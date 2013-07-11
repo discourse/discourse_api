@@ -1,14 +1,9 @@
-class DiscourseApi::Client
+class DiscourseApi::Client < DiscourseApi::Resource
 
-  extend DiscourseApi::Resource
-
-  def initialize(host,api_key)
+  def initialize(host)
     @host = host
-    @api_key = api_key
   end
 
-  resource :user do |r|
-    r.post :invite, :require => [:email, :topic_id]
-  end
+  post :topic_invite_user => "/t/:topic_id/invite", :require => [:email, :topic_id]
 
 end
