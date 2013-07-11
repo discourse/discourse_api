@@ -18,6 +18,17 @@ Or install it yourself as:
 
 ## Usage
 
+Over time this project intends to have a full Discourse API, at the moment there is only one endpoint
+
+```ruby
+
+client = DiscourseApi::Client.new("l.discourse")
+client.api_key = "YOUR_API_KEY"
+client.api_username = "YOUR_USERNAME"
+
+client.topic_invite_user(topic_id: 1794, email: "bob@bob.com")
+
+```
 
 
 ## Contributing
