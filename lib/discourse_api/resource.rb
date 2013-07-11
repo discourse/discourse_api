@@ -4,10 +4,6 @@ require 'json'
 class DiscourseApi::Resource
   attr_accessor :host, :port, :api_key, :api_username
 
-  def self.resource(name)
-    yield DiscourseApi::ResourceDefinition.new(name, self)
-  end
-
   def self.post(args)
     # ruby 1.9.3 for now
     array_args = args.to_a
