@@ -30,7 +30,7 @@ class DiscourseApi::Resource
 
     req = Net::HTTP::Post.new(path, initheader = {'Content-Type' =>'application/json'})
     req.body = api_args(actual_args).to_json
-    Net::HTTP.new(@host, port || 80).start {|http| http.request(req) }
+    Net::HTTP.new(host, port).start {|http| http.request(req) }
   end
 
 end
