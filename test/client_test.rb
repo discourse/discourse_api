@@ -18,4 +18,9 @@ class ClientTest < Minitest::Test
     assert_equal(3000, client.port)
   end
 
+  def test_client_responds_to_topic_invite_user
+    client = DiscourseApi::Client.new('localhost',3000)
+    assert_respond_to(client, :topic_invite_user)
+  end
+
 end
