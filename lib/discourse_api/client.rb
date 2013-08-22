@@ -6,5 +6,7 @@ class DiscourseApi::Client < DiscourseApi::Resource
   end
 
   post :topic_invite_user => "/t/:topic_id/invite", :require => [:email, :topic_id]
+  get :topics_latest => "/latest.json"
+  get :topics_hot => "/hot.json"
 
 end

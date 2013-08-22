@@ -19,8 +19,18 @@ class ClientTest < Minitest::Test
   end
 
   def test_client_responds_to_topic_invite_user
-    client = DiscourseApi::Client.new('localhost',3000)
+    client = DiscourseApi::Client.new('localhost')
     assert_respond_to(client, :topic_invite_user)
+  end
+
+  def test_client_responds_to_topics_latest
+    client = DiscourseApi::Client.new('localhost')
+    assert_respond_to(client, :topics_latest)
+  end
+
+  def test_client_responds_to_topics_hot
+    client = DiscourseApi::Client.new('localhost')
+    assert_respond_to(client, :topics_hot)
   end
 
 end
