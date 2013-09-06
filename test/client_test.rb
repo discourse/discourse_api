@@ -1,8 +1,10 @@
 require 'discourse_api'
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'webmock/minitest'
 
 class ClientTest < Minitest::Test
+
 
   describe "client basics" do
 
@@ -24,6 +26,7 @@ class ClientTest < Minitest::Test
   describe "topics" do
 
     before do
+      stub_request(:any, "localhost")
       @client = DiscourseApi::Client.new('http://localhost')
     end
 
@@ -40,6 +43,10 @@ class ClientTest < Minitest::Test
   describe "categories" do
 
     before do
+      stub_request(:get, "http://localhost/categories.json").
+  with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Faraday v0.8.8'}).
+  to_return(:status => 200, :body => {"category_list" => {"categories" => [{'name' => 'the_name', 'id' => '000001', 'description' => 'the info', 'topic_count' => 0}]}}.to_json, :headers => {})
+
       @client = DiscourseApi::Client.new('http://localhost')
     end
 
