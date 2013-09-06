@@ -4,28 +4,49 @@ require 'minitest/pride'
 
 class ClientTest < Minitest::Test
 
-  def test_client_requires_host_argument
-    assert_raises(ArgumentError) { DiscourseApi::Client.new }
+  describe "client basics" do
+
+    it "should require a host argument" do
+      assert_raises(ArgumentError) { DiscourseApi::Client.new }
+    end
+
   end
 
-  def test_client_responds_to_topic_invite_user
-    client = DiscourseApi::Client.new('localhost')
-    assert_respond_to(client, :topic_invite_user)
+  describe "topic invitations" do
+
+    it "responds to topic_invite_user" do
+      client = DiscourseApi::Client.new('localhost')
+      assert_respond_to(client, :topic_invite_user)
+    end
+
   end
 
-  def test_client_responds_to_topics_latest
-    client = DiscourseApi::Client.new('localhost')
-    assert_respond_to(client, :topics_latest)
+  describe "topics" do
+
+    before do
+      @client = DiscourseApi::Client.new('localhost')
+    end
+
+    it "responds to topics_latest" do
+      assert_respond_to(@client, :topics_latest)
+    end
+
+    it "responds to topics_hot" do
+      assert_respond_to(@client, :topics_hot)
+    end
+
   end
 
-  def test_client_responds_to_topics_hot
-    client = DiscourseApi::Client.new('localhost')
-    assert_respond_to(client, :topics_hot)
-  end
+  describe "categories" do
 
-  def test_client_responds_to_categories
-    client = DiscourseApi::Client.new('localhost')
-    assert_respond_to(client, :categories)
+    before do
+      @client = DiscourseApi::Client.new('localhost')
+    end
+
+    it "responds to categories" do
+      assert_respond_to(@client, :categories)
+    end
+
   end
 
 end
