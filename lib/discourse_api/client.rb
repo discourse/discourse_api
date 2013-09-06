@@ -22,6 +22,9 @@ class DiscourseApi::Client
   end
 
   def categories
+    resp = @conn.get '/categories.json'
+    json = JSON.parse(resp.body)
+    json['category_list']['categories']
   end
 
   def topic_invite_user
