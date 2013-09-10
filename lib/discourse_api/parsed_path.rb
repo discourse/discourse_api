@@ -1,6 +1,6 @@
 class DiscourseApi::ParsedPath
   def initialize(path, args)
-    @segments = path.split("/")[1..-1] || []
+    @path = path
     @required = Set.new
     @path_args = Set.new
 
@@ -8,7 +8,7 @@ class DiscourseApi::ParsedPath
       reqs.each{|r| @required << r.to_sym}
     end
 
-    @segments.map{|s| param_name(s)}.compact.each do |r|
+    @path.scan(/:(\w+)/).flatten.each do |r|
       @required << r.to_sym
       @path_args << r
     end
@@ -22,14 +22,10 @@ class DiscourseApi::ParsedPath
   end
 
   def generate(args)
-    path = ""
-    @segments.each do |s|
-      path << "/"
-      if n = param_name(s)
-        path << args[n.to_sym].to_s
-      else
-        path << s
-      end
+    path = @path.dup
+
+    @path_args.each do |s|
+      path.gsub!(":#{s}", args[s.to_sym].to_s)
     end
 
     extra_args = args.dup.delete_if{|k,v| @path_args.include?(k.to_s)}
@@ -37,11 +33,4 @@ class DiscourseApi::ParsedPath
     [path, extra_args]
   end
 
-  protected
-
-  def param_name(segment)
-    if segment[0] == ":"
-      segment[1..-1]
-    end
-  end
 end

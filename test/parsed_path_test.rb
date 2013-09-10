@@ -10,6 +10,12 @@ class ParsedPathTest < Minitest::Test
     assert_equal(["/hello/world/1",{}],path.generate(:hello => "hello", :world => "world"))
   end
 
+  def test_generates_path_with_format
+    path = DiscourseApi::ParsedPath.new("/:hello/:world.json", {})
+
+    assert_equal(["/hello/world.json",{}],path.generate(:hello => "hello", :world => "world"))
+  end
+
   def test_generates_correct_path_for_non_string
     path = DiscourseApi::ParsedPath.new('/:hello', {})
 
