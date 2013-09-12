@@ -10,4 +10,17 @@ class DiscourseApi::Client < DiscourseApi::Resource
   get :topics_hot => "/hot.json"
   get :categories => "/categories.json"
 
+  get :users_honeypot => "/users/hp.json"
+  post :create_user => "/users.json", :require => [:name, :username, :email, :password, :password_confirmation, :challenge]
+
+  def create_user_past_honeypot(user_params)
+    honeypot_response = JSON.parse self.users_honeypot({})
+
+    user_params.merge!({
+      password_confirmation: honeypot_response["value"],
+      challenge: honeypot_response["challenge"].reverse
+    })
+
+    self.create_user(user_params)
+  end
 end
