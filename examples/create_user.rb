@@ -3,8 +3,8 @@ require 'discourse_api'
 # $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 # require File.expand_path('../../lib/discourse_api', __FILE__)
 
-client = DiscourseApi::Client.new("forum.staging.makerist.de")
-client.api_key = "5804eb67134f62d51ba29e6cfa8ce026f5d3891a8cace02c115ab72896fb1c52" # "YOUR_API_KEY"
+client = DiscourseApi::Client.new("localhost", 3000)
+client.api_key = "YOUR_API_KEY"
 client.api_username = "YOUR_USERNAME"
 
 # honeypot_response = JSON.parse client.users_honeypot({})
