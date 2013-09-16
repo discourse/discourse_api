@@ -8,8 +8,26 @@ class ClientTest < Minitest::Test
 
   describe "client basics" do
 
-    it "should require a host argument" do
+    it "requires a host argument" do
       assert_raises(ArgumentError) { DiscourseApi::Client.new }
+    end
+
+    it "exposes the host argument" do
+      host = 'http://localhost'
+      client = DiscourseApi::Client.new(host)
+      assert_equal(client.host, host)
+    end
+
+    it "the host argument is read-only for clients" do
+      host = 'http://localhost'
+      client = DiscourseApi::Client.new(host)
+      assert_raises(NoMethodError) { client.host = 'http://another.host' }
+    end
+
+    it 'accepts the api_key as an optional argument' do
+      api_key = 'abc123'
+      client = DiscourseApi::Client.new('http://localhost', api_key)
+      assert_equal(client.api_key, api_key)
     end
 
   end
