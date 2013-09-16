@@ -18,7 +18,8 @@ class DiscourseApi::Client
 
   def topics_latest
     resp = @conn.get("/latest.json")
-    JSON.parse(resp.body)
+    json = JSON.parse(resp.body)
+    json['topic_list']['topics']
   end
 
   def topics_hot
