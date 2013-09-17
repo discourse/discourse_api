@@ -2,7 +2,7 @@ require 'net/http'
 require 'json'
 
 class DiscourseApi::Resource
-  attr_accessor :host, :port, :api_key, :api_username
+  attr_accessor :protocol, :host, :port, :api_key, :api_username
 
   def self.post(args)
     # ruby 1.9.3 for now
@@ -42,7 +42,7 @@ class DiscourseApi::Resource
     path, actual_args = parsed_path.generate(args)
     actual_args = api_args(actual_args)
     req = Net::HTTP::Get.new(path, initheader = {'Content-Type' =>'application/json'})
-    r = Net::HTTP.new(host, port).start {|http| http.request(req) }
+    r = http_client.start {|http| http.request(req) }
     puts r.body
   end
 
@@ -53,7 +53,20 @@ class DiscourseApi::Resource
 
     req = Net::HTTP::Post.new(path, initheader = {'Content-Type' =>'application/json'})
     req.body = api_args(actual_args).to_json
-    Net::HTTP.new(host, port).start {|http| http.request(req) }
+    http_client.start {|http| http.request(req) }
   end
+
+  private
+
+    def http_client
+      if protocol == 'https'
+        client = Net::HTTP.new(host, port)
+        client.use_ssl = true
+        client.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        client
+      else
+        Net::HTTP.new(host, port)
+      end
+    end
 
 end
