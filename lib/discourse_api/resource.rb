@@ -43,7 +43,7 @@ class DiscourseApi::Resource
     actual_args = api_args(actual_args)
     req = Net::HTTP::Get.new(path, initheader = {'Content-Type' =>'application/json'})
     r = http_client.start {|http| http.request(req) }
-    puts r.body
+    parse_result( r.body )
   end
 
   def perform_post(parsed_path, args)
@@ -57,6 +57,9 @@ class DiscourseApi::Resource
   end
 
   private
+    def parse_result( text )
+      JSON.parse( text, :create_extensions => false )
+    end
 
     def http_client
       if protocol == 'https'
