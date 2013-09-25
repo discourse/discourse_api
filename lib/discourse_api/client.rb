@@ -12,4 +12,5 @@ class DiscourseApi::Client < DiscourseApi::Resource
   get :topics_hot => "/hot.json"
   get :categories => "/categories.json"
 
+  get :topic => "/t/:topic_id.json"
 end
