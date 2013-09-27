@@ -1,11 +1,12 @@
 require 'faraday'
 class DiscourseApi::Client
 
-  attr_reader :host, :api_key
+  attr_reader :host, :api_key, :api_username
 
-  def initialize(host, api_key=nil)
+  def initialize(host, api_key=nil, api_username=nil)
     @host = host
     @api_key = api_key
+    @api_username = api_username
     @conn = Faraday.new(url: host) do |faraday|
       faraday.request  :url_encoded             # form-encode POST params
       faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP

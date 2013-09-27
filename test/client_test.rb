@@ -30,6 +30,13 @@ class ClientTest < Minitest::Test
       assert_equal(client.api_key, api_key)
     end
 
+    it 'accepts the api_username as an optional argument' do
+      api_key = 'abc123'
+      api_username = 'admin'
+      client = DiscourseApi::Client.new('http://localhost', api_key, api_username)
+      assert_equal(client.api_username, api_username)
+    end
+
   end
 
   describe "topic invitations" do
