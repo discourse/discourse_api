@@ -30,8 +30,9 @@ class DiscourseApi::Client
     json['topic_list']['topics']
   end
 
-  def topic
-    # get :topic => "/t/:topic_id.json"
+  def topic(id)
+    resp = @conn.get("/t/#{id}.json")
+    json = JSON.parse(resp.body)
   end
 
   def topic_invite_user

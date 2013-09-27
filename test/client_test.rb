@@ -100,11 +100,41 @@ class ClientTest < Minitest::Test
     describe "topic" do
 
       before do
+        stub_request(:get, "http://localhost/t/1.json").
+          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Faraday v0.8.8'}).
+          to_return(:status => 200, :body => {"post_stream" => {"stream" => [], "posts" => [{}] }, "id" => 1, "title" => 'Topic Title' }.to_json, :headers => {})
         @client = DiscourseApi::Client.new('http://localhost')
       end
 
       it "responds to topic" do
         assert_respond_to(@client, :topic)
+      end
+
+      it 'requires a topic_id as an argument' do
+        assert_raises(ArgumentError) do
+          @client.topic
+        end
+      end
+
+      it 'responds with the topic' do
+        @client.topic(1).must_be_kind_of Enumerable
+      end
+
+
+      it 'has the right keys for a given topic' do
+        topic = @client.topic(1)
+        topic.keys.must_include 'post_stream'
+        topic.keys.must_include 'id'
+        topic.keys.must_include 'title'
+      end
+
+      it 'has the right keys for a given topic post_stream' do
+        post_stream = @client.topic(1)['post_stream']
+        post_stream.keys.length.must_equal 2
+        post_stream.keys.must_include 'stream'
+        post_stream['stream'].must_be_kind_of Array
+        post_stream.keys.must_include 'posts'
+        post_stream['posts'].must_be_kind_of Array
       end
     end
 
