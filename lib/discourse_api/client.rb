@@ -25,7 +25,9 @@ class DiscourseApi::Client
   end
 
   def topics_hot
-    # get :topics_hot => "/hot.json"
+    resp = @conn.get("/hot.json")
+    json = JSON.parse(resp.body)
+    json['topic_list']['topics']
   end
 
   def topic

@@ -43,14 +43,14 @@ class ClientTest < Minitest::Test
 
   describe "topics" do
 
-    before do
-      stub_request(:get, "http://localhost/latest.json").
-        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Faraday v0.8.8'}).
-        to_return(:status => 200, :body => {"topic_list" => { "topics" => [{'id' => '00001', 'title' => 'Title', 'slug' => 'post_slug', 'posts_count' => 0}]} }.to_json, :headers => {})
-      @client = DiscourseApi::Client.new('http://localhost')
-    end
-
     describe "latest" do
+
+      before do
+        stub_request(:get, "http://localhost/latest.json").
+          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Faraday v0.8.8'}).
+          to_return(:status => 200, :body => {"topic_list" => { "topics" => [{'id' => '00001', 'title' => 'Title', 'slug' => 'post_slug', 'posts_count' => 0}]} }.to_json, :headers => {})
+        @client = DiscourseApi::Client.new('http://localhost')
+      end
 
       it "responds to topics_latest" do
         assert_respond_to(@client, :topics_latest)
@@ -71,12 +71,38 @@ class ClientTest < Minitest::Test
     end
 
     describe "hot" do
+
+      before do
+        stub_request(:get, "http://localhost/hot.json").
+          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Faraday v0.8.8'}).
+          to_return(:status => 200, :body => {"topic_list" => { "topics" => [{'id' => '00001', 'title' => 'Title', 'slug' => 'post_slug', 'posts_count' => 0}]} }.to_json, :headers => {})
+        @client = DiscourseApi::Client.new('http://localhost')
+      end
+
       it "responds to topics_hot" do
         assert_respond_to(@client, :topics_hot)
       end
+
+      it 'responds with a list of categories' do
+        @client.topics_hot.must_be_kind_of Enumerable
+      end
+
+      it 'has the right keys for a given category' do
+        topic = @client.topics_hot.first
+        topic.keys.must_include 'id'
+        topic.keys.must_include 'title'
+        topic.keys.must_include 'slug'
+        topic.keys.must_include 'posts_count'
+      end
+
     end
 
     describe "topic" do
+
+      before do
+        @client = DiscourseApi::Client.new('http://localhost')
+      end
+
       it "responds to topic" do
         assert_respond_to(@client, :topic)
       end
