@@ -76,14 +76,20 @@ class ClientTest < Minitest::Test
       end
     end
 
+    describe "topic" do
+      it "responds to topic" do
+        assert_respond_to(@client, :topic)
+      end
+    end
+
   end
 
   describe "categories" do
 
     before do
       stub_request(:get, "http://localhost/categories.json").
-  with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Faraday v0.8.8'}).
-  to_return(:status => 200, :body => {"category_list" => {"categories" => [{'name' => 'the_name', 'id' => '000001', 'description' => 'the info', 'topic_count' => 0}]}}.to_json, :headers => {})
+        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Faraday v0.8.8'}).
+        to_return(:status => 200, :body => {"category_list" => {"categories" => [{'name' => 'the_name', 'id' => '000001', 'description' => 'the info', 'topic_count' => 0}]}}.to_json, :headers => {})
 
       @client = DiscourseApi::Client.new('http://localhost')
     end
@@ -102,6 +108,18 @@ class ClientTest < Minitest::Test
       category.keys.must_include 'name'
       category.keys.must_include 'description'
       category.keys.must_include 'topic_count'
+    end
+
+  end
+
+  describe "#post_create" do
+
+    before do
+      @client = DiscourseApi::Client.new('http://localhost')
+    end
+
+    it "responds to post_create" do
+      assert_respond_to(@client, :post_create)
     end
 
   end
