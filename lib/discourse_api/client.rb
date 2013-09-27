@@ -13,26 +13,22 @@ class DiscourseApi::Client
   end
 
   def categories
-    resp = @conn.get '/categories.json'
-    json = JSON.parse(resp.body)
+    json = _get('/categories.json')
     json['category_list']['categories']
   end
 
   def topics_latest
-    resp = @conn.get("/latest.json")
-    json = JSON.parse(resp.body)
+    json = _get("/latest.json")
     json['topic_list']['topics']
   end
 
   def topics_hot
-    resp = @conn.get("/hot.json")
-    json = JSON.parse(resp.body)
+    json = _get("/hot.json")
     json['topic_list']['topics']
   end
 
   def topic(id)
-    resp = @conn.get("/t/#{id}.json")
-    json = JSON.parse(resp.body)
+    json = _get("/t/#{id}.json")
   end
 
   def topic_invite_user
@@ -41,6 +37,13 @@ class DiscourseApi::Client
 
   def post_create
     # post :post_create => "/posts", :require => [:raw]
+  end
+
+  private
+
+  def _get(message)
+    resp = @conn.get(message)
+    JSON.parse(resp.body)
   end
 
 end
