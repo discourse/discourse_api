@@ -32,8 +32,9 @@ class DiscourseApi::Client
     json = _get("/t/#{id}.json")
   end
 
-  def topic_invite_user
+  def topic_invite_user(email, id)
     # post :topic_invite_user => "/t/:topic_id/invite", :require => [:email, :topic_id]
+    json = _post("/t/#{id}/invite.json", email: email, topic_id: id)
   end
 
   def post_create
@@ -45,6 +46,19 @@ class DiscourseApi::Client
   def _get(message)
     resp = @conn.get(message)
     JSON.parse(resp.body)
+  end
+
+  def _post(message, args)
+    args = args.merge(api_key: @api_key, api_username: @api_username, topic: {})
+
+    resp = @conn.post do |req|
+      req.url message
+      req.headers['Content-Type'] = 'application/json'
+      req.body = args.to_json
+    end
+
+    resp.status
+
   end
 
 end

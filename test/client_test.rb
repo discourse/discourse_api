@@ -46,6 +46,23 @@ class ClientTest < Minitest::Test
       assert_respond_to(client, :topic_invite_user)
     end
 
+    it "sends a topic invitation request" do
+      api_key = 'abc123'
+      api_username = 'admin'
+      client = DiscourseApi::Client.new('http://localhost', api_key, api_username)
+
+      topic_id = 1
+      invitee_email = "invitee@example.com"
+
+      stub_request(:post, "http://localhost/t/#{topic_id}/invite.json").
+        with(:body => "{\"email\":\"#{invitee_email}\",\"topic_id\":#{topic_id},\"api_key\":\"#{api_key}\",\"api_username\":\"#{api_username}\",\"topic\":{}}",
+             :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Faraday v0.8.8'}).
+        to_return(:status => 200, :body => "", :headers => {})
+
+      resp = client.topic_invite_user('invitee@example.com', 1)
+      assert_equal(resp, 200)
+    end
+
   end
 
   describe "topics" do
