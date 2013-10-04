@@ -13,4 +13,20 @@ class DiscourseApi::Client < DiscourseApi::Resource
   get :categories => "/categories.json"
 
   get :topic => "/t/:topic_id.json"
+
+  # NOTE: If used on api username,
+  # then the api username also needs to be changed
+  put :user_update      => "/users/:username",
+                        :require => [:username]
+
+  put :username_update  => '/users/:username/preferences/username',
+                        :require => [:username]
+
+  # NOTE: Will send email activation
+  put :email_update     => '/users/:username/preferences/email',
+                        :require => [:username]
+
+  put :toggle_avatar    => '/users/:username/preferences/avatar/toggle',
+                        :require => [:username]
+
 end
