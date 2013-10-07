@@ -204,4 +204,51 @@ class ClientTest < Minitest::Test
 
   end
 
+  describe "user basics" do
+
+    before do
+      stub_request(:get, "http://localhost/user/testuser.json").
+        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Faraday v0.8.8'}).
+        to_return(:status => 200, :body => {"user" => {"username" => "testuser"}}.to_json, :headers => {})
+
+      @client = DiscourseApi::Client.new('http://localhost')
+    end
+
+    describe '#user' do
+      it 'responds to user/:username' do
+        assert_respond_to(@client, :user)
+      end
+
+      it 'responds with the user' do
+        @client.user('testuser').must_be_kind_of Hash
+      end
+
+      it 'has the right keys for a user' do
+        user = @client.user('testuser')
+        user.keys.must_include 'username'
+      end
+    end
+
+    describe '#user_update' do
+
+      it "responds to user_update" do
+        assert_respond_to(@client, :user_update)
+      end
+
+    end
+
+    it 'responds to username_update' do
+      assert_respond_to(@client, :username_update)
+    end
+
+    it 'responds to email_update' do
+      assert_respond_to(@client, :email_update)
+    end
+
+    it 'responds to toggle_avatar' do
+      assert_respond_to(@client, :toggle_avatar)
+    end
+
+  end
+
 end
