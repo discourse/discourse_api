@@ -41,6 +41,21 @@ class DiscourseApi::Client
     # post :post_create => "/posts", :require => [:raw]
   end
 
+  # NOTE: If used on api username,
+  # then the api username also needs to be changed
+  # put :user_update      => "/users/:username",
+  #                       :require => [:username]
+
+  # put :username_update  => '/users/:username/preferences/username',
+  #                       :require => [:username]
+
+  # # NOTE: Will send email activation
+  # put :email_update     => '/users/:username/preferences/email',
+  #                       :require => [:username]
+
+  # put :toggle_avatar    => '/users/:username/preferences/avatar/toggle',
+  #                       :require => [:username]
+
   private
 
   def _get(message)
