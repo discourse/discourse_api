@@ -246,11 +246,11 @@ class ClientTest < Minitest::Test
       end
 
       it 'updates an existing username' do
-        stub_request(:put, "http://localhost/users/original@example.com/preferences/username").
-          with(:body => {"api_key"=>true, "api_username"=>true, "new_username"=>"new@example.com"}, :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Faraday v0.8.8'}).
+        stub_request(:put, "http://localhost/users/testuser/preferences/username").
+          with(:body => {"api_key"=>true, "api_username"=>true, "new_username"=>"newuser"}, :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Faraday v0.8.8'}).
           to_return(:status => 200, :body => "", :headers => {})
 
-        resp = @client.username_update('original@example.com', 'new@example.com')
+        resp = @client.username_update('testuser', 'newuser')
         assert_equal(resp, 200)
       end
 
