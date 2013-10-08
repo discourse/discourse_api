@@ -54,24 +54,16 @@ class DiscourseApi::Api
   end
 
   def username_update(username, new_username)
-    # put :username_update  => '/users/:username/preferences/username',
-    #                       :require => [:username]
-    # puts client.username_update(username: "Batman", new_username: "Alfred")
     json = _put("/users/#{username}/preferences/username", {new_username: new_username})
   end
 
-  # # NOTE: Will send email activation
+  # NOTE: Will send email activation
   def email_update(username, email)
-  # put :email_update     => '/users/:username/preferences/email',
-  #                       :require => [:username]
-  # puts client.email_update(username: "Batman", email: "batman@example.com")
     json = _put("/users/#{username}/preferences/email", {email: email})
   end
 
-  def toggle_avatar(username)
-  # put :toggle_avatar    => '/users/:username/preferences/avatar/toggle',
-  #                       :require => [:username]
-  # puts client.toggle_avatar(username: "Batman", use_uploaded_avatar: true)
+  def toggle_avatar(username, use_uploaded_avatar)
+    json = _put("/users/#{username}/preferences/avatar/toggle", {use_uploaded_avatar: use_uploaded_avatar})
   end
 
   private

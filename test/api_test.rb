@@ -5,7 +5,6 @@ require 'webmock/minitest'
 
 class ClientTest < Minitest::Test
 
-
   describe "client basics" do
 
     it "requires a host argument" do
@@ -294,6 +293,17 @@ class ClientTest < Minitest::Test
       it 'responds to toggle_avatar' do
         assert_respond_to(@client, :toggle_avatar)
       end
+
+      it 'toggles the avatar for the user' do
+        stub_request(:put, "http://localhost/users/testuser/preferences/avatar/toggle").
+          with(:body => {"api_key"=>true, "api_username"=>true, "use_uploaded_avatar"=>"true"},
+               :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Faraday v0.8.8'}).
+          to_return(:status => 200, :body => "", :headers => {})
+
+        resp = @client.toggle_avatar('testuser', true)
+        assert_equal(resp, 200)
+      end
+
     end
 
   end
