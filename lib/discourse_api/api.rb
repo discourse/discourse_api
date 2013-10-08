@@ -50,13 +50,14 @@ class DiscourseApi::Api
   def user_update(username)
   # put :user_update      => "/users/:username",
   #                       :require => [:username]
-  # puts client.username_update(username: "Batman", new_username: "Alfred")
+  # puts client.user_update(username: "Batman", name: "Bruce Wayne")
   end
 
-  def username_update(username)
-  # put :username_update  => '/users/:username/preferences/username',
-  #                       :require => [:username]
-  # puts client.user_update(username: "Batman", name: "Bruce Wayne")
+  def username_update(username, new_username)
+    # put :username_update  => '/users/:username/preferences/username',
+    #                       :require => [:username]
+    # puts client.username_update(username: "Batman", new_username: "Alfred")
+    json = _put("/users/#{username}/preferences/username", {new_username: new_username})
   end
 
   # # NOTE: Will send email activation
@@ -92,4 +93,15 @@ class DiscourseApi::Api
 
   end
 
+  def _put(message, args)
+    args = args.merge(api_key: @api_key, api_username: @api_username)
+
+    resp = @conn.put do |req|
+      req.url message
+      # req.headers['Content-Type'] = 'application/json'
+      req.body = args#.to_json
+    end
+
+    resp.status
+  end
 end
