@@ -237,6 +237,15 @@ class ClientTest < Minitest::Test
         assert_respond_to(@client, :user_update)
       end
 
+      it 'updates the information, a name for example, for an existing user' do
+        stub_request(:put, "http://localhost/users/testuser").
+          with(:body => {"api_key"=>true, "api_username"=>true, "name"=>"Awesome User"},
+            :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Faraday v0.8.8'}).
+          to_return(:status => 200, :body => "", :headers => {})
+
+        resp = @client.user_update('testuser', name: 'Awesome User')
+        assert_equal(resp, 200)
+      end
     end
 
     describe '#username_update' do

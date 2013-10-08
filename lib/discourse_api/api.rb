@@ -47,10 +47,11 @@ class DiscourseApi::Api
 
   # NOTE: If used on api username,
   # then the api username also needs to be changed
-  def user_update(username)
+  def user_update(username, user_params = {})
   # put :user_update      => "/users/:username",
   #                       :require => [:username]
   # puts client.user_update(username: "Batman", name: "Bruce Wayne")
+    json = _put("/users/#{username}", user_params)
   end
 
   def username_update(username, new_username)
