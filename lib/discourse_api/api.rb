@@ -61,10 +61,11 @@ class DiscourseApi::Api
   end
 
   # # NOTE: Will send email activation
-  def email_update(username)
+  def email_update(username, email)
   # put :email_update     => '/users/:username/preferences/email',
   #                       :require => [:username]
   # puts client.email_update(username: "Batman", email: "batman@example.com")
+    json = _put("/users/#{username}/preferences/email", {email: email})
   end
 
   def toggle_avatar(username)

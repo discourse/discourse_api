@@ -248,9 +248,8 @@ class ClientTest < Minitest::Test
 
       it 'updates an existing username' do
         stub_request(:put, "http://localhost/users/original@example.com/preferences/username").
-  with(:body => {"api_key"=>true, "api_username"=>true, "new_username"=>"new@example.com"},
-       :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Faraday v0.8.8'}).
-  to_return(:status => 200, :body => "", :headers => {})
+          with(:body => {"api_key"=>true, "api_username"=>true, "new_username"=>"new@example.com"}, :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Faraday v0.8.8'}).
+          to_return(:status => 200, :body => "", :headers => {})
 
         resp = @client.username_update('original@example.com', 'new@example.com')
         assert_equal(resp, 200)
@@ -258,21 +257,43 @@ class ClientTest < Minitest::Test
 
       it '404s on a non-existing username' do
         stub_request(:put, "http://localhost/users/missing@example.com/preferences/username").
-  with(:body => {"api_key"=>true, "api_username"=>true, "new_username"=>"new@example.com"},
-       :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Faraday v0.8.8'}).
-  to_return(:status => 404, :body => "", :headers => {})
+          with(:body => {"api_key"=>true, "api_username"=>true, "new_username"=>"new@example.com"}, :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Faraday v0.8.8'}).
+          to_return(:status => 404, :body => "", :headers => {})
 
         resp = @client.username_update('missing@example.com', 'new@example.com')
         assert_equal(resp, 404)
       end
     end
 
-    it 'responds to email_update' do
-      assert_respond_to(@client, :email_update)
+    describe '#email_update' do
+      it 'responds to email_update' do
+        assert_respond_to(@client, :email_update)
+      end
+
+      it 'updates an existing email address' do
+        stub_request(:put, "http://localhost/users/testuser/preferences/email").
+          with(:body => {"api_key"=>true, "api_username"=>true, "email"=>"new@example.com"}, :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Faraday v0.8.8'}).
+          to_return(:status => 200, :body => "", :headers => {})
+
+        resp = @client.email_update('testuser', 'new@example.com')
+        assert_equal(resp, 200)
+      end
+
+      it '404s on a non-existing username' do
+        stub_request(:put, "http://localhost/users/missinguser/preferences/email").
+          with(:body => {"api_key"=>true, "api_username"=>true, "email"=>"new@example.com"}, :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Faraday v0.8.8'}).
+          to_return(:status => 404, :body => "", :headers => {})
+
+        resp = @client.email_update('missinguser', 'new@example.com')
+        assert_equal(resp, 404)
+
+      end
     end
 
-    it 'responds to toggle_avatar' do
-      assert_respond_to(@client, :toggle_avatar)
+    describe '#toggle_avatar' do
+      it 'responds to toggle_avatar' do
+        assert_respond_to(@client, :toggle_avatar)
+      end
     end
 
   end
