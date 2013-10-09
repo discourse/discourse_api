@@ -1,5 +1,7 @@
 # DiscourseApi
 
+[![Code Climate](https://codeclimate.com/github/discourse/discourse_api.png)](https://codeclimate.com/github/discourse/discourse_api)
+
 The Discourse API gem allows you to consume the Discourse API
 
 ## Installation
