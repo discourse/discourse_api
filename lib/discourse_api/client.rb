@@ -29,4 +29,7 @@ class DiscourseApi::Client < DiscourseApi::Resource
   put :toggle_avatar    => '/users/:username/preferences/avatar/toggle',
                         :require => [:username]
 
+  post :upload_avatar    => '/users/:username/preferences/avatar',
+                        :require => [:username, :file]
+
 end
