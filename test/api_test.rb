@@ -310,6 +310,7 @@ class ClientTest < Minitest::Test
     end
 
     describe '#toggle_avatar' do
+
       it 'responds to toggle_avatar' do
         assert_respond_to(@client, :toggle_avatar)
       end
@@ -326,6 +327,20 @@ class ClientTest < Minitest::Test
 
     end
 
+    describe '#upload_avatar' do
+      it 'responds to upload_avatar' do
+        assert_respond_to(@client, :upload_avatar)
+      end
+
+      it 'uploads a file for the avatar image' do
+        stub_request(:post, "http://localhost/users/testuser/preferences/avatar").
+          with(:body => "{\"file\":\"http://cdn.discourse.org/assets/logo.png\",\"api_key\":null,\"api_username\":null,\"topic\":{}}", :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Faraday v0.8.8'}).
+          to_return(:status => 200, :body => "", :headers => {})
+
+        resp = @client.upload_avatar('testuser', 'http://cdn.discourse.org/assets/logo.png')
+        assert_equal(resp, 200)
+      end
+    end
   end
 
 end

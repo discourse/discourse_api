@@ -67,6 +67,10 @@ class DiscourseApi::Api
     json = _put("/users/#{username}/preferences/avatar/toggle", {use_uploaded_avatar: use_uploaded_avatar})
   end
 
+  def upload_avatar(username, file)
+    json = _post("/users/#{username}/preferences/avatar", {file: file})
+  end
+
   private
 
   def _get(message)
