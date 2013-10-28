@@ -37,8 +37,8 @@ class DiscourseApi::Api
     json = _post("/t/#{id}/invite.json", email: email, topic_id: id)
   end
 
-  def post_create
-    # post :post_create => "/posts", :require => [:raw]
+  def post_create(args)
+    json = _post("/posts.json", args)
   end
 
   def user(username)
@@ -65,6 +65,10 @@ class DiscourseApi::Api
 
   def toggle_avatar(username, use_uploaded_avatar)
     json = _put("/users/#{username}/preferences/avatar/toggle", {use_uploaded_avatar: use_uploaded_avatar})
+  end
+
+  def upload_avatar(username, file)
+    json = _post("/users/#{username}/preferences/avatar", {file: file})
   end
 
   private
