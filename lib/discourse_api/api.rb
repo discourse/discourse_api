@@ -37,8 +37,8 @@ class DiscourseApi::Api
     json = _post("/t/#{id}/invite.json", email: email, topic_id: id)
   end
 
-  def post_create
-    # post :post_create => "/posts", :require => [:raw]
+  def post_create(args)
+    json = _post("/posts.json", args)
   end
 
   def user(username)

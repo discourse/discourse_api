@@ -194,11 +194,22 @@ class ClientTest < Minitest::Test
   describe "#post_create" do
 
     before do
-      @client = DiscourseApi::Api.new('http://localhost')
+      @client = DiscourseApi::Api.new('http://localhost', 'abc123', 'admin')
     end
 
     it "responds to post_create" do
       assert_respond_to(@client, :post_create)
+    end
+
+    it 'creates a new post successfully' do
+
+      stub_request(:post, "http://localhost/posts.json").
+        with(:body => "{\"category\":\"Boing Boing\",\"skip_validations\":true,\"autotrack\":false,\"title\":\"Concert Master: A new way to choose\",\"raw\":\"This is the raw markdown for my post\",\"api_key\":\"abc123\",\"api_username\":\"admin\",\"topic\":{}}",
+       :headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Faraday v0.8.8'}).
+        to_return(:status => 200, :body => "".to_json, :headers => {})
+
+      resp = @client.post_create(category: "Boing Boing", skip_validations: true, autotrack: false, title: "Concert Master: A new way to choose", raw: "This is the raw markdown for my post")
+      assert_equal(resp, 200)
     end
 
   end
