@@ -1,4 +1,16 @@
-class DiscourseApi::Client < DiscourseApi::Resource
+require 'faraday'
+require 'faraday_middleware'
+require 'discourse_api/api/categories'
+require 'discourse_api/api/topics'
+require 'discourse_api/api/users'
+
+class DiscourseApi::Client
+
+  attr_reader :host, :port
+
+  include DiscourseApi::API::Categories
+  include DiscourseApi::API::Topics
+  include DiscourseApi::API::Users
 
   def initialize(host, port=80, protocol='http')
     @host = host
@@ -6,30 +18,39 @@ class DiscourseApi::Client < DiscourseApi::Resource
     @protocol = protocol
   end
 
-  post :topic_invite_user => "/t/:topic_id/invite", :require => [:email, :topic_id]
-  post :post_create => "/posts", :require => [:raw]
-  get :topics_latest => "/latest.json"
-  get :topics_hot => "/hot.json"
-  get :categories => "/categories.json"
+  def delete(path, params={})
+    request(:delete, path, params)
+  end
 
-  get :topic => "/t/:topic_id.json"
+  def get(path, params={})
+    request(:get, path, params)
+  end
 
-  # NOTE: If used on api username,
-  # then the api username also needs to be changed
-  put :user_update      => "/users/:username",
-                        :require => [:username]
+  def post(path, params={})
+    request(:post, path, params)
+  end
 
-  put :username_update  => '/users/:username/preferences/username',
-                        :require => [:username]
+  def put(path, params={})
+    request(:put, path, params)
+  end
 
-  # NOTE: Will send email activation
-  put :email_update     => '/users/:username/preferences/email',
-                        :require => [:username]
+  private
 
-  put :toggle_avatar    => '/users/:username/preferences/avatar/toggle',
-                        :require => [:username]
+  def connection
+    @connection ||= Faraday.new(url: @host) do |conn|
+      # Convert request params to "www-form-encoded"
+      conn.request :url_encoded
+      # Parse responses as JSON
+      conn.response :json, :content_type => /\bjson$/
+      # Use Faraday's default HTTP adapter
+      conn.adapter Faraday.default_adapter
+    end
+  end
 
-  post :upload_avatar    => '/users/:username/preferences/avatar',
-                        :require => [:username, :file]
-
+  def request(method, path, params={})
+    response = connection.send(method.to_sym, path, params)
+    response.env
+  rescue Faraday::Error::ClientError, JSON::ParserError
+    raise DiscourseApi::Error
+  end
 end
