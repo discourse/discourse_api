@@ -1,5 +1,6 @@
 require 'faraday'
 require 'faraday_middleware'
+require 'discourse_api/version'
 require 'discourse_api/api/categories'
 require 'discourse_api/api/topics'
 require 'discourse_api/api/users'
@@ -18,6 +19,16 @@ module DiscourseApi
       @api_username = api_username
     end
 
+    def connection_options
+      @connection_options ||= {
+          url: @host,
+          headers: {
+              accept: 'application/json',
+              user_agent: user_agent,
+          }
+      }
+    end
+
     def delete(path, params={})
       request(:delete, path, params)
     end
@@ -34,10 +45,14 @@ module DiscourseApi
       request(:put, path, params)
     end
 
+    def user_agent
+      @user_agent ||= "DiscourseAPI Ruby Gem #{DiscourseApi::VERSION}"
+    end
+
     private
 
     def connection
-      @connection ||= Faraday.new(url: @host) do |conn|
+      @connection ||= Faraday.new connection_options do |conn|
         # Convert request params to "www-form-encoded"
         conn.request :url_encoded
         # Parse responses as JSON
