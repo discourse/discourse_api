@@ -17,7 +17,8 @@ module DiscourseApi
       end
 
       def topic(id, *args)
-        get("/t/#{id}.json", args)
+        response = get("/t/#{id}.json", args)
+        response[:body]
       end
     end
   end

@@ -57,7 +57,7 @@ module DiscourseApi
         # Convert request params to "www-form-encoded"
         conn.request :url_encoded
         # Parse responses as JSON
-        conn.response :json, :content_type => /\bjson$/
+        conn.response :json
         # Use Faraday's default HTTP adapter
         conn.adapter Faraday.default_adapter
       end

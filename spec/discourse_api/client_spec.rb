@@ -67,11 +67,4 @@ describe DiscourseApi::Client do
       expect{subject.send(:request, :get, "/test")}.to raise_error DiscourseApi::Error
     end
   end
-
-  describe "API methods" do
-    it { should respond_to :categories }
-    it { should respond_to :hot_topics }
-    it { should respond_to :invite_user_to_topic }
-    it { should respond_to :latest_topics }
-  end
 end
