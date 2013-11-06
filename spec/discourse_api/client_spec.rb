@@ -27,6 +27,47 @@ describe DiscourseApi::Client do
     end
   end
 
+  describe "#connection" do
+    it "looks like a Faraday connection" do
+      expect(subject.send(:connection)).to respond_to :run_request
+    end
+    it "memoizes the connection" do
+      c1, c2 = subject.send(:connection), subject.send(:connection)
+      expect(c1.object_id).to eq(c2.object_id)
+    end
+  end
+
+  describe "#delete" do
+    before do
+      stub_delete("http://localhost/test/delete").with(query: { deleted: "object" })
+    end
+    it "allows custom delete requests" do
+      subject.delete("/test/delete", { deleted: "object" })
+      expect(a_delete("http://localhost/test/delete").with(query: { deleted: "object" })).to have_been_made
+    end
+  end
+
+  describe "#put" do
+    before do
+      stub_put("http://localhost/test/put").with(body: { updated: "object" })
+    end
+    it "allows custom delete requests" do
+      subject.put("/test/put", { updated: "object" })
+      expect(a_put("http://localhost/test/put").with(body: { updated: "object" })).to have_been_made
+    end
+  end
+
+  describe "#request" do
+    it "catches Faraday errors" do
+      allow(subject).to receive(:connection).and_raise(Faraday::Error::ClientError.new("BOOM!"))
+      expect{subject.send(:request, :get, "/test")}.to raise_error DiscourseApi::Error
+    end
+    it "catches JSON::ParserError errors" do
+      allow(subject).to receive(:connection).and_raise(JSON::ParserError.new("unexpected token"))
+      expect{subject.send(:request, :get, "/test")}.to raise_error DiscourseApi::Error
+    end
+  end
+
   describe "API methods" do
     it { should respond_to :categories }
     it { should respond_to :hot_topics }

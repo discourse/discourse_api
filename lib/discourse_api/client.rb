@@ -1,5 +1,6 @@
 require 'faraday'
 require 'faraday_middleware'
+require 'json'
 require 'discourse_api/version'
 require 'discourse_api/api/categories'
 require 'discourse_api/api/topics'
