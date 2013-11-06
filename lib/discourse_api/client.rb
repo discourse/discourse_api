@@ -6,16 +6,16 @@ require 'discourse_api/api/users'
 
 module DiscourseApi
   class Client
-    attr_reader :host, :port
+    attr_reader :host, :api_key, :api_username
 
     include DiscourseApi::API::Categories
     include DiscourseApi::API::Topics
     include DiscourseApi::API::Users
 
-    def initialize(host, port=80, protocol='http')
+    def initialize(host, api_key=nil, api_username=nil)
       @host = host
-      @port = port
-      @protocol = protocol
+      @api_key = api_key
+      @api_username = api_username
     end
 
     def delete(path, params={})

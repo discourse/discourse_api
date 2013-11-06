@@ -6,14 +6,24 @@ describe DiscourseApi::Client do
       lambda { DiscourseApi::Client.new }.must_raise ArgumentError
     end
 
-    it "defaults port to 80" do
+    it "defaults api key to nil" do
       client = DiscourseApi::Client.new('http://localhost')
-      client.port.must_be :==, 80
+      client.api_key.must_be_nil
     end
 
-    it "accepts a port argument" do
-      client = DiscourseApi::Client.new('http://localhost',3000)
-      client.port.must_be :==, 3000
+    it "defaults api username to nil" do
+      client = DiscourseApi::Client.new('http://localhost')
+      client.api_username.must_be_nil
+    end
+
+    it "accepts an api key argument" do
+      client = DiscourseApi::Client.new('http://localhost', 'test')
+      client.api_key.must_be :==, 'test'
+    end
+
+    it "accepts an api username argument" do
+      client = DiscourseApi::Client.new('http://localhost', 'test', 'test_user')
+      client.api_username.must_be :==, 'test_user'
     end
   end
 
