@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe DiscourseApi::Client do
+  subject { DiscourseApi::Client.new('http://localhost') }
+
   describe ".new" do
     it "requires a host argument" do
       lambda { DiscourseApi::Client.new }.must_raise ArgumentError
@@ -28,8 +30,6 @@ describe DiscourseApi::Client do
   end
 
   describe "API methods" do
-    subject { DiscourseApi::Client.new('http://localhost') }
-
     it { subject.must_respond_to :categories }
     it { subject.must_respond_to :hot_topics }
     it { subject.must_respond_to :invite_user_to_topic }
