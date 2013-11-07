@@ -3,6 +3,7 @@ require 'faraday_middleware'
 require 'json'
 require 'discourse_api/version'
 require 'discourse_api/api/categories'
+require 'discourse_api/api/search'
 require 'discourse_api/api/topics'
 require 'discourse_api/api/users'
 
@@ -12,6 +13,7 @@ module DiscourseApi
     attr_reader :host
 
     include DiscourseApi::API::Categories
+    include DiscourseApi::API::Search
     include DiscourseApi::API::Topics
     include DiscourseApi::API::Users
 
