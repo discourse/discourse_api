@@ -8,7 +8,8 @@ require 'discourse_api/api/users'
 
 module DiscourseApi
   class Client
-    attr_reader :host, :api_key, :api_username
+    attr_accessor :api_key, :api_username
+    attr_reader :host
 
     include DiscourseApi::API::Categories
     include DiscourseApi::API::Topics

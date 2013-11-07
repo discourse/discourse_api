@@ -27,6 +27,30 @@ describe DiscourseApi::Client do
     end
   end
 
+  describe "#api_key" do
+    it "is publically accessible" do
+      subject.api_key = "test_key"
+      expect(subject.api_key).to eq("test_key")
+    end
+  end
+
+  describe "#api_username" do
+    it "is publically accessible" do
+      subject.api_username = "test_user"
+      expect(subject.api_username).to eq("test_user")
+    end
+  end
+
+  describe "#host" do
+    it "is publically readable" do
+      expect(subject.host).to eq("http://localhost")
+    end
+
+    it "is not publically writeable" do
+      expect(subject).not_to respond_to(:host=)
+    end
+  end
+
   describe "#connection" do
     it "looks like a Faraday connection" do
       expect(subject.send(:connection)).to respond_to :run_request
