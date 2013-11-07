@@ -3,7 +3,9 @@ require 'simplecov'
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::HTMLFormatter,
 ]
-SimpleCov.start
+SimpleCov.start do
+  add_filter "/spec/"
+end
 
 require 'discourse_api'
 require 'rspec'
