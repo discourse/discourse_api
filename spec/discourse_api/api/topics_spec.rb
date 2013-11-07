@@ -41,6 +41,23 @@ describe DiscourseApi::API::Topics do
     end
   end
 
+  describe "#new_topics" do
+    before do
+      stub_get("http://localhost/new.json").to_return(body: fixture("new.json"), headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.new_topics
+      expect(a_get("http://localhost/new.json")).to have_been_made
+    end
+
+    it "returns the requested topics" do
+      topics = subject.new_topics
+      expect(topics).to be_an Array
+      expect(topics.first).to be_a Hash
+    end
+  end
+
   describe "#topic" do
     before do
       stub_get("http://localhost/t/57.json").to_return(body: fixture("topic.json"), headers: { content_type: "application/json" })
