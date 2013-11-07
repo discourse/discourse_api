@@ -71,6 +71,17 @@ describe DiscourseApi::Client do
     end
   end
 
+  describe "#post" do
+    before do
+      stub_post("http://localhost/test/post").with(body: { created: "object"})
+    end
+
+    it "allows custom post requests" do
+      subject.post("/test/post", { created: "object" })
+      expect(a_post("http://localhost/test/post").with(body: { created: "object"})).to have_been_made
+    end
+  end
+
   describe "#put" do
     before do
       stub_put("http://localhost/test/put").with(body: { updated: "object" })
