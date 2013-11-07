@@ -20,6 +20,11 @@ module DiscourseApi
         response = get("/t/#{id}.json", args)
         response[:body]
       end
+
+      def topics_by(username, *args)
+        response = get("/topics/created-by/#{username}.json", args)
+        response[:body]['topic_list']['topics']
+      end
     end
   end
 end

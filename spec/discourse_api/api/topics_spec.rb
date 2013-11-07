@@ -57,4 +57,21 @@ describe DiscourseApi::API::Topics do
       expect(topic["id"]).to eq(57)
     end
   end
+
+  describe "#topics_by" do
+    before do
+      stub_get("http://localhost/topics/created-by/test_user.json").to_return(body: fixture("topics_created_by.json"), headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.topics_by('test_user')
+      expect(a_get("http://localhost/topics/created-by/test_user.json")).to have_been_made
+    end
+
+    it "returns the requested topics" do
+      topics = subject.topics_by('test_user')
+      expect(topics).to be_an Array
+      expect(topics.first).to be_a Hash
+    end
+  end
 end
