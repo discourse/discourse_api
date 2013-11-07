@@ -1,3 +1,10 @@
+require 'simplecov'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+]
+SimpleCov.start
+
 require 'discourse_api'
 require 'rspec'
 require 'webmock/rspec'
