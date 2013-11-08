@@ -6,8 +6,8 @@ require 'discourse_api/version'
 Gem::Specification.new do |spec|
   spec.name          = "discourse_api"
   spec.version       = DiscourseApi::VERSION
-  spec.authors       = ["Sam Saffron", "John Paul Ashenfelter"]
-  spec.email         = ["sam.saffron@gmail.com", "john@ashenfelter.com"]
+  spec.authors       = ["Sam Saffron", "John Paul Ashenfelter", "Michael Herold"]
+  spec.email         = ["sam.saffron@gmail.com", "john@ashenfelter.com", "michael.j.herold@gmail.com"]
   spec.description   = %q{Discourse API}
   spec.summary       = %q{Allows access to the Discourse API}
   spec.homepage      = "http://github.com/discourse/discourse_api"
