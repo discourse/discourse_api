@@ -1,6 +1,10 @@
 # DiscourseApi
 
-[![Code Climate](https://codeclimate.com/github/discourse/discourse_api.png)](https://codeclimate.com/github/discourse/discourse_api)
+[![Build Status](https://travis-ci.org/discourse/discourse_api.pong?branch=master)][travis]
+[![Code Climate](https://codeclimate.com/github/discourse/discourse_api.png)][codeclimate]
+
+[travis]: http://travis-ci.org/discourse/discourse_api
+[codeclimate]: https://codeclimate.com/github/discourse/discourse_api
 
 The Discourse API gem allows you to consume the Discourse API
 
@@ -20,15 +24,24 @@ Or install it yourself as:
 
 ## Usage
 
-Over time this project intends to have a full Discourse API, at the moment there is only one endpoint
+Over time this project intends to have a full Discourse API. At the moment there are only a
+few endpoints available:
 
 ```ruby
+client = DiscourseApi::Client.new("http://try.discourse.org")
 
-client = DiscourseApi::Client.new("l.discourse")
-client.api_key = "YOUR_API_KEY"
-client.api_username = "YOUR_USERNAME"
+# Topic endpoints
+client.latest_topics      #=> Gets a list of the latest topics
+client.hot_topics         #=> Gets a list of hot topics
+client.new_topics         #=> Gets a list of new topics
+client.topics_by("sam")   #=> Gets a list of topics created by user "sam"
+client.topic(57)          #=> Gets the topic with id 57
 
-client.topic_invite_user(topic_id: 1794, email: "bob@bob.com")
+# Search endpoint
+client.search("sandbox")  #=> Gets a list of topics that match "sandbox"
+
+# Categories endpoint
+client.categories         #=> Gets a list of categories
 
 ```
 
