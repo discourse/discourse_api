@@ -38,4 +38,8 @@ describe DiscourseApi::API::Users do
   describe "#update_username" do
     it "needs to have a test written for it"
   end
+
+  describe "#create_user" do
+    it "needs to have a test written for it"
+  end
 end
