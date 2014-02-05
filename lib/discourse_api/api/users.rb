@@ -6,7 +6,7 @@ module DiscourseApi
       end
 
       def user(username, *args)
-        response = get("/user/#{username}.json", args)
+        response = get("/users/#{username}.json", args)
         response[:body]['user']
       end
 
