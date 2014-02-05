@@ -25,6 +25,17 @@ module DiscourseApi
       def update_username(username, new_username)
         put("/users/#{username}/preferences/username", { new_username: new_username })
       end
+
+      # Create a user
+      def create_user(*args)
+        # First retrieve the honeypot values
+        response = get("/users/hp.json")
+        args.first[:password_confirmation] = response[:body]['value']
+        args.first[:challenge] = response[:body]['challenge'].reverse
+
+        # POST the args
+        post("/users", args)
+      end
     end
   end
 end

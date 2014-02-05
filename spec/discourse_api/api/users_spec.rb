@@ -38,4 +38,21 @@ describe DiscourseApi::API::Users do
   describe "#update_username" do
     it "needs to have a test written for it"
   end
+
+  describe "#create_user" do
+    before do
+      stub_post("http://localhost/users").to_return(body: fixture("user_create_success.json"), headers: { content_type: "application/json" })
+      stub_get("http://localhost/users/hp.json").to_return(body: {"value"=>"foo", "challenge"=>"bar"}.to_json, headers: { content_type: "application/json" })
+    end
+
+    it "makes the post request" do
+      subject.create_user :name => "Test User", :email => "test@example.com", :password => "P@ssword", :username => "test-user"
+      expect(a_post("http://localhost/users")).to have_been_made
+    end
+
+    it "returns success" do
+      response = subject.create_user :name => "Test User", :email => "test@example.com", :password => "P@ssword", :username => "test-user"
+      expect(response[:body]['success']).to be_true
+    end
+  end
 end
