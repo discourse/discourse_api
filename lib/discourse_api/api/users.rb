@@ -5,6 +5,10 @@ module DiscourseApi
         put("/users/#{username}/preferences/avatar/toggle", { use_uploaded_avatar: use_uploaded_avatar })
       end
 
+      def activate(id)
+        put "/admin/users/#{id}/activate", api_key: api_key, api_username: api_username
+      end
+
       def user(username, *args)
         response = get("/users/#{username}.json", args)
         response[:body]['user']
