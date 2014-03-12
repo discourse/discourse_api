@@ -15,11 +15,11 @@ module DiscourseApi
       end
 
       def update_avatar(username, file)
-        put("/users/#{username}/preferences/avatar", { file: file })
+        put("/users/#{username}/preferences/avatar", { file: file, api_key: api_key })
       end
 
       def update_email(username, email)
-        put("/users/#{username}/preferences/email", { email: email })
+        put("/users/#{username}/preferences/email", { email: email, api_key: api_key })
       end
 
       def update_user(username, *args)
@@ -27,7 +27,7 @@ module DiscourseApi
       end
 
       def update_username(username, new_username)
-        put("/users/#{username}/preferences/username", { new_username: new_username })
+        put("/users/#{username}/preferences/username", { new_username: new_username, api_key: api_key })
       end
 
       # Create a user
