@@ -70,7 +70,7 @@ module DiscourseApi
       if opts[:csrf_token]
         token, session = get_token_and_session
         connection.headers['Cookie'] = session
-        params.merge(authenticity_token: token)
+        params.merge!(authenticity_token: token)
       end
       response = connection.send(method.to_sym, path, params)
       response.env
