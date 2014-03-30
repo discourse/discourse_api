@@ -38,7 +38,7 @@ module DiscourseApi
     end
 
     def get(path, params={})
-      request(:get, path, params)
+      request(:get, path, @api_key, @api_username, params)
     end
 
     def post(path, params={})
