@@ -7,7 +7,7 @@ client = DiscourseApi::Client.new("localhost", 3000)
 client.api_key = "YOUR_API_KEY"
 client.api_username = "YOUR_USERNAME"
 
-puts client.topics_latest({})
-puts client.topics_hot({})
+puts client.latest_topics({})
+puts client.hot_topics({})
 puts client.categories({})
 
