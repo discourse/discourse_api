@@ -33,20 +33,20 @@ module DiscourseApi
       }
     end
 
-    def delete(path, params={})
-      request(:delete, path, params)
+    def delete(path, params={}, opts={})
+      request(:delete, path, params, opts)
     end
 
-    def get(path, params={})
-      request(:get, path, params)
+    def get(path, params={}, opts={})
+      request(:get, path, params, opts)
     end
 
-    def post(path, params={})
-      request(:post, path, params)
+    def post(path, params={}, opts={})
+      request(:post, path, params, opts)
     end
 
-    def put(path, params={})
-      request(:put, path, params)
+    def put(path, params={}, opts={})
+      request(:put, path, params, opts)
     end
 
     def user_agent
@@ -69,11 +69,24 @@ module DiscourseApi
       end
     end
 
-    def request(method, path, params={})
+    def request(method, path, params={}, opts={})
+      if opts[:csrf_token]
+        token, session = get_token_and_session
+        connection.headers['Cookie'] = session
+        params.merge!(authenticity_token: token)
+      end
       response = connection.send(method.to_sym, path, params)
       response.env
     rescue Faraday::Error::ClientError, JSON::ParserError
       raise DiscourseApi::Error
+    end
+
+    def get_token_and_session
+      response = get('/session/csrf.json')
+      [
+        response[:body]['csrf'],
+        response[:response_headers]['set-cookie']
+      ]
     end
   end
 end
