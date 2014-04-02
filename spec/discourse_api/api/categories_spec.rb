@@ -5,12 +5,12 @@ describe DiscourseApi::API::Categories do
 
   describe "#categories" do
     before do
-      stub_get("http://localhost/categories.json").to_return(body: fixture("categories.json"), headers: { content_type: "application/json" })
+      stub_get("http://localhost/categories.json?api_key&api_username").to_return(body: fixture("categories.json"), headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.categories
-      expect(a_get("http://localhost/categories.json")).to have_been_made
+      expect(a_get("http://localhost/categories.json?api_key&api_username")).to have_been_made
     end
 
     it "returns the requested categories" do
