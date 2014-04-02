@@ -5,12 +5,12 @@ describe DiscourseApi::API::Search do
 
   describe "#search" do
     before do
-      stub_get("http://localhost/search.json").with(query: { term: "test"} ).to_return(body: fixture("search.json"), headers: { content_type: "application/json" })
+      stub_get("http://localhost/search.json?api_key&api_username").with(query: { term: "test"} ).to_return(body: fixture("search.json"), headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.search("test")
-      expect(a_get("http://localhost/search.json").with(query: { term: "test"} )).to have_been_made
+      expect(a_get("http://localhost/search.json?api_key&api_username").with(query: { term: "test"} )).to have_been_made
     end
 
     it "returns the requested search" do

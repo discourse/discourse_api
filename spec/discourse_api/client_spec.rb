@@ -63,32 +63,32 @@ describe DiscourseApi::Client do
 
   describe "#delete" do
     before do
-      stub_delete("http://localhost/test/delete").with(query: { deleted: "object" })
+      stub_delete("http://localhost/test/delete?api_key&api_username").with(query: { deleted: "object" })
     end
     it "allows custom delete requests" do
       subject.delete("/test/delete", { deleted: "object" })
-      expect(a_delete("http://localhost/test/delete").with(query: { deleted: "object" })).to have_been_made
+      expect(a_delete("http://localhost/test/delete?api_key&api_username").with(query: { deleted: "object" })).to have_been_made
     end
   end
 
   describe "#post" do
     before do
-      stub_post("http://localhost/test/post").with(body: { created: "object"})
+      stub_post("http://localhost/test/post?api_key&api_username").with(body: { created: "object"})
     end
 
     it "allows custom post requests" do
       subject.post("/test/post", { created: "object" })
-      expect(a_post("http://localhost/test/post").with(body: { created: "object"})).to have_been_made
+      expect(a_post("http://localhost/test/post?api_key&api_username").with(body: { created: "object"})).to have_been_made
     end
   end
 
   describe "#put" do
     before do
-      stub_put("http://localhost/test/put").with(body: { updated: "object" })
+      stub_put("http://localhost/test/put?api_key&api_username").with(body: { updated: "object" })
     end
     it "allows custom delete requests" do
       subject.put("/test/put", { updated: "object" })
-      expect(a_put("http://localhost/test/put").with(body: { updated: "object" })).to have_been_made
+      expect(a_put("http://localhost/test/put?api_key&api_username").with(body: { updated: "object" })).to have_been_made
     end
   end
 
