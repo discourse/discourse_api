@@ -1,10 +1,6 @@
 module DiscourseApi
   module API
     module Users
-      def toggle_avatar(username, use_uploaded_avatar)
-        put("/users/#{username}/preferences/avatar/toggle", { use_uploaded_avatar: use_uploaded_avatar })
-      end
-
       def activate(id)
         put "/admin/users/#{id}/activate", api_key: api_key, api_username: api_username
       end
@@ -22,8 +18,8 @@ module DiscourseApi
         put("/users/#{username}/preferences/email", { email: email, api_key: api_key })
       end
 
-      def update_user(username, *args)
-        put("/users/#{username}", args)
+      def update_user(username, params={})
+        put("/users/#{username}", params)
       end
 
       def update_username(username, new_username)

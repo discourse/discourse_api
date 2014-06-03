@@ -3,10 +3,6 @@ require 'spec_helper'
 describe DiscourseApi::API::Users do
   subject { DiscourseApi::Client.new("http://localhost") }
 
-  describe "#toggle_avatar" do
-    it "needs to have a test written for it"
-  end
-
   describe "#user" do
     before do
       stub_get("http://localhost/users/test_user.json").to_return(body: fixture("user.json"), headers: { content_type: "application/json" })

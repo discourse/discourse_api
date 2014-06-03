@@ -32,7 +32,6 @@ client = DiscourseApi::Client.new("http://try.discourse.org")
 
 # Topic endpoints
 client.latest_topics      #=> Gets a list of the latest topics
-client.hot_topics         #=> Gets a list of hot topics
 client.new_topics         #=> Gets a list of new topics
 client.topics_by("sam")   #=> Gets a list of topics created by user "sam"
 client.topic(57)          #=> Gets the topic with id 57

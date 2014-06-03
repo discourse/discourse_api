@@ -18,8 +18,8 @@ module DiscourseApi
     include DiscourseApi::API::Users
 
     def initialize(host, api_key=nil, api_username=nil)
-      @host = host
-      @api_key = api_key
+      @host         = host
+      @api_key      = api_key
       @api_username = api_username
     end
 

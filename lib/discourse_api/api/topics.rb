@@ -1,14 +1,13 @@
 module DiscourseApi
   module API
     module Topics
-      def hot_topics(*args)
-        response = get('/hot.json', args)
-        response[:body]['topic_list']['topics']
+
+      def invite_user_to_topic(params={})
+        post("/t/#{params[:topic_id]}/invite", params)
       end
 
-      def invite_user_to_topic(user_email, topic_id)
-        params = { email: user_email, topic_id: topic_id }
-        post "/t/#{topic_id}/invite.json", params
+      def create_topic(params={})
+        post("/posts", params)
       end
 
       def latest_topics(*args)
