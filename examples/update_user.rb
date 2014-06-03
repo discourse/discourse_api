@@ -7,8 +7,11 @@ client = DiscourseApi::Client.new("localhost", 3000)
 client.api_key = "YOUR_API_KEY"
 client.api_username = "YOUR_USERNAME"
 
-puts client.username_update(username: "Batman", new_username: "Alfred")
-puts client.user_update(username: "Batman", name: "Bruce Wayne")
-puts client.email_update(username: "Batman", email: "batman@example.com")
-puts client.toggle_avatar(username: "Batman", use_uploaded_avatar: true)
-puts client.upload_avatar(username: "DiscourseHero", file: "http://cdn.discourse.org/assets/logo.png")
+# update username from "robin" to "batman"
+puts client.update_username("robin", "batman")
+# update name of user whose username is "batman"
+puts client.update_user("batman", name: "Bruce Wayne")
+# update email of user whose username is "batman"
+puts client.update_email("batman", "batman@gotham.com")
+# update avatar of user whose username is "batman"
+puts client.update_avatar("batman", "http://meta-discourse.r.worldssl.net/uploads/default/2497/724a6ef2e79d2bc7.png")

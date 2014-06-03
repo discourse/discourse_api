@@ -3,23 +3,6 @@ require 'spec_helper'
 describe DiscourseApi::API::Topics do
   subject { DiscourseApi::Client.new("http://localhost") }
 
-  describe "#hot_topics" do
-    before do
-      stub_get("http://localhost/hot.json").to_return(body: fixture("hot.json"), headers: { content_type: "application/json" })
-    end
-
-    it "requests the correct resource" do
-      subject.hot_topics
-      expect(a_get("http://localhost/hot.json")).to have_been_made
-    end
-
-    it "returns the requested topics" do
-      topics = subject.hot_topics
-      expect(topics).to be_an Array
-      expect(topics.first).to be_a Hash
-    end
-  end
-
   describe "#invite_user_to_topic" do
     it "needs to have a test written for it"
   end
