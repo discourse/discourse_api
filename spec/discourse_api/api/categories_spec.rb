@@ -19,4 +19,15 @@ describe DiscourseApi::API::Categories do
       expect(categories.first).to be_a Hash
     end
   end
+
+  describe '#category_latest_topics' do
+    before do
+      stub_get("http://localhost/category/category-slug.json?api_key&api_username").to_return(body: fixture("category_latest_topics.json"), headers: { content_type: "application/json" })
+    end
+
+    it "returns the latest topics in a category" do
+      latest_topics = subject.category_latest_topics('category-slug')
+      expect(latest_topics).to be_an Array
+    end
+  end
 end
