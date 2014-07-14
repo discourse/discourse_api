@@ -6,6 +6,7 @@ require 'discourse_api/api/categories'
 require 'discourse_api/api/search'
 require 'discourse_api/api/topics'
 require 'discourse_api/api/users'
+require 'discourse_api/api/invite'
 
 module DiscourseApi
   class Client
@@ -16,6 +17,7 @@ module DiscourseApi
     include DiscourseApi::API::Search
     include DiscourseApi::API::Topics
     include DiscourseApi::API::Users
+    include DiscourseApi::API::Invite
 
     def initialize(host, api_key=nil, api_username=nil)
       @host         = host
