@@ -59,10 +59,12 @@ module DiscourseApi
 
     def connection
       @connection ||= Faraday.new connection_options do |conn|
+        # Follow redirects
+        conn.use FaradayMiddleware::FollowRedirects, limit: 5
         # Convert request params to "www-form-encoded"
         conn.request :url_encoded
         # Parse responses as JSON
-        conn.response :json
+        conn.use FaradayMiddleware::ParseJson, content_type: 'application/json'
         # Use Faraday's default HTTP adapter
         conn.adapter Faraday.default_adapter
         #pass api_key and api_username on every request
