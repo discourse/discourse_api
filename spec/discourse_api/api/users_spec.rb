@@ -1,20 +1,24 @@
 require 'spec_helper'
 
 describe DiscourseApi::API::Users do
-  subject { DiscourseApi::Client.new("http://localhost") }
+  subject { DiscourseApi::Client.new("http://localhost:3000") }
 
   describe "#user" do
     before do
-      stub_get("http://localhost/users/test_user.json").to_return(body: fixture("user.json"), headers: { content_type: "application/json" })
+      stub_get("http://localhost:3000/users/test.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user.json"), headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
-      subject.user("test_user")
-      expect(a_get("http://localhost/users/test_user.json")).to have_been_made
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      subject.user("test")
+      expect(a_get("http://localhost:3000/users/test.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
     end
 
     it "returns the requested user" do
-      user = subject.user("test_user")
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      user = subject.user("test")
       expect(user).to be_a Hash
     end
   end
@@ -37,18 +41,22 @@ describe DiscourseApi::API::Users do
 
   describe "#create_user" do
     before do
-      stub_post("http://localhost/users").to_return(body: fixture("user_create_success.json"), headers: { content_type: "application/json" })
-      stub_get("http://localhost/users/hp.json").to_return(body: {"value"=>"foo", "challenge"=>"bar"}.to_json, headers: { content_type: "application/json" })
+      stub_post("http://localhost:3000/users?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_create_success.json"), headers: { content_type: "application/json" })
+      stub_get("http://localhost:3000/users/hp.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: {"value"=>"foo", "challenge"=>"bar"}.to_json, headers: { content_type: "application/json" })
     end
 
     it "makes the post request" do
-      subject.create_user :name => "Test User", :email => "test@example.com", :password => "P@ssword", :username => "test-user"
-      expect(a_post("http://localhost/users")).to have_been_made
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      subject.create_user :name => "Test User", :email => "test2@example.com", :password => "P@ssword", :username => "test2"
+      expect(a_post("http://localhost:3000/users?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
     end
 
     it "returns success" do
-      response = subject.create_user :name => "Test User", :email => "test@example.com", :password => "P@ssword", :username => "test-user"
-      expect(response[:body]['success']).to be_true
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      response = subject.create_user :name => "Test User", :email => "test2@example.com", :password => "P@ssword", :username => "test2"
+      expect(response[:body]['success']).to be_truthy
     end
   end
 end

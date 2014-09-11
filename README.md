@@ -53,3 +53,10 @@ client.category_latest_posts("category-slug")   #=> Gets a list of latest posts 
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Testing
+
+1. Install discourse locally
+2. Inside of your discourse directory, run: `bundle exec rake db:api_test_seed`
+3. Start discourse: `bundle exec rails s`
+4. Inside of your discourse_api directory, run: `bundle exec rspec spec/`

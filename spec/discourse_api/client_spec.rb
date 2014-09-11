@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe DiscourseApi::Client do
-  subject { DiscourseApi::Client.new('http://localhost') }
+  subject { DiscourseApi::Client.new('http://localhost:3000') }
 
   describe ".new" do
     it "requires a host argument" do
@@ -17,20 +17,20 @@ describe DiscourseApi::Client do
     end
 
     it "accepts an api key argument" do
-      client = DiscourseApi::Client.new('http://localhost', 'test')
+      client = DiscourseApi::Client.new('http://localhost:3000', 'test')
       expect(client.api_key).to eq('test')
     end
 
     it "accepts an api username argument" do
-      client = DiscourseApi::Client.new('http://localhost', 'test', 'test_user')
+      client = DiscourseApi::Client.new('http://localhost:3000', 'test', 'test_user')
       expect(client.api_username).to eq('test_user')
     end
   end
 
   describe "#api_key" do
     it "is publically accessible" do
-      subject.api_key = "test_key"
-      expect(subject.api_key).to eq("test_key")
+      subject.api_key = "test_d7fd0429940"
+      expect(subject.api_key).to eq("test_d7fd0429940")
     end
   end
 
@@ -43,7 +43,7 @@ describe DiscourseApi::Client do
 
   describe "#host" do
     it "is publically readable" do
-      expect(subject.host).to eq("http://localhost")
+      expect(subject.host).to eq("http://localhost:3000")
     end
 
     it "is not publically writeable" do
@@ -55,7 +55,7 @@ describe DiscourseApi::Client do
     it "looks like a Faraday connection" do
       expect(subject.send(:connection)).to respond_to :run_request
     end
-    it "memoizes the connection" do
+    it "memorizes the connection" do
       c1, c2 = subject.send(:connection), subject.send(:connection)
       expect(c1.object_id).to eq(c2.object_id)
     end
@@ -63,32 +63,38 @@ describe DiscourseApi::Client do
 
   describe "#delete" do
     before do
-      stub_delete("http://localhost/test/delete").with(query: { deleted: "object" })
+      stub_delete("http://localhost:3000/test/delete?api_key=test_d7fd0429940&api_username=test_user").with(query: { deleted: "object" })
     end
     it "allows custom delete requests" do
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
       subject.delete("/test/delete", { deleted: "object" })
-      expect(a_delete("http://localhost/test/delete").with(query: { deleted: "object" })).to have_been_made
+      expect(a_delete("http://localhost:3000/test/delete?api_key=test_d7fd0429940&api_username=test_user").with(query: { deleted: "object" })).to have_been_made
     end
   end
 
   describe "#post" do
     before do
-      stub_post("http://localhost/test/post").with(body: { created: "object"})
+      stub_post("http://localhost:3000/test/post?api_key=test_d7fd0429940&api_username=test_user").with(body: { created: "object"})
     end
 
     it "allows custom post requests" do
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
       subject.post("/test/post", { created: "object" })
-      expect(a_post("http://localhost/test/post").with(body: { created: "object"})).to have_been_made
+      expect(a_post("http://localhost:3000/test/post?api_key=test_d7fd0429940&api_username=test_user").with(body: { created: "object"})).to have_been_made
     end
   end
 
   describe "#put" do
     before do
-      stub_put("http://localhost/test/put").with(body: { updated: "object" })
+      stub_put("http://localhost:3000/test/put?api_key=test_d7fd0429940&api_username=test_user").with(body: { updated: "object" })
     end
-    it "allows custom delete requests" do
+    it "allows custom put requests" do
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
       subject.put("/test/put", { updated: "object" })
-      expect(a_put("http://localhost/test/put").with(body: { updated: "object" })).to have_been_made
+      expect(a_put("http://localhost:3000/test/put?api_key=test_d7fd0429940&api_username=test_user").with(body: { updated: "object" })).to have_been_made
     end
   end
 
