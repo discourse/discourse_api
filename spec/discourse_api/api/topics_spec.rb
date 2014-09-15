@@ -4,7 +4,24 @@ describe DiscourseApi::API::Topics do
   subject { DiscourseApi::Client.new("http://localhost:3000") }
 
   describe "#invite_user_to_topic" do
-    it "needs to have a test written for it"
+    before do
+      stub_post("http://localhost:3000/t/12/invite?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("topic_invite_user.json"), headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      subject.invite_user_to_topic(email: "fake_user@example.com", topic_id: 12)
+      expect(a_post("http://localhost:3000/t/12/invite?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns success" do
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      response = subject.invite_user_to_topic(email: "fake_user@example.com", topic_id: 12)
+      expect(response[:body]['success']).to be_truthy
+    end
+
   end
 
   describe "#latest_topics" do

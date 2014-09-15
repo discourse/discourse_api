@@ -28,15 +28,63 @@ describe DiscourseApi::API::Users do
   end
 
   describe "#update_email" do
-    it "needs to have a test written for it"
+    before do
+      stub_put("http://localhost:3000/users/fake_user/preferences/email?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_update_user.json"), headers: { content_type: "application/json" })
+    end
+
+    it "makes the put request" do
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      subject.update_email("fake_user", "fake_user_2@example.com")
+      expect(a_put("http://localhost:3000/users/fake_user/preferences/email?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns success" do
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      response = subject.update_email("fake_user", "fake_user_2@example.com")
+      expect(response[:body]['success']).to be_truthy
+    end
   end
 
   describe "#update_user" do
-    it "needs to have a test written for it"
+    before do
+      stub_put("http://localhost:3000/users/fake_user?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_update_user.json"), headers: { content_type: "application/json" })
+    end
+
+    it "makes the put request" do
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      subject.update_user("fake_user", name: "Fake User 2")
+      expect(a_put("http://localhost:3000/users/fake_user?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns success" do
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      response = subject.update_user("fake_user", name: "Fake User 2")
+      expect(response[:body]['success']).to be_truthy
+    end
   end
 
   describe "#update_username" do
-    it "needs to have a test written for it"
+    before do
+      stub_put("http://localhost:3000/users/fake_user/preferences/username?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_update_username.json"), headers: { content_type: "application/json" })
+    end
+
+    it "makes the put request" do
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      subject.update_username("fake_user", "fake_user_2")
+      expect(a_put("http://localhost:3000/users/fake_user/preferences/username?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns success" do
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      response = subject.update_username("fake_user", "fake_user_2")
+      expect(response[:body]['success']).to be_truthy
+    end
   end
 
   describe "#create_user" do
