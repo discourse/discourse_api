@@ -27,11 +27,11 @@ module DiscourseApi
       end
 
       # Create a user
-      def create_user(*args)
+      def create_user(args={})
         # First retrieve the honeypot values
         response = get("/users/hp.json")
-        args.first[:password_confirmation] = response[:body]['value']
-        args.first[:challenge] = response[:body]['challenge'].reverse
+        args[:password_confirmation] = response[:body]['value']
+        args[:challenge] = response[:body]['challenge'].reverse
 
         # POST the args
         post("/users", args)
