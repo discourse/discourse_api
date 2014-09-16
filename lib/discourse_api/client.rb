@@ -8,6 +8,7 @@ require 'discourse_api/api/topics'
 require 'discourse_api/api/users'
 require 'discourse_api/api/invite'
 require 'discourse_api/api/private_messages'
+require 'discourse_api/api/notifications'
 
 module DiscourseApi
   class Client
@@ -20,6 +21,7 @@ module DiscourseApi
     include DiscourseApi::API::Users
     include DiscourseApi::API::Invite
     include DiscourseApi::API::PrivateMessages
+    include DiscourseApi::API::Notifications
 
     def initialize(host, api_key=nil, api_username=nil)
       @host         = host
