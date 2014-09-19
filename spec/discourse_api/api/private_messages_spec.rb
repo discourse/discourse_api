@@ -19,7 +19,7 @@ describe DiscourseApi::API::PrivateMessages do
       subject.api_key = 'test_d7fd0429940'
       subject.api_username = 'test_user'
       private_messages = subject.private_messages('test_user')
-      expect(private_messages).to be_a Hash
+      expect(private_messages).to be_an Array
     end
   end
 
