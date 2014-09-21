@@ -5,6 +5,9 @@ client = DiscourseApi::Client.new("http://localhost:3000")
 client.api_key = "YOUR_API_KEY"
 client.api_username = "YOUR_USERNAME"
 
+# invite user
+client.invite_user(email: "name@example.com", group_ids: "41,42")
+
 # invite to a topic
 client.invite_user_to_topic(email: "foo@bar.com", topic_id: 1)
 
