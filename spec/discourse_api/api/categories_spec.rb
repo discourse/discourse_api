@@ -26,7 +26,7 @@ describe DiscourseApi::API::Categories do
 
   describe '#category_latest_topics' do
     before do
-      stub_get("http://localhost:3000/category/category-slug.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("category_latest_topics.json"), headers: { content_type: "application/json" })
+      stub_get("http://localhost:3000/category/category-slug/l/latest.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("category_latest_topics.json"), headers: { content_type: "application/json" })
     end
 
     it "returns the latest topics in a category" do
