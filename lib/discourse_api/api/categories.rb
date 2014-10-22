@@ -7,7 +7,7 @@ module DiscourseApi
       end
 
       def category_latest_topics(category_slug)
-        response = get("/category/#{category_slug}.json")
+        response = get("/category/#{category_slug}/l/latest.json")
         response[:body]['topic_list']['topics']
       end
     end
