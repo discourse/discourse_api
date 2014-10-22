@@ -28,6 +28,10 @@ module DiscourseApi
         response = get("/topics/created-by/#{username}.json", args)
         response[:body]['topic_list']['topics']
       end
+
+      def delete_topic(id)
+        delete("/t/#{id}.json")
+      end
     end
   end
 end
