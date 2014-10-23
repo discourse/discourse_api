@@ -1,1 +1,24 @@
-[{"type":"topic","name":"Topics","more":true,"results":[{"id":1,"title":"Test topic #1","url":"/t/test-topic-1/1"},{"id":2,"title":"Test topic #2","url":"/t/test-topic-2/2"},{"id":3,"title":"Test topic #3","url":"/t/test-topic-3/3"}]}]
+[
+  {
+    "type": "topic",
+    "name": "Topics",
+    "more": true,
+    "results": [
+      {
+        "id": 1,
+        "title": "Test topic #1",
+        "url": "/t/test-topic-1/1"
+      },
+      {
+        "id": 2,
+        "title": "Test topic #2",
+        "url": "/t/test-topic-2/2"
+      },
+      {
+        "id": 3,
+        "title": "Test topic #3",
+        "url": "/t/test-topic-3/3"
+      }
+    ]
+  }
+]
