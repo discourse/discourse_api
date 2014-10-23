@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe DiscourseApi::API::Notifications do
-  subject { DiscourseApi::Client.new("http://localhost:3000") }
+  subject { DiscourseApi::Client.new("http://localhost:3000", "test_d7fd0429940", "test_user") }
 
   describe "#notifications" do
 
@@ -10,15 +10,11 @@ describe DiscourseApi::API::Notifications do
     end
 
     it "requests the correct resource" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
       subject.notifications
       expect(a_get("http://localhost:3000/notifications.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
     end
 
     it "returns the requested notifications" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
       notifications = subject.notifications
       expect(notifications).to be_an Array
       expect(notifications.first).to be_an Hash
