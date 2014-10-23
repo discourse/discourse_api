@@ -71,6 +71,22 @@ describe DiscourseApi::API::Topics do
     end
   end
 
+  describe "#update_topic" do
+    before do
+      stub_put("http://localhost:3000/t/57.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("topic.json"), headers: { content_type: "application/json" })
+    end
+
+    it "renames the topic" do
+      subject.rename_topic(57, "A new title!")
+      expect(a_put("http://localhost:3000/t/57.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "assigns the topic a new category" do
+      subject.recategorize_topic(57, 3)
+      expect(a_put("http://localhost:3000/t/57.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+  end
+
   describe "#topics_by" do
     before do
       stub_get("http://localhost:3000/topics/created-by/test.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("topics_created_by.json"), headers: { content_type: "application/json" })
