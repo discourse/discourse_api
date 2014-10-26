@@ -55,6 +55,7 @@ describe DiscourseApi::Client do
     it "looks like a Faraday connection" do
       expect(subject.send(:connection)).to respond_to :run_request
     end
+
     it "memorizes the connection" do
       c1, c2 = subject.send(:connection), subject.send(:connection)
       expect(c1.object_id).to eq(c2.object_id)
@@ -65,6 +66,7 @@ describe DiscourseApi::Client do
     before do
       stub_delete("http://localhost:3000/test/delete?api_key=test_d7fd0429940&api_username=test_user").with(query: { deleted: "object" })
     end
+
     it "allows custom delete requests" do
       subject.api_key = 'test_d7fd0429940'
       subject.api_username = 'test_user'
@@ -90,6 +92,7 @@ describe DiscourseApi::Client do
     before do
       stub_put("http://localhost:3000/test/put?api_key=test_d7fd0429940&api_username=test_user").with(body: { updated: "object" })
     end
+
     it "allows custom put requests" do
       subject.api_key = 'test_d7fd0429940'
       subject.api_username = 'test_user'
@@ -103,6 +106,7 @@ describe DiscourseApi::Client do
       allow(subject).to receive(:connection).and_raise(Faraday::Error::ClientError.new("BOOM!"))
       expect{subject.send(:request, :get, "/test")}.to raise_error DiscourseApi::Error
     end
+
     it "catches JSON::ParserError errors" do
       allow(subject).to receive(:connection).and_raise(JSON::ParserError.new("unexpected token"))
       expect{subject.send(:request, :get, "/test")}.to raise_error DiscourseApi::Error

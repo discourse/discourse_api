@@ -15,8 +15,12 @@ module DiscourseApi
         response[:body]['topic_list']['topics']
       end
 
-      def recategorize_topic(params={})
-        put("/t/#{params[:topic_id]}.json", params)
+      def rename_topic(topic_id, title)
+        put("/t/#{topic_id}.json", { topic_id: topic_id, title: title })
+      end
+
+      def recategorize_topic(topic_id, category_id)
+        put("/t/#{topic_id}.json", { topic_id: topic_id, category_id: category_id })
       end
 
       def topic(id, *args)

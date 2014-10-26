@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe DiscourseApi::API::Users do
-  subject { DiscourseApi::Client.new("http://localhost:3000") }
+  subject { DiscourseApi::Client.new("http://localhost:3000", "test_d7fd0429940", "test_user") }
 
   describe "#user" do
     before do
@@ -9,15 +9,11 @@ describe DiscourseApi::API::Users do
     end
 
     it "requests the correct resource" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
       subject.user("test")
       expect(a_get("http://localhost:3000/users/test.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
     end
 
     it "returns the requested user" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
       user = subject.user("test")
       expect(user).to be_a Hash
     end
@@ -33,15 +29,11 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the put request" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
       subject.update_email("fake_user", "fake_user_2@example.com")
       expect(a_put("http://localhost:3000/users/fake_user/preferences/email?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
     end
 
     it "returns success" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
       response = subject.update_email("fake_user", "fake_user_2@example.com")
       expect(response[:body]['success']).to be_truthy
     end
@@ -94,15 +86,11 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the post request" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
       subject.create_user :name => "Test User", :email => "test2@example.com", :password => "P@ssword", :username => "test2"
       expect(a_post("http://localhost:3000/users?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
     end
 
     it "returns success" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
       response = subject.create_user :name => "Test User", :email => "test2@example.com", :password => "P@ssword", :username => "test2"
       expect(response[:body]['success']).to be_truthy
     end
