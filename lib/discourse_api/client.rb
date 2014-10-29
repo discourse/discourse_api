@@ -4,6 +4,7 @@ require 'json'
 require 'discourse_api/version'
 require 'discourse_api/api/categories'
 require 'discourse_api/api/search'
+require 'discourse_api/api/sso'
 require 'discourse_api/api/topics'
 require 'discourse_api/api/users'
 require 'discourse_api/api/invite'
@@ -17,6 +18,7 @@ module DiscourseApi
 
     include DiscourseApi::API::Categories
     include DiscourseApi::API::Search
+    include DiscourseApi::API::SSO
     include DiscourseApi::API::Topics
     include DiscourseApi::API::Users
     include DiscourseApi::API::Invite
