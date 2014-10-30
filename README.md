@@ -45,6 +45,15 @@ client.search("sandbox")                        #=> Gets a list of topics that m
 # Categories endpoint
 client.categories                               #=> Gets a list of categories
 client.category_latest_posts("category-slug")   #=> Gets a list of latest posts in a category
+
+# SSO endpoint
+client.sync_sso(                                #=> Synchronizes the SSO record
+  sso_secret: "discourse_sso_rocks",
+  name: "Test Name",
+  username: "test_name",
+  email: "name@example.com",
+  external_id: "2"
+)
 ```
 
 
