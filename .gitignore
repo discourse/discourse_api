@@ -18,3 +18,4 @@ tmp
 bin/
 .ruby-gemset
 .ruby-version
+.env
