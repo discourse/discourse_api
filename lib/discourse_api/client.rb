@@ -1,3 +1,4 @@
+require 'dotenv'
 require 'faraday'
 require 'faraday_middleware'
 require 'json'
@@ -6,7 +7,9 @@ require 'discourse_api/api/categories'
 require 'discourse_api/api/search'
 require 'discourse_api/api/sso'
 require 'discourse_api/api/topics'
+require 'discourse_api/api/posts'
 require 'discourse_api/api/users'
+require 'discourse_api/api/groups'
 require 'discourse_api/api/invite'
 require 'discourse_api/api/private_messages'
 require 'discourse_api/api/notifications'
@@ -20,12 +23,16 @@ module DiscourseApi
     include DiscourseApi::API::Search
     include DiscourseApi::API::SSO
     include DiscourseApi::API::Topics
+    include DiscourseApi::API::Posts
     include DiscourseApi::API::Users
+    include DiscourseApi::API::Groups
     include DiscourseApi::API::Invite
     include DiscourseApi::API::PrivateMessages
     include DiscourseApi::API::Notifications
 
-    def initialize(host, api_key=nil, api_username=nil)
+    def initialize(host = ENV["DISCOURSE_URL"],
+                   api_key = ENV["DISCOURSE_API_KEY"],
+                   api_username = ENV["DISCOURSE_USERNAME"])
       @host         = host
       @api_key      = api_key
       @api_username = api_username
@@ -50,7 +57,13 @@ module DiscourseApi
     end
 
     def post(path, params={})
-      request(:post, path, params)
+      response = request(:post, path, params)
+      case response.status
+      when 200
+        response.body
+      else
+        raise ApiError, response.body
+      end
     end
 
     def put(path, params={})
@@ -86,4 +99,6 @@ module DiscourseApi
       raise DiscourseApi::Error
     end
   end
+
+  class ApiError < Exception; end
 end
