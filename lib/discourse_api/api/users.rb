@@ -37,8 +37,8 @@ module DiscourseApi
         post("/users", args)
       end
 
-      def log_out_and_refresh_browser(id)
-        post("/admin/users/#{id}/log_out_and_refresh_browser")
+      def log_out(id)
+        post("/admin/users/#{id}/log_out")
       end
     end
   end
