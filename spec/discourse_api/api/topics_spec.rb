@@ -15,7 +15,8 @@ describe DiscourseApi::API::Topics do
 
     it "returns success" do
       response = subject.invite_user_to_topic(email: "fake_user@example.com", topic_id: 12)
-      expect(response[:body]['success']).to be_truthy
+      expect(response).to be_a Hash
+      expect(response['success']).to be_truthy
     end
   end
 

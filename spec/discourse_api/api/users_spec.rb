@@ -92,7 +92,8 @@ describe DiscourseApi::API::Users do
 
     it "returns success" do
       response = subject.create_user :name => "Test User", :email => "test2@example.com", :password => "P@ssword", :username => "test2"
-      expect(response[:body]['success']).to be_truthy
+      expect(response).to be_a Hash
+      expect(response['success']).to be_truthy
     end
   end
 end
