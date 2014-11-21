@@ -29,7 +29,7 @@ describe DiscourseApi::API::Groups do
 
     it "adds members" do
       stub_request(:patch, "http://localhost:3000/admin/groups/123?api_key=test_d7fd0429940&api_username=test_user")
-      subject.group_add({id: 123}, "sam")
+      subject.group_add(123, "sam")
       expect(a_request(:patch, "http://localhost:3000/admin/groups/123?api_key=test_d7fd0429940&api_username=test_user").
               with(body: {changes: {add: [ "sam" ]}})
             ).to have_been_made
@@ -37,7 +37,7 @@ describe DiscourseApi::API::Groups do
 
     it "removes members" do
       stub_request(:patch, "http://localhost:3000/admin/groups/123?api_key=test_d7fd0429940&api_username=test_user")
-      subject.group_remove({id: 123}, "sam")
+      subject.group_remove(123, "sam")
       expect(a_request(:patch, "http://localhost:3000/admin/groups/123?api_key=test_d7fd0429940&api_username=test_user").
               with(body: {changes: {delete: [ "sam" ]}})
             ).to have_been_made
