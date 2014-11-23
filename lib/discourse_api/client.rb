@@ -71,6 +71,10 @@ module DiscourseApi
       request(:put, path, params)
     end
 
+    def patch(path, params={})
+      request(:patch, path, params)
+    end
+
     def user_agent
       @user_agent ||= "DiscourseAPI Ruby Gem #{DiscourseApi::VERSION}"
     end
