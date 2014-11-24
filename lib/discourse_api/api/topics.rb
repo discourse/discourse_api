@@ -4,13 +4,14 @@ module DiscourseApi
       # :category OPTIONAL name of category, not ID
       # :skip_validations OPTIONAL boolean
       # :auto_track OPTIONAL boolean
-      def create_topic(title:, raw:, category: nil, skip_validations: nil, auto_track: nil)
-        post("/posts",
-             title: title,
-             raw: raw,
-             category: category,
-             skip_validations: skip_validations,
-             auto_track: auto_track)
+      def create_topic(args)
+
+        args =
+          API.params(args)
+            .required(:title, :raw)
+            .optional(:skip_validations, :category, :auto_track)
+
+        post("/posts", args.to_h)
       end
 
       def latest_topics(*args)

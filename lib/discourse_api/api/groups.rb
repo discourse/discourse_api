@@ -1,8 +1,13 @@
 module DiscourseApi
   module API
     module Groups
-      def create_group(name:, visible: true)
-        post("/admin/groups", group: {name: name, visible: visible.to_s})
+      def create_group(args)
+
+        post("/admin/groups", group: API.params(args)
+                                         .required(:name)
+                                         .default(visible: true)
+                                         .to_h
+        )
       end
 
       def groups

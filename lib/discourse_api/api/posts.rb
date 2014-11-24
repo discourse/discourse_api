@@ -1,8 +1,9 @@
 module DiscourseApi
   module API
     module Posts
-      def create_post(topic_id:, raw:)
-        post("/posts", topic_id: topic_id, raw: raw)
+      def create_post(args)
+        post("/posts", API.params(args)
+                          .required(:topic_id, :raw))
       end
     end
   end

@@ -98,6 +98,9 @@ module DiscourseApi
     end
 
     def request(method, path, params={})
+      unless Hash === params
+        params = params.to_h if params.respond_to? :to_h
+      end
       response = connection.send(method.to_sym, path, params)
       response.env
     rescue Faraday::Error::ClientError, JSON::ParserError
