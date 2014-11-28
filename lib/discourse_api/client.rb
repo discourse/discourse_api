@@ -63,7 +63,7 @@ module DiscourseApi
       when 200
         response.body
       else
-        raise ApiError, response.body
+        raise DiscourseApi::Error, response.body
       end
     end
 
@@ -107,6 +107,4 @@ module DiscourseApi
       raise DiscourseApi::Error
     end
   end
-
-  class ApiError < Exception; end
 end
