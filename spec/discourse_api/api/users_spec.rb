@@ -96,4 +96,31 @@ describe DiscourseApi::API::Users do
       expect(response['success']).to be_truthy
     end
   end
+
+  describe "#log_out_success" do
+    before do
+      stub_post("http://localhost:3000/admin/users/4/log_out?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_log_out_success.json"), headers: { content_type: "application/json" })
+    end
+
+    it "makes a post request" do
+      subject.log_out(4)
+      expect(a_post("http://localhost:3000/admin/users/4/log_out?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns success" do
+      response = subject.log_out(4)
+      expect(response).to be_a Hash
+      expect(response['success']).to eq('OK')
+    end
+  end
+
+  describe "#log_out_unsuccessful" do
+    before do
+      stub_post("http://localhost:3000/admin/users/90/log_out?api_key=test_d7fd0429940&api_username=test_user").to_return(status: 404, headers: { content_type: "application/json" })
+    end
+
+    it "Raises API Error" do
+      expect{subject.log_out(90)}.to raise_error DiscourseApi::ApiError
+    end
+  end
 end
