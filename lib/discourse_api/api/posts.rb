@@ -3,7 +3,12 @@ module DiscourseApi
     module Posts
       def create_post(args)
         post("/posts", API.params(args)
-                          .required(:topic_id, :raw))
+                       .required(:topic_id, :raw))
+      end
+
+      def get_post(id, *args)
+        response = get("/posts/#{id}.json", args)
+        response[:body]
       end
     end
   end

@@ -1,0 +1,94 @@
+{
+  "id": 11,
+  "name": "system",
+  "username": "system",
+  "avatar_template": "/user_avatar/localhost/system/{size}/1.png",
+  "uploaded_avatar_id": 1,
+  "created_at": "2014-10-31T04:37:32.553Z",
+  "cooked": "<p>The first paragraph of this pinned topic will be visible as a welcome message to all new visitors on your homepage. It's important!</p>\n\n<p><strong>Edit this</strong> into a brief description of your community:</p>\n\n<ul><li>Who is it for?</li><li>What can they find here?</li><li>Why should they come here?</li><li>Where can they read more (links, resources, etc)?</li></ul>\n\n<p>You may want to close this topic via the admin wrench (at the upper right and bottom), so that replies don't pile up on an announcement.</p>",
+  "post_number": 1,
+  "post_type": 1,
+  "updated_at": "2014-10-31T04:37:32.553Z",
+  "reply_count": 0,
+  "reply_to_post_number": null,
+  "quote_count": 0,
+  "avg_time": null,
+  "incoming_link_count": 0,
+  "reads": 1,
+  "score": 0.2,
+  "yours": false,
+  "topic_id": 8,
+  "topic_slug": "welcome-to-discourse",
+  "topic_auto_close_at": null,
+  "display_username": "system",
+  "primary_group_name": null,
+  "version": 1,
+  "can_edit": true,
+  "can_delete": false,
+  "can_recover": true,
+  "user_title": null,
+  "raw": "The first paragraph of this pinned topic will be visible as a welcome message to all new visitors on your homepage. It's important!\n\n**Edit this** into a brief description of your community:\n\n- Who is it for?\n- What can they find here?\n- Why should they come here?\n- Where can they read more (links, resources, etc)?\n\nYou may want to close this topic via the admin wrench (at the upper right and bottom), so that replies don't pile up on an announcement.",
+  "actions_summary": [
+    {
+      "id": 2,
+      "count": 0,
+      "hidden": false,
+      "can_act": true,
+      "can_defer_flags": false
+    },
+    {
+      "id": 3,
+      "count": 0,
+      "hidden": false,
+      "can_act": true,
+      "can_defer_flags": false
+    },
+    {
+      "id": 4,
+      "count": 0,
+      "hidden": false,
+      "can_act": true,
+      "can_defer_flags": false
+    },
+    {
+      "id": 5,
+      "count": 0,
+      "hidden": true,
+      "can_act": true,
+      "can_defer_flags": false
+    },
+    {
+      "id": 6,
+      "count": 0,
+      "hidden": false,
+      "can_act": true,
+      "can_defer_flags": false
+    },
+    {
+      "id": 7,
+      "count": 0,
+      "hidden": false,
+      "can_act": true,
+      "can_defer_flags": false
+    },
+    {
+      "id": 8,
+      "count": 0,
+      "hidden": false,
+      "can_act": true,
+      "can_defer_flags": false
+    }
+  ],
+  "moderator": true,
+  "admin": true,
+  "staff": true,
+  "user_id": -1,
+  "hidden": false,
+  "hidden_reason_id": null,
+  "trust_level": 4,
+  "deleted_at": null,
+  "user_deleted": false,
+  "edit_reason": null,
+  "can_view_edit_history": true,
+  "wiki": false
+}
