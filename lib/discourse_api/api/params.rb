@@ -42,7 +42,7 @@ module DiscourseApi
             @args.dup
           else
             @optional.each do |k|
-              h[k] = @args[k]
+              h[k] = @args[k] if @args[k]
             end
             h
           end

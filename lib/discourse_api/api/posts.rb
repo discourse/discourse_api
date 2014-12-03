@@ -6,8 +6,9 @@ module DiscourseApi
                        .required(:topic_id, :raw))
       end
 
-      def get_post(id, *args)
-        response = get("/posts/#{id}.json", args)
+      def get_post(id, args = {})
+        response = get("/posts/#{id}.json", API.params(args)
+                                            .optional(:version))
         response[:body]
       end
     end
