@@ -120,7 +120,7 @@ describe DiscourseApi::API::Users do
     end
 
     it "Raises API Error" do
-      expect{subject.log_out(90)}.to raise_error DiscourseApi::ApiError
+      expect{subject.log_out(90)}.to raise_error DiscourseApi::Error
     end
   end
 end
