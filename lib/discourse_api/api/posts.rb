@@ -11,6 +11,10 @@ module DiscourseApi
                                             .optional(:version))
         response[:body]
       end
+
+      def wikify_post(id)
+        put("/posts/#{id}/wiki", wiki: true)
+      end
     end
   end
 end
