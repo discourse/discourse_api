@@ -20,7 +20,16 @@ describe DiscourseApi::API::Users do
   end
 
   describe "#update_avatar" do
-    it "needs to have a test written for it"
+    before do
+      stub_post("http://localhost:3000/admin/users/4/log_out?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_update_avatar_success.json"), headers: { content_type: "application/json" })
+    end
+
+    it "uploads an image" do
+      sam = "https://meta-discourse.global.ssl.fastly.net/user_avatar/meta.discourse.org/sam/120/5243.png"
+      args = { username: 'test_user', file: sam }
+      response = subject.update_avatar(args)
+      expect(response[:body]['success']).to eq('OK')
+    end
   end
 
   describe "#update_email" do
