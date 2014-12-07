@@ -3,11 +3,11 @@ module DiscourseApi
     module Categories
       # :color and :text_color are RGB hexadecimal strings
       def create_category(args)
-        post("/categories", API.params(args)
-                               .required(:name)
-                               .optional(:color, :text_color)
-                               .default(parent_category_id: nil)
-            )
+        params = API.params(args)
+                    .required(:name)
+                    .optional(:color, :text_color)
+                    .default(parent_category_id: nil)
+        post("/categories", params)
       end
 
       def categories(*args)
