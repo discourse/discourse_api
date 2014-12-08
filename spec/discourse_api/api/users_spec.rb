@@ -106,6 +106,22 @@ describe DiscourseApi::API::Users do
     end
   end
 
+  describe "#activate_user" do
+    before do
+      stub_put("http://localhost:3000/admin/users/15/activate?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_activate_success.json"), headers: { content_type: "application/json" })
+    end
+
+    it "makes the put request" do
+      subject.activate(15)
+      expect(a_put("http://localhost:3000/admin/users/15/activate?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns success" do
+      response = subject.activate(15)
+      expect(response[:body]['success']).to eq('OK')
+    end
+  end
+
   describe "#log_out_success" do
     before do
       stub_post("http://localhost:3000/admin/users/4/log_out?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_log_out_success.json"), headers: { content_type: "application/json" })
