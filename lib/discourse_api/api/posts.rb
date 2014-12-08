@@ -15,6 +15,10 @@ module DiscourseApi
       def wikify_post(id)
         put("/posts/#{id}/wiki", wiki: true)
       end
+
+      def edit_post(id, raw)
+        put("/posts/#{id}", post: {raw: raw})
+      end
     end
   end
 end
