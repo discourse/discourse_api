@@ -10,8 +10,13 @@ module DiscourseApi
         response[:body]['user']
       end
 
-      def update_avatar(username, file)
-        put("/users/#{username}/preferences/avatar", { file: file, api_key: api_key })
+      def update_avatar(args)
+        params = API.params(args)
+                    .required(:username, :file)
+                    .default(image_type: 'avatar')
+                    .to_h
+        upload_response = post("/users/#{args[:username]}/preferences/user_image", params)
+        put("/users/#{args[:username]}/preferences/avatar/pick", { upload_id: upload_response['upload_id'] })
       end
 
       def update_email(username, email)
@@ -26,7 +31,6 @@ module DiscourseApi
         put("/users/#{username}/preferences/username", { new_username: new_username, api_key: api_key })
       end
 
-      # Create a user
       def create_user(args={})
         # First retrieve the honeypot values
         # TODO, none of this should be needed via API
@@ -34,7 +38,6 @@ module DiscourseApi
         args[:password_confirmation] = response[:body]['value']
         args[:challenge] = response[:body]['challenge'].reverse
 
-        # POST the args
         post("/users", args)
       end
 

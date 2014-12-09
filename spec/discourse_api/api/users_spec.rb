@@ -20,7 +20,16 @@ describe DiscourseApi::API::Users do
   end
 
   describe "#update_avatar" do
-    it "needs to have a test written for it"
+    before do
+      stub_post("http://localhost:3000/admin/users/4/log_out?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_update_avatar_success.json"), headers: { content_type: "application/json" })
+    end
+
+    it "uploads an image" do
+      sam = "https://meta-discourse.global.ssl.fastly.net/user_avatar/meta.discourse.org/sam/120/5243.png"
+      args = { username: 'test_user', file: sam }
+      response = subject.update_avatar(args)
+      expect(response[:body]['success']).to eq('OK')
+    end
   end
 
   describe "#update_email" do
@@ -94,6 +103,22 @@ describe DiscourseApi::API::Users do
       response = subject.create_user :name => "Test User", :email => "test2@example.com", :password => "P@ssword", :username => "test2"
       expect(response).to be_a Hash
       expect(response['success']).to be_truthy
+    end
+  end
+
+  describe "#activate_user" do
+    before do
+      stub_put("http://localhost:3000/admin/users/15/activate?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_activate_success.json"), headers: { content_type: "application/json" })
+    end
+
+    it "makes the put request" do
+      subject.activate(15)
+      expect(a_put("http://localhost:3000/admin/users/15/activate?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns success" do
+      response = subject.activate(15)
+      expect(response[:body]['success']).to eq('OK')
     end
   end
 
