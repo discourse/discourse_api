@@ -21,7 +21,8 @@ describe DiscourseApi::API::Users do
 
   describe "#update_avatar" do
     before do
-      stub_post("http://localhost:3000/admin/users/4/log_out?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_update_avatar_success.json"), headers: { content_type: "application/json" })
+      stub_post("http://localhost:3000/users/test_user/preferences/user_image?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_update_avatar_success.json"), headers: { content_type: "application/json" })
+      stub_put("http://localhost:3000/users/test_user/preferences/avatar/pick?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_update_avatar_success.json"), headers: { content_type: "application/json" })
     end
 
     it "uploads an image" do
