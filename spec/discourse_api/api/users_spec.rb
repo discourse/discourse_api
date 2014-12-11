@@ -75,17 +75,13 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the put request" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
       subject.update_username("fake_user", "fake_user_2")
       expect(a_put("http://localhost:3000/users/fake_user/preferences/username?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
     end
 
-    it "returns success" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
+    it "returns the updated username" do
       response = subject.update_username("fake_user", "fake_user_2")
-      expect(response[:body]['success']).to be_truthy
+      expect(response[:body]['username']).to eq('fake_user_2')
     end
   end
 
