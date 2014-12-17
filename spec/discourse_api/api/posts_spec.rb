@@ -15,4 +15,15 @@ describe DiscourseApi::API::Posts do
     end
   end
 
+  describe "#wikify_post" do
+    before do
+      stub_put("http://localhost:3000/posts/9999/wiki?api_key=test_d7fd0429940&api_username=test_user")
+    end
+
+    it "fails on unknown post" do
+      client.wikify_post(9999)
+      expect(a_put("http://localhost:3000/posts/9999/wiki?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+  end
+
 end
