@@ -4,10 +4,11 @@ module DiscourseApi
       # :color and :text_color are RGB hexadecimal strings
       def create_category(args)
         params = API.params(args)
-                    .required(:name)
-                    .optional(:color, :text_color)
-                    .default(parent_category_id: nil)
-        post("/categories", params)
+                 .required(:name, :color, :text_color)
+                 .optional(:description)
+                 .default(parent_category_id: nil)
+        response = (post "/categories", params)
+        response['category']
       end
 
       def categories(params={})
@@ -18,6 +19,11 @@ module DiscourseApi
       def category_latest_topics(category_slug)
         response = get("/category/#{category_slug}/l/latest.json")
         response[:body]['topic_list']['topics']
+      end
+
+      def category(id)
+        response = get("/c/#{id}/show")
+        response.body['category']
       end
     end
   end
