@@ -41,11 +41,12 @@ module DiscourseApi
 
     def connection_options
       @connection_options ||= {
-          url: @host,
-          headers: {
-              accept: 'application/json',
-              user_agent: user_agent,
-          }
+        url: @host,
+        headers: {
+          accept: 'application/json',
+          user_agent: user_agent,
+        },
+        ssl: {verify: false}
       }
     end
 
