@@ -17,6 +17,11 @@ describe DiscourseApi::API::Users do
       user = subject.user("test")
       expect(user).to be_a Hash
     end
+
+    it "works with optional params" do
+      user = subject.user("test", {})
+      expect(user).to be_a Hash
+    end
   end
 
   describe "#update_avatar" do
