@@ -32,13 +32,11 @@ module DiscourseApi
       end
 
       def create_user(args={})
-        # First retrieve the honeypot values
-        # TODO, none of this should be needed via API
-        response = get("/users/hp.json")
-        args[:password_confirmation] = response[:body]['value']
-        args[:challenge] = response[:body]['challenge'].reverse
-
-        post("/users", args)
+        params = API.params(args)
+                    .required(:name, :email, :password, :username)
+                    .optional(:active)
+                    .to_h
+        post("/users", params)
       end
 
       def log_out(id)

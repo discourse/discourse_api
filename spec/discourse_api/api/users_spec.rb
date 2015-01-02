@@ -93,7 +93,6 @@ describe DiscourseApi::API::Users do
   describe "#create_user" do
     before do
       stub_post("http://localhost:3000/users?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_create_success.json"), headers: { content_type: "application/json" })
-      stub_get("http://localhost:3000/users/hp.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: {"value"=>"foo", "challenge"=>"bar"}.to_json, headers: { content_type: "application/json" })
     end
 
     it "makes the post request" do
