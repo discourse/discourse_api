@@ -149,4 +149,21 @@ describe DiscourseApi::API::Users do
       expect{subject.log_out(90)}.to raise_error DiscourseApi::Error
     end
   end
+
+  describe "#list_users" do
+    before do
+      stub_get("http://localhost:3000/admin/users/list/active.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_list.json"), headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.list_users('active')
+      expect(a_get("http://localhost:3000/admin/users/list/active.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns the requested users" do
+      users = subject.list_users('active')
+      expect(users).to be_an Array
+      expect(users.first).to be_a Hash
+    end
+  end
 end

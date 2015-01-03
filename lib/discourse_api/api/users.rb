@@ -31,7 +31,7 @@ module DiscourseApi
         put("/users/#{username}/preferences/username", { new_username: new_username, api_key: api_key })
       end
 
-      def create_user(args={})
+      def create_user(args)
         params = API.params(args)
                     .required(:name, :email, :password, :username)
                     .optional(:active)
@@ -45,6 +45,11 @@ module DiscourseApi
 
       def invite_admin(args={})
         post("/admin/users/invite_admin", args)
+      end
+
+      def list_users(type)
+        response = get("admin/users/list/#{type}.json")
+        response[:body]
       end
     end
   end
