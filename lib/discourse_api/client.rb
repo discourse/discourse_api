@@ -14,6 +14,7 @@ require 'discourse_api/api/invite'
 require 'discourse_api/api/private_messages'
 require 'discourse_api/api/notifications'
 require 'discourse_api/api/badges'
+require 'discourse_api/api/email'
 
 module DiscourseApi
   class Client
@@ -31,6 +32,7 @@ module DiscourseApi
     include DiscourseApi::API::PrivateMessages
     include DiscourseApi::API::Notifications
     include DiscourseApi::API::Badges
+    include DiscourseApi::API::Email
 
     def initialize(host = ENV["DISCOURSE_URL"],
                    api_key = ENV["DISCOURSE_API_KEY"],
