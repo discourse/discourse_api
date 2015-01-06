@@ -20,4 +20,20 @@ describe DiscourseApi::API::Email do
       expect(settings).to have_key('settings')
     end
   end
+
+  describe "#list_email_all" do
+    before do
+      stub_get("http://localhost:3000/admin/email/all.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("email_list_all.json"), headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.list_email('all')
+      expect(a_get("http://localhost:3000/admin/email/all.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns all email" do
+      all_email = subject.list_email('all')
+      expect(all_email).to be_an Array
+    end
+  end
 end
