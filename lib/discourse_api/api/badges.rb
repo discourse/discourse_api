@@ -5,6 +5,11 @@ module DiscourseApi
         response = get("/admin/badges.json")
         response.body
       end
+
+      def user_badges(username)
+        response = get("/users/#{username}/activity/badges.json")
+        response.body['badges']
+      end
     end
   end
 end
