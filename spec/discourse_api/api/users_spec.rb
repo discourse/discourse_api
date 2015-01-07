@@ -17,6 +17,11 @@ describe DiscourseApi::API::Users do
       user = subject.user("test")
       expect(user).to be_a Hash
     end
+
+    it "works with optional params" do
+      user = subject.user("test", {})
+      expect(user).to be_a Hash
+    end
   end
 
   describe "#update_avatar" do
@@ -75,24 +80,19 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the put request" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
       subject.update_username("fake_user", "fake_user_2")
       expect(a_put("http://localhost:3000/users/fake_user/preferences/username?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
     end
 
-    it "returns success" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
+    it "returns the updated username" do
       response = subject.update_username("fake_user", "fake_user_2")
-      expect(response[:body]['success']).to be_truthy
+      expect(response[:body]['username']).to eq('fake_user_2')
     end
   end
 
   describe "#create_user" do
     before do
       stub_post("http://localhost:3000/users?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_create_success.json"), headers: { content_type: "application/json" })
-      stub_get("http://localhost:3000/users/hp.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: {"value"=>"foo", "challenge"=>"bar"}.to_json, headers: { content_type: "application/json" })
     end
 
     it "makes the post request" do
@@ -147,6 +147,23 @@ describe DiscourseApi::API::Users do
 
     it "Raises API Error" do
       expect{subject.log_out(90)}.to raise_error DiscourseApi::Error
+    end
+  end
+
+  describe "#list_users" do
+    before do
+      stub_get("http://localhost:3000/admin/users/list/active.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_list.json"), headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.list_users('active')
+      expect(a_get("http://localhost:3000/admin/users/list/active.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns the requested users" do
+      users = subject.list_users('active')
+      expect(users).to be_an Array
+      expect(users.first).to be_a Hash
     end
   end
 end

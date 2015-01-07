@@ -18,6 +18,12 @@ describe DiscourseApi::API::Categories do
       expect(categories).to be_an Array
       expect(categories.first).to be_a Hash
     end
+
+    it "returns the requested categories with hash arg" do
+      categories = subject.categories({})
+      expect(categories).to be_an Array
+      expect(categories.first).to be_a Hash
+    end
   end
 
   describe '#category_latest_topics' do

@@ -1,0 +1,749 @@
+[
+  {
+    "id": 64,
+    "reply_key": null,
+    "to_address": "steve7@example.com",
+    "email_type": "signup",
+    "user_id": 22,
+    "created_at": "2015-01-03T13:33:46.730Z",
+    "skipped": false,
+    "user": {
+      "id": 22,
+      "username": "steve7",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve7/{size}/2.png"
+    }
+  },
+  {
+    "id": 63,
+    "reply_key": null,
+    "to_address": "steve6@example.com",
+    "email_type": "user_private_message",
+    "user_id": 21,
+    "created_at": "2015-01-02T17:18:47.098Z",
+    "skipped": false,
+    "user": {
+      "id": 21,
+      "username": "steve6",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve6/{size}/2.png"
+    }
+  },
+  {
+    "id": 62,
+    "reply_key": null,
+    "to_address": "steve5@example.com",
+    "email_type": "user_private_message",
+    "user_id": 20,
+    "created_at": "2015-01-02T16:05:38.192Z",
+    "skipped": false,
+    "user": {
+      "id": 20,
+      "username": "steve5",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve5/{size}/2.png"
+    }
+  },
+  {
+    "id": 61,
+    "reply_key": null,
+    "to_address": "steve4@example.com",
+    "email_type": "user_private_message",
+    "user_id": 19,
+    "created_at": "2015-01-02T15:59:27.137Z",
+    "skipped": false,
+    "user": {
+      "id": 19,
+      "username": "steve4",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve4/{size}/2.png"
+    }
+  },
+  {
+    "id": 60,
+    "reply_key": null,
+    "to_address": "steve5@example.com",
+    "email_type": "signup",
+    "user_id": 20,
+    "created_at": "2015-01-02T15:57:57.061Z",
+    "skipped": false,
+    "user": {
+      "id": 20,
+      "username": "steve5",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve5/{size}/2.png"
+    }
+  },
+  {
+    "id": 59,
+    "reply_key": null,
+    "to_address": "steve4@example.com",
+    "email_type": "signup",
+    "user_id": 19,
+    "created_at": "2015-01-02T15:52:36.210Z",
+    "skipped": false,
+    "user": {
+      "id": 19,
+      "username": "steve4",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve4/{size}/2.png"
+    }
+  },
+  {
+    "id": 58,
+    "reply_key": null,
+    "to_address": "steve3@example.com",
+    "email_type": "signup",
+    "user_id": 18,
+    "created_at": "2015-01-02T15:50:29.330Z",
+    "skipped": false,
+    "user": {
+      "id": 18,
+      "username": "steve3",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve3/{size}/2.png"
+    }
+  },
+  {
+    "id": 57,
+    "reply_key": null,
+    "to_address": "steve3@example.com",
+    "email_type": "user_private_message",
+    "user_id": 18,
+    "created_at": "2015-01-02T14:07:40.357Z",
+    "skipped": true,
+    "skipped_reason": "The notification this email is about has already been read",
+    "user": {
+      "id": 18,
+      "username": "steve3",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve3/{size}/2.png"
+    }
+  },
+  {
+    "id": 56,
+    "reply_key": null,
+    "to_address": "steve3@example.com",
+    "email_type": "signup",
+    "user_id": 18,
+    "created_at": "2015-01-02T13:53:04.352Z",
+    "skipped": false,
+    "user": {
+      "id": 18,
+      "username": "steve3",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve3/{size}/2.png"
+    }
+  },
+  {
+    "id": 55,
+    "reply_key": null,
+    "to_address": "steve2@example.com",
+    "email_type": "signup",
+    "user_id": 17,
+    "created_at": "2015-01-02T13:39:40.455Z",
+    "skipped": false,
+    "user": {
+      "id": 17,
+      "username": "steve2",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve2/{size}/2.png"
+    }
+  },
+  {
+    "id": 54,
+    "reply_key": null,
+    "to_address": "batman@gotham.com",
+    "email_type": "signup",
+    "user_id": 1,
+    "created_at": "2015-01-02T13:38:11.418Z",
+    "skipped": false,
+    "user": {
+      "id": 1,
+      "username": "test_user",
+      "uploaded_avatar_id": 7,
+      "avatar_template": "/user_avatar/localhost/test_user/{size}/7.png"
+    }
+  },
+  {
+    "id": 53,
+    "reply_key": null,
+    "to_address": "dave3@gotham.com",
+    "email_type": "signup",
+    "user_id": 10,
+    "created_at": "2015-01-01T13:08:57.914Z",
+    "skipped": false,
+    "user": {
+      "id": 10,
+      "username": "dave3",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/dave3/{size}/2.png"
+    }
+  },
+  {
+    "id": 52,
+    "reply_key": null,
+    "to_address": "dave2@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 9,
+    "created_at": "2015-01-01T01:22:45.479Z",
+    "skipped": false,
+    "user": {
+      "id": 9,
+      "username": "dave2",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/dave2/{size}/2.png"
+    }
+  },
+  {
+    "id": 51,
+    "reply_key": null,
+    "to_address": "phil@example.com",
+    "email_type": "user_private_message",
+    "user_id": 7,
+    "created_at": "2015-01-01T01:01:33.316Z",
+    "skipped": false,
+    "user": {
+      "id": 7,
+      "username": "phil12",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/phil12/{size}/2.png"
+    }
+  },
+  {
+    "id": 50,
+    "reply_key": null,
+    "to_address": "dave@example.com",
+    "email_type": "user_private_message",
+    "user_id": 8,
+    "created_at": "2015-01-01T01:01:33.222Z",
+    "skipped": false,
+    "user": {
+      "id": 8,
+      "username": "dave",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/dave/{size}/2.png"
+    }
+  },
+  {
+    "id": 49,
+    "reply_key": null,
+    "to_address": "steve@example.com",
+    "email_type": "user_private_message",
+    "user_id": 4,
+    "created_at": "2015-01-01T01:01:33.200Z",
+    "skipped": false,
+    "user": {
+      "id": 4,
+      "username": "steve",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve/{size}/2.png"
+    }
+  },
+  {
+    "id": 48,
+    "reply_key": null,
+    "to_address": "steve@example.com",
+    "email_type": "signup",
+    "user_id": 4,
+    "created_at": "2015-01-01T01:01:33.141Z",
+    "skipped": false,
+    "user": {
+      "id": 4,
+      "username": "steve",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve/{size}/2.png"
+    }
+  },
+  {
+    "id": 47,
+    "reply_key": null,
+    "to_address": "steve999@example.com",
+    "email_type": "authorize_email",
+    "user_id": 4,
+    "created_at": "2015-01-01T01:01:32.846Z",
+    "skipped": false,
+    "user": {
+      "id": 4,
+      "username": "steve",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve/{size}/2.png"
+    }
+  },
+  {
+    "id": 46,
+    "reply_key": null,
+    "to_address": "steve345@example.com",
+    "email_type": "authorize_email",
+    "user_id": 4,
+    "created_at": "2015-01-01T01:01:32.844Z",
+    "skipped": false,
+    "user": {
+      "id": 4,
+      "username": "steve",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve/{size}/2.png"
+    }
+  },
+  {
+    "id": 45,
+    "reply_key": null,
+    "to_address": "robin3@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 2,
+    "created_at": "2015-01-01T01:01:24.446Z",
+    "skipped": false,
+    "user": {
+      "id": 2,
+      "username": "robin",
+      "uploaded_avatar_id": 3,
+      "avatar_template": "/user_avatar/localhost/robin/{size}/3.png"
+    }
+  },
+  {
+    "id": 44,
+    "reply_key": null,
+    "to_address": "robin3@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 2,
+    "created_at": "2015-01-01T01:01:24.445Z",
+    "skipped": false,
+    "user": {
+      "id": 2,
+      "username": "robin",
+      "uploaded_avatar_id": 3,
+      "avatar_template": "/user_avatar/localhost/robin/{size}/3.png"
+    }
+  },
+  {
+    "id": 43,
+    "reply_key": null,
+    "to_address": "robin3@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 2,
+    "created_at": "2015-01-01T01:01:24.444Z",
+    "skipped": false,
+    "user": {
+      "id": 2,
+      "username": "robin",
+      "uploaded_avatar_id": 3,
+      "avatar_template": "/user_avatar/localhost/robin/{size}/3.png"
+    }
+  },
+  {
+    "id": 42,
+    "reply_key": null,
+    "to_address": "robin3@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 2,
+    "created_at": "2015-01-01T01:01:24.441Z",
+    "skipped": false,
+    "user": {
+      "id": 2,
+      "username": "robin",
+      "uploaded_avatar_id": 3,
+      "avatar_template": "/user_avatar/localhost/robin/{size}/3.png"
+    }
+  },
+  {
+    "id": 41,
+    "reply_key": null,
+    "to_address": "no_email_found",
+    "email_type": "signup",
+    "user_id": null,
+    "created_at": "2014-12-31T18:12:05.707Z",
+    "skipped": true,
+    "skipped_reason": "Can't find user with id 6",
+    "user": null
+  },
+  {
+    "id": 40,
+    "reply_key": null,
+    "to_address": "foo@bar.com",
+    "email_type": "authorize_email",
+    "user_id": 8,
+    "created_at": "2014-12-31T17:56:39.302Z",
+    "skipped": false,
+    "user": {
+      "id": 8,
+      "username": "dave",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/dave/{size}/2.png"
+    }
+  },
+  {
+    "id": 39,
+    "reply_key": null,
+    "to_address": "dave2@example.com",
+    "email_type": "user_private_message",
+    "user_id": 9,
+    "created_at": "2014-12-31T17:56:21.004Z",
+    "skipped": false,
+    "user": {
+      "id": 9,
+      "username": "dave2",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/dave2/{size}/2.png"
+    }
+  },
+  {
+    "id": 38,
+    "reply_key": null,
+    "to_address": "fake@example.com",
+    "email_type": "signup",
+    "user_id": 16,
+    "created_at": "2014-12-31T17:54:32.454Z",
+    "skipped": false,
+    "user": {
+      "id": 16,
+      "username": "carl",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/carl/{size}/2.png"
+    }
+  },
+  {
+    "id": 37,
+    "reply_key": null,
+    "to_address": "test_user2@example.com",
+    "email_type": "authorize_email",
+    "user_id": 1,
+    "created_at": "2014-12-31T17:53:48.162Z",
+    "skipped": false,
+    "user": {
+      "id": 1,
+      "username": "test_user",
+      "uploaded_avatar_id": 7,
+      "avatar_template": "/user_avatar/localhost/test_user/{size}/7.png"
+    }
+  },
+  {
+    "id": 36,
+    "reply_key": null,
+    "to_address": "foo@bar.com",
+    "email_type": "authorize_email",
+    "user_id": 7,
+    "created_at": "2014-12-31T17:13:15.797Z",
+    "skipped": false,
+    "user": {
+      "id": 7,
+      "username": "phil12",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/phil12/{size}/2.png"
+    }
+  },
+  {
+    "id": 35,
+    "reply_key": null,
+    "to_address": "batman@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 7,
+    "created_at": "2014-12-31T17:13:06.259Z",
+    "skipped": false,
+    "user": {
+      "id": 7,
+      "username": "phil12",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/phil12/{size}/2.png"
+    }
+  },
+  {
+    "id": 34,
+    "reply_key": null,
+    "to_address": "dave7@example.com",
+    "email_type": "signup",
+    "user_id": 14,
+    "created_at": "2014-12-31T17:12:43.031Z",
+    "skipped": false,
+    "user": {
+      "id": 14,
+      "username": "dave7",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/dave7/{size}/2.png"
+    }
+  },
+  {
+    "id": 33,
+    "reply_key": null,
+    "to_address": "batman@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 2,
+    "created_at": "2014-12-31T17:12:43.017Z",
+    "skipped": false,
+    "user": {
+      "id": 2,
+      "username": "robin",
+      "uploaded_avatar_id": 3,
+      "avatar_template": "/user_avatar/localhost/robin/{size}/3.png"
+    }
+  },
+  {
+    "id": 32,
+    "reply_key": null,
+    "to_address": "batman@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 2,
+    "created_at": "2014-12-31T17:12:43.010Z",
+    "skipped": false,
+    "user": {
+      "id": 2,
+      "username": "robin",
+      "uploaded_avatar_id": 3,
+      "avatar_template": "/user_avatar/localhost/robin/{size}/3.png"
+    }
+  },
+  {
+    "id": 31,
+    "reply_key": null,
+    "to_address": "batman@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 1,
+    "created_at": "2014-12-31T17:12:43.007Z",
+    "skipped": false,
+    "user": {
+      "id": 1,
+      "username": "test_user",
+      "uploaded_avatar_id": 7,
+      "avatar_template": "/user_avatar/localhost/test_user/{size}/7.png"
+    }
+  },
+  {
+    "id": 30,
+    "reply_key": null,
+    "to_address": "foo@bar.com",
+    "email_type": "authorize_email",
+    "user_id": 7,
+    "created_at": "2014-12-31T17:12:42.959Z",
+    "skipped": false,
+    "user": {
+      "id": 7,
+      "username": "phil12",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/phil12/{size}/2.png"
+    }
+  },
+  {
+    "id": 29,
+    "reply_key": null,
+    "to_address": "dave4@example.com",
+    "email_type": "signup",
+    "user_id": 11,
+    "created_at": "2014-12-31T17:11:51.195Z",
+    "skipped": false,
+    "user": {
+      "id": 11,
+      "username": "dave4",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/dave4/{size}/2.png"
+    }
+  },
+  {
+    "id": 28,
+    "reply_key": null,
+    "to_address": "batman@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 2,
+    "created_at": "2014-12-31T17:11:51.193Z",
+    "skipped": false,
+    "user": {
+      "id": 2,
+      "username": "robin",
+      "uploaded_avatar_id": 3,
+      "avatar_template": "/user_avatar/localhost/robin/{size}/3.png"
+    }
+  },
+  {
+    "id": 27,
+    "reply_key": null,
+    "to_address": "dave5@example.com",
+    "email_type": "signup",
+    "user_id": 12,
+    "created_at": "2014-12-31T17:11:51.192Z",
+    "skipped": false,
+    "user": {
+      "id": 12,
+      "username": "dave5",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/dave5/{size}/2.png"
+    }
+  },
+  {
+    "id": 26,
+    "reply_key": null,
+    "to_address": "foo@bar.com",
+    "email_type": "authorize_email",
+    "user_id": 8,
+    "created_at": "2014-12-31T17:11:51.144Z",
+    "skipped": false,
+    "user": {
+      "id": 8,
+      "username": "dave",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/dave/{size}/2.png"
+    }
+  },
+  {
+    "id": 25,
+    "reply_key": null,
+    "to_address": "dave6@example.com",
+    "email_type": "signup",
+    "user_id": 13,
+    "created_at": "2014-12-31T17:11:14.401Z",
+    "skipped": false,
+    "user": {
+      "id": 13,
+      "username": "dave6",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/dave6/{size}/2.png"
+    }
+  },
+  {
+    "id": 24,
+    "reply_key": null,
+    "to_address": "test_user2@example.com",
+    "email_type": "authorize_email",
+    "user_id": 1,
+    "created_at": "2014-12-31T17:11:14.399Z",
+    "skipped": false,
+    "user": {
+      "id": 1,
+      "username": "test_user",
+      "uploaded_avatar_id": 7,
+      "avatar_template": "/user_avatar/localhost/test_user/{size}/7.png"
+    }
+  },
+  {
+    "id": 23,
+    "reply_key": null,
+    "to_address": "batman@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 7,
+    "created_at": "2014-12-31T17:11:14.398Z",
+    "skipped": false,
+    "user": {
+      "id": 7,
+      "username": "phil12",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/phil12/{size}/2.png"
+    }
+  },
+  {
+    "id": 22,
+    "reply_key": null,
+    "to_address": "foo@bar.com",
+    "email_type": "authorize_email",
+    "user_id": 7,
+    "created_at": "2014-12-31T17:10:28.274Z",
+    "skipped": false,
+    "user": {
+      "id": 7,
+      "username": "phil12",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/phil12/{size}/2.png"
+    }
+  },
+  {
+    "id": 21,
+    "reply_key": null,
+    "to_address": "batman@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 2,
+    "created_at": "2014-12-31T17:10:28.257Z",
+    "skipped": false,
+    "user": {
+      "id": 2,
+      "username": "robin",
+      "uploaded_avatar_id": 3,
+      "avatar_template": "/user_avatar/localhost/robin/{size}/3.png"
+    }
+  },
+  {
+    "id": 20,
+    "reply_key": null,
+    "to_address": "steve123@example.com",
+    "email_type": "authorize_email",
+    "user_id": 4,
+    "created_at": "2014-12-31T17:10:28.252Z",
+    "skipped": false,
+    "user": {
+      "id": 4,
+      "username": "steve",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve/{size}/2.png"
+    }
+  },
+  {
+    "id": 19,
+    "reply_key": null,
+    "to_address": "steve123@example.com",
+    "email_type": "authorize_email",
+    "user_id": 4,
+    "created_at": "2014-12-31T17:10:03.163Z",
+    "skipped": false,
+    "user": {
+      "id": 4,
+      "username": "steve",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/steve/{size}/2.png"
+    }
+  },
+  {
+    "id": 18,
+    "reply_key": null,
+    "to_address": "dave8@example.com",
+    "email_type": "signup",
+    "user_id": 15,
+    "created_at": "2014-12-31T17:09:30.028Z",
+    "skipped": false,
+    "user": {
+      "id": 15,
+      "username": "dave8",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/dave8/{size}/2.png"
+    }
+  },
+  {
+    "id": 17,
+    "reply_key": null,
+    "to_address": "dave3@example.com",
+    "email_type": "signup",
+    "user_id": 10,
+    "created_at": "2014-12-31T17:09:30.011Z",
+    "skipped": false,
+    "user": {
+      "id": 10,
+      "username": "dave3",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/dave3/{size}/2.png"
+    }
+  },
+  {
+    "id": 16,
+    "reply_key": null,
+    "to_address": "batman@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 2,
+    "created_at": "2014-12-31T17:09:30.005Z",
+    "skipped": false,
+    "user": {
+      "id": 2,
+      "username": "robin",
+      "uploaded_avatar_id": 3,
+      "avatar_template": "/user_avatar/localhost/robin/{size}/3.png"
+    }
+  },
+  {
+    "id": 15,
+    "reply_key": null,
+    "to_address": "batman@gotham.com",
+    "email_type": "authorize_email",
+    "user_id": 7,
+    "created_at": "2014-12-31T17:09:29.997Z",
+    "skipped": false,
+    "user": {
+      "id": 7,
+      "username": "phil12",
+      "uploaded_avatar_id": null,
+      "avatar_template": "/letter_avatar/phil12/{size}/2.png"
+    }
+  }
+]

@@ -5,8 +5,8 @@ module DiscourseApi
         put "/admin/users/#{id}/activate", api_key: api_key, api_username: api_username
       end
 
-      def user(username, *args)
-        response = get("/users/#{username}.json", args)
+      def user(username, params={})
+        response = get("/users/#{username}.json", params)
         response[:body]['user']
       end
 
@@ -31,14 +31,12 @@ module DiscourseApi
         put("/users/#{username}/preferences/username", { new_username: new_username, api_key: api_key })
       end
 
-      def create_user(args={})
-        # First retrieve the honeypot values
-        # TODO, none of this should be needed via API
-        response = get("/users/hp.json")
-        args[:password_confirmation] = response[:body]['value']
-        args[:challenge] = response[:body]['challenge'].reverse
-
-        post("/users", args)
+      def create_user(args)
+        params = API.params(args)
+                    .required(:name, :email, :password, :username)
+                    .optional(:active)
+                    .to_h
+        post("/users", params)
       end
 
       def log_out(id)
@@ -47,6 +45,11 @@ module DiscourseApi
 
       def invite_admin(args={})
         post("/admin/users/invite_admin", args)
+      end
+
+      def list_users(type)
+        response = get("admin/users/list/#{type}.json")
+        response[:body]
       end
     end
   end

@@ -35,6 +35,12 @@ describe DiscourseApi::API::Topics do
       expect(topics).to be_an Array
       expect(topics.first).to be_a Hash
     end
+
+    it "can take a hash param" do
+      topics = subject.latest_topics({})
+      expect(topics).to be_an Array
+      expect(topics.first).to be_a Hash
+    end
   end
 
   describe "#new_topics" do

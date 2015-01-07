@@ -1,0 +1,170 @@
+{
+  "user_badges": [
+    {
+      "id": 3,
+      "granted_at": "2014-11-30T14:27:19.404Z",
+      "badge_id": 10,
+      "user_id": 1,
+      "granted_by_id": -1
+    },
+    {
+      "id": 2,
+      "granted_at": "2014-09-16T13:08:23.061Z",
+      "post_id": 15,
+      "post_number": 1,
+      "badge_id": 5,
+      "user_id": 1,
+      "granted_by_id": -1,
+      "topic_id": 12
+    }
+  ],
+  "badges": [
+    {
+      "id": 10,
+      "name": "Editor",
+      "description": null,
+      "grant_count": 1,
+      "allow_title": false,
+      "multiple_grant": false,
+      "icon": "fa-certificate",
+      "image": null,
+      "listable": true,
+      "enabled": true,
+      "badge_grouping_id": 2,
+      "system": true,
+      "badge_type_id": 3
+    },
+    {
+      "id": 5,
+      "name": "Welcome",
+      "description": null,
+      "grant_count": 1,
+      "allow_title": false,
+      "multiple_grant": false,
+      "icon": "fa-certificate",
+      "image": null,
+      "listable": true,
+      "enabled": true,
+      "badge_grouping_id": 2,
+      "system": true,
+      "badge_type_id": 3
+    }
+  ],
+  "badge_types": [
+    {
+      "id": 3,
+      "name": "Bronze",
+      "sort_order": 7
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "test_user",
+      "uploaded_avatar_id": 7,
+      "avatar_template": "/user_avatar/localhost/test_user/{size}/7.png"
+    },
+    {
+      "id": -1,
+      "username": "system",
+      "uploaded_avatar_id": 1,
+      "avatar_template": "/user_avatar/localhost/system/{size}/1.png"
+    }
+  ],
+  "topics": [
+    {
+      "id": 12,
+      "title": "Test topic for inviting users",
+      "fancy_title": "Test topic for inviting users",
+      "slug": "test-topic-for-inviting-users",
+      "posts_count": 1
+    }
+  ],
+  "user": {
+    "id": 1,
+    "username": "test_user",
+    "uploaded_avatar_id": 7,
+    "avatar_template": "/user_avatar/localhost/test_user/{size}/7.png",
+    "name": "Test User",
+    "email": "batman@gotham.com",
+    "last_posted_at": "2015-01-07T13:59:29.406Z",
+    "last_seen_at": "2015-01-07T15:59:16.095Z",
+    "created_at": "2014-09-11T00:11:44.207Z",
+    "website": "http://",
+    "can_edit": true,
+    "can_edit_username": true,
+    "can_edit_email": true,
+    "can_edit_name": true,
+    "stats": [
+      {
+        "action_type": 12,
+        "count": 9,
+        "id": null
+      },
+      {
+        "action_type": 4,
+        "count": 12,
+        "id": null
+      },
+      {
+        "action_type": 5,
+        "count": 3,
+        "id": null
+      },
+      {
+        "action_type": 2,
+        "count": 1,
+        "id": null
+      },
+      {
+        "action_type": 3,
+        "count": 1,
+        "id": null
+      }
+    ],
+    "can_send_private_messages": true,
+    "can_send_private_message_to_user": false,
+    "bio_excerpt": "<div class='missing-profile'>the About Me field of your profile is currently blank, <a href='/users/test_user/preferences/about-me'>would you like to fill it out?</a></div>",
+    "trust_level": 0,
+    "moderator": false,
+    "admin": true,
+    "title": null,
+    "badge_count": 2,
+    "notification_count": 2,
+    "has_title_badges": false,
+    "custom_fields": {},
+    "post_count": 15,
+    "can_be_deleted": false,
+    "can_delete_all_posts": false,
+    "locale": "",
+    "email_digests": true,
+    "email_private_messages": true,
+    "email_direct": true,
+    "email_always": false,
+    "digest_after_days": 7,
+    "mailing_list_mode": false,
+    "auto_track_topics_after_msecs": 240000,
+    "new_topic_duration_minutes": 2880,
+    "external_links_in_new_tab": false,
+    "dynamic_favicon": false,
+    "enable_quoting": true,
+    "muted_category_ids": [],
+    "tracked_category_ids": [],
+    "watched_category_ids": [],
+    "private_messages_stats": {
+      "all": 9,
+      "mine": 9,
+      "unread": 0
+    },
+    "disable_jump_reply": false,
+    "gravatar_avatar_upload_id": null,
+    "custom_avatar_upload_id": null,
+    "invited_by": null,
+    "custom_groups": [],
+    "featured_user_badge_ids": [
+      3,
+      2
+    ],
+    "card_badge": null
+  }
+}

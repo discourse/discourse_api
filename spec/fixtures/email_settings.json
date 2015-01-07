@@ -1,0 +1,13 @@
+{
+  "delivery_method": "smtp",
+  "settings": [
+    {
+      "name": "address",
+      "value": "localhost"
+    },
+    {
+      "name": "port",
+      "value": 1025
+    }
+  ]
+}
