@@ -50,8 +50,12 @@ module DiscourseApi
           accept: 'application/json',
           user_agent: user_agent,
         },
-        ssl: {verify: false}
+        # ssl: {verify: false}
       }
+    end
+
+    def ssl(options)
+      connection_options[:ssl] = options
     end
 
     def delete(path, params={})
