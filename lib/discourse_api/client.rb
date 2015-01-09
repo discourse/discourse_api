@@ -49,8 +49,7 @@ module DiscourseApi
         headers: {
           accept: 'application/json',
           user_agent: user_agent,
-        },
-        # ssl: {verify: false}
+        }
       }
     end
 
