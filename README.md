@@ -32,6 +32,8 @@ client = DiscourseApi::Client.new("http://try.discourse.org")
 client.api_key = "YOUR_API_KEY"
 client.api_username = "YOUR_USERNAME"
 
+client.ssl(...)                                 #=> specify SSL connection settings if needed
+
 # Topic endpoints
 client.latest_topics                            #=> Gets a list of the latest topics
 client.hot_topics                               #=> Gets a list of hot topics

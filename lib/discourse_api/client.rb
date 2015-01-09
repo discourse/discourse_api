@@ -47,12 +47,16 @@ module DiscourseApi
 
     def connection_options
       @connection_options ||= {
-          url: @host,
-          headers: {
-              accept: 'application/json',
-              user_agent: user_agent,
-          }
+        url: @host,
+        headers: {
+          accept: 'application/json',
+          user_agent: user_agent,
+        }
       }
+    end
+
+    def ssl(options)
+      connection_options[:ssl] = options
     end
 
     def delete(path, params={})
