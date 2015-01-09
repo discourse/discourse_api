@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "key": "test_d7fd0429940",
+    "user": {
+      "id": 1,
+      "username": "test_user",
+      "uploaded_avatar_id": 7,
+      "avatar_template": "/user_avatar/localhost/test_user/{size}/7.png"
+    }
+  }
+]
