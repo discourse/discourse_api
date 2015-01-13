@@ -1,0 +1,12 @@
+{
+  "api_key": {
+    "id": 5,
+    "key": "e722e04df8cf6d097d565ca04eea1ff8e9e8f09beb405bae6f0c79852916f334",
+    "user": {
+      "id": 2,
+      "username": "robin",
+      "uploaded_avatar_id": 3,
+      "avatar_template": "/user_avatar/localhost/robin/{size}/3.png"
+    }
+  }
+}

@@ -11,11 +11,11 @@ module DiscourseApi
       end
 
       def update_avatar(args)
-        params = API.params(args)
-                    .required(:username, :file)
-                    .default(image_type: 'avatar')
-                    .to_h
-        upload_response = post("/users/#{args[:username]}/preferences/user_image", params)
+        args = API.params(args)
+                  .required(:username, :file)
+                  .default(image_type: 'avatar')
+                  .to_h
+        upload_response = post("/users/#{args[:username]}/preferences/user_image", args)
         put("/users/#{args[:username]}/preferences/avatar/pick", { upload_id: upload_response['upload_id'] })
       end
 
@@ -32,11 +32,11 @@ module DiscourseApi
       end
 
       def create_user(args)
-        params = API.params(args)
-                    .required(:name, :email, :password, :username)
-                    .optional(:active)
-                    .to_h
-        post("/users", params)
+        args = API.params(args)
+                  .required(:name, :email, :password, :username)
+                  .optional(:active)
+                  .to_h
+        post("/users", args)
       end
 
       def log_out(id)
