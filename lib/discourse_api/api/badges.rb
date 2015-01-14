@@ -10,6 +10,10 @@ module DiscourseApi
         response = get("/users/#{username}/activity/badges.json")
         response.body['badges']
       end
+
+      def grant_user_badge(params={})
+        post("/user_badges", params)
+      end
     end
   end
 end
