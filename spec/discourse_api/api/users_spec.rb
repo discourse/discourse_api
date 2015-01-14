@@ -166,4 +166,26 @@ describe DiscourseApi::API::Users do
       expect(users.first).to be_a Hash
     end
   end
+
+  describe "#update_trust_level" do
+    before do
+      url = "http://localhost:3000/admin/users/2/trust_level?api_key=test_d7fd0429940&api_username=test_user"
+      stub_get(url).to_return(body: fixture("update_trust_level.json"),
+                              headers: { content_type: "application/json" })
+    end
+
+    it "makes the correct put request" do
+      params = { user_id: 2, level: 2 }
+      subject.update_trust_level(params)
+      url = "http://localhost:3000/admin/users/2/trust_level?api_key=test_d7fd0429940&api_username=test_user"
+      expect(a_put(url)).to have_been_made
+    end
+
+    it "updates the trust_level" do
+      params = { user_id: 2, level: 2 }
+      admin_user = subject.update_trust_level(params)
+      expect(admin_user).to be_a Hash
+      expect(admin_user['admin_user']).to have_key('trust_level')
+    end
+  end
 end

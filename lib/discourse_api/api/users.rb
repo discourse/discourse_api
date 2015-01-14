@@ -31,8 +31,12 @@ module DiscourseApi
         put("/users/#{username}/preferences/username", { new_username: new_username, api_key: api_key })
       end
 
-      def update_trust_level(params={})
-        put("/admin/users/#{params[:user_id]}/trust_level", params)
+      def update_trust_level(args)
+        args = API.params(args)
+                  .required(:user_id, :level)
+                  .to_h
+        response = put("/admin/users/#{args[:user_id]}/trust_level", args)
+        response[:body]
       end
 
       def create_user(args)
