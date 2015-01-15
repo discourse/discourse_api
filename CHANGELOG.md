@@ -21,3 +21,10 @@
 - be able to specify SSL connection settings
 - list api keys generated
 - list backups created
+
+## 0.4.0
+
+- [FEATURE] generate an api key for a user
+- [FEATURE] revoke an api key for a user
+- [FEATURE] update user trust level
+- [FEATURE] grant user badge
