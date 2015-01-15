@@ -45,6 +45,19 @@ describe DiscourseApi::API::ApiAdmin do
       expect(api_key).to be_a Hash
       expect(api_key['api_key']).to have_key('key')
     end
+  end
 
+  describe "#revoke_api_key" do
+    before do
+      url = "http://localhost:3000/admin/users/2/revoke_api_key.json?" +
+      "api_key=test_d7fd0429940&api_username=test_user"
+      stub_post(url).to_return(body: "",
+      headers: { content_type: "application/json" })
+    end
+
+    it "returns 200" do
+      response = subject.revoke_api_key(2)
+      expect(response['status']).to eq(200)
+    end
   end
 end
