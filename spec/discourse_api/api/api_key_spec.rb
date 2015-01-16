@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DiscourseApi::API::ApiAdmin do
+describe DiscourseApi::API::ApiKey do
   subject {
     DiscourseApi::Client.new(
       "http://localhost:3000",
@@ -11,16 +11,15 @@ describe DiscourseApi::API::ApiAdmin do
 
   describe "#api" do
     before do
-      url = "http://localhost:3000/admin/api.json?" +
-            "api_key=test_d7fd0429940&api_username=test_user"
+      url = "http://localhost:3000/admin/api.json"
       stub_get(url).to_return(body: fixture("api.json"),
                               headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.api
-      url = "http://localhost:3000/admin/api.json?" +
-            "api_key=test_d7fd0429940&api_username=test_user"
+      url = "http://localhost:3000/admin/api.json" +
+            "?api_key=test_d7fd0429940&api_username=test_user"
       expect(a_get(url)).to have_been_made
     end
 
@@ -34,8 +33,7 @@ describe DiscourseApi::API::ApiAdmin do
 
   describe "#generate_api_key" do
     before do
-      url = "http://localhost:3000/admin/users/2/generate_api_key.json?" +
-            "api_key=test_d7fd0429940&api_username=test_user"
+      url = "http://localhost:3000/admin/users/2/generate_api_key.json"
       stub_post(url).to_return(body: fixture("generate_api_key.json"),
                                headers: { content_type: "application/json" })
     end
@@ -49,8 +47,7 @@ describe DiscourseApi::API::ApiAdmin do
 
   describe "#revoke_api_key" do
     before do
-      url = "http://localhost:3000/admin/users/2/revoke_api_key.json?" +
-      "api_key=test_d7fd0429940&api_username=test_user"
+      url = "http://localhost:3000/admin/users/2/revoke_api_key.json"
       stub_post(url).to_return(body: "",
       headers: { content_type: "application/json" })
     end
@@ -58,6 +55,21 @@ describe DiscourseApi::API::ApiAdmin do
     it "returns 200" do
       response = subject.revoke_api_key(2)
       expect(response['status']).to eq(200)
+    end
+  end
+
+  describe "#generate_master_key" do
+    before do
+      url = "http://localhost:3000/admin/api/key"
+      stub_post(url).to_return(body: fixture("generate_master_key.json"),
+      headers: { content_type: "application/json" })
+    end
+
+    it "returns the generated master key" do
+      master_key = subject.generate_master_key
+      expect(master_key).to be_a Hash
+      expect(master_key['api_key']).to have_key('key')
+      expect(master_key['api_key']['user']).to eq(nil)
     end
   end
 end

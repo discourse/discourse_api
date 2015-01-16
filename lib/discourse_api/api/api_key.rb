@@ -1,6 +1,6 @@
 module DiscourseApi
   module API
-    module ApiAdmin
+    module ApiKey
       def api
         response = get("/admin/api.json")
         response.body
@@ -12,6 +12,10 @@ module DiscourseApi
 
       def revoke_api_key(user_id)
         response = delete("/admin/users/#{user_id}/revoke_api_key.json")
+      end
+
+      def generate_master_key
+        response = post("/admin/api/key")
       end
     end
   end
