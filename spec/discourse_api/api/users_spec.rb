@@ -170,7 +170,7 @@ describe DiscourseApi::API::Users do
   describe "#update_trust_level" do
     before do
       url = "http://localhost:3000/admin/users/2/trust_level?api_key=test_d7fd0429940&api_username=test_user"
-      stub_get(url).to_return(body: fixture("update_trust_level.json"),
+      stub_put(url).to_return(body: fixture("update_trust_level.json"),
                               headers: { content_type: "application/json" })
     end
 
