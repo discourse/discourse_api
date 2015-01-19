@@ -97,4 +97,25 @@ describe DiscourseApi::API::ApiKey do
       expect(response['status']).to eq(200)
     end
   end
+
+  describe "#regenerate_api_key" do
+    before do
+      url = "http://localhost:3000/admin/api/key" +
+        "?api_key=test_d7fd0429940&api_username=test_user"
+      stub_put(url).to_return(body: fixture("regenerate_api_key.json"),
+                                 headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.regenerate_api_key(10)
+      url = "http://localhost:3000/admin/api/key" +
+        "?api_key=test_d7fd0429940&api_username=test_user"
+      expect(a_put(url)).to have_been_made
+    end
+
+    it "returns the regenerated api key" do
+      key = subject.regenerate_api_key(10)
+      expect(key['api_key']).to have_key('key')
+    end
+  end
 end

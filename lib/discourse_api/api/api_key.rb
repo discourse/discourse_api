@@ -21,6 +21,11 @@ module DiscourseApi
       def revoke_api_key(id)
         response = delete("/admin/api/key", {id: id})
       end
+
+      def regenerate_api_key(id)
+        response = put("/admin/api/key", {id: id})
+        response.body
+      end
     end
   end
 end
