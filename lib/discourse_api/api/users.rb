@@ -59,6 +59,11 @@ module DiscourseApi
         response = get("admin/users/list/#{type}.json")
         response[:body]
       end
+
+      def grant_admin(user_id)
+        response = put("admin/users/#{user_id}/grant_admin")
+        response[:body]
+      end
     end
   end
 end

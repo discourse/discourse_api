@@ -188,4 +188,24 @@ describe DiscourseApi::API::Users do
       expect(admin_user['admin_user']).to have_key('trust_level')
     end
   end
+
+  describe "#grant admin" do
+    before do
+      url = "http://localhost:3000/admin/users/11/grant_admin?api_key=test_d7fd0429940&api_username=test_user"
+      stub_put(url).to_return(body: fixture("user_grant_admin.json"),
+                              headers: { content_type: "application/json" })
+    end
+
+    it "makes the correct put request" do
+      result = subject.grant_admin(11)
+      url = "http://localhost:3000/admin/users/11/grant_admin?api_key=test_d7fd0429940&api_username=test_user"
+      expect(a_put(url)).to have_been_made
+    end
+
+    it "makes the user an admin" do
+      result = subject.grant_admin(11)
+      expect(result).to be_a Hash
+      expect(result['admin_user']['admin']).to eq(true)
+    end
+  end
 end
