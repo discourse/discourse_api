@@ -64,6 +64,11 @@ module DiscourseApi
         response = put("admin/users/#{user_id}/grant_admin")
         response[:body]
       end
+
+      def revoke_admin(user_id)
+        response = put("admin/users/#{user_id}/revoke_admin")
+        response[:body]
+      end
     end
   end
 end
