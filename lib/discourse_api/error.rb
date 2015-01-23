@@ -11,4 +11,7 @@ module DiscourseApi
       exception.respond_to?(:message) ? super(exception.message) : super(exception.to_s)
     end
   end
+
+  class UnauthenticatedError < StandardError
+  end
 end
