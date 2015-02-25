@@ -23,7 +23,7 @@ describe DiscourseApi::API::Groups do
       stub_post("http://localhost:3000/admin/groups?api_key=test_d7fd0429940&api_username=test_user")
       subject.create_group(name: "test_group")
       expect(a_post("http://localhost:3000/admin/groups?api_key=test_d7fd0429940&api_username=test_user").
-              with(body: {group: {name: "test_group", visible: "true"}})
+              with(body: {name: "test_group", visible: "true"})
             ).to have_been_made
     end
 
