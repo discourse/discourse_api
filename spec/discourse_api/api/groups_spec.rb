@@ -27,20 +27,44 @@ describe DiscourseApi::API::Groups do
             ).to have_been_made
     end
 
-    it "adds members" do
-      stub_request(:patch, "http://localhost:3000/admin/groups/123?api_key=test_d7fd0429940&api_username=test_user")
-      subject.group_add(123, "sam")
-      expect(a_request(:patch, "http://localhost:3000/admin/groups/123?api_key=test_d7fd0429940&api_username=test_user").
-              with(body: {changes: {add: [ "sam" ]}})
-            ).to have_been_made
+    describe "add members" do
+      before do
+        stub_request(:put, "http://localhost:3000/admin/groups/123/members.json?api_key=test_d7fd0429940&api_username=test_user")
+      end
+
+      it "adds a single member by username" do
+        subject.group_add(123, username: "sam")
+        expect(a_request(:put, "http://localhost:3000/admin/groups/123/members.json?api_key=test_d7fd0429940&api_username=test_user").
+                with(body: {usernames: "sam"})
+              ).to have_been_made
+      end
+
+      it "adds an array of members by username" do
+        subject.group_add(123, usernames: ["sam", "jeff"])
+        expect(a_request(:put, "http://localhost:3000/admin/groups/123/members.json?api_key=test_d7fd0429940&api_username=test_user").
+                with(body: {usernames: "sam,jeff"})
+              ).to have_been_made
+      end
+
+      it "adds a single member by user_id" do
+        subject.group_add(123, user_id: 456)
+        expect(a_request(:put, "http://localhost:3000/admin/groups/123/members.json?api_key=test_d7fd0429940&api_username=test_user").
+                with(body: {user_ids: "456"})
+              ).to have_been_made
+      end
+
+      it "adds an array of members by user_id" do
+        subject.group_add(123, user_id: [123, 456])
+        expect(a_request(:put, "http://localhost:3000/admin/groups/123/members.json?api_key=test_d7fd0429940&api_username=test_user").
+                with(body: {user_ids: "123,456"})
+              ).to have_been_made
+      end
     end
 
     it "removes members" do
-      stub_request(:patch, "http://localhost:3000/admin/groups/123?api_key=test_d7fd0429940&api_username=test_user")
-      subject.group_remove(123, "sam")
-      expect(a_request(:patch, "http://localhost:3000/admin/groups/123?api_key=test_d7fd0429940&api_username=test_user").
-              with(body: {changes: {delete: [ "sam" ]}})
-            ).to have_been_made
+      stub_request(:delete, "http://localhost:3000/admin/groups/123/members.json?api_key=test_d7fd0429940&api_username=test_user")
+      subject.group_remove(123, username: "sam")
+      expect(a_request(:delete, "http://localhost:3000/admin/groups/123/members.json?api_key=test_d7fd0429940&api_username=test_user&username=sam")).to have_been_made
     end
   end
 end
