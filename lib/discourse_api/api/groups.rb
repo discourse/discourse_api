@@ -6,7 +6,7 @@ module DiscourseApi
                   .required(:name)
                   .default(visible: true)
                   .to_h
-        post("/admin/groups", group: args)
+        post("/admin/groups", args)
       end
 
       def groups
