@@ -13,5 +13,5 @@ client.group_add(group_id, usernames: ["neil", "dan"])
 client.group_add(group_id, user_id: 123)
 client.group_add(group_id, user_ids: [123, 456])
 
-client.group_remove(group_id, "neil")
-client.group_remove(group_id, 123)
+client.group_remove(group_id, username: "neil")
+client.group_remove(group_id, user_id: 123)
