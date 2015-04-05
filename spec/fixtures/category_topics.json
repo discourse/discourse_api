@@ -1,0 +1,92 @@
+{
+  "users": [
+    {
+      "id": 3,
+      "username": "fuzzy",
+      "avatar_template": "//www.gravatar.com/avatar/c0c59575e86a794d733db4ee29b2baf4.png?s={size}&r=pg&d=identicon"
+    }
+  ],
+  "topic_list": {
+    "can_create_topic": true,
+    "draft": null,
+    "draft_key": "new_topic",
+    "draft_sequence": 2,
+    "topics": [
+      {
+        "id": 5,
+        "title": "About the category",
+        "fancy_title": "About the category",
+        "slug": "about-the-category",
+        "posts_count": 2,
+        "reply_count": 0,
+        "highest_post_number": 2,
+        "image_url": null,
+        "created_at": "2014-04-16T14:10:50.950-04:00",
+        "last_posted_at": "2014-04-16T14:31:10.406-04:00",
+        "bumped": true,
+        "bumped_at": "2014-04-17T13:35:01.102-04:00",
+        "unseen": false,
+        "last_read_post_number": 2,
+        "unread": 0,
+        "new_posts": 0,
+        "pinned": true,
+        "unpinned": null,
+        "excerpt": null,
+        "visible    ": true,
+        "closed": false,
+        "archived": false,
+        "views": 0,
+        "like_count": 0,
+        "starred": false,
+        "has_summary": false,
+        "archetype": "regular",
+        "last_poster_username": "fuzzy",
+        "category_id": 2,
+        "posters": [
+          {
+            "extras": "latest",
+            "description": "Original Poster, Most Recent Poster",
+            "user_id": 3
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "This is a markdown post",
+        "fancy_title": "This is a markdown post",
+        "slug": "this-is-a-markdown-post",
+        "posts_count": 2,
+        "reply_count": 0,
+        "highest_post_number": 2,
+        "image_url": null,
+        "created_at": "2014-04-16T13:52:58.777-04:00",
+        "last_posted_at": "2014-04-16T14:31:37.371-04:00",
+        "bumped": true,
+        "bumped_at": "2014-04-16T14:31:37.371-04:00",
+        "unseen": false,
+        "last_read_post_number": 2,
+        "unread": 0,
+        "new_posts": 0,
+        "pinned": false,
+        "unpinned    ": null,
+        "visible": true,
+        "closed": false,
+        "archived": false,
+        "views": 0,
+        "like_count": 0,
+        "starred": false,
+        "has_summary": false,
+        "archetype": "regular",
+        "last_poster_username": "fuzzy",
+        "category_id": 2,
+        "posters": [
+          {
+            "extras": "latest",
+            "description": "Original Poster, Most Recent Poster",
+            "user_id": 3
+          }
+        ]
+      }
+    ]
+  }
+}
