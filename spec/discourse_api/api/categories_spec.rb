@@ -36,4 +36,34 @@ describe DiscourseApi::API::Categories do
       expect(latest_topics).to be_an Array
     end
   end
+
+  describe '#category_top_topics' do
+    before do
+      stub_get("http://localhost:3000/category/category-slug/l/top.json?api_key=test_d7fd0429940&api_username=test_user")
+      .to_return(
+        body: fixture("category_topics.json"), 
+        headers: { content_type: "application/json" }
+      )
+    end
+
+    it "returns the top topics in a category" do
+      topics = subject.category_top_topics('category-slug')
+      expect(topics).to be_an Array
+    end
+  end
+
+  describe '#category_new_topics' do
+    before do
+      stub_get("http://localhost:3000/category/category-slug/l/new.json?api_key=test_d7fd0429940&api_username=test_user")
+      .to_return(
+        body: fixture("category_topics.json"), 
+        headers: { content_type: "application/json" }
+      )
+    end
+
+    it "returns the new topics in a category" do
+      topics = subject.category_new_topics('category-slug')
+      expect(topics).to be_an Array
+    end
+  end
 end
