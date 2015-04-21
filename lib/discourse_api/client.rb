@@ -6,6 +6,7 @@ require 'discourse_api/version'
 require 'discourse_api/api/categories'
 require 'discourse_api/api/search'
 require 'discourse_api/api/sso'
+require 'discourse_api/api/tags'
 require 'discourse_api/api/topics'
 require 'discourse_api/api/posts'
 require 'discourse_api/api/users'
@@ -26,6 +27,7 @@ module DiscourseApi
     include DiscourseApi::API::Categories
     include DiscourseApi::API::Search
     include DiscourseApi::API::SSO
+    include DiscourseApi::API::Tags
     include DiscourseApi::API::Topics
     include DiscourseApi::API::Posts
     include DiscourseApi::API::Users
