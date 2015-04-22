@@ -5,9 +5,10 @@ require 'openssl'
 module DiscourseApi
   class SingleSignOn
     ACCESSORS = [:nonce, :name, :username, :email, :avatar_url, :avatar_force_update,
-                 :about_me, :external_id, :return_sso_url, :admin, :moderator]
+                 :about_me, :external_id, :return_sso_url, :admin, :moderator, :suppress_welcome_message]
     FIXNUMS = []
-    BOOLS = [:avatar_force_update, :admin, :moderator]
+    BOOLS = [:avatar_force_update, :admin, :moderator, :suppress_welcome_message]
+    NONCE_EXPIRY_TIME = 10.minutes
 
     attr_accessor(*ACCESSORS)
     attr_accessor :sso_secret, :sso_url
@@ -26,7 +27,12 @@ module DiscourseApi
 
       parsed = Rack::Utils.parse_query(payload)
       if sso.sign(parsed["sso"]) != parsed["sig"]
-        raise RuntimeError, "Bad signature for payload"
+        diags = "\n\nsso: #{parsed["sso"]}\n\nsig: #{parsed["sig"]}\n\nexpected sig: #{sso.sign(parsed["sso"])}"
+        if parsed["sso"] =~ /[^a-zA-Z0-9=\r\n\/+]/m
+          raise RuntimeError, "The SSO field should be Base64 encoded, using only A-Z, a-z, 0-9, +, /, and = characters. Your input contains characters we don't understand as Base64, see http://en.wikipedia.org/wiki/Base64 #{diags}"
+        else
+          raise RuntimeError, "Bad signature for payload #{diags}"
+        end
       end
 
       decoded = Base64.decode64(parsed["sso"])
@@ -98,5 +104,7 @@ module DiscourseApi
 
       Rack::Utils.build_query(payload)
     end
+
   end
+
 end
