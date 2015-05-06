@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'active_support/all'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::HTMLFormatter,
