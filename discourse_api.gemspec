@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "faraday_middleware", "~> 0.9"
   spec.add_dependency "rack", "~> 1.5"
   spec.add_dependency "dotenv", "~> 1.0"
+  spec.add_dependency "activesupport", "~> 4.2"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake", "10.3.2"
