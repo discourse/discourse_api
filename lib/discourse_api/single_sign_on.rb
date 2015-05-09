@@ -8,7 +8,7 @@ module DiscourseApi
                  :about_me, :external_id, :return_sso_url, :admin, :moderator, :suppress_welcome_message]
     FIXNUMS = []
     BOOLS = [:avatar_force_update, :admin, :moderator, :suppress_welcome_message]
-    NONCE_EXPIRY_TIME = 10.minutes
+    #NONCE_EXPIRY_TIME = 10.minutes # minutes is a rails method and is causing an error. Is this needed in the api?
 
     attr_accessor(*ACCESSORS)
     attr_accessor :sso_secret, :sso_url
