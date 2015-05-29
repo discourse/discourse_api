@@ -6,6 +6,7 @@
                                       PUT      /forums/:id(.:format)                                forums#update
                                       DELETE   /forums/:id(.:format)                                forums#destroy
                            srv_status GET      /srv/status(.:format)                                forums#status
+                 admin_users_sync_sso POST     /admin/users/sync_sso(.:format)                      admin/users#sync_sso
          generate_key_admin_api_index POST     /admin/api/generate_key(.:format)                    admin/api#generate_key
                       admin_api_index GET      /admin/api(.:format)                                 admin/api#index
            email_preferences_redirect GET      /email_preferences(.:format)                         email#preferences_redirect
@@ -200,4 +201,3 @@
                             list_read          /                                                    list#read
                           list_posted          /                                                    list#posted
                      categories_index          /                                                    categories#index
-
