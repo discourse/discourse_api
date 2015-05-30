@@ -1,6 +1,5 @@
 # DiscourseApi
 
-[![Build Status](https://travis-ci.org/discourse/discourse_api.pong?branch=master)][travis]
 [![Code Climate](https://codeclimate.com/github/discourse/discourse_api.png)][codeclimate]
 
 [codeclimate]: https://codeclimate.com/github/discourse/discourse_api
