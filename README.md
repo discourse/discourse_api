@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.org/discourse/discourse_api.pong?branch=master)][travis]
 [![Code Climate](https://codeclimate.com/github/discourse/discourse_api.png)][codeclimate]
 
-[travis]: http://travis-ci.org/discourse/discourse_api
 [codeclimate]: https://codeclimate.com/github/discourse/discourse_api
 
 The Discourse API gem allows you to consume the Discourse API
