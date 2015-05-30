@@ -10,6 +10,11 @@ module DiscourseApi
         response[:body]['user']
       end
 
+      def user_sso(username)
+        response = get("/admin/users/#{username.downcase}")
+        response[:body]['single_sign_on_record']
+      end
+
       def update_avatar(args)
         args = API.params(args)
                   .required(:username, :file)
