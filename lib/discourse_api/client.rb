@@ -1,4 +1,3 @@
-require 'dotenv'
 require 'faraday'
 require 'faraday_middleware'
 require 'json'
@@ -40,9 +39,7 @@ module DiscourseApi
     include DiscourseApi::API::ApiKey
     include DiscourseApi::API::Backups
 
-    def initialize(host = ENV["DISCOURSE_URL"],
-                   api_key = ENV["DISCOURSE_API_KEY"],
-                   api_username = ENV["DISCOURSE_USERNAME"])
+    def initialize(host, api_key = nil, api_username = nil)
       raise ArgumentError, 'host needs to be defined' if host.nil? || host.empty?
       @host         = host
       @api_key      = api_key
