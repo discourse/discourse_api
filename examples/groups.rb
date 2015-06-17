@@ -1,9 +1,6 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require File.expand_path('../../lib/discourse_api', __FILE__)
 
-require 'dotenv'
-Dotenv.load
-
 client = DiscourseApi::Client.new
 
 response = client.create_group(name: "engineering_team")
