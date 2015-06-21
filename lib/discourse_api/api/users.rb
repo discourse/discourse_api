@@ -17,11 +17,12 @@ module DiscourseApi
 
       def update_avatar(args)
         args = API.params(args)
-                  .required(:username, :file)
-                  .default(image_type: 'avatar')
+                  .required(:username)
+                  .optional(:file, :url)
+                  .default(type: 'avatar', synchronous: true)
                   .to_h
-        upload_response = post("/users/#{args[:username]}/preferences/user_image", args)
-        put("/users/#{args[:username]}/preferences/avatar/pick", { upload_id: upload_response['upload_id'] })
+        upload_response = post("/uploads", args)
+        put("/users/#{args[:username]}/preferences/avatar/pick", { upload_id: upload_response['id'] })
       end
 
       def update_email(username, email)
