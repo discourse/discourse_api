@@ -26,13 +26,13 @@ describe DiscourseApi::API::Users do
 
   describe "#update_avatar" do
     before do
-      stub_post("http://localhost:3000/users/test_user/preferences/user_image?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_update_avatar_success.json"), headers: { content_type: "application/json" })
+      stub_post("http://localhost:3000/uploads?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("upload_avatar.json"), headers: { content_type: "application/json" })
       stub_put("http://localhost:3000/users/test_user/preferences/avatar/pick?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_update_avatar_success.json"), headers: { content_type: "application/json" })
     end
 
     it "uploads an image" do
       sam = "https://meta-discourse.global.ssl.fastly.net/user_avatar/meta.discourse.org/sam/120/5243.png"
-      args = { username: 'test_user', file: sam }
+      args = { username: 'test_user', url: sam }
       response = subject.update_avatar(args)
       expect(response[:body]['success']).to eq('OK')
     end

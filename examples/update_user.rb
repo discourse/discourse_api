@@ -12,7 +12,7 @@ puts client.update_user("batman", name: "Bruce Wayne")
 # update email of user whose username is "batman"
 puts client.update_email("batman", "batman@gotham.com")
 # update avatar of user whose username is "batman"
-puts client.update_avatar("batman", "http://meta-discourse.r.worldssl.net/uploads/default/2497/724a6ef2e79d2bc7.png")
+puts client.update_avatar(username: "batman", url: "http://meta-discourse.r.worldssl.net/uploads/default/2497/724a6ef2e79d2bc7.png")
 # update trust level of user whose id is "102"
 puts client.update_trust_level(user_id: 102, level: 2)
 # log out everywhere and refresh browser of user whose id is "2"

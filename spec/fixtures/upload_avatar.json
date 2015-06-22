@@ -1,0 +1,14 @@
+{
+  "id": 11,
+  "user_id": 1,
+  "original_filename": "avatar.jpg",
+  "filesize": 86900,
+  "width": 360,
+  "height": 360,
+  "url": "/uploads/default/original/1X/417e624d2453925e6c68748b9aa67637c284b5aa.jpg",
+  "created_at": "2015-06-21T12:35:45.182Z",
+  "updated_at": "2015-06-21T12:35:45.195Z",
+  "sha1": "417e624d2453925e6c68748b9aa67637c284b5aa",
+  "origin": null,
+  "retain_hours": null
+}
