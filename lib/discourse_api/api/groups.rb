@@ -34,6 +34,10 @@ module DiscourseApi
       def group_remove(group_id, user)
         delete("/admin/groups/#{group_id}/members.json", user)
       end
+
+      def delete_group(group_id)
+        delete("/admin/groups/#{group_id}.json")
+      end
     end
   end
 end
