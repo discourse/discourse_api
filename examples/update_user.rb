@@ -16,7 +16,7 @@ puts client.update_avatar(username: "batman", url: "http://meta-discourse.r.worl
 # update trust level of user whose id is "102"
 puts client.update_trust_level(user_id: 102, level: 2)
 # update user bio, location or website
-puts client.update_user("techapj", bio_raw: "I am Batman.", location: "Gotham", website: "https://en.wikipedia.org/wiki/Batman")
+puts client.update_user("batman", bio_raw: "I am Batman.", location: "Gotham", website: "https://en.wikipedia.org/wiki/Batman")
 
 # log out everywhere and refresh browser of user whose id is "2"
 puts client.log_out(2)
