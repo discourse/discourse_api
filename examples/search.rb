@@ -6,4 +6,4 @@ client.api_key = "YOUR_API_KEY"
 client.api_username = "YOUR_USERNAME"
 
 # search for term
-puts client.search("batman")
+puts client.search("discourse")
