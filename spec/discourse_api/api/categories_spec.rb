@@ -66,4 +66,15 @@ describe DiscourseApi::API::Categories do
       expect(topics).to be_an Array
     end
   end
+
+  describe "creates a new category" do
+    it "returns success" do
+      subject.api_key = 'test_d7fd0429940'
+      subject.api_username = 'test_user'
+      # category name is random letters to avoid category name taken error
+      response = subject.create_category(name: ('a'..'z').to_a.shuffle[0,8].join, color: "283890",
+        text_color: "FFFFFF", description: "This is a description", permissions: {"group_1" => 1, "admins" => 1})
+      expect(response).to be_a Hash
+    end
+  end  
 end

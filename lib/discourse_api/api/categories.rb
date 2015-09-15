@@ -2,10 +2,11 @@ module DiscourseApi
   module API
     module Categories
       # :color and :text_color are RGB hexadecimal strings
+      # :permissions is a hash with the group name and permission_type which is an integer 1 = Full 2 = Create Post 3 = Read Only
       def create_category(args)
         args = API.params(args)
                   .required(:name, :color, :text_color)
-                  .optional(:description)
+                  .optional(:description, :permissions)
                   .default(parent_category_id: nil)
         response = post("/categories", args)
         response['category']
