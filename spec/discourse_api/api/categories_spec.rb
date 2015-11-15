@@ -5,7 +5,8 @@ describe DiscourseApi::API::Categories do
 
   describe "#categories" do
     before do
-      stub_get("http://localhost:3000/categories.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("categories.json"), headers: { content_type: "application/json" })
+      stub_get("http://localhost:3000/categories.json?api_key=test_d7fd0429940&api_username=test_user")
+        .to_return(body: fixture("categories.json"), headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
@@ -28,7 +29,8 @@ describe DiscourseApi::API::Categories do
 
   describe '#category_latest_topics' do
     before do
-      stub_get("http://localhost:3000/category/category-slug/l/latest.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("category_latest_topics.json"), headers: { content_type: "application/json" })
+      stub_get("http://localhost:3000/category/category-slug/l/latest.json?api_key=test_d7fd0429940&api_username=test_user")
+        .to_return(body: fixture("category_latest_topics.json"), headers: { content_type: "application/json" })
     end
 
     it "returns the latest topics in a category" do
@@ -67,14 +69,19 @@ describe DiscourseApi::API::Categories do
     end
   end
 
-  describe "creates a new category" do
-    it "returns success" do
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
-      # category name is random letters to avoid category name taken error
-      response = subject.create_category(name: ('a'..'z').to_a.shuffle[0,8].join, color: "283890",
-        text_color: "FFFFFF", description: "This is a description", permissions: {"group_1" => 1, "admins" => 1})
-      expect(response).to be_a Hash
+  describe '#category_new_category' do
+    before do
+      stub_post("http://localhost:3000/categories?api_key=test_d7fd0429940&api_username=test_user")
+      subject.create_category(name: "test_category", color: "283890", text_color: "FFFFFF",
+                              description: "This is a description",
+                              permissions: {"group_1" => 1, "admins" => 1})
+    end
+    
+    it "makes a create category request" do
+      expect(a_post("http://localhost:3000/categories?api_key=test_d7fd0429940&api_username=test_user").with(body: 
+          "color=283890&description=This+is+a+description&name=test_category&parent_category_id&permissions%5Badmins%5D=1&permissions%5Bgroup_1%5D=1&text_color=FFFFFF")
+        ).to have_been_made
     end
   end  
+
 end
