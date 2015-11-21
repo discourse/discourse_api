@@ -32,3 +32,7 @@
 ## 0.5.0
 
 - [FEATURE] get latest category topics by page
+
+## 0.5.1
+
+- remove puts statement

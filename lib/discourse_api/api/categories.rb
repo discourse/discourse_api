@@ -24,7 +24,6 @@ module DiscourseApi
                     .optional(:page).to_h
         url = "/c/#{params[:category_slug]}/l/latest.json"
         if params.include?(:page)
-          puts params[:page]
           url = "#{url}?page=#{params[:page]}"
         end 
         response = get(url)
