@@ -28,3 +28,7 @@
 - [FEATURE] revoke an api key for a user
 - [FEATURE] update user trust level
 - [FEATURE] grant user badge
+
+## 0.5.0
+
+- [FEATURE] get latest category topics by page
