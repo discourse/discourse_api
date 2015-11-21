@@ -29,12 +29,12 @@ describe DiscourseApi::API::Categories do
 
   describe '#category_latest_topics' do
     before do
-      stub_get("http://localhost:3000/category/category-slug/l/latest.json?api_key=test_d7fd0429940&api_username=test_user")
+      stub_get("http://localhost:3000/c/category-slug/l/latest.json?api_key=test_d7fd0429940&api_username=test_user")
         .to_return(body: fixture("category_latest_topics.json"), headers: { content_type: "application/json" })
     end
 
     it "returns the latest topics in a category" do
-      latest_topics = subject.category_latest_topics('category-slug')
+      latest_topics = subject.category_latest_topics(category_slug: 'category-slug')
       expect(latest_topics).to be_an Array
     end
   end

@@ -4,7 +4,7 @@ module DiscourseApi
       # :category OPTIONAL name of category, not ID
       # :skip_validations OPTIONAL boolean
       # :auto_track OPTIONAL boolean
-      def create_topic(args)
+      def create_topic(args={})
         args = API.params(args)
                   .required(:title, :raw)
                   .optional(:skip_validations, :category, :auto_track)

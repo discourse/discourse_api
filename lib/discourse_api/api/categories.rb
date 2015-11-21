@@ -2,8 +2,9 @@ module DiscourseApi
   module API
     module Categories
       # :color and :text_color are RGB hexadecimal strings
-      # :permissions is a hash with the group name and permission_type which is an integer 1 = Full 2 = Create Post 3 = Read Only
-      def create_category(args)
+      # :permissions is a hash with the group name and permission_type which is
+      # an integer 1 = Full 2 = Create Post 3 = Read Only
+      def create_category(args={})
         args = API.params(args)
                   .required(:name, :color, :text_color)
                   .optional(:description, :permissions)
@@ -17,8 +18,16 @@ module DiscourseApi
         response[:body]['category_list']['categories']
       end
 
-      def category_latest_topics(category_slug)
-        response = get("/category/#{category_slug}/l/latest.json")
+      def category_latest_topics(args={})
+        params = API.params(args)
+                    .required(:category_slug)
+                    .optional(:page).to_h
+        url = "/c/#{params[:category_slug]}/l/latest.json"
+        if params.include?(:page)
+          puts params[:page]
+          url = "#{url}?page=#{params[:page]}"
+        end 
+        response = get(url)
         response[:body]['topic_list']['topics']
       end
 
