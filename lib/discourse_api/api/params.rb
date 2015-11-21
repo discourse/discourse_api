@@ -6,6 +6,7 @@ module DiscourseApi
 
     class Params
       def initialize(args)
+        raise ArgumentError.new("Required to be initialized with a Hash") unless args.is_a? Hash
         @args = args
         @required = []
         @optional = []
