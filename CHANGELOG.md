@@ -1,19 +1,28 @@
-# CHANGELOG
+# Change Log
+All notable changes to this project will be documented in this file.
+This project adheres to [Semantic Versioning](http://semver.org/). 
 
-## master
+## [0.6.0] - 2015-11-27
+### Added
+- get posts in topic by an array of id's
 
-- Added `client.category_latest_posts("category-slug")` endpoint
+## [0.5.1] - 2015-11-21
+### Fixed
+- remove puts statement
 
-## 0.1.2
+## [0.5.0] - 2015-11-21
+### Added
+- get latest category topics by page
 
-- Release
+## [0.4.0] - 2015-01-15
+### Added
+- generate an api key for a user
+- revoke an api key for a user
+- update user trust level
+- grant user badge
 
-## 0.3.5
-
-- Can now get a list of users by type: active, new, staff, etc.
-
-## 0.3.6
-
+## [0.3.6] - 2015-01-11
+### Added
 - list badges
 - view email settings
 - list emails sent
@@ -22,17 +31,16 @@
 - list api keys generated
 - list backups created
 
-## 0.4.0
+## [0.3.5] - 2015-01-06
+### Added
+- Can now get a list of users by type: active, new, staff, etc.
+- `client.category_latest_posts("category-slug")` endpoint
 
-- [FEATURE] generate an api key for a user
-- [FEATURE] revoke an api key for a user
-- [FEATURE] update user trust level
-- [FEATURE] grant user badge
+## [0.1.2] - 2014-05-11
 
-## 0.5.0
+- Release
 
-- [FEATURE] get latest category topics by page
 
-## 0.5.1
 
-- remove puts statement
+
+
