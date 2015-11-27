@@ -42,6 +42,18 @@ module DiscourseApi
       def delete_topic(id)
         delete("/t/#{id}.json")
       end
+
+      def topic_posts(topic_id, post_ids=[])
+        url = "/t/#{topic_id}/posts.json"
+        if posts_ids.count > 0
+          url << '?'
+          post_ids.each do |id|
+            url << "post_ids[]=#{id}&"
+          end 
+        end
+        response = get(url) 
+        response[:body]
+      end
     end
   end
 end
