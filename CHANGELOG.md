@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/). 
 
+## [0.6.1] - 2015-11-28
+### Fixed
+- typo in topic_posts method
+
 ## [0.6.0] - 2015-11-27
 ### Added
 - get posts in topic by an array of id's
