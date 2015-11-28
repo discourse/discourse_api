@@ -45,7 +45,7 @@ module DiscourseApi
 
       def topic_posts(topic_id, post_ids=[])
         url = "/t/#{topic_id}/posts.json"
-        if posts_ids.count > 0
+        if post_ids.count > 0
           url << '?'
           post_ids.each do |id|
             url << "post_ids[]=#{id}&"
