@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/). 
 
+## [0.6.2] - 2015-12-02
+### Fixed
+- `API::Params` will not work correctly when both optional and defaults are
+  specified
+
 ## [0.6.1] - 2015-11-28
 ### Fixed
 - typo in topic_posts method
