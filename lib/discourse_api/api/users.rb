@@ -75,6 +75,11 @@ module DiscourseApi
         response = put("admin/users/#{user_id}/revoke_admin")
         response[:body]
       end
+
+      def by_external_id(external_id)
+        response = get("/users/by-external/#{external_id}")
+        response[:body]['user']
+      end
     end
   end
 end
