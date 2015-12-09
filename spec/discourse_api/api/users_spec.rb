@@ -208,4 +208,21 @@ describe DiscourseApi::API::Users do
       expect(result['admin_user']['admin']).to eq(true)
     end
   end
+
+  describe "#by_external_id" do
+    before do
+      stub_get("http://localhost:3000/users/by-external/1?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user.json"), headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.by_external_id(1)
+      expect(a_get("http://localhost:3000/users/by-external/1?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns the requested user" do
+      user = subject.by_external_id(1)
+      puts user
+      expect(user['id']).to eq 1
+    end
+  end
 end
