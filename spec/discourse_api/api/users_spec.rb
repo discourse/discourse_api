@@ -221,7 +221,6 @@ describe DiscourseApi::API::Users do
 
     it "returns the requested user" do
       user = subject.by_external_id(1)
-      puts user
       expect(user['id']).to eq 1
     end
   end
