@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/). 
 
+## [0.8.0] - 2016-02-28
+### Added
+- get stats from admin dashboard
+- get only stat totals from admin dashboard
+
 ## [0.7.0] - 2015-12-09
 ### Added
 - get user by external_id
