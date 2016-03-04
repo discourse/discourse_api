@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/). 
 
+## [0.8.1] - 2016-03-03
+### Fixed
+- enable use of discourse_api to make unauthenticated requests to discourse
+  endpoints like /categories and /topics 
+
 ## [0.8.0] - 2016-02-28
 ### Added
 - get stats from admin dashboard
