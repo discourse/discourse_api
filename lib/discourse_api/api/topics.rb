@@ -11,6 +11,12 @@ module DiscourseApi
         post("/posts", args.to_h)
       end
 
+      def create_topic_action(args)
+        args = API.params(args)
+                   .required(:topic_id, :post_action_type_id)
+        post("/post_actions", args.to_h.merge(flag_topic: true))
+      end
+
       def latest_topics(params={})
         response = get('/latest.json', params)
         response[:body]['topic_list']['topics']
