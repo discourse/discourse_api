@@ -16,10 +16,10 @@ client.api_username = "YOUR_USERNAME"
 # 8 - Flag - Spam
 
 # Like a post
-client.create_post_action(post_id: 1, post_action_type_id: 2)
+client.create_post_action(id: 2, post_action_type_id: 2)
 
 # Flag a topic as spam
-client.create_topic_action(topic_id: 1, post_action_type_id: 8)
+client.create_topic_action(id: 1, post_action_type_id: 8)
 
 # Unlike a post
-client.destroy_post_action(post_id: 1, post_action_type_id: 2)
+client.destroy_post_action(id: 3, post_action_type_id: 2)
