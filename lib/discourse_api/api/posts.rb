@@ -9,7 +9,7 @@ module DiscourseApi
 
       def create_post_action(args)
         args = API.params(args)
-                   .required(:post_id, :post_action_type_id)
+                   .required(:id, :post_action_type_id)
         post("/post_actions", args.to_h.merge(flag_topic: false))
       end
 
