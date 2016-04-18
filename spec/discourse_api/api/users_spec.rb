@@ -167,6 +167,24 @@ describe DiscourseApi::API::Users do
     end
   end
 
+  describe "#all_users" do
+    before do
+      5.times do |i|
+        stub_get("http://localhost:3000/groups/trust_level_#{i}/members.json?api_key=test_d7fd0429940&api_username=test_user&limit=100&offset=0").to_return(body: fixture("members_0.json"), headers: { content_type: "application/json" })
+        stub_get("http://localhost:3000/groups/trust_level_#{i}/members.json?api_key=test_d7fd0429940&api_username=test_user&limit=100&offset=100").to_return(body: fixture("members_1.json"), headers: { content_type: "application/json" })
+      end
+    end
+
+    it "requests the correct resource" do
+      users = subject.all_users
+      5.times do |i|
+        expect(a_get("http://localhost:3000/groups/trust_level_#{i}/members.json?api_key=test_d7fd0429940&api_username=test_user&limit=100&offset=0")).to have_been_made
+        expect(a_get("http://localhost:3000/groups/trust_level_#{i}/members.json?api_key=test_d7fd0429940&api_username=test_user&limit=100&offset=100")).to have_been_made
+      end
+      expect(users.length).to eq(190)
+    end
+  end
+
   describe "#update_trust_level" do
     before do
       url = "http://localhost:3000/admin/users/2/trust_level?api_key=test_d7fd0429940&api_username=test_user"
