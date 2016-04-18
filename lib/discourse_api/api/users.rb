@@ -80,6 +80,16 @@ module DiscourseApi
         response = get("/users/by-external/#{external_id}")
         response[:body]['user']
       end
+
+      def all_users
+        result = []
+
+        5.times do |i|
+          result += group_members("trust_level_#{i}")
+        end
+
+        result.uniq! { |u| u['id'] }.freeze
+      end
     end
   end
 end
