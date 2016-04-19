@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/). 
 
+## [0.10.0] - 2016-04-19
+### Added
+- group_members: Allows you to retrieve more than 100 users with pagination (offset &
+  limit)
+### Fixed
+- Deprication warning with SimpleCov
+- updated rack dependency and added ruby 2.3 to travis config
+
 ## [0.9.1] - 2016-03-23
 ### Fixed
 - topic and post like/flag need to use `:id`
