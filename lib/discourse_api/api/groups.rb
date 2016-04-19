@@ -38,6 +38,15 @@ module DiscourseApi
       def delete_group(group_id)
         delete("/admin/groups/#{group_id}.json")
       end
+
+      def group_members(group_name, params = {})
+        params = API.params(params)
+                 .optional(:offset, :limit)
+                 .default(offset: 0, limit: 100)
+                 .to_h
+        response = get("/groups/#{group_name}/members.json", params)
+        response.body['members']
+      end
     end
   end
 end

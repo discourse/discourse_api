@@ -73,6 +73,22 @@ describe DiscourseApi::API::Groups do
       end
     end
 
+    describe "group members" do
+      before do
+        stub_get("http://localhost:3000/groups/mygroup/members.json?api_key=test_d7fd0429940&api_username=test_user&limit=100&offset=0").to_return(body: fixture("members_0.json"), headers: { content_type: "application/json" })
+        stub_get("http://localhost:3000/groups/mygroup/members.json?api_key=test_d7fd0429940&api_username=test_user&limit=100&offset=100").to_return(body: fixture("members_1.json"), headers: { content_type: "application/json" })
+      end
+
+      it "list members" do
+        members = subject.group_members('mygroup')
+        expect(a_get("http://localhost:3000/groups/mygroup/members.json?api_key=test_d7fd0429940&api_username=test_user&limit=100&offset=0")).to have_been_made
+        expect(members.length).to eq(100)
+        members = subject.group_members('mygroup', offset: 100)
+        expect(a_get("http://localhost:3000/groups/mygroup/members.json?api_key=test_d7fd0429940&api_username=test_user&limit=100&offset=100")).to have_been_made
+        expect(members.length).to eq(90)
+      end
+    end
+
 
   end
 end
