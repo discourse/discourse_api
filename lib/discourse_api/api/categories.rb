@@ -27,7 +27,11 @@ module DiscourseApi
           url = "#{url}?page=#{params[:page]}"
         end 
         response = get(url)
-        response[:body]['topic_list']['topics']
+        if response[:body]['errors']
+          response[:body]['errors']
+        else
+          response[:body]['topic_list']['topics']
+        end
       end
 
       def category_top_topics(category_slug)
