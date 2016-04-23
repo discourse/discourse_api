@@ -18,3 +18,8 @@ client.group_remove(group_id, username: "neil")
 client.group_remove(group_id, user_id: 123)
 
 client.delete_group(group_id)
+
+## List users of a group
+
+members = client.group_members('trust_level_0')
+puts members
