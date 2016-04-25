@@ -35,12 +35,16 @@ module DiscourseApi
       end
 
       def category_top_topics(category_slug)
-        response = get("/category/#{category_slug}/l/top.json")
-        response[:body]['topic_list']['topics']
+        response = get("/c/#{category_slug}/l/top.json")
+        if response[:body]['errors']
+          response[:body]['errors']
+        else
+          response[:body]['topic_list']['topics']
+        end
       end
 
       def category_new_topics(category_slug)
-        response = get("/category/#{category_slug}/l/new.json")
+        response = get("/c/#{category_slug}/l/new.json")
         response[:body]['topic_list']['topics']
       end
 
