@@ -17,6 +17,11 @@ module DiscourseApi
         post("/post_actions", args.to_h.merge(flag_topic: true))
       end
 
+      # timestamp is seconds past the epoch.
+      def edit_topic_timestamp(topic_id,timestamp)
+        put("/t/#{topic_id}/change-timestamp", { timestamp: timestamp })
+      end
+
       def latest_topics(params={})
         response = get('/latest.json', params)
         response[:body]['topic_list']['topics']
