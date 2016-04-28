@@ -4,10 +4,11 @@ module DiscourseApi
       # :category OPTIONAL name of category, not ID
       # :skip_validations OPTIONAL boolean
       # :auto_track OPTIONAL boolean
+      # :created_at OPTIONAL seconds since epoch.
       def create_topic(args={})
         args = API.params(args)
                   .required(:title, :raw)
-                  .optional(:skip_validations, :category, :auto_track)
+                  .optional(:skip_validations, :category, :auto_track, :created_at)
         post("/posts", args.to_h)
       end
 
