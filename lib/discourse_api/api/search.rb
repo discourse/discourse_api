@@ -8,6 +8,9 @@ module DiscourseApi
       # @option options [String] :type_filter Returns results of the specified type.
       # @return [Array] Return results as an array of Hashes.
       def search(term, options={})
+        raise ArgumentError.new("#{term} is required but not specified") unless term
+        raise ArgumentError.new("#{term} is required but not specified") unless !term.empty?
+
         response = get('/search/query', options.merge(term: term))
         response[:body]
       end

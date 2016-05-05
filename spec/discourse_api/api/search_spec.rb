@@ -18,5 +18,13 @@ describe DiscourseApi::API::Search do
       expect(results).to be_an Array
       expect(results.first).to be_a Hash
     end
+    
+    it "raises an ArgumentError for nil" do
+      expect { subject.search(nil) }.to raise_error(ArgumentError)
+    end
+
+    it "raises an ArgumentError for empty string" do
+      expect { subject.search('') }.to raise_error(ArgumentError)
+    end
   end
 end

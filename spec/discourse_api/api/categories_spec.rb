@@ -41,7 +41,7 @@ describe DiscourseApi::API::Categories do
 
   describe '#category_top_topics' do
     before do
-      stub_get("http://localhost:3000/category/category-slug/l/top.json?api_key=test_d7fd0429940&api_username=test_user")
+      stub_get("http://localhost:3000/c/category-slug/l/top.json?api_key=test_d7fd0429940&api_username=test_user")
       .to_return(
         body: fixture("category_topics.json"), 
         headers: { content_type: "application/json" }
@@ -56,7 +56,7 @@ describe DiscourseApi::API::Categories do
 
   describe '#category_new_topics' do
     before do
-      stub_get("http://localhost:3000/category/category-slug/l/new.json?api_key=test_d7fd0429940&api_username=test_user")
+      stub_get("http://localhost:3000/c/category-slug/l/new.json?api_key=test_d7fd0429940&api_username=test_user")
       .to_return(
         body: fixture("category_topics.json"), 
         headers: { content_type: "application/json" }
