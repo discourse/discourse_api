@@ -4,10 +4,11 @@ module DiscourseApi
       # :category OPTIONAL name of category, not ID
       # :skip_validations OPTIONAL boolean
       # :auto_track OPTIONAL boolean
+      # :created_at OPTIONAL seconds since epoch.
       def create_topic(args={})
         args = API.params(args)
                   .required(:title, :raw)
-                  .optional(:skip_validations, :category, :auto_track)
+                  .optional(:skip_validations, :category, :auto_track, :created_at)
         post("/posts", args.to_h)
       end
 
@@ -15,6 +16,11 @@ module DiscourseApi
         args = API.params(args)
                    .required(:id, :post_action_type_id)
         post("/post_actions", args.to_h.merge(flag_topic: true))
+      end
+
+      # timestamp is seconds past the epoch.
+      def edit_topic_timestamp(topic_id,timestamp)
+        put("/t/#{topic_id}/change-timestamp", { timestamp: timestamp })
       end
 
       def latest_topics(params={})
