@@ -15,4 +15,4 @@ puts client.create_backup()
 puts client.restore_backup("backup_file_name.tar.gz")
 
 # download backup
-puts client.download_backup("backup_file_name.tar.gz")
+puts client.download_backup("backup_file_name.tar.gz", "/tmp/")
