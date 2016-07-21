@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "guard", "~> 2.14"
   spec.add_development_dependency "rb-inotify", "~> 0.9"
   spec.add_development_dependency "simplecov", "~> 0.11"
+  spec.add_development_dependency "pry", "~> 0.10"
 
   spec.required_ruby_version = '>= 2.2.3'
 end
