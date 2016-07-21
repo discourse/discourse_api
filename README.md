@@ -71,3 +71,9 @@ client.sync_sso(                                #=> Synchronizes the SSO record
 2. Inside of your discourse directory, run: `bundle exec rake db:api_test_seed`
 3. Start discourse: `bundle exec rails s`
 4. Inside of your discourse_api directory, run: `bundle exec rspec spec/`
+
+## The Shell
+
+Configure the api by setting `DISCOURSE_API_URL`, `DISCOURSE_API_KEY`, `DISCOURSE_API_USERNAME` in .env or start the Discourse API in a terminal: `bundle exec bin/shell ` OR ` DISCOURSE_API_URL="http://localhost:30000" DISCOURSE_API_KEY="secret" DISCOURSE_API_USERNAME="yourusername" bundle exec bin/shell `
+
+Then, run (see examples) like this: `client.latest_topics`
