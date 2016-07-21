@@ -76,6 +76,8 @@ client.sync_sso(                                #=> Synchronizes the SSO record
 
 Configure the api by setting `DISCOURSE_API_URL`, `DISCOURSE_API_KEY`, `DISCOURSE_API_USERNAME` environment variables and start the Discourse API in a terminal:
 
-` bundle exec bin/shell `
+` ./bin/shell `
 
 Then, run (see examples) like this: `discourse> client.latest_topics`
+
+Also, you can copy `env.example` to `.env` and modify it.
