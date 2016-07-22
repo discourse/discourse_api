@@ -11,7 +11,7 @@ require 'discourse_api'
 
 client = DiscourseApi::Client.new(ENV['DISCOURSE_API_URL'])
 client.api_key = ENV['DISCOURSE_API_KEY']
-client.api_username = ENV['DISCOURSE_USERNAME']
+client.api_username = ENV['DISCOURSE_API_USERNAME']
 
 Pry.config.prompt = [proc { 'discourse> ' }, proc { 'discourse| ' }]
 Pry.start
