@@ -32,9 +32,8 @@ module DiscourseApi
         delete("/post_actions/#{post_id}.json", post_action_type_id: post_action_type_id)
       end
 
-      # This will need to be updated when Discourse 1.5 is released
       def post_action_users(post_id, post_action_type_id)
-        response = get("/post_actions/users.json", {id: post_id, post_action_type_id: post_action_type_id})
+        response = get("/post_action_users.json", {id: post_id, post_action_type_id: post_action_type_id})
         response[:body]
       end
     end

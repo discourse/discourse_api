@@ -1,0 +1,18 @@
+{
+  "post_action_users":  [
+    {
+      "id": 1286,
+      "username": "john_smith",
+      "avatar_template": "/user_avatar/domain/john_smith/size/1609_1.png",
+      "post_url": null,
+      "username_lower": "john_smith"
+    },
+    {
+      "id": 1,
+      "username": "jane_smith",
+      "avatar_template": "/user_avatar/domain/jane_smith/size/17_1.png",
+      "post_url": null,
+      "username_lower": "jane_smith"
+    }
+  ]
+}
