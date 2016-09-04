@@ -41,6 +41,13 @@ module DiscourseApi
         put("/t/#{topic_id}.json", { topic_id: topic_id, category_id: category_id })
       end
 
+      def change_topic_status(topic_slug, topic_id, params={})
+        params = API.params(params)
+                     .required(:status, :enabled)
+                     .optional(:api_username)
+        put("/t/#{topic_slug}/#{topic_id}/status", params.to_h)
+      end
+
       def topic(id, params={})
         response = get("/t/#{id}.json", params)
         response[:body]
