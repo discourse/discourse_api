@@ -26,4 +26,16 @@ describe DiscourseApi::API::Posts do
     end
   end
 
+  describe "#post_action_users" do
+    before do
+      stub_get("http://localhost:3000/post_action_users.json?api_key=test_d7fd0429940&api_username=test_user&id=11&post_action_type_id=2").to_return(body: fixture("post_action_users.json"), headers: { content_type: "application/json" })
+    end
+
+    it "fetches post_action_users" do
+      post_action_users = client.post_action_users(11, 2)
+      expect(post_action_users).to be_a Hash
+      expect(post_action_users["post_action_users"][0]["id"]).to eq(1286)
+    end
+  end
+
 end
