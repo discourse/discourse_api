@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/). 
+This project adheres to [Semantic Versioning](http://semver.org/).
+
+## [0.11.0] - 2016-09-03
+### Fixed
+- add destination folder to backup download
+- `post_action_users`
+### Added
+- `change_topic_status`
+- set username of topic on creation
 
 ## [0.10.1] - 2016-05-04
 ### Fixed
