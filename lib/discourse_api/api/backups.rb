@@ -14,10 +14,10 @@ module DiscourseApi
         post("/admin/backups/#{file_name}/restore")
       end
 
-      def download_backup(file_name)
+      def download_backup(file_name, destination)
         response = get("/admin/backups/#{file_name}")
         # write file
-        File.open('examples/backup.tar.gz', 'wb') { |fp| fp.write(response.body) }
+        File.open("#{destination}/#{file_name}", 'wb') { |fp| fp.write(response.body) }
       end
     end
   end
