@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - add destination folder to backup download
 - `post_action_users`
+
 ### Added
 - `change_topic_status`
 - set username of topic on creation
