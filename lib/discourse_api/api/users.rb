@@ -80,6 +80,14 @@ module DiscourseApi
         response = get("/users/by-external/#{external_id}")
         response[:body]['user']
       end
+
+      def suspend(user_id, days, reason)
+        put("/admin/users/#{user_id}/suspend", {duration: days, reason: reason})
+      end
+
+      def unsuspend(user_id)
+        put("/admin/users/#{user_id}/unsuspend")
+      end
     end
   end
 end
