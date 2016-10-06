@@ -224,4 +224,32 @@ describe DiscourseApi::API::Users do
       expect(user['id']).to eq 1
     end
   end
+
+  describe "#suspend" do
+    before do
+      url = "http://localhost:3000/admin/users/11/suspend?api_key=test_d7fd0429940&api_username=test_user"
+      stub_put(url).to_return(body: '', status: 200)
+    end
+
+    it "makes the correct put request" do
+      result = subject.suspend(11, 1, "no reason")
+      url = "http://localhost:3000/admin/users/11/suspend?api_key=test_d7fd0429940&api_username=test_user"
+      expect(a_put(url)).to have_been_made
+      expect(result.status).to eq(200)
+    end
+  end
+
+  describe "#unsuspend" do
+    before do
+      url = "http://localhost:3000/admin/users/11/unsuspend?api_key=test_d7fd0429940&api_username=test_user"
+      stub_put(url).to_return(body: '', status: 200)
+    end
+
+    it "makes the correct put request" do
+      result = subject.unsuspend(11)
+      url = "http://localhost:3000/admin/users/11/unsuspend?api_key=test_d7fd0429940&api_username=test_user"
+      expect(a_put(url)).to have_been_made
+      expect(result.status).to eq(200)
+    end
+  end
 end
