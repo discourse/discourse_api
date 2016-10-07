@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.12.0] - 2016-10-06
+### Added
+- add endpoint for `/admin/users/{id}/suspend`
+- add endpoint for `/admin/users/{id}/unsuspend`
+
 ## [0.11.0] - 2016-09-03
 ### Fixed
 - add destination folder to backup download
