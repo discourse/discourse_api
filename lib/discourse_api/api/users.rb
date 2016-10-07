@@ -2,7 +2,7 @@ module DiscourseApi
   module API
     module Users
       def activate(id)
-        put "/admin/users/#{id}/activate", api_key: api_key, api_username: api_username
+        put("/admin/users/#{id}/activate")
       end
 
       def user(username, params={})
