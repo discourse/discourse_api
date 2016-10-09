@@ -68,9 +68,9 @@ module DiscourseApi
           url << '?'
           post_ids.each do |id|
             url << "post_ids[]=#{id}&"
-          end 
+          end
         end
-        response = get(url) 
+        response = get(url)
         response[:body]
       end
     end

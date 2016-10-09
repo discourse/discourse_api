@@ -36,7 +36,7 @@ module DiscourseApi
         url = "/c/#{params[:category_slug]}/l/latest.json"
         if params.include?(:page)
           url = "#{url}?page=#{params[:page]}"
-        end 
+        end
         response = get(url)
         if response[:body]['errors']
           response[:body]['errors']

@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.13.0] - 2016-10-09
+### Added
+- added `update_category`
+- added `upload_post_image`
+
 ## [0.12.0] - 2016-10-06
 ### Added
 - add endpoint for `/admin/users/{id}/suspend`
