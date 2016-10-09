@@ -13,6 +13,17 @@ module DiscourseApi
         response['category']
       end
 
+      def update_category(args={})
+        category_id = args[:id]
+        args = API.params(args)
+                   .required(:id, :name, :color, :text_color)
+                   .optional(:slug, :permissions, :auto_close_hours, :auto_close_based_on_last_post, :position, :email_in,
+                             :email_in_allow_strangers, :logo_url, :background_url, :allow_badges, :topic_template)
+                   .default(parent_category_id: nil)
+        response = put("/categories/#{category_id}", args)
+        response['body']['category'] if response['body']
+      end
+
       def categories(params={})
         response = get('/categories.json', params)
         response[:body]['category_list']['categories']
