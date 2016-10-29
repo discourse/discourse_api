@@ -14,4 +14,13 @@ module DiscourseApi
 
   class UnauthenticatedError < StandardError
   end
+
+  class NotFoundError < StandardError
+  end
+
+  class UnprocessableEntity < StandardError
+  end
+
+  class TooManyRequests < StandardError
+  end
 end

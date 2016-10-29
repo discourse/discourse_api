@@ -129,6 +129,12 @@ module DiscourseApi
       case response.status
       when 403
         raise DiscourseApi::UnauthenticatedError.new(response.env[:body])
+      when 404, 410
+        raise DiscourseApi::NotFoundError.new(response.env[:body])
+      when 422
+        raise DiscourseApi::UnprocessableEntity.new(response.env[:body])
+      when 429
+        raise DiscourseApi::TooManyRequests.new(response.env[:body])
       end
     end
   end
