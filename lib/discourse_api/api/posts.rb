@@ -28,6 +28,10 @@ module DiscourseApi
         put("/posts/#{id}", post: {raw: raw})
       end
 
+      def delete_post(id)
+        delete("/posts/#{id}.json")
+      end
+
       def destroy_post_action(post_id, post_action_type_id)
         delete("/post_actions/#{post_id}.json", post_action_type_id: post_action_type_id)
       end
