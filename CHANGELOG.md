@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.14.0] - 2016-10-30
+### Added
+- improved error responses by adding `NotFoundError`, `UnprocessableEntity`, and `TooManyRequests`
+- added `delete_post` method
+
 ## [0.13.0] - 2016-10-09
 ### Added
 - added `update_category`
