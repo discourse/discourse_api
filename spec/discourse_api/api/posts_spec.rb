@@ -26,6 +26,17 @@ describe DiscourseApi::API::Posts do
     end
   end
 
+  describe "#delete_post" do
+    before do
+      stub_delete("http://localhost:3000/posts/9999.json?api_key=test_d7fd0429940&api_username=test_user")
+    end
+
+    it "deletes a post" do
+      client.delete_post(9999)
+      expect(a_delete("http://localhost:3000/posts/9999.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+  end
+
   describe "#post_action_users" do
     before do
       stub_get("http://localhost:3000/post_action_users.json?api_key=test_d7fd0429940&api_username=test_user&id=11&post_action_type_id=2").to_return(body: fixture("post_action_users.json"), headers: { content_type: "application/json" })
