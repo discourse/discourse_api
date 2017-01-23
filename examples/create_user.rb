@@ -6,9 +6,12 @@ client.api_key = "YOUR_API_KEY"
 client.api_username = "YOUR_USERNAME"
 
 # create user
-client.create_user(
+user = client.create_user(
   name: "Bruce Wayne",
   email: "bruce@wayne.com",
   username: "batman",
   password: "WhySoSerious"
 )
+
+# activate user
+client.activate(user["user_id"])
