@@ -44,7 +44,7 @@ client.search("sandbox")                        #=> Gets a list of topics that m
 
 # Categories endpoint
 client.categories                               #=> Gets a list of categories
-client.category_latest_posts("category-slug")   #=> Gets a list of latest posts in a category
+client.category_latest_topics(category_slug: "lounge")  #=> Gets a list of latest topics in a category
 
 # SSO endpoint
 client.sync_sso(                                #=> Synchronizes the SSO record
