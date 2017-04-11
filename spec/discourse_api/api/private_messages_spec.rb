@@ -19,4 +19,20 @@ describe DiscourseApi::API::PrivateMessages do
     end
   end
 
+  describe '#create_private_message' do
+    before do
+      stub_post("http://localhost:3000/posts?api_key=test_d7fd0429940&api_username=test_user")
+      subject.create_private_message(
+        title: "Confidential: Hello World!",
+        raw: "This is the raw markdown for my private message",
+        target_usernames: ["user1", "user2"]
+      )
+    end
+
+    it "makes a create private message request" do
+      expect(a_post("http://localhost:3000/posts?api_key=test_d7fd0429940&api_username=test_user").with(body:
+          'archetype=private_message&raw=This+is+the+raw+markdown+for+my+private+message&target_usernames%5B%5D=user1&target_usernames%5B%5D=user2&title=Confidential%3A+Hello+World%21')
+        ).to have_been_made
+    end
+  end
 end
