@@ -102,6 +102,13 @@ describe DiscourseApi::Client do
   end
 
   describe "#request" do
+    it "catches 500 errors" do
+      connection = instance_double(Faraday::Connection)
+      allow(connection).to receive(:get).and_return(OpenStruct.new(env: { body: 'error page html' }, status: 500))
+      allow(subject).to receive(:connection).and_return(connection)
+      expect{subject.send(:request, :get, "/test")}.to raise_error DiscourseApi::Error
+    end
+
     it "catches Faraday errors" do
       allow(subject).to receive(:connection).and_raise(Faraday::Error::ClientError.new("BOOM!"))
       expect{subject.send(:request, :get, "/test")}.to raise_error DiscourseApi::Error

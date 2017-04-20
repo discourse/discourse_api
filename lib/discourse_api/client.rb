@@ -135,6 +135,8 @@ module DiscourseApi
         raise DiscourseApi::UnprocessableEntity.new(response.env[:body])
       when 429
         raise DiscourseApi::TooManyRequests.new(response.env[:body])
+      when 500...600
+        raise DiscourseApi::Error.new(response.env[:body])
       end
     end
   end
