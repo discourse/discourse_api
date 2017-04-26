@@ -54,6 +54,16 @@ client.sync_sso(                                #=> Synchronizes the SSO record
   email: "name@example.com",
   external_id: "2"
 )
+
+# Private messages
+client.private_messages("test_user")            #=> Gets a list of private messages received by "test_user"
+client.sent_private_messages("test_user")       #=> Gets a list of private messages sent by "test_user"
+client.create_private_message(                  #=> Creates a private messages by api_username user
+  title: "Confidential: Hello World!",
+  raw: "This is the raw markdown for my private message",
+  target_usernames: "user1,user2"
+)
+
 ```
 
 
