@@ -19,6 +19,22 @@ describe DiscourseApi::API::PrivateMessages do
     end
   end
 
+  describe "#sent_private_messages" do
+    before do
+      stub_get("http://localhost:3000/topics/private-messages-sent/test_user.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("private_messages.json"), headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.sent_private_messages('test_user')
+      expect(a_get("http://localhost:3000/topics/private-messages-sent/test_user.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns the requested sent private messages" do
+      private_messages = subject.sent_private_messages('test_user')
+      expect(private_messages).to be_an Array
+    end
+  end
+
   describe '#create_private_message' do
     before do
       stub_post("http://localhost:3000/posts?api_key=test_d7fd0429940&api_username=test_user")
