@@ -100,6 +100,8 @@ module DiscourseApi
       @connection ||= Faraday.new connection_options do |conn|
         # Follow redirects
         conn.use FaradayMiddleware::FollowRedirects, limit: 5
+        # Allow uploading of files
+        conn.request :multipart
         # Convert request params to "www-form-encoded"
         conn.request :url_encoded
         # Parse responses as JSON
