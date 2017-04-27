@@ -17,6 +17,11 @@ module DiscourseApi
         response = get("topics/private-messages/#{username}.json", args)
         response[:body]['topic_list']['topics']
       end
+
+      def sent_private_messages(username, *args)
+        response = get("topics/private-messages-sent/#{username}.json", args)
+        response[:body]['topic_list']['topics']
+      end
     end
   end
 end
