@@ -11,7 +11,7 @@ module DiscourseApi
 
       def upload_file(args)
         args = API.params(args)
-                  .optional(:file, :url)
+                  .required(:file)
                   .default(type: 'upload', synchronous: true)
                   .to_h
         post('/uploads', args)
