@@ -7,4 +7,4 @@ client.api_username = "YOUR_USERNAME"
 
 # Upload a file
 file = Faraday::UploadIO.new('grumpy_cat.pdf', "application/pdf")
-client.upload_file(file: 'grumpy_cat.pdf')
+client.upload_file(file: file)
