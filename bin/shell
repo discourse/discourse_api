@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'dotenv'
+require 'pry'
+
+Dotenv.load
+
+$LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib')))
+
+require 'discourse_api'
+
+client = DiscourseApi::Client.new(ENV['DISCOURSE_API_URL'])
+client.api_key = ENV['DISCOURSE_API_KEY']
+client.api_username = ENV['DISCOURSE_API_USERNAME']
+
+Pry.config.prompt = [proc { 'discourse> ' }, proc { 'discourse| ' }]
+Pry.start

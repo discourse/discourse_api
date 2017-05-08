@@ -81,3 +81,13 @@ client.create_private_message(                  #=> Creates a private messages b
 2. Inside of your discourse directory, run: `bundle exec rake db:api_test_seed`
 3. Start discourse: `bundle exec rails s`
 4. Inside of your discourse_api directory, run: `bundle exec rspec spec/`
+
+## The Shell
+
+Configure the api by setting `DISCOURSE_API_URL`, `DISCOURSE_API_KEY`, `DISCOURSE_API_USERNAME` environment variables and start the Discourse API in a terminal:
+
+` ./bin/shell `
+
+Then, run (see examples) like this: `discourse> client.latest_topics`
+
+Also, you can copy `env.example` to `.env` and modify it.
