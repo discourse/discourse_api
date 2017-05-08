@@ -43,11 +43,12 @@ module DiscourseApi
     include DiscourseApi::API::Dashboard
     include DiscourseApi::API::Uploads
 
-    def initialize(host, api_key = nil, api_username = nil)
+    def initialize(host, api_key = nil, api_username = nil, include_prefix = nil)
       raise ArgumentError, 'host needs to be defined' if host.nil? || host.empty?
       @host         = host
       @api_key      = api_key
       @api_username = api_username
+      @include_prefix = include_prefix #https://github.com/lostisland/faraday/issues/293
     end
 
     def connection_options
@@ -118,6 +119,7 @@ module DiscourseApi
       unless Hash === params
         params = params.to_h if params.respond_to? :to_h
       end
+      path.slice!(0) if @include_prefix
       response = connection.send(method.to_sym, path, params)
       handle_error(response)
       response.env
