@@ -1,7 +1,7 @@
 module DiscourseApi
   module API
     module Uploads
-      def upload_post_image(args)
+      def upload_file(args)
         args = API.params(args)
                   .optional(:file, :url)
                   .default(type: 'composer', synchronous: true)
