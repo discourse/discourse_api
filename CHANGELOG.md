@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.16.0] - 2017-05-14
+### Added
+- added `upload_file`
+### Removed
+- removed `upload_post_image`
+
 ## [0.15.0] - 2017-04-12
 ### Added
 - added the ability to create private messages
