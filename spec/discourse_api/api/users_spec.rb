@@ -24,6 +24,23 @@ describe DiscourseApi::API::Users do
     end
   end
 
+  describe "#user_sso" do
+    before do
+      stub_get("http://localhost:3000/admin/users/15.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("admin_user.json"), headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.user_sso(15)
+      expect(a_get("http://localhost:3000/admin/users/15.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "has single_sign_on_record" do
+      user_sso = subject.user_sso(15)
+      expect(user_sso).to be_a Hash
+      expect(user_sso).to have_key("external_id")
+    end
+  end
+
   describe "#update_avatar" do
     before do
       stub_post("http://localhost:3000/uploads?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("upload_avatar.json"), headers: { content_type: "application/json" })

@@ -10,8 +10,8 @@ module DiscourseApi
         response[:body]['user']
       end
 
-      def user_sso(username)
-        response = get("/admin/users/#{username.downcase}")
+      def user_sso(user_id)
+        response = get("/admin/users/#{user_id}.json")
         response[:body]['single_sign_on_record']
       end
 
