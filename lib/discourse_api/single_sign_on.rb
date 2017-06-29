@@ -5,7 +5,7 @@ require 'openssl'
 module DiscourseApi
   class SingleSignOn
     ACCESSORS = [:nonce, :name, :username, :email, :avatar_url, :avatar_force_update,
-                 :about_me, :external_id, :return_sso_url, :admin, :moderator, :suppress_welcome_message]
+                 :about_me, :external_id, :return_sso_url, :admin, :moderator, :suppress_welcome_message, :title]
     FIXNUMS = []
     BOOLS = [:avatar_force_update, :admin, :moderator, :suppress_welcome_message]
     #NONCE_EXPIRY_TIME = 10.minutes # minutes is a rails method and is causing an error. Is this needed in the api?
