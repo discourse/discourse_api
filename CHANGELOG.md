@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.17.0] - 2017-06-29
+### Added
+- Add title to SSO sync
+
 ## [0.16.1] - 2017-06-23
 ### Fixed
 - `user_sso` should use `user_id` instead of `username`
