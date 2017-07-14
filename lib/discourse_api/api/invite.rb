@@ -9,8 +9,9 @@ module DiscourseApi
         post("/t/#{params[:topic_id]}/invite", params)
       end
 
+      # requires this plugin => https://github.com/discourse/discourse-invite-tokens
       def disposable_tokens(params={})
-        post("/invites/disposable", params)
+        post("/invite-token/generate", params)
       end
     end
   end

@@ -1,3 +1,5 @@
+# requires this plugin => https://github.com/discourse/discourse-invite-tokens
+
 require 'csv'
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
