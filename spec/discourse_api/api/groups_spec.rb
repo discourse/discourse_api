@@ -22,8 +22,12 @@ describe DiscourseApi::API::Groups do
     it "create new groups" do
       stub_post("http://localhost:3000/admin/groups?api_key=test_d7fd0429940&api_username=test_user")
       subject.create_group(name: "test_group")
+      params = {"group[name]" => "test_group", "group[visibility_level]" => 0}
+      escaped_params = params.map do |key, value|
+        [CGI.escape(key), value].join('=')
+      end.join('&')
       expect(a_post("http://localhost:3000/admin/groups?api_key=test_d7fd0429940&api_username=test_user").
-              with(body: {name: "test_group", visible: "true"})
+              with(body: escaped_params)
             ).to have_been_made
     end
 

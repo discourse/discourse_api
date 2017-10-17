@@ -4,9 +4,29 @@ module DiscourseApi
       def create_group(args)
         args = API.params(args)
                   .required(:name)
-                  .default(visible: true)
+                  .default(visibility_level: 0)
+                  .optional(:mentionable_level,
+                            :messageable_level,
+                            :automatic_membership_email_domains,
+                            :automatic_membership_retroactive,
+                            :title,
+                            :primary_group,
+                            :grant_trust_level,
+                            :incoming_email,
+                            :flair_url,
+                            :flair_bg_color,
+                            :flair_color,
+                            :bio_raw,
+                            :public_admission,
+                            :public_exit,
+                            :allow_membership_requests,
+                            :full_name,
+                            :default_notification_level,
+                            :usernames,
+                            :owner_usernames,
+                            :membership_request_template)
                   .to_h
-        post("/admin/groups", args)
+        post("/admin/groups", group: args)
       end
 
       def groups
