@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.18.0] - 2017-10-17
+### Added
+- Added update_group API call
+### Fixed
+- Fixed params for create groups endpoint
+- Fixed invite token API endpoint
+
 ## [0.17.0] - 2017-06-29
 ### Added
 - Add title to SSO sync
