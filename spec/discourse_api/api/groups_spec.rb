@@ -22,8 +22,18 @@ describe DiscourseApi::API::Groups do
     it "create new groups" do
       stub_post("http://localhost:3000/admin/groups?api_key=test_d7fd0429940&api_username=test_user")
       subject.create_group(name: "test_group")
+      params = escape_params("group[name]" => "test_group", "group[visibility_level]" => 0)
       expect(a_post("http://localhost:3000/admin/groups?api_key=test_d7fd0429940&api_username=test_user").
-              with(body: {name: "test_group", visible: "true"})
+              with(body: params)
+            ).to have_been_made
+    end
+
+    it "update an existing group" do
+      stub_put("http://localhost:3000/admin/groups/42?api_key=test_d7fd0429940&api_username=test_user")
+      subject.update_group(42, name: "test_group")
+      params = escape_params("group[name]" => "test_group", "group[visibility_level]" => 0)
+      expect(a_put("http://localhost:3000/admin/groups/42?api_key=test_d7fd0429940&api_username=test_user").
+              with(body: params)
             ).to have_been_made
     end
 
