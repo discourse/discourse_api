@@ -29,6 +29,34 @@ module DiscourseApi
         post("/admin/groups", group: args)
       end
 
+      def update_group(group_id, args)
+        args = API.params(args)
+                  .default(visibility_level: 0)
+                  .optional(:mentionable_level,
+                            :messageable_level,
+                            :name,
+                            :automatic_membership_email_domains,
+                            :automatic_membership_retroactive,
+                            :title,
+                            :primary_group,
+                            :grant_trust_level,
+                            :incoming_email,
+                            :flair_url,
+                            :flair_bg_color,
+                            :flair_color,
+                            :bio_raw,
+                            :public_admission,
+                            :public_exit,
+                            :allow_membership_requests,
+                            :full_name,
+                            :default_notification_level,
+                            :usernames,
+                            :owner_usernames,
+                            :membership_request_template)
+                  .to_h
+        put("/admin/groups/#{group_id}", group: args)
+      end
+
       def groups
         response = get("/admin/groups.json")
         response.body

@@ -59,3 +59,9 @@ end
 def fixture(file)
   File.new(fixture_path + '/' + file)
 end
+
+def escape_params(params)
+  params.map do |key, value|
+    [CGI.escape(key), value].join('=')
+  end.join('&')
+end
