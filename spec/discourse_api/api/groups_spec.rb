@@ -19,6 +19,12 @@ describe DiscourseApi::API::Groups do
       groups.each { |g| expect(g).to be_a Hash }
     end
 
+    it "returns a single group" do
+      stub_get("http://localhost:3000/groups/some-group.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("group.json"), headers: { content_type: "application/json" })
+      group = subject.group('some-group')
+      expect(group['basic_group']).to be_a Hash
+    end
+
     it "create new groups" do
       stub_post("http://localhost:3000/admin/groups?api_key=test_d7fd0429940&api_username=test_user")
       subject.create_group(name: "test_group")

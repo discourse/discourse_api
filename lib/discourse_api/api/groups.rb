@@ -62,6 +62,11 @@ module DiscourseApi
         response.body
       end
 
+      def group(group_name)
+        response = get("/groups/#{group_name}.json")
+        response.body
+      end
+
       def group_add(group_id, users)
         users.keys.each do |key|
           # Accept arrays and convert to comma-delimited string.
