@@ -4,6 +4,7 @@ module DiscourseApi
       def create_post(args)
         args = API.params(args)
                   .required(:topic_id, :raw)
+                  .optional(:created_at, :api_username)
         post("/posts", args)
       end
 
