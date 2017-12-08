@@ -80,4 +80,5 @@ client.create_private_message(                  #=> Creates a private messages b
 1. Install discourse locally
 2. Inside of your discourse directory, run: `bundle exec rake db:api_test_seed`
 3. Start discourse: `bundle exec rails s`
-4. Inside of your discourse_api directory, run: `bundle exec rspec spec/`
+4. Install bundler in the discourse_api directory, run `gem install bundler`
+5. Inside of your discourse_api directory, run: `bundle exec rspec spec/`
