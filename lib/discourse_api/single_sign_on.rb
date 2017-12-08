@@ -4,14 +4,16 @@ require 'openssl'
 
 module DiscourseApi
   class SingleSignOn
-    ACCESSORS = [:nonce, :name, :username, :email, :avatar_url, :avatar_force_update,
-                 :about_me, :external_id, :return_sso_url, :admin, :moderator, :suppress_welcome_message, :title]
+    ACCESSORS = [:nonce, :name, :username, :email, :avatar_url, :avatar_force_update, :require_activation,
+                 :bio, :external_id, :return_sso_url, :admin, :moderator, :suppress_welcome_message, :title,
+                 :add_groups, :remove_groups, :groups]
     FIXNUMS = []
-    BOOLS = [:avatar_force_update, :admin, :moderator, :suppress_welcome_message]
+    BOOLS = [:avatar_force_update, :admin, :moderator, :require_activation, :suppress_welcome_message]
+    ARRAYS = [:groups]
     #NONCE_EXPIRY_TIME = 10.minutes # minutes is a rails method and is causing an error. Is this needed in the api?
 
     attr_accessor(*ACCESSORS)
-    attr_accessor :sso_secret, :sso_url
+    attr_writer :sso_secret, :sso_url
 
     def self.sso_secret
       raise RuntimeError, "sso_secret not implemented on class, be sure to set it on instance"
@@ -44,20 +46,21 @@ module DiscourseApi
         if BOOLS.include? k
           val = ["true", "false"].include?(val) ? val == "true" : nil
         end
+        val = Array(val) if ARRAYS.include?(k) && !val.nil?
         sso.send("#{k}=", val)
       end
 
-      decoded_hash.each do |k,v|
-        # 1234567
-        # custom.
-        #
-        if k[0..6] == "custom."
-          field = k[7..-1]
+      decoded_hash.each do |k, v|
+        if field = k[/^custom\.(.+)$/, 1]
           sso.custom_fields[field] = v
         end
       end
 
       sso
+    end
+
+    def diagnostics
+      DiscourseApi::SingleSignOn::ACCESSORS.map { |a| "#{a}: #{send(a)}" }.join("\n")
     end
 
     def sso_secret
@@ -72,32 +75,30 @@ module DiscourseApi
       @custom_fields ||= {}
     end
 
-
     def sign(payload)
       OpenSSL::HMAC.hexdigest("sha256", sso_secret, payload)
     end
 
-
-    def to_url(base_url=nil)
+    def to_url(base_url = nil)
       base = "#{base_url || sso_url}"
       "#{base}#{base.include?('?') ? '&' : '?'}#{payload}"
     end
 
     def payload
-      payload = Base64.encode64(unsigned_payload)
+      payload = Base64.strict_encode64(unsigned_payload)
       "sso=#{CGI::escape(payload)}&sig=#{sign(payload)}"
     end
 
     def unsigned_payload
       payload = {}
-      ACCESSORS.each do |k|
-       next if (val = send k) == nil
 
+      ACCESSORS.each do |k|
+        next if (val = send k) == nil
        payload[k] = val
       end
 
       if @custom_fields
-        @custom_fields.each do |k,v|
+        @custom_fields.each do |k, v|
           payload["custom.#{k}"] = v.to_s
         end
       end
