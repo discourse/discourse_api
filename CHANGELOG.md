@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.21.0] - 2018-04-23
+### Fixed
+- Update GET groups api route
+- Update PUT groups api route
+
 ## [0.20.0] - 2017-12-13
 ### Added
 - Add base error class

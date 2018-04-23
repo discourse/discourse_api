@@ -5,12 +5,12 @@ describe DiscourseApi::API::Groups do
 
   describe "#groups" do
     before do
-      stub_get("http://localhost:3000/admin/groups.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("groups.json"), headers: { content_type: "application/json" })
+      stub_get("http://localhost:3000/groups.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("groups.json"), headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.groups
-      expect(a_get("http://localhost:3000/admin/groups.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+      expect(a_get("http://localhost:3000/groups.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
     end
 
     it "returns the requested groups" do
@@ -35,10 +35,10 @@ describe DiscourseApi::API::Groups do
     end
 
     it "update an existing group" do
-      stub_put("http://localhost:3000/admin/groups/42?api_key=test_d7fd0429940&api_username=test_user")
+      stub_put("http://localhost:3000/groups/42?api_key=test_d7fd0429940&api_username=test_user")
       subject.update_group(42, name: "test_group")
       params = escape_params("group[name]" => "test_group", "group[visibility_level]" => 0)
-      expect(a_put("http://localhost:3000/admin/groups/42?api_key=test_d7fd0429940&api_username=test_user").
+      expect(a_put("http://localhost:3000/groups/42?api_key=test_d7fd0429940&api_username=test_user").
               with(body: params)
             ).to have_been_made
     end

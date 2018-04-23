@@ -54,11 +54,11 @@ module DiscourseApi
                             :owner_usernames,
                             :membership_request_template)
                   .to_h
-        put("/admin/groups/#{group_id}", group: args)
+        put("/groups/#{group_id}", group: args)
       end
 
       def groups
-        response = get("/admin/groups.json")
+        response = get("/groups.json")
         response.body
       end
 
