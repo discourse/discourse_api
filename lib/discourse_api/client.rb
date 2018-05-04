@@ -1,6 +1,7 @@
 require 'faraday'
 require 'faraday_middleware'
 require 'json'
+require 'uri'
 require 'discourse_api/version'
 require 'discourse_api/api/categories'
 require 'discourse_api/api/search'
@@ -48,6 +49,7 @@ module DiscourseApi
       @host         = host
       @api_key      = api_key
       @api_username = api_username
+      @use_relative = check_subdirectory(host)
     end
 
     def connection_options
@@ -120,6 +122,7 @@ module DiscourseApi
       unless Hash === params
         params = params.to_h if params.respond_to? :to_h
       end
+      path = @use_relative ? path.sub(/^\//, '') : path
       response = connection.send(method.to_sym, path, params)
       handle_error(response)
       response.env
@@ -140,6 +143,10 @@ module DiscourseApi
       when 500...600
         raise DiscourseApi::Error.new(response.env[:body])
       end
+    end
+
+    def check_subdirectory(host)
+      URI(host).request_uri != '/'
     end
   end
 end
