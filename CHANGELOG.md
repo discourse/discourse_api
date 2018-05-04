@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.22.0] - 2018-05-04
+### Added
+- Support for subfolder paths
+
 ## [0.21.0] - 2018-04-23
 ### Fixed
 - Update GET groups api route
