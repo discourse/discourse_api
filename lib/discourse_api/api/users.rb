@@ -88,6 +88,10 @@ module DiscourseApi
       def unsuspend(user_id)
         put("/admin/users/#{user_id}/unsuspend")
       end
+
+      def delete_user(user_id, delete_posts = false)
+        delete("/admin/users/#{user_id}.json?delete_posts=#{delete_posts}")
+      end
     end
   end
 end

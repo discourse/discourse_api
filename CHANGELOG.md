@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.23.0] - 2018-05-24
+### Added
+- Added `delete_user` method
+
 ## [0.22.0] - 2018-05-04
 ### Added
 - Support for subfolder paths
@@ -23,7 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.18.0] - 2017-10-17
 ### Added
-- Added update_group API call
+- Added `update_group` API call
 ### Fixed
 - Fixed params for create groups endpoint
 - Fixed invite token API endpoint

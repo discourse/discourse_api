@@ -269,4 +269,19 @@ describe DiscourseApi::API::Users do
       expect(result.status).to eq(200)
     end
   end
+
+  describe "#delete_user" do
+    before do
+      url = "http://localhost:3000/admin/users/11.json?delete_posts=true&api_key=test_d7fd0429940&api_username=test_user"
+      stub_delete(url).to_return(body: '{"deleted": true}', status: 200)
+    end
+
+    it "makes the correct delete request" do
+      result = subject.delete_user(11, true)
+      url = "http://localhost:3000/admin/users/11.json?delete_posts=true&api_key=test_d7fd0429940&api_username=test_user"
+      expect(a_delete(url)).to have_been_made
+      expect(result.body).to eq('{"deleted": true}')
+      expect(result.status).to eq(200)
+    end
+  end
 end
