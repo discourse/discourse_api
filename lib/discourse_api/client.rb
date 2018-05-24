@@ -23,8 +23,8 @@ require 'discourse_api/api/uploads'
 
 module DiscourseApi
   class Client
-    attr_accessor :api_key, :api_username
-    attr_reader :host
+    attr_accessor :api_key
+    attr_reader :host, :api_username
 
     include DiscourseApi::API::Categories
     include DiscourseApi::API::Search
@@ -50,6 +50,11 @@ module DiscourseApi
       @api_key      = api_key
       @api_username = api_username
       @use_relative = check_subdirectory(host)
+    end
+
+    def api_username=(api_username)
+      @api_username = api_username
+      @connection.params['api_username'] = api_username unless @connection.nil?
     end
 
     def connection_options
