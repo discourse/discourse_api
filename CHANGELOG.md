@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.25.0] - 2018-08-15
+### Added
+- Added ability to rescue certain error classes and inspect the response object
+
 ## [0.24.0] - 2018-05-30
 ### Added
 - Added support for custom `user_fields` when creating a user
