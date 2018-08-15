@@ -66,6 +66,19 @@ client.create_private_message(                  #=> Creates a private messages b
 
 ```
 
+You can handle some basic errors by rescuing from certain error classes and inspecting the response object passed to those errors:
+
+```ruby
+begin
+  client.create_group({ name: 'NO' })
+rescue DiscourseApi::UnprocessableEntity => error
+  # `body` is something like `{ errors: ["Name must be at least 3 characters"] }`
+  # This outputs "Name must be at least 3 characters"
+  puts error.response.body['errors'].first
+end
+```
+
+Check out [lib/discourse_api/error.rb](lib/discourse_api/error.rb) and [lib/discourse_api/client.rb](lib/discourse_api/client.rb)'s `handle_error` method for the types of errors raised by the API.
 
 ## Contributing
 
