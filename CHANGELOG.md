@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.26.0] - 2018-09-10
+### Added
+- Added user `user_actions` endpoint so you can retrieve `user_replies` and
+  `user_topics_and_replies`
+
 ## [0.25.0] - 2018-08-15
 ### Added
 - Added ability to rescue certain error classes and inspect the response object
