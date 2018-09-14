@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.27.0] - 2018-09-14
+### Added
+- Added `site_settings_update` method
+
 ## [0.26.0] - 2018-09-10
 ### Added
 - Added user `user_actions` endpoint so you can retrieve `user_replies` and
