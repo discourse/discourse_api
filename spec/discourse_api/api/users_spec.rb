@@ -284,4 +284,23 @@ describe DiscourseApi::API::Users do
       expect(result.status).to eq(200)
     end
   end
+
+  describe "#check_username" do
+    let(:url) { "http://localhost:3000/users/check_username.json?username=sparrow&api_key=test_d7fd0429940&api_username=test_user" }
+
+    before do
+      body = '{"available":false,"suggestion":"sparrow1"}'
+      stub_get(url).to_return(body: body, headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.check_username("sparrow")
+      expect(a_get(url)).to have_been_made
+    end
+
+    it "returns the result" do
+      result = subject.check_username("sparrow")
+      expect(result['available']).to eq false
+    end
+  end
 end
