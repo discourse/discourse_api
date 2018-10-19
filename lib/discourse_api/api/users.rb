@@ -92,6 +92,11 @@ module DiscourseApi
       def delete_user(user_id, delete_posts = false)
         delete("/admin/users/#{user_id}.json?delete_posts=#{delete_posts}")
       end
+
+      def check_username(username)
+        response = get("/users/check_username.json?username=#{username}")
+        response[:body]
+      end
     end
   end
 end
