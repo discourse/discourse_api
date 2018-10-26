@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.28.1] - 2018-10-26
+### Fixed
+- Fixed non-URI chars in `check_username` method
+
 ## [0.28.0] - 2018-10-23
 ### Added
 - Added `check_username` method
