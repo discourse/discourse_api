@@ -287,9 +287,9 @@ describe DiscourseApi::API::Users do
 
   describe "#check_username" do
     let(:url) { "http://localhost:3000/users/check_username.json?username=sparrow&api_key=test_d7fd0429940&api_username=test_user" }
+    let(:body) { '{"available":false,"suggestion":"sparrow1"}' }
 
     before do
-      body = '{"available":false,"suggestion":"sparrow1"}'
       stub_get(url).to_return(body: body, headers: { content_type: "application/json" })
     end
 
@@ -301,6 +301,21 @@ describe DiscourseApi::API::Users do
     it "returns the result" do
       result = subject.check_username("sparrow")
       expect(result['available']).to eq false
+    end
+
+    context "when non-URI characters are used" do
+      let(:url) { "http://localhost:3000/users/check_username.json?username=1_%5B4%5D%21+%40the%24%23%3F&api_key=test_d7fd0429940&api_username=test_user" }
+      let(:body) { '{"errors":["must only include numbers, letters, dashes, and underscores"]}' }
+
+      it "escapes them" do
+        subject.check_username("1_[4]! @the$#?")
+        expect(a_get(url)).to have_been_made
+      end
+
+      it "returns the result" do
+        result = subject.check_username("1_[4]! @the$#?")
+        expect(result['errors'].first).to eq "must only include numbers, letters, dashes, and underscores"
+      end
     end
   end
 end
