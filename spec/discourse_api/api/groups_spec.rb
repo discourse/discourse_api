@@ -78,14 +78,15 @@ describe DiscourseApi::API::Groups do
     end
 
     describe "remove members" do
+      let(:url) { "http://localhost:3000/admin/groups/123/members.json?api_key=test_d7fd0429940&api_username=test_user&usernames=sam" }
+
       before do
-        url = "http://localhost:3000/admin/groups/123/members.json?api_key=test_d7fd0429940&api_username=test_user&username=sam"
         stub_delete(url)
       end
 
       it "removes member" do
         subject.group_remove(123, username: "sam")
-        expect(a_delete("http://localhost:3000/admin/groups/123/members.json?api_key=test_d7fd0429940&api_username=test_user&username=sam")).to have_been_made
+        expect(a_delete(url)).to have_been_made
       end
     end
 
