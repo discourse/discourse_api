@@ -94,7 +94,7 @@ module DiscourseApi
       end
 
       def check_username(username)
-        response = get("/users/check_username.json?username=#{username}")
+        response = get("/users/check_username.json?username=#{CGI.escape(username)}")
         response[:body]
       end
     end
