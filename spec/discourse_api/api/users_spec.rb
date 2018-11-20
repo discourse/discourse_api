@@ -249,7 +249,7 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the correct put request" do
-      result = subject.suspend(11, 1, "no reason")
+      result = subject.suspend(11, '2030-01-01', "no reason")
       url = "http://localhost:3000/admin/users/11/suspend?api_key=test_d7fd0429940&api_username=test_user"
       expect(a_put(url)).to have_been_made
       expect(result.status).to eq(200)
