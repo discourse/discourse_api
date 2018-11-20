@@ -81,8 +81,8 @@ module DiscourseApi
         response[:body]['user']
       end
 
-      def suspend(user_id, days, reason)
-        put("/admin/users/#{user_id}/suspend", {duration: days, reason: reason})
+      def suspend(user_id, suspend_until, reason)
+        put("/admin/users/#{user_id}/suspend", {suspend_until: suspend_until, reason: reason})
       end
 
       def unsuspend(user_id)
