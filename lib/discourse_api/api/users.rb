@@ -61,8 +61,8 @@ module DiscourseApi
         post("/admin/users/invite_admin", args)
       end
 
-      def list_users(type)
-        response = get("admin/users/list/#{type}.json")
+      def list_users(type, params = {})
+        response = get("admin/users/list/#{type}.json", params)
         response[:body]
       end
 
