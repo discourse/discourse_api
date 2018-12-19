@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.30.0] - 2018-12-19
+### Added
+- Add params hash to `list_users`
+
 ## [0.29.0] - 2018-12-07
 ### Added
 - Add `add_groups` and `remove_groups` to `sync_sso`
