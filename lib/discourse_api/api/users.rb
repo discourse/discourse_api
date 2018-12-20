@@ -97,6 +97,10 @@ module DiscourseApi
         response = get("/users/check_username.json?username=#{CGI.escape(username)}")
         response[:body]
       end
+
+      def deactivate(user_id)
+        put("/admin/users/#{user_id}/deactivate")
+      end
     end
   end
 end
