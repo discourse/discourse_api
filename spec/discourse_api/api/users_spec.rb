@@ -318,4 +318,20 @@ describe DiscourseApi::API::Users do
       end
     end
   end
+
+  describe "#deactivate" do
+    before do
+      stub_put("http://localhost:3000/admin/users/15/deactivate?api_key=test_d7fd0429940&api_username=test_user").to_return(body: nil)
+    end
+
+    it "makes the put request" do
+      subject.deactivate(15)
+      expect(a_put("http://localhost:3000/admin/users/15/deactivate?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+    end
+
+    it "returns success" do
+      response = subject.deactivate(15)
+      expect(response.status).to eq(200)
+    end
+  end
 end
