@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.31.0] - 2018-12-20
+### Added
+- Added `deactivate` method
+
 ## [0.30.0] - 2018-12-19
 ### Added
 - Add params hash to `list_users`
