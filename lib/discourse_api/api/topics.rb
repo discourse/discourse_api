@@ -11,7 +11,7 @@ module DiscourseApi
                   .optional(:skip_validations, :category, :auto_track, :created_at, :api_username)
         post("/posts", args.to_h)
       end
-
+      
       def create_topic_action(args)
         args = API.params(args)
                    .required(:id, :post_action_type_id)
@@ -72,6 +72,11 @@ module DiscourseApi
         end
         response = get(url)
         response[:body]
+      end
+      
+      def change_owner(topic_id, target_username, post_id)
+        post("/t/#{topic_id}/change-owner.json",
+          {topic_id: topic_id, username: target_username, post_ids: [post_id]})
       end
     end
   end
