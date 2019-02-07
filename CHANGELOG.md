@@ -2,9 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.31.0] - 2018-12-20
+## [0.31.0] - 2019-02-07
 ### Added
 - Added `deactivate` method
+- Added 201 and 204 as valid POST responses
 
 ## [0.30.0] - 2018-12-19
 ### Added
