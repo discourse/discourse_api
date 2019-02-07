@@ -86,7 +86,7 @@ module DiscourseApi
     def post(path, params={})
       response = request(:post, path, params)
       case response.status
-      when 200
+      when 200, 201, 204
         response.body
       else
         raise DiscourseApi::Error, response.body
