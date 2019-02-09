@@ -1,9 +1,9 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require File.expand_path('../../lib/discourse_api', __FILE__)
 
-client = DiscourseApi::Client.new('http://localhost:3000')
-client.api_key = ENV['LOCAL_DISCOURSE_API']
-client.api_username = 'KM_Admin'
+client = DiscourseApi::Client.new("http://localhost:3000")
+client.api_key = "YOUR_API_KEY"
+client.api_username = "YOUR_USERNAME"
 
 # testing variables
 # @target_username = 'some_test_username'
@@ -43,6 +43,7 @@ def member_notifications(client, user)
 end
 
 
+# API allows only 100 users per call(page), so this loops to get them all
 retrieve_next = 1
 while retrieve_next > 0
   @users = client.list_users('active', page: retrieve_next)
