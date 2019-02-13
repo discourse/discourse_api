@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.32.0] - 2019-02-13
+### Added
+- Added a new method to update a users notification level in a group
+
 ## [0.31.0] - 2019-02-07
 ### Added
 - Added `deactivate` method
