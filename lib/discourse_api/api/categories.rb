@@ -61,7 +61,14 @@ module DiscourseApi
 
       def category(id)
         response = get("/c/#{id}/show")
-        response.body['category']
+        response[:body]['category']
+      end
+
+      def category_set_user_notification(args={})
+        category_id = args[:id]
+        args = API.params(args)
+                   .required(:notification_level)
+        post("/category/#{category_id}/notifications", args)
       end
     end
   end
