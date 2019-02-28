@@ -19,3 +19,6 @@ puts category_topics
 category_topics_paged = client.category_latest_topics(category_slug: "test-category", page: "5")
 puts category_topics_paged
 
+# update category notification_level
+update_response = client.category_set_user_notification(id: "test-id", notification_level: "test-notification-level")
+puts update_response
