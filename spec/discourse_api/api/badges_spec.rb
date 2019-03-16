@@ -5,12 +5,12 @@ describe DiscourseApi::API::Badges do
 
   describe "#badges" do
     before do
-      stub_get("http://localhost:3000/admin/badges.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("badges.json"), headers: { content_type: "application/json" })
+      stub_get("http://localhost:3000/admin/badges.json").to_return(body: fixture("badges.json"), headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.badges
-      expect(a_get("http://localhost:3000/admin/badges.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+      expect(a_get("http://localhost:3000/admin/badges.json")).to have_been_made
     end
 
     it "returns the requested badges" do
@@ -22,12 +22,12 @@ describe DiscourseApi::API::Badges do
 
   describe "#user_badges" do
     before do
-      stub_get("http://localhost:3000/users/test_user/activity/badges.json?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("user_badges.json"), headers: { content_type: "application/json" })
+      stub_get("http://localhost:3000/users/test_user/activity/badges.json").to_return(body: fixture("user_badges.json"), headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.user_badges('test_user')
-      expect(a_get("http://localhost:3000/users/test_user/activity/badges.json?api_key=test_d7fd0429940&api_username=test_user")).to have_been_made
+      expect(a_get("http://localhost:3000/users/test_user/activity/badges.json")).to have_been_made
     end
 
     it "returns the requested user badges" do

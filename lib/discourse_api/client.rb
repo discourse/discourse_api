@@ -121,8 +121,8 @@ module DiscourseApi
         conn.adapter Faraday.default_adapter
         #pass api_key and api_username on every request
         unless api_username.nil?
-          conn.params['api_key'] = api_key
-          conn.params['api_username'] = api_username
+          conn.headers['Api-key'] = api_key
+          conn.headers['Api-username'] = api_username
         end
       end
     end

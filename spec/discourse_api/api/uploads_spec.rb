@@ -5,7 +5,7 @@ describe DiscourseApi::API::Uploads do
 
   describe "#upload_file" do
     before do
-      stub_post("http://localhost:3000/uploads?api_key=test_d7fd0429940&api_username=test_user").to_return(body: fixture("upload_file.json"), headers: { content_type: "application/json" })
+      stub_post("http://localhost:3000/uploads").to_return(body: fixture("upload_file.json"), headers: { content_type: "application/json" })
     end
 
     it "uploads an image via URL" do

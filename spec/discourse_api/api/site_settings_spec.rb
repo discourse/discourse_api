@@ -5,12 +5,12 @@ describe DiscourseApi::API::SiteSettings do
 
   describe "#site_setting_update" do
     before do
-      stub_put("http://localhost:3000/admin/site_settings/foo?api_key=test_d7fd0429940&api_username=test_user")
+      stub_put("http://localhost:3000/admin/site_settings/foo")
       subject.site_setting_update(name: "foo", value: "bar")
     end
 
     it "makes a site_settings_update request" do
-      expect(a_put("http://localhost:3000/admin/site_settings/foo?api_key=test_d7fd0429940&api_username=test_user")
+      expect(a_put("http://localhost:3000/admin/site_settings/foo")
              .with(body: "foo=bar")).to have_been_made
     end
   end

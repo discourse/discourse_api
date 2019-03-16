@@ -64,78 +64,78 @@ describe DiscourseApi::Client do
 
   describe "#delete" do
     before do
-      stub_delete("http://localhost:3000/test/delete?api_key=test_d7fd0429940&api_username=test_user").with(query: { deleted: "object" })
+      stub_delete("http://localhost:3000/test/delete").with(query: { deleted: "object" })
       subject.api_key = 'test_d7fd0429940'
       subject.api_username = 'test_user'
     end
 
     it "allows custom delete requests" do
       subject.delete("/test/delete", { deleted: "object" })
-      expect(a_delete("http://localhost:3000/test/delete?api_key=test_d7fd0429940&api_username=test_user").with(query: { deleted: "object" })).to have_been_made
+      expect(a_delete("http://localhost:3000/test/delete").with(query: { deleted: "object" })).to have_been_made
     end
 
     context 'when using a host with a subdirectory' do
       subject { DiscourseApi::Client.new('http://localhost:3000/forum') }
 
       before do
-        stub_delete("http://localhost:3000/forum/test/delete?api_key=test_d7fd0429940&api_username=test_user").with(query: { deleted: "object" })
+        stub_delete("http://localhost:3000/forum/test/delete").with(query: { deleted: "object" })
       end
 
       it "allows custom delete requests" do
         subject.delete("/test/delete", { deleted: "object" })
-        expect(a_delete("http://localhost:3000/forum/test/delete?api_key=test_d7fd0429940&api_username=test_user").with(query: { deleted: "object" })).to have_been_made
+        expect(a_delete("http://localhost:3000/forum/test/delete").with(query: { deleted: "object" })).to have_been_made
       end
     end
   end
 
   describe "#post" do
     before do
-      stub_post("http://localhost:3000/test/post?api_key=test_d7fd0429940&api_username=test_user").with(body: { created: "object"})
+      stub_post("http://localhost:3000/test/post").with(body: { created: "object"})
       subject.api_key = 'test_d7fd0429940'
       subject.api_username = 'test_user'
     end
 
     it "allows custom post requests" do
       subject.post("/test/post", { created: "object" })
-      expect(a_post("http://localhost:3000/test/post?api_key=test_d7fd0429940&api_username=test_user").with(body: { created: "object"})).to have_been_made
+      expect(a_post("http://localhost:3000/test/post").with(body: { created: "object"})).to have_been_made
     end
 
     context 'when using a host with a subdirectory' do
       subject { DiscourseApi::Client.new('http://localhost:3000/forum') }
 
       before do
-        stub_post("http://localhost:3000/forum/test/post?api_key=test_d7fd0429940&api_username=test_user").with(body: { created: "object"})
+        stub_post("http://localhost:3000/forum/test/post").with(body: { created: "object"})
       end
 
       it "allows custom post requests" do
         subject.post("/test/post", { created: "object" })
-        expect(a_post("http://localhost:3000/forum/test/post?api_key=test_d7fd0429940&api_username=test_user").with(body: { created: "object"})).to have_been_made
+        expect(a_post("http://localhost:3000/forum/test/post").with(body: { created: "object"})).to have_been_made
       end
     end
   end
 
   describe "#put" do
     before do
-      stub_put("http://localhost:3000/test/put?api_key=test_d7fd0429940&api_username=test_user").with(body: { updated: "object" })
+      stub_put("http://localhost:3000/test/put").with(body: { updated: "object" })
       subject.api_key = 'test_d7fd0429940'
       subject.api_username = 'test_user'
     end
 
     it "allows custom put requests" do
       subject.put("/test/put", { updated: "object" })
-      expect(a_put("http://localhost:3000/test/put?api_key=test_d7fd0429940&api_username=test_user").with(body: { updated: "object" })).to have_been_made
+      expect(a_put("http://localhost:3000/test/put").with(body: { updated: "object" })).to have_been_made
     end
 
     context 'when using a host with a subdirectory' do
       subject { DiscourseApi::Client.new('http://localhost:3000/forum') }
 
       before do
-        stub_put("http://localhost:3000/forum/test/put?api_key=test_d7fd0429940&api_username=test_user").with(body: { updated: "object" })
+        stub_put("http://localhost:3000/forum/test/put").with(body: { updated: "object" })
       end
 
       it "allows custom post requests" do
         subject.put("/test/put", { updated: "object" })
-        expect(a_put("http://localhost:3000/forum/test/put?api_key=test_d7fd0429940&api_username=test_user").with(body: { updated: "object" })).to have_been_made
+        expect(a_put("http://localhost:3000/forum/test/put").with(body: { updated: "object" })).to have_been_made
       end
     end
   end
