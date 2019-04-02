@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.34.0] - 2019-04-02
+### Added
+- Header based authentication
+### Removed
+- Query param based authentication
+
 ## [0.33.0] - 2019-03-04
 ### Added
 - Added a new method to update a users notification level in a category
