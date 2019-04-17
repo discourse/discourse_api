@@ -75,15 +75,15 @@ module DiscourseApi
       connection_options[:ssl] = options
     end
 
-    def delete(path, params={})
+    def delete(path, params = {})
       request(:delete, path, params)
     end
 
-    def get(path, params={})
+    def get(path, params = {})
       request(:get, path, params)
     end
 
-    def post(path, params={})
+    def post(path, params = {})
       response = request(:post, path, params)
       case response.status
       when 200, 201, 204
@@ -93,11 +93,11 @@ module DiscourseApi
       end
     end
 
-    def put(path, params={})
+    def put(path, params = {})
       request(:put, path, params)
     end
 
-    def patch(path, params={})
+    def patch(path, params = {})
       request(:patch, path, params)
     end
 
@@ -127,7 +127,7 @@ module DiscourseApi
       end
     end
 
-    def request(method, path, params={})
+    def request(method, path, params = {})
       unless Hash === params
         params = params.to_h if params.respond_to? :to_h
       end

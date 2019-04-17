@@ -5,9 +5,9 @@ client = DiscourseApi::Client.new("http://localhost:3000")
 client.api_key = "YOUR_API_KEY"
 client.api_username = "YOUR_USERNAME"
 
-# get all dashboard status as json 
+# get all dashboard status as json
 puts client.get_dashboard_stats
 
-# get hash of some dashboard total value 
+# get hash of some dashboard total value
 puts client.get_dashboard_stats_totals
 # sample output: {"users"=>9, "topics"=>230, "posts"=>441}

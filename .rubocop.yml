@@ -1,0 +1,6 @@
+inherit_from: https://raw.githubusercontent.com/discourse/discourse/master/.rubocop.yml
+AllCops:
+  TargetRubyVersion: 2.4
+  DisabledByDefault: true
+  Exclude:
+    - 'spec/**/**/*.rb'
