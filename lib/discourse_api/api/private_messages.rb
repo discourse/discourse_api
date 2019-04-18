@@ -5,11 +5,11 @@ module DiscourseApi
       # :target_usernames REQUIRED comma separated list of usernames
       # :category OPTIONAL name of category, not ID
       # :created_at OPTIONAL seconds since epoch.
-      def create_private_message(args={})
+      def create_private_message(args = {})
         args[:archetype] = 'private_message'
         args = API.params(args)
-                  .required(:title, :raw, :target_usernames, :archetype)
-                  .optional(:category, :created_at, :api_username)
+          .required(:title, :raw, :target_usernames, :archetype)
+          .optional(:category, :created_at, :api_username)
         post("/posts", args.to_h)
       end
 

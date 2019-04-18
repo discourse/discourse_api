@@ -24,7 +24,7 @@ module DiscourseApi
       end
 
       def default(args)
-        args.each do |k,v|
+        args.each do |k, v|
           @defaults[k] = v
         end
         self
@@ -42,7 +42,7 @@ module DiscourseApi
           h[k] = @args[k] if @args.include?(k)
         end
 
-        @defaults.each do |k,v|
+        @defaults.each do |k, v|
           @args.key?(k) ? h[k] = @args[k] : h[k] = v
         end
 

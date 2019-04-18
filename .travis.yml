@@ -1,11 +1,11 @@
-language: ruby
+language: 'ruby'
 
 before_install:
-  - gem update --system
-  - gem install bundler
+  - 'gem update --system'
+  - 'gem install bundler'
 
 rvm:
-  - 2.5.5
-  - 2.6.2
+  - '2.5.5'
+  - '2.6.2'
 
-script: 'bundle exec rake test'
+script: 'bundle exec rake'

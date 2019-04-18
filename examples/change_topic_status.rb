@@ -17,7 +17,6 @@ response = client.create_topic(
 topic_id = response['topic_id']
 topic_slug = response['topic_slug']
 
-
 ##
 # available options (guessing from reading discourse source)
 # status can be: ['autoclose', 'closed', 'archived', 'disabled', 'visible']
@@ -25,9 +24,9 @@ topic_slug = response['topic_slug']
 ##
 
 # lock topic (note: api_username determines user that is performing action)
-params = {status: 'closed', enabled: true, api_username: "YOUR USERNAME/USERS USERNAME"}
+params = { status: 'closed', enabled: true, api_username: "YOUR USERNAME/USERS USERNAME" }
 client.change_topic_status(topic_slug, topic_id, params)
 
 # unlock topic (note: api_username determines user that is performing action)
-params = {status: 'closed', enabled: false, api_username: "YOUR USERNAME/USERS USERNAME"}
+params = { status: 'closed', enabled: false, api_username: "YOUR USERNAME/USERS USERNAME" }
 client.change_topic_status(topic_slug, topic_id, params)

@@ -7,7 +7,7 @@ module DiscourseApi
       # @param options [Hash] A customizable set of options
       # @option options [String] :type_filter Returns results of the specified type.
       # @return [Array] Return results as an array of Hashes.
-      def search(term, options={})
+      def search(term, options = {})
         raise ArgumentError.new("#{term} is required but not specified") unless term
         raise ArgumentError.new("#{term} is required but not specified") unless !term.empty?
 
