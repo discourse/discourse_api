@@ -19,3 +19,6 @@ bin/
 .ruby-gemset
 .ruby-version
 .env
+
+
+.rubocop-https---raw-githubusercontent-com-discourse-discourse-master--rubocop-yml

@@ -18,7 +18,6 @@ client.api_username = "system"
 #   :email_in_allow_strangers, :logo_url, :background_url, :allow_badges, :topic_template
 ###
 
-
 # Create category
 new_category = client.create_category(
     name: "Test Category",

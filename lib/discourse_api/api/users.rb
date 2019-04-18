@@ -5,7 +5,7 @@ module DiscourseApi
         put("/admin/users/#{id}/activate")
       end
 
-      def user(username, params={})
+      def user(username, params = {})
         response = get("/users/#{username}.json", params)
         response[:body]['user']
       end
@@ -17,39 +17,39 @@ module DiscourseApi
 
       def update_avatar(args)
         args = API.params(args)
-                  .required(:username)
-                  .optional(:file, :url)
-                  .default(type: 'avatar', synchronous: true)
-                  .to_h
+          .required(:username)
+          .optional(:file, :url)
+          .default(type: 'avatar', synchronous: true)
+          .to_h
         upload_response = post("/uploads", args)
-        put("/users/#{args[:username]}/preferences/avatar/pick", { upload_id: upload_response['id'] })
+        put("/users/#{args[:username]}/preferences/avatar/pick", upload_id: upload_response['id'])
       end
 
       def update_email(username, email)
-        put("/users/#{username}/preferences/email", { email: email, api_key: api_key })
+        put("/users/#{username}/preferences/email", email: email, api_key: api_key)
       end
 
-      def update_user(username, params={})
+      def update_user(username, params = {})
         put("/users/#{username}", params)
       end
 
       def update_username(username, new_username)
-        put("/users/#{username}/preferences/username", { new_username: new_username, api_key: api_key })
+        put("/users/#{username}/preferences/username", new_username: new_username, api_key: api_key)
       end
 
       def update_trust_level(args)
         args = API.params(args)
-                  .required(:user_id, :level)
-                  .to_h
+          .required(:user_id, :level)
+          .to_h
         response = put("/admin/users/#{args[:user_id]}/trust_level", args)
         response[:body]
       end
 
       def create_user(args)
         args = API.params(args)
-                  .required(:name, :email, :password, :username)
-                  .optional(:active, :staged, :user_fields)
-                  .to_h
+          .required(:name, :email, :password, :username)
+          .optional(:active, :staged, :user_fields)
+          .to_h
         post("/users", args)
       end
 
@@ -57,7 +57,7 @@ module DiscourseApi
         post("/admin/users/#{id}/log_out")
       end
 
-      def invite_admin(args={})
+      def invite_admin(args = {})
         post("/admin/users/invite_admin", args)
       end
 
@@ -82,7 +82,7 @@ module DiscourseApi
       end
 
       def suspend(user_id, suspend_until, reason)
-        put("/admin/users/#{user_id}/suspend", {suspend_until: suspend_until, reason: reason})
+        put("/admin/users/#{user_id}/suspend", suspend_until: suspend_until, reason: reason)
       end
 
       def unsuspend(user_id)
