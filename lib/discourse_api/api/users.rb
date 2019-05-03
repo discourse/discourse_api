@@ -29,8 +29,11 @@ module DiscourseApi
         put("/users/#{username}/preferences/email", email: email, api_key: api_key)
       end
 
-      def update_user(username, params = {})
-        put("/users/#{username}", params)
+      def update_user(username, args)
+        args = API.params(args)
+          .optional(:name, :title, :bio_raw, :location, :website, :profile_background, :card_background)
+          .to_h
+        put("/u/#{username}", args)
       end
 
       def update_username(username, new_username)

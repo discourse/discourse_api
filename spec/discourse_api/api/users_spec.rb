@@ -73,14 +73,14 @@ describe DiscourseApi::API::Users do
 
   describe "#update_user" do
     before do
-      stub_put("http://localhost:3000/users/fake_user").to_return(body: fixture("user_update_user.json"), headers: { content_type: "application/json" })
+      stub_put("http://localhost:3000/u/fake_user").to_return(body: fixture("user_update_user.json"), headers: { content_type: "application/json" })
     end
 
     it "makes the put request" do
       subject.api_key = 'test_d7fd0429940'
       subject.api_username = 'test_user'
       subject.update_user("fake_user", name: "Fake User 2")
-      expect(a_put("http://localhost:3000/users/fake_user")).to have_been_made
+      expect(a_put("http://localhost:3000/u/fake_user")).to have_been_made
     end
 
     it "returns success" do
