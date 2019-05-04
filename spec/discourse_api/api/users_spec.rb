@@ -57,12 +57,12 @@ describe DiscourseApi::API::Users do
 
   describe "#update_email" do
     before do
-      stub_put("http://localhost:3000/users/fake_user/preferences/email").to_return(body: fixture("user_update_user.json"), headers: { content_type: "application/json" })
+      stub_put("http://localhost:3000/u/fake_user/preferences/email").to_return(body: fixture("user_update_user.json"), headers: { content_type: "application/json" })
     end
 
     it "makes the put request" do
       subject.update_email("fake_user", "fake_user_2@example.com")
-      expect(a_put("http://localhost:3000/users/fake_user/preferences/email")).to have_been_made
+      expect(a_put("http://localhost:3000/u/fake_user/preferences/email")).to have_been_made
     end
 
     it "returns success" do
@@ -93,12 +93,12 @@ describe DiscourseApi::API::Users do
 
   describe "#update_username" do
     before do
-      stub_put("http://localhost:3000/users/fake_user/preferences/username").to_return(body: fixture("user_update_username.json"), headers: { content_type: "application/json" })
+      stub_put("http://localhost:3000/u/fake_user/preferences/username").to_return(body: fixture("user_update_username.json"), headers: { content_type: "application/json" })
     end
 
     it "makes the put request" do
       subject.update_username("fake_user", "fake_user_2")
-      expect(a_put("http://localhost:3000/users/fake_user/preferences/username")).to have_been_made
+      expect(a_put("http://localhost:3000/u/fake_user/preferences/username")).to have_been_made
     end
 
     it "returns the updated username" do

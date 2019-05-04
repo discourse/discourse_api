@@ -26,7 +26,7 @@ module DiscourseApi
       end
 
       def update_email(username, email)
-        put("/users/#{username}/preferences/email", email: email, api_key: api_key)
+        put("/u/#{username}/preferences/email", email: email)
       end
 
       def update_user(username, args)
@@ -37,7 +37,7 @@ module DiscourseApi
       end
 
       def update_username(username, new_username)
-        put("/users/#{username}/preferences/username", new_username: new_username, api_key: api_key)
+        put("/u/#{username}/preferences/username", new_username: new_username)
       end
 
       def update_trust_level(args)
