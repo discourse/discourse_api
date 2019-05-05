@@ -192,15 +192,15 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the correct put request" do
-      params = { user_id: 2, level: 2 }
-      subject.update_trust_level(params)
+      params = { level: 2 }
+      subject.update_trust_level(2, params)
       url = "http://localhost:3000/admin/users/2/trust_level"
       expect(a_put(url)).to have_been_made
     end
 
     it "updates the trust_level" do
-      params = { user_id: 2, level: 2 }
-      admin_user = subject.update_trust_level(params)
+      params = { level: 2 }
+      admin_user = subject.update_trust_level(2, params)
       expect(admin_user).to be_a Hash
       expect(admin_user['admin_user']).to have_key('trust_level')
     end

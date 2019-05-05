@@ -40,11 +40,11 @@ module DiscourseApi
         put("/u/#{username}/preferences/username", new_username: new_username)
       end
 
-      def update_trust_level(args)
+      def update_trust_level(user_id, args)
         args = API.params(args)
-          .required(:user_id, :level)
+          .required(:level)
           .to_h
-        response = put("/admin/users/#{args[:user_id]}/trust_level", args)
+        response = put("/admin/users/#{user_id}/trust_level", args)
         response[:body]
       end
 
