@@ -15,14 +15,13 @@ module DiscourseApi
         response[:body]['single_sign_on_record']
       end
 
-      def update_avatar(args)
+      def update_avatar(username, args)
         args = API.params(args)
-          .required(:username)
           .optional(:file, :url)
           .default(type: 'avatar', synchronous: true)
           .to_h
         upload_response = post("/uploads", args)
-        put("/users/#{args[:username]}/preferences/avatar/pick", upload_id: upload_response['id'])
+        put("/u/#{username}/preferences/avatar/pick", upload_id: upload_response['id'])
       end
 
       def update_email(username, email)
