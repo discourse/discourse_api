@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module DiscourseApi
   class DiscourseError < StandardError
     attr_reader :response
