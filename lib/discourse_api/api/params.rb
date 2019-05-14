@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module DiscourseApi
   module API
     def self.params(args)

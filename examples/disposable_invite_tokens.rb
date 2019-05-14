@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # requires this plugin => https://github.com/discourse/discourse-invite-tokens
 
 require 'csv'
