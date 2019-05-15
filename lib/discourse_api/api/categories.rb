@@ -8,7 +8,7 @@ module DiscourseApi
       def create_category(args = {})
         args = API.params(args)
           .required(:name, :color, :text_color)
-          .optional(:description, :permissions)
+          .optional(:description, :permissions, :custom_fields)
           .default(parent_category_id: nil)
         response = post("/categories", args)
         response['category']
@@ -19,7 +19,7 @@ module DiscourseApi
         args = API.params(args)
           .required(:id, :name, :color, :text_color)
           .optional(:slug, :permissions, :auto_close_hours, :auto_close_based_on_last_post, :position, :email_in,
-                             :email_in_allow_strangers, :logo_url, :background_url, :allow_badges, :topic_template)
+                             :email_in_allow_strangers, :logo_url, :background_url, :allow_badges, :topic_template, :custom_fields)
           .default(parent_category_id: nil)
         response = put("/categories/#{category_id}", args)
         response['body']['category'] if response['body']
