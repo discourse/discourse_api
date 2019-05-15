@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.35.0] - 2019-04-02
+### Added
+- Added `custom_fields` param to create/update category
+- Added `frozen_string_literal: true` to all the files
+- Added rubocop and all the changes that went along with it
+### Fixed
+- Allow `api_username` to be changed for an initialized client
+- Update many of the `/users` routes to use the `/u` route
+### Changed
+- Changed `update_trust_level` to follow consistent method param syntax where
+  you specify the id first followed by params
+
 ## [0.34.0] - 2019-04-02
 ### Added
 - Header based authentication
