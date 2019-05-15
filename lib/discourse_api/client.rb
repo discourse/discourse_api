@@ -59,7 +59,7 @@ module DiscourseApi
 
     def api_username=(api_username)
       @api_username = api_username
-      @connection.params['api_username'] = api_username unless @connection.nil?
+      @connection.headers['Api-username'] = api_username unless @connection.nil?
     end
 
     def connection_options
