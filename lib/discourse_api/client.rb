@@ -61,7 +61,7 @@ module DiscourseApi
 
     def api_username=(api_username)
       @api_username = api_username
-      @connection.headers['Api-Username'] = api_username unless @connection.nil?
+      @connection.headers['Api-username'] = api_username unless @connection.nil?
     end
 
     def connection_options
@@ -120,14 +120,12 @@ module DiscourseApi
         conn.request :url_encoded
         # Parse responses as JSON
         conn.use FaradayMiddleware::ParseJson, content_type: 'application/json'
-        # For HTTP debugging, uncomment
-        # conn.response :logger
         # Use Faraday's default HTTP adapter
         conn.adapter Faraday.default_adapter
         #pass api_key and api_username on every request
         unless api_username.nil?
-          conn.headers['Api-Key'] = api_key
-          conn.headers['Api-Username'] = api_username
+          conn.headers['Api-key'] = api_key
+          conn.headers['Api-username'] = api_username
         end
       end
     end
