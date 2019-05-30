@@ -7,7 +7,7 @@ client.api_key = "YOUR_API_KEY"
 client.api_username = "YOUR_USERNAME"
 
 response = client.create_topic(
-    category: "Boing Boing",
+    category: 1,
     skip_validations: true,
     auto_track: false,
     title: "Concert Master: A new way to choose",
