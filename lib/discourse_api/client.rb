@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'faraday'
 require 'faraday_middleware'
 require 'json'
@@ -8,6 +9,7 @@ require 'discourse_api/api/search'
 require 'discourse_api/api/sso'
 require 'discourse_api/api/tags'
 require 'discourse_api/api/topics'
+require 'discourse_api/api/polls'
 require 'discourse_api/api/posts'
 require 'discourse_api/api/users'
 require 'discourse_api/api/groups'
@@ -33,6 +35,7 @@ module DiscourseApi
     include DiscourseApi::API::SSO
     include DiscourseApi::API::Tags
     include DiscourseApi::API::Topics
+    include DiscourseApi::API::Polls
     include DiscourseApi::API::Posts
     include DiscourseApi::API::Users
     include DiscourseApi::API::Groups
@@ -58,7 +61,7 @@ module DiscourseApi
 
     def api_username=(api_username)
       @api_username = api_username
-      @connection.params['api_username'] = api_username unless @connection.nil?
+      @connection.headers['Api-Username'] = api_username unless @connection.nil?
     end
 
     def connection_options
@@ -75,15 +78,15 @@ module DiscourseApi
       connection_options[:ssl] = options
     end
 
-    def delete(path, params={})
+    def delete(path, params = {})
       request(:delete, path, params)
     end
 
-    def get(path, params={})
+    def get(path, params = {})
       request(:get, path, params)
     end
 
-    def post(path, params={})
+    def post(path, params = {})
       response = request(:post, path, params)
       case response.status
       when 200, 201, 204
@@ -93,11 +96,11 @@ module DiscourseApi
       end
     end
 
-    def put(path, params={})
+    def put(path, params = {})
       request(:put, path, params)
     end
 
-    def patch(path, params={})
+    def patch(path, params = {})
       request(:patch, path, params)
     end
 
@@ -117,17 +120,19 @@ module DiscourseApi
         conn.request :url_encoded
         # Parse responses as JSON
         conn.use FaradayMiddleware::ParseJson, content_type: 'application/json'
+        # For HTTP debugging, uncomment
+        # conn.response :logger
         # Use Faraday's default HTTP adapter
         conn.adapter Faraday.default_adapter
         #pass api_key and api_username on every request
         unless api_username.nil?
-          conn.headers['Api-key'] = api_key
-          conn.headers['Api-username'] = api_username
+          conn.headers['Api-Key'] = api_key
+          conn.headers['Api-Username'] = api_username
         end
       end
     end
 
-    def request(method, path, params={})
+    def request(method, path, params = {})
       unless Hash === params
         params = params.to_h if params.respond_to? :to_h
       end
