@@ -115,9 +115,8 @@ module DiscourseApi
         response.body['members']
       end
 
-      def group_set_user_notification_level(group, user_id, notification_level)
-        response = post("/groups/#{group}/notifications?user_id=#{user_id}&notification_level=#{notification_level}")
-        response
+      def group_set_user_notify_level(group, user_id, notification_level)
+        post("/groups/#{group}/notifications?user_id=#{user_id}&notification_level=#{notification_level}")
       end
     end
   end

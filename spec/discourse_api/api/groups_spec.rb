@@ -106,5 +106,17 @@ describe DiscourseApi::API::Groups do
       end
     end
 
+    describe "group user notification level" do
+      before do
+        stub_post("http://localhost:3000/groups/mygroup/notifications?user_id=77&notification_level=3")
+      end
+
+      it "updates user's notification level for group" do
+        subject.group_set_user_notify_level("mygroup", 77, 3)
+        expect(a_post("http://localhost:3000/groups/mygroup/notifications?user_id=77&notification_level=3"))
+            .to have_been_made
+      end
+    end
+
   end
 end

@@ -24,7 +24,7 @@ end
   if users_group['group_id'] == @target_group_id
     @notification_level = users_group['notification_level']
     puts "Group ID:#{@target_group_id} #{@group_name}    Current Notification Level: #{@notification_level}    Default: #{@default_level}"
-    response = client.group_set_user_notification_level(@group_name, @user['id'], @default_level)
+    response = client.group_set_user_notify_level(@group_name, @user['id'], @default_level)
     puts response
     @users_group_users_after_update = client.user(@target_username)['group_users']
     # this just pulls the user from the database again to make sure we updated the user's group notification level
