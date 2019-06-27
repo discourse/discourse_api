@@ -20,14 +20,14 @@ describe DiscourseApi::API::Badges do
     end
   end
 
-  describe "#user_badges" do
+  describe "#user-badges" do
     before do
-      stub_get("http://localhost:3000/users/test_user/activity/badges.json").to_return(body: fixture("user_badges.json"), headers: { content_type: "application/json" })
+      stub_get("http://localhost:3000/user-badges/test_user.json").to_return(body: fixture("user_badges.json"), headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.user_badges('test_user')
-      expect(a_get("http://localhost:3000/users/test_user/activity/badges.json")).to have_been_made
+      expect(a_get("http://localhost:3000/user-badges/test_user.json")).to have_been_made
     end
 
     it "returns the requested user badges" do
