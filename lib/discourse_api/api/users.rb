@@ -31,7 +31,8 @@ module DiscourseApi
 
       def update_user(username, args)
         args = API.params(args)
-          .optional(:name, :title, :bio_raw, :location, :website, :profile_background, :card_background)
+          .optional(:name, :title, :bio_raw, :location, :website, :profile_background, :card_background,
+                    :email_messages_level, :mailing_list_mode, :homepage_id, :theme_ids, :user_fields)
           .to_h
         put("/u/#{username}", args)
       end
