@@ -2,7 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.35.0] - 2019-04-02
+## [0.36.0] - 2019-07-18
+### Added
+- Added poll methods
+### Fixed
+- Updated create topic example
+- Fixed capialization for header auth keys
+
+## [0.35.0] - 2019-05-15
 ### Added
 - Added `custom_fields` param to create/update category
 - Added `frozen_string_literal: true` to all the files
