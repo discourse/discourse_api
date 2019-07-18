@@ -9,6 +9,7 @@ require 'discourse_api/api/search'
 require 'discourse_api/api/sso'
 require 'discourse_api/api/tags'
 require 'discourse_api/api/topics'
+require 'discourse_api/api/polls'
 require 'discourse_api/api/posts'
 require 'discourse_api/api/users'
 require 'discourse_api/api/groups'
@@ -34,6 +35,7 @@ module DiscourseApi
     include DiscourseApi::API::SSO
     include DiscourseApi::API::Tags
     include DiscourseApi::API::Topics
+    include DiscourseApi::API::Polls
     include DiscourseApi::API::Posts
     include DiscourseApi::API::Users
     include DiscourseApi::API::Groups
@@ -118,6 +120,8 @@ module DiscourseApi
         conn.request :url_encoded
         # Parse responses as JSON
         conn.use FaradayMiddleware::ParseJson, content_type: 'application/json'
+        # For HTTP debugging, uncomment
+        # conn.response :logger
         # Use Faraday's default HTTP adapter
         conn.adapter Faraday.default_adapter
         #pass api_key and api_username on every request

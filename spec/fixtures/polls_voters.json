@@ -1,0 +1,20 @@
+{
+  "voters": {
+    "e539a9df8700d0d05c69356a07b768cf": [
+      {
+        "id": 356,
+        "username": "David_Ashby",
+        "name": "David Ashby",
+        "avatar_template": "/user_avatar/discourse.gomomentum.org/david_ashby/{size}/2403_2.png",
+        "title": "Team Agape"
+      },
+      {
+        "id": 72,
+        "username": "David_Kirk",
+        "name": "David Kirk",
+        "avatar_template": "/user_avatar/discourse.gomomentum.org/david_kirk/{size}/236_2.png",
+        "title": "Foundry"
+      }
+    ]
+  }
+}
