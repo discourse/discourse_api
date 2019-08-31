@@ -15,6 +15,25 @@ describe DiscourseApi::API::Posts do
     end
   end
 
+  describe "#posts" do
+    before do
+      stub_get("#{host}/posts.json?before=0").to_return(body: fixture("posts_latest.json"), headers: { content_type: "application/json" })
+      stub_get("#{host}/posts.json?before=14").to_return(body: fixture("posts_before.json"), headers: { content_type: "application/json" })
+    end
+
+    it "fetches latest posts" do
+      the_posts = client.posts()
+      expect(the_posts).to be_a Hash
+      expect(the_posts['latest_posts'][0]['id']).to eq(15)
+    end
+
+    it "fetches posts before 14" do
+      the_posts = client.posts(before: 14)
+      expect(the_posts).to be_a Hash
+      expect(the_posts['latest_posts'][0]['id']).to eq(14)
+    end
+  end
+
   describe "#wikify_post" do
     before do
       stub_put("#{host}/posts/9999/wiki")
