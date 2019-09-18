@@ -226,6 +226,41 @@ describe DiscourseApi::API::Users do
     end
   end
 
+  describe "#grant moderation" do
+    before do
+      url = "http://localhost:3000/admin/users/11/grant_moderation"
+      stub_put(url).to_return(body: fixture("user_grant_moderator.json"),
+                              headers: { content_type: "application/json" })
+    end
+
+    it "makes the correct put request" do
+      subject.grant_moderation(11)
+      url = "http://localhost:3000/admin/users/11/grant_moderation"
+      expect(a_put(url)).to have_been_made
+    end
+
+    it "makes the user a moderator" do
+      result = subject.grant_moderation(11)
+      expect(result).to be_a Hash
+      expect(result['admin_user']['moderator']).to eq(true)
+    end
+  end
+
+  describe "#revoke moderation" do
+    before do
+      url = "http://localhost:3000/admin/users/11/revoke_moderation"
+      stub_put(url).to_return(body: '', status: 200)
+    end
+
+    it "makes the correct put request" do
+      result = subject.revoke_moderation(11)
+      url = "http://localhost:3000/admin/users/11/revoke_moderation"
+      expect(a_put(url)).to have_been_made
+      expect(result.status).to eq(200)
+    end
+
+  end
+
   describe "#by_external_id" do
     before do
       stub_get("http://localhost:3000/users/by-external/1").to_return(body: fixture("user.json"), headers: { content_type: "application/json" })
