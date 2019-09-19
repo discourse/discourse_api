@@ -80,6 +80,15 @@ module DiscourseApi
         response[:body]
       end
 
+      def grant_moderation(user_id)
+        response = put("admin/users/#{user_id}/grant_moderation")
+        response[:body]
+      end
+
+      def revoke_moderation(user_id)
+        put("admin/users/#{user_id}/revoke_moderation")
+      end
+
       def by_external_id(external_id)
         response = get("/users/by-external/#{external_id}")
         response[:body]['user']
