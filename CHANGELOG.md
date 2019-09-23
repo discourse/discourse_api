@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.37.0] - 2019-09-23
+### Added
+- user-badges endpoint for full badges list
+- expanded list of allowed messages
+- grant/revoke moderation
+
 ## [0.36.0] - 2019-07-18
 ### Added
 - Added poll methods
