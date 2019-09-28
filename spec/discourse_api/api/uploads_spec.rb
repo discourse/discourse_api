@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe DiscourseApi::API::Uploads do
-  subject { DiscourseApi::Client.new("http://localhost:3000", "test_d7fd0429940", "test_user") }
+  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#upload_file" do
     before do
-      stub_post("http://localhost:3000/uploads").to_return(body: fixture("upload_file.json"), headers: { content_type: "application/json" })
+      stub_post("#{host}/uploads").to_return(body: fixture("upload_file.json"), headers: { content_type: "application/json" })
     end
 
     it "uploads an image via URL" do

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe DiscourseApi::API::Posts do
-  let (:client) { DiscourseApi::Client.new("http://localhost:3000", "test_d7fd0429940", "test_user") }
+  let (:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#get_post" do
     before do
-      stub_get("http://localhost:3000/posts/11.json").to_return(body: fixture("post.json"), headers: { content_type: "application/json" })
+      stub_get("#{host}/posts/11.json").to_return(body: fixture("post.json"), headers: { content_type: "application/json" })
     end
 
     it "fetches a post" do
@@ -17,29 +17,29 @@ describe DiscourseApi::API::Posts do
 
   describe "#wikify_post" do
     before do
-      stub_put("http://localhost:3000/posts/9999/wiki")
+      stub_put("#{host}/posts/9999/wiki")
     end
 
     it "fails on unknown post" do
       client.wikify_post(9999)
-      expect(a_put("http://localhost:3000/posts/9999/wiki")).to have_been_made
+      expect(a_put("#{host}/posts/9999/wiki")).to have_been_made
     end
   end
 
   describe "#delete_post" do
     before do
-      stub_delete("http://localhost:3000/posts/9999.json")
+      stub_delete("#{host}/posts/9999.json")
     end
 
     it "deletes a post" do
       client.delete_post(9999)
-      expect(a_delete("http://localhost:3000/posts/9999.json")).to have_been_made
+      expect(a_delete("#{host}/posts/9999.json")).to have_been_made
     end
   end
 
   describe "#post_action_users" do
     before do
-      stub_get("http://localhost:3000/post_action_users.json?id=11&post_action_type_id=2").to_return(body: fixture("post_action_users.json"), headers: { content_type: "application/json" })
+      stub_get("#{host}/post_action_users.json?id=11&post_action_type_id=2").to_return(body: fixture("post_action_users.json"), headers: { content_type: "application/json" })
     end
 
     it "fetches post_action_users" do

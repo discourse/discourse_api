@@ -3,7 +3,7 @@ require 'spec_helper'
 describe DiscourseApi::API::ApiKey do
   subject {
     DiscourseApi::Client.new(
-      "http://localhost:3000",
+      "#{host}",
       "test_d7fd0429940",
       "test_user"
     )
@@ -11,14 +11,14 @@ describe DiscourseApi::API::ApiKey do
 
   describe "#api" do
     before do
-      url = "http://localhost:3000/admin/api.json"
+      url = "#{host}/admin/api.json"
       stub_get(url).to_return(body: fixture("api.json"),
                               headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.api
-      url = "http://localhost:3000/admin/api.json"
+      url = "#{host}/admin/api.json"
       expect(a_get(url)).to have_been_made
     end
 
@@ -32,7 +32,7 @@ describe DiscourseApi::API::ApiKey do
 
   describe "#generate_user_api_key" do
     before do
-      url = "http://localhost:3000/admin/users/2/generate_api_key.json"
+      url = "#{host}/admin/users/2/generate_api_key.json"
       stub_post(url).to_return(body: fixture("generate_api_key.json"),
                                headers: { content_type: "application/json" })
     end
@@ -46,7 +46,7 @@ describe DiscourseApi::API::ApiKey do
 
   describe "#revoke_user_api_key" do
     before do
-      url = "http://localhost:3000/admin/users/2/revoke_api_key.json"
+      url = "#{host}/admin/users/2/revoke_api_key.json"
       stub_delete(url).to_return(body: "",
       headers: { content_type: "application/json" })
     end
@@ -59,7 +59,7 @@ describe DiscourseApi::API::ApiKey do
 
   describe "#generate_master_key" do
     before do
-      url = "http://localhost:3000/admin/api/key"
+      url = "#{host}/admin/api/key"
       stub_post(url).to_return(body: fixture("generate_master_key.json"),
                                headers: { content_type: "application/json" })
     end
@@ -74,14 +74,14 @@ describe DiscourseApi::API::ApiKey do
 
   describe "#revoke_api_key" do
     before do
-      url = "http://localhost:3000/admin/api/key?id=10"
+      url = "#{host}/admin/api/key?id=10"
       stub_delete(url).to_return(body: "",
                                  headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.revoke_api_key(10)
-      url = "http://localhost:3000/admin/api/key?id=10"
+      url = "#{host}/admin/api/key?id=10"
       expect(a_delete(url)).to have_been_made
     end
 
@@ -93,14 +93,14 @@ describe DiscourseApi::API::ApiKey do
 
   describe "#regenerate_api_key" do
     before do
-      url = "http://localhost:3000/admin/api/key"
+      url = "#{host}/admin/api/key"
       stub_put(url).to_return(body: fixture("regenerate_api_key.json"),
                                  headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.regenerate_api_key(10)
-      url = "http://localhost:3000/admin/api/key"
+      url = "#{host}/admin/api/key"
       expect(a_put(url)).to have_been_made
     end
 
