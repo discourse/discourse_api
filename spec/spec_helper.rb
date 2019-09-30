@@ -20,6 +20,10 @@ end
 
 WebMock.disable_net_connect!(:allow_localhost => true)
 
+def host
+  'http://localhost:3000'
+end
+
 def a_delete(path)
   a_request(:delete, path)
 end

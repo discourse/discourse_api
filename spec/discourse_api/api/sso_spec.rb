@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe DiscourseApi::API::SSO do
-  subject { DiscourseApi::Client.new("http://localhost:3000", "test_d7fd0429940", "test_user" )}
+  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user" )}
 
   describe "#sync_sso" do
     before do

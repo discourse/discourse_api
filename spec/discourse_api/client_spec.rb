@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe DiscourseApi::Client do
-  subject { DiscourseApi::Client.new('http://localhost:3000') }
+  subject { DiscourseApi::Client.new(host) }
 
   describe ".new" do
     it "requires a host argument" do
@@ -17,12 +17,12 @@ describe DiscourseApi::Client do
     end
 
     it "accepts an api key argument" do
-      client = DiscourseApi::Client.new('http://localhost:3000', 'test')
+      client = DiscourseApi::Client.new(host, 'test')
       expect(client.api_key).to eq('test')
     end
 
     it "accepts an api username argument" do
-      client = DiscourseApi::Client.new('http://localhost:3000', 'test', 'test_user')
+      client = DiscourseApi::Client.new(host, 'test', 'test_user')
       expect(client.api_username).to eq('test_user')
     end
   end
@@ -43,7 +43,7 @@ describe DiscourseApi::Client do
 
   describe "#host" do
     it "is publically readable" do
-      expect(subject.host).to eq("http://localhost:3000")
+      expect(subject.host).to eq("#{host}")
     end
 
     it "is not publically writeable" do
@@ -64,78 +64,78 @@ describe DiscourseApi::Client do
 
   describe "#delete" do
     before do
-      stub_delete("http://localhost:3000/test/delete").with(query: { deleted: "object" })
+      stub_delete("#{host}/test/delete").with(query: { deleted: "object" })
       subject.api_key = 'test_d7fd0429940'
       subject.api_username = 'test_user'
     end
 
     it "allows custom delete requests" do
       subject.delete("/test/delete", { deleted: "object" })
-      expect(a_delete("http://localhost:3000/test/delete").with(query: { deleted: "object" })).to have_been_made
+      expect(a_delete("#{host}/test/delete").with(query: { deleted: "object" })).to have_been_made
     end
 
     context 'when using a host with a subdirectory' do
-      subject { DiscourseApi::Client.new('http://localhost:3000/forum') }
+      subject { DiscourseApi::Client.new("#{host}/forum") }
 
       before do
-        stub_delete("http://localhost:3000/forum/test/delete").with(query: { deleted: "object" })
+        stub_delete("#{host}/forum/test/delete").with(query: { deleted: "object" })
       end
 
       it "allows custom delete requests" do
         subject.delete("/test/delete", { deleted: "object" })
-        expect(a_delete("http://localhost:3000/forum/test/delete").with(query: { deleted: "object" })).to have_been_made
+        expect(a_delete("#{host}/forum/test/delete").with(query: { deleted: "object" })).to have_been_made
       end
     end
   end
 
   describe "#post" do
     before do
-      stub_post("http://localhost:3000/test/post").with(body: { created: "object"})
+      stub_post("#{host}/test/post").with(body: { created: "object"})
       subject.api_key = 'test_d7fd0429940'
       subject.api_username = 'test_user'
     end
 
     it "allows custom post requests" do
       subject.post("/test/post", { created: "object" })
-      expect(a_post("http://localhost:3000/test/post").with(body: { created: "object"})).to have_been_made
+      expect(a_post("#{host}/test/post").with(body: { created: "object"})).to have_been_made
     end
 
     context 'when using a host with a subdirectory' do
-      subject { DiscourseApi::Client.new('http://localhost:3000/forum') }
+      subject { DiscourseApi::Client.new("#{host}/forum") }
 
       before do
-        stub_post("http://localhost:3000/forum/test/post").with(body: { created: "object"})
+        stub_post("#{host}/forum/test/post").with(body: { created: "object"})
       end
 
       it "allows custom post requests" do
         subject.post("/test/post", { created: "object" })
-        expect(a_post("http://localhost:3000/forum/test/post").with(body: { created: "object"})).to have_been_made
+        expect(a_post("#{host}/forum/test/post").with(body: { created: "object"})).to have_been_made
       end
     end
   end
 
   describe "#put" do
     before do
-      stub_put("http://localhost:3000/test/put").with(body: { updated: "object" })
+      stub_put("#{host}/test/put").with(body: { updated: "object" })
       subject.api_key = 'test_d7fd0429940'
       subject.api_username = 'test_user'
     end
 
     it "allows custom put requests" do
       subject.put("/test/put", { updated: "object" })
-      expect(a_put("http://localhost:3000/test/put").with(body: { updated: "object" })).to have_been_made
+      expect(a_put("#{host}/test/put").with(body: { updated: "object" })).to have_been_made
     end
 
     context 'when using a host with a subdirectory' do
-      subject { DiscourseApi::Client.new('http://localhost:3000/forum') }
+      subject { DiscourseApi::Client.new("#{host}/forum") }
 
       before do
-        stub_put("http://localhost:3000/forum/test/put").with(body: { updated: "object" })
+        stub_put("#{host}/forum/test/put").with(body: { updated: "object" })
       end
 
       it "allows custom post requests" do
         subject.put("/test/put", { updated: "object" })
-        expect(a_put("http://localhost:3000/forum/test/put").with(body: { updated: "object" })).to have_been_made
+        expect(a_put("#{host}/forum/test/put").with(body: { updated: "object" })).to have_been_made
       end
     end
   end

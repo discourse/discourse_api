@@ -1,16 +1,16 @@
 require 'spec_helper'
 
 describe DiscourseApi::API::Badges do
-  subject { DiscourseApi::Client.new("http://localhost:3000", "test_d7fd0429940", "test_user" )}
+  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user" )}
 
   describe "#badges" do
     before do
-      stub_get("http://localhost:3000/admin/badges.json").to_return(body: fixture("badges.json"), headers: { content_type: "application/json" })
+      stub_get("#{host}/admin/badges.json").to_return(body: fixture("badges.json"), headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.badges
-      expect(a_get("http://localhost:3000/admin/badges.json")).to have_been_made
+      expect(a_get("#{host}/admin/badges.json")).to have_been_made
     end
 
     it "returns the requested badges" do
@@ -22,12 +22,12 @@ describe DiscourseApi::API::Badges do
 
   describe "#user-badges" do
     before do
-      stub_get("http://localhost:3000/user-badges/test_user.json").to_return(body: fixture("user_badges.json"), headers: { content_type: "application/json" })
+      stub_get("#{host}/user-badges/test_user.json").to_return(body: fixture("user_badges.json"), headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.user_badges('test_user')
-      expect(a_get("http://localhost:3000/user-badges/test_user.json")).to have_been_made
+      expect(a_get("#{host}/user-badges/test_user.json")).to have_been_made
     end
 
     it "returns the requested user badges" do
