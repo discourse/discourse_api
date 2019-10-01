@@ -149,7 +149,7 @@ describe DiscourseApi::Client do
     end
 
     it "catches Faraday errors" do
-      allow(subject).to receive(:connection).and_raise(Faraday::Error::ClientError.new("BOOM!"))
+      allow(subject).to receive(:connection).and_raise(Faraday::ClientError.new("BOOM!"))
       expect{subject.send(:request, :get, "/test")}.to raise_error DiscourseApi::Error
     end
 
