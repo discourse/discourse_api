@@ -140,7 +140,7 @@ module DiscourseApi
       response = connection.send(method.to_sym, path, params)
       handle_error(response)
       response.env
-    rescue Faraday::Error::ClientError, JSON::ParserError
+    rescue Faraday::ClientError, JSON::ParserError
       raise DiscourseApi::Error
     end
 
