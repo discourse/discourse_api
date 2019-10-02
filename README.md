@@ -88,10 +88,18 @@ Check out [lib/discourse_api/error.rb](lib/discourse_api/error.rb) and [lib/disc
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
+## Examples
+
+To try the examples in `/examples` you will need a [Discourse instance up and running](https://github.com/discourse/discourse/blob/master/docs/INSTALL.md), installed either locally or in the cloud, then: 
+
+1. Specify your environment by making a copy of config-example.yml to create a file called config.yml with your environment settings.
+2. In a given example file, comment out all but the examples you want to run.
+3. Edit the example file with any required parameters, e.g. a target `username` passed to the method.
+4. Running the file will then pull from your config.yml to run a given client method (e.g. `client.badges`) against your Discourse instance
+
 ## Testing
 
-1. Install discourse locally
-2. Inside of your discourse directory, run: `bundle exec rake db:api_test_seed`
-3. Start discourse: `bundle exec rails s`
-4. Install bundler in the discourse_api directory, run `gem install bundler`
-5. Inside of your discourse_api directory, run: `bundle exec rspec spec/`
+To run the discourse_api tests in spec:
+
+1. Install bundler in the discourse_api directory, run `gem install bundler`
+2. Inside of your discourse_api directory, run: `bundle exec rspec spec/`
