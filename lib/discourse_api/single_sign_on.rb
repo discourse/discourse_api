@@ -7,9 +7,10 @@ module DiscourseApi
   class SingleSignOn
     ACCESSORS = [:nonce, :name, :username, :email, :avatar_url, :avatar_force_update, :require_activation,
                  :bio, :external_id, :return_sso_url, :admin, :moderator, :suppress_welcome_message, :title,
-                 :add_groups, :remove_groups, :groups]
+                 :add_groups, :remove_groups, :groups, :locale, :locale_force_update]
     FIXNUMS = []
-    BOOLS = [:avatar_force_update, :admin, :moderator, :require_activation, :suppress_welcome_message]
+    BOOLS = [:avatar_force_update, :admin, :moderator, :require_activation, :suppress_welcome_message,
+      :locale_force_update]
     ARRAYS = [:groups]
     #NONCE_EXPIRY_TIME = 10.minutes # minutes is a rails method and is causing an error. Is this needed in the api?
 
