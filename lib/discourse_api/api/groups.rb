@@ -114,8 +114,11 @@ module DiscourseApi
           .to_h
         response = get("/groups/#{group_name}/members.json", params)
 
-        response.body if options[:all] == true
-        response.body['members']
+        if options[:all] == true
+          response.body
+        else
+          response.body['members']
+        end
       end
 
       def group_set_user_notification_level(group, user_id, notification_level)
