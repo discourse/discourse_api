@@ -107,12 +107,18 @@ module DiscourseApi
       end
 
       def group_members(group_name, params = {})
+        options = params
         params = API.params(params)
           .optional(:offset, :limit)
           .default(offset: 0, limit: 100)
           .to_h
         response = get("/groups/#{group_name}/members.json", params)
-        response.body['members']
+
+        if options[:all] == true
+          response.body
+        else
+          response.body['members']
+        end
       end
 
       def group_set_user_notification_level(group, user_id, notification_level)

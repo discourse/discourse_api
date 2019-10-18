@@ -91,18 +91,26 @@ describe DiscourseApi::API::Groups do
     end
 
     describe "group members" do
-      before do
+      it "list members" do
         stub_get("#{host}/groups/mygroup/members.json?limit=100&offset=0").to_return(body: fixture("members_0.json"), headers: { content_type: "application/json" })
         stub_get("#{host}/groups/mygroup/members.json?limit=100&offset=100").to_return(body: fixture("members_1.json"), headers: { content_type: "application/json" })
-      end
-
-      it "list members" do
         members = subject.group_members('mygroup')
         expect(a_get("#{host}/groups/mygroup/members.json?limit=100&offset=0")).to have_been_made
         expect(members.length).to eq(100)
         members = subject.group_members('mygroup', offset: 100)
         expect(a_get("#{host}/groups/mygroup/members.json?limit=100&offset=100")).to have_been_made
         expect(members.length).to eq(90)
+      end
+
+      context "with :all params" do
+        it "lists members and owners" do
+          stub_get("#{host}/groups/mygroup/members.json?limit=100&offset=0").to_return(body: fixture("members_2.json"), headers: { content_type: "application/json" })
+          member_data = subject.group_members('mygroup', all: true)
+          expect(a_get("#{host}/groups/mygroup/members.json?limit=100&offset=0")).to have_been_made
+          expect(member_data["members"].length).to eq(100)
+          expect(member_data["owners"].length).to eq(7)
+          expect(member_data.keys.sort).to eq(["members", "meta", "owners"])
+        end
       end
     end
 
