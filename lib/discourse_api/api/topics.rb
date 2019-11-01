@@ -46,7 +46,7 @@ module DiscourseApi
         params = API.params(params)
           .required(:status, :enabled)
           .optional(:api_username)
-        put("/t/#{topic_slug}/#{topic_id}/status", params.to_h)
+        put("/t/#{topic_id}/status", params.to_h)
       end
 
       def topic(id, params = {})

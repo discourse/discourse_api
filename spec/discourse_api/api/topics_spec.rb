@@ -3,6 +3,17 @@ require 'spec_helper'
 describe DiscourseApi::API::Topics do
   subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
+  describe "#change_topic_status" do
+    before do
+      stub_put("#{host}/t/57/status").to_return(body: fixture("topic.json"), headers: { content_type: "application/json" })
+    end
+
+    it "changes the topic status" do
+      subject.change_topic_status(nil, 57, { status: 'visible', enabled: false })
+      expect(a_put("#{host}/t/57/status")).to have_been_made
+    end
+  end
+
   describe "#invite_user_to_topic" do
     before do
       stub_post("#{host}/t/12/invite").to_return(body: fixture("topic_invite_user.json"), headers: { content_type: "application/json" })
