@@ -9,6 +9,10 @@ describe DiscourseApi::API::Params do
     expect { params_for({o1: "test"}).to_h }.to raise_error(ArgumentError)
   end
 
+  it "should not raise when a required param is false" do
+    expect { params_for({r1: false}).to_h }.not_to raise_error
+  end
+
   it "should not include optional params when not provided" do
     expect(params_for({r1: "test"}).to_h).not_to include(:o1)
   end

@@ -16,6 +16,9 @@ module DiscourseApi
 
       def required(*keys)
         @required.concat(keys)
+        @required.each do |k|
+          raise ArgumentError.new("#{k} is required but not specified") unless @args.key?(k)
+        end
         self
       end
 
@@ -36,7 +39,6 @@ module DiscourseApi
 
         @required.each do |k|
           h[k] = @args[k]
-          raise ArgumentError.new("#{k} is required but not specified") unless h[k]
         end
 
         @optional.each do |k|
