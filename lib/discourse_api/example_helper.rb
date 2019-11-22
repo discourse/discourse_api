@@ -14,6 +14,6 @@ module DiscourseApi
       end
       config
     end
-    
+
   end
 end
