@@ -16,21 +16,19 @@ describe DiscourseApi::API::SSO do
       avatar_force_update: false,
       add_groups: ['a', 'b'],
       remove_groups: ['c', 'd'],
-      'custom.field_1' => 'potatoe',
-      'custom.field_2' => 'tomatoe'
+      'custom.field_1' => 'potato',
+      'custom.field_2' => 'tomato'
     }
   end
-  let(:sso_double) do
-    DiscourseApi::SingleSignOn.new
-  end
+  let(:sso_double) { DiscourseApi::SingleSignOn.new }
 
   describe "#sync_sso" do
     before do
-      stub_post(/.*sync_sso.*/).to_return(body: fixture("user.json"), headers: { content_type: "application/json" })
-
-      expect(DiscourseApi::SingleSignOn).to(
-        receive(:new).and_return(sso_double)
+      stub_post(/.*sync_sso.*/).to_return(
+        body: fixture("user.json"),
+        headers: { content_type: "application/json" }
       )
+      expect(DiscourseApi::SingleSignOn).to(receive(:new).and_return(sso_double))
     end
 
     it 'assigns params to sso instance' do
@@ -51,7 +49,7 @@ describe DiscourseApi::API::SSO do
       subject.sync_sso(params)
 
       expect(sso_double.instance_variable_get(:@custom_fields)).to(
-        eql({ 'field_1' => 'potatoe', 'field_2' => 'tomatoe' })
+        eql({ 'field_1' => 'potato', 'field_2' => 'tomato' })
       )
       expect(sso_double.unsigned_payload).to include('custom.field_1')
       expect(sso_double.unsigned_payload).to include('custom.field_2')
