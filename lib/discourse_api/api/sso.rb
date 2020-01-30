@@ -15,8 +15,8 @@ module DiscourseApi
         sso.avatar_force_update = params[:avatar_force_update] === true
         sso.add_groups = params[:add_groups]
         sso.remove_groups = params[:remove_groups]
-        params.keys.select { |key| key.to_s.start_with?("custom") }.each do |custom_key|
-          sso.custom_fields[custom_key] = params[custom_key]
+        params.keys.select { |key| key.to_s.start_with?('custom.') }.each do |custom_key|
+          sso.custom_fields[custom_key.gsub('custom.', '')] = params[custom_key]
         end
 
         post("/admin/users/sync_sso", sso.payload)
