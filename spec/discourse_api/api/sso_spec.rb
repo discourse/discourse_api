@@ -33,7 +33,7 @@ describe DiscourseApi::API::SSO do
       )
     end
 
-    it do
+    it 'assigns params to sso instance' do
       expect(sso_double).to receive(:sso_secret=).with(params[:sso_secret]).and_call_original
       expect(sso_double).to receive(:name=).with(params[:name]).and_call_original
       expect(sso_double).to receive(:username=).with(params[:username]).and_call_original
@@ -51,7 +51,7 @@ describe DiscourseApi::API::SSO do
       subject.sync_sso(params)
 
       expect(sso_double.instance_variable_get(:@custom_fields)).to(
-        eql({"field_1"=>"potatoe", "field_2"=>"tomatoe"})
+        eql({ 'field_1' => 'potatoe', 'field_2' => 'tomatoe' })
       )
       expect(sso_double.unsigned_payload).to include('custom.field_1')
       expect(sso_double.unsigned_payload).to include('custom.field_2')
