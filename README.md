@@ -52,7 +52,8 @@ client.sync_sso(                                #=> Synchronizes the SSO record
   name: "Test Name",
   username: "test_name",
   email: "name@example.com",
-  external_id: "2"
+  external_id: "2",
+  "custom.field_1" => "Custom field"
 )
 
 # Private messages
