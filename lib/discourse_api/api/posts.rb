@@ -22,6 +22,12 @@ module DiscourseApi
         response[:body]
       end
 
+      def posts(args = {})
+        args = API.params(args).default(before: 0)
+        response = get("/posts.json", args)
+        response[:body]
+      end
+
       def wikify_post(id)
         put("/posts/#{id}/wiki", wiki: true)
       end
