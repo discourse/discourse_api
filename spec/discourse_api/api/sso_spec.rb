@@ -51,7 +51,7 @@ describe DiscourseApi::API::SSO do
       expect(sso_double.instance_variable_get(:@custom_fields)).to(
         eql({ 'custom.field_1' => 'potato', 'field_2' => 'tomato' })
       )
-      expect(sso_double.unsigned_payload).to include('custom.field_1')
+      expect(sso_double.unsigned_payload).to include('custom.custom.field_1')
       expect(sso_double.unsigned_payload).to include('custom.field_2')
     end
 
