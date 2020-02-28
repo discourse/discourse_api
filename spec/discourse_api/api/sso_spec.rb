@@ -16,8 +16,7 @@ describe DiscourseApi::API::SSO do
       avatar_force_update: false,
       add_groups: ['a', 'b'],
       remove_groups: ['c', 'd'],
-      'custom.custom.field_1' => 'potato',
-      'custom.field_2' => 'tomato'
+      'custom.field_1' => 'tomato'
     }
   end
   let(:sso_double) { DiscourseApi::SingleSignOn.new }
@@ -43,16 +42,15 @@ describe DiscourseApi::API::SSO do
       expect(sso_double).to receive(:avatar_force_update=).with(params[:avatar_force_update]).and_call_original
       expect(sso_double).to receive(:add_groups=).with(params[:add_groups]).and_call_original
       expect(sso_double).to receive(:remove_groups=).with(params[:remove_groups]).and_call_original
-      expect(sso_double).to receive(:custom_fields).twice.and_call_original
+      expect(sso_double).to receive(:custom_fields).and_call_original
       expect(sso_double).to receive(:payload).and_call_original
 
       subject.sync_sso(params)
 
       expect(sso_double.instance_variable_get(:@custom_fields)).to(
-        eql({ 'custom.field_1' => 'potato', 'field_2' => 'tomato' })
+        eql({ 'custom.field_1' => 'tomato' })
       )
-      expect(sso_double.unsigned_payload).to include('custom.custom.field_1')
-      expect(sso_double.unsigned_payload).to include('custom.field_2')
+      expect(sso_double.unsigned_payload).to include('custom.field_1')
     end
 
     it "requests the correct resource" do

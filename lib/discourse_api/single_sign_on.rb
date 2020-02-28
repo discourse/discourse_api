@@ -99,11 +99,7 @@ module DiscourseApi
        payload[k] = val
       end
 
-      if @custom_fields
-        @custom_fields.each do |k, v|
-          payload["custom.#{k}"] = v.to_s
-        end
-      end
+      @custom_fields.each { |k, v| payload[k] = v.to_s } if @custom_fields
 
       Rack::Utils.build_query(payload)
     end
