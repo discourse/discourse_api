@@ -67,7 +67,7 @@ module DiscourseApi
         url = ["/t/#{topic_id}/posts.json"]
         if post_ids.count > 0
           url.push('?')
-          url.push(post_ids.map { |id| "post_ids[]=#{id}" }.join('&') )
+          url.push(post_ids.map { |id| "post_ids[]=#{id}" }.join('&'))
         end
         response = get(url.join)
         response[:body]
