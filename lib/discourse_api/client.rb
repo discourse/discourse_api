@@ -126,8 +126,8 @@ module DiscourseApi
         conn.adapter Faraday.default_adapter
         #pass api_key and api_username on every request
         unless api_username.nil?
-          conn.headers['Api-Key'] = api_key
-          conn.headers['Api-Username'] = api_username
+          conn.params['api_key'] = api_key
+          conn.params['api_username'] = api_username
           conn.options[:timeout] = ENV["DEFAULT_TIMEOUT"]||5
           conn.options[:open_timeout] = ENV["DEFAULT_TIMEOUT"]||5
         end
