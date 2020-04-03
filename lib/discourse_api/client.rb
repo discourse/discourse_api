@@ -27,8 +27,8 @@ require 'discourse_api/api/site_settings'
 
 module DiscourseApi
   class Client
-    attr_accessor :api_key
-    attr_reader :host, :api_username
+    attr_accessor :api_key, :api_username
+    attr_reader :host
 
     include DiscourseApi::API::Categories
     include DiscourseApi::API::Search
@@ -51,7 +51,9 @@ module DiscourseApi
     include DiscourseApi::API::UserActions
     include DiscourseApi::API::SiteSettings
 
-    def initialize(host, api_key = nil, api_username = nil)
+    def initialize(host = ENV["DISCOURSE_URL"],
+                   api_key = ENV["DISCOURSE_API_KEY"],
+                   api_username = ENV["DISCOURSE_USERNAME"])
       raise ArgumentError, 'host needs to be defined' if host.nil? || host.empty?
       @host         = host
       @api_key      = api_key
