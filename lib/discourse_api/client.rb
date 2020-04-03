@@ -92,7 +92,7 @@ module DiscourseApi
       when 200, 201, 204
         response.body
       else
-        raise DiscourseApi::Error, response.body
+        Rails.logger.info "DiscourseApi::Error: #{response.body.inspect}"
       end
     end
 
@@ -128,6 +128,8 @@ module DiscourseApi
         unless api_username.nil?
           conn.headers['Api-Key'] = api_key
           conn.headers['Api-Username'] = api_username
+          conn.options[:timeout] = ENV["DEFAULT_TIMEOUT"]||5
+          conn.options[:open_timeout] = ENV["DEFAULT_TIMEOUT"]||5
         end
       end
     end
@@ -147,7 +149,7 @@ module DiscourseApi
     def handle_error(response)
       case response.status
       when 403
-        raise DiscourseApi::UnauthenticatedError.new(response.env[:body], response.env)
+        Rails.logger.info "#{DiscourseApi::UnauthenticatedError.new(response.env[:body]).inspect}"
       when 404, 410
         raise DiscourseApi::NotFoundError.new(response.env[:body], response.env)
       when 422

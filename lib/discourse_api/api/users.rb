@@ -52,7 +52,7 @@ module DiscourseApi
       def create_user(args)
         args = API.params(args)
           .required(:name, :email, :password, :username)
-          .optional(:active, :staged, :user_fields)
+          .optional(:active, :staged, :user_fields, :premium)
           .to_h
         post("/users", args)
       end
@@ -104,6 +104,10 @@ module DiscourseApi
 
       def delete_user(user_id, delete_posts = false)
         delete("/admin/users/#{user_id}.json?delete_posts=#{delete_posts}")
+      end
+
+      def delete_user(id)
+        delete("/users/#{id}")
       end
 
       def check_username(username)

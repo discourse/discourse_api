@@ -32,6 +32,10 @@ module DiscourseApi
         put("/posts/#{id}/wiki", wiki: true)
       end
 
+      def delete_post(id)
+        delete("/posts/#{id}")
+      end
+
       def edit_post(id, raw)
         put("/posts/#{id}", post: { raw: raw })
       end

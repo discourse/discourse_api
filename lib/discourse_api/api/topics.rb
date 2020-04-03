@@ -8,8 +8,8 @@ module DiscourseApi
       # :created_at OPTIONAL seconds since epoch.
       def create_topic(args = {})
         args = API.params(args)
-          .required(:title, :raw)
-          .optional(:skip_validations, :category, :auto_track, :created_at, :api_username)
+          .required(:title, :raw, :tags, :stars)
+          .optional(:skip_validations, :category, :auto_track, :created_at, :api_username, :visible)
         post("/posts", args.to_h)
       end
 
@@ -34,8 +34,16 @@ module DiscourseApi
         response[:body]['topic_list']['topics']
       end
 
-      def rename_topic(topic_id, title)
-        put("/t/#{topic_id}.json", topic_id: topic_id, title: title)
+      def rename_topic(topic_id, title, tags)
+        put("/t/#{topic_id}.json", { topic_id: topic_id, title: title, tags: tags })
+      end
+
+      def update_stars(topic_id, stars)
+        put("/t/#{topic_id}.json", { topic_id: topic_id, stars: stars })
+      end
+
+      def update_with_created_date(topic_id, created_date)
+        put("/t/#{topic_id}.json", { topic_id: topic_id, created_date: created_date })
       end
 
       def recategorize_topic(topic_id, category_id)
@@ -71,6 +79,10 @@ module DiscourseApi
         end
         response = get(url.join)
         response[:body]
+      end
+
+      def update_content_topic(topic_id, content, tags, visible = true)
+        put("/t/#{topic_id}.json", {topic_id: topic_id,excerpt: content,tags: tags, visible: visible})
       end
     end
   end
