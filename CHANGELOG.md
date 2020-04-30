@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.39.3] - 2020-04-30
+### Fixed
+- Add `reviewable_by_group_name` to categories
+
 ## [0.39.2] - 2020-04-30
 ### Fixed
 - Add `members_visibility_level` to group
