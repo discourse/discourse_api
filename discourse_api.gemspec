@@ -28,9 +28,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '>= 12.3.3'
   spec.add_development_dependency 'rb-inotify', '~> 0.9'
   spec.add_development_dependency 'rspec', '~> 3.4'
-  spec.add_development_dependency 'rubocop', '~> 0.69'
   spec.add_development_dependency 'simplecov', '~> 0.11'
   spec.add_development_dependency 'webmock', '~> 2.0'
+  spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rubocop-discourse'
   spec.add_development_dependency 'rubocop-rspec'
 
