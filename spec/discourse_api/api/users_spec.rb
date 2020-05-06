@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe DiscourseApi::API::Users do
@@ -113,12 +114,12 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the post request" do
-      subject.create_user :name => "Test User", :email => "test2@example.com", :password => "P@ssword", :username => "test2"
+      subject.create_user name: "Test User", email: "test2@example.com", password: "P@ssword", username: "test2"
       expect(a_post("#{host}/users")).to have_been_made
     end
 
     it "returns success" do
-      response = subject.create_user :name => "Test User", :email => "test2@example.com", :password => "P@ssword", :username => "test2"
+      response = subject.create_user name: "Test User", email: "test2@example.com", password: "P@ssword", username: "test2"
       expect(response).to be_a Hash
       expect(response['success']).to be_truthy
     end
@@ -163,7 +164,7 @@ describe DiscourseApi::API::Users do
     end
 
     it "Raises API Error" do
-      expect{subject.log_out(90)}.to raise_error DiscourseApi::NotFoundError
+      expect { subject.log_out(90) }.to raise_error DiscourseApi::NotFoundError
     end
   end
 

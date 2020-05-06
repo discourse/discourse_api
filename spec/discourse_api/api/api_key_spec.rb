@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe DiscourseApi::API::ApiKey do
@@ -48,7 +49,7 @@ describe DiscourseApi::API::ApiKey do
     before do
       url = "#{host}/admin/users/2/revoke_api_key.json"
       stub_delete(url).to_return(body: "",
-      headers: { content_type: "application/json" })
+                                 headers: { content_type: "application/json" })
     end
 
     it "returns 200" do
@@ -95,7 +96,7 @@ describe DiscourseApi::API::ApiKey do
     before do
       url = "#{host}/admin/api/key"
       stub_put(url).to_return(body: fixture("regenerate_api_key.json"),
-                                 headers: { content_type: "application/json" })
+                              headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe DiscourseApi::API::SSO do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user" )}
+  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#sync_sso" do
     before do
@@ -9,7 +10,7 @@ describe DiscourseApi::API::SSO do
     end
 
     it "requests the correct resource" do
-      subject.sync_sso({sso_secret: "test_d7fd0429940", "custom.riffle_url" => "test"})
+      subject.sync_sso({ sso_secret: "test_d7fd0429940", "custom.riffle_url" => "test" })
       expect(a_post(/.*sync_sso.*/)).to have_been_made
     end
   end
