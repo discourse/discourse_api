@@ -28,6 +28,11 @@ module DiscourseApi
         response['body']['category'] if response['body']
       end
 
+      def delete_category(id)
+        response = delete("/categories/#{id}")
+        response[:body]['success']
+      end
+
       def categories(params = {})
         response = get('/categories.json', params)
         response[:body]['category_list']['categories']
