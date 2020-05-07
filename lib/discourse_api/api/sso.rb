@@ -11,6 +11,9 @@ module DiscourseApi
         sso.external_id = params[:external_id]
         sso.suppress_welcome_message = params[:suppress_welcome_message] === true
         sso.avatar_url = params[:avatar_url]
+        sso.profile_background_url = params[:profile_background_url]
+        sso.card_background_url = params[:card_background_url]
+        sso.bio = params[:bio]
         sso.title = params[:title]
         sso.avatar_force_update = params[:avatar_force_update] === true
         sso.add_groups = params[:add_groups]
