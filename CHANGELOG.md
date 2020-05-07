@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.40.0] - 2020-05-07
+### Fixed
+- Add missing attributes to `sync_sso`
+
+### Added
+- Add delete category method
+
 ## [0.39.3] - 2020-04-30
 ### Fixed
 - Add `reviewable_by_group_name` to categories
