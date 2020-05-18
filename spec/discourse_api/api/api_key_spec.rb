@@ -31,33 +31,6 @@ describe DiscourseApi::API::ApiKey do
     end
   end
 
-  describe "#generate_user_api_key" do
-    before do
-      url = "#{host}/admin/users/2/generate_api_key.json"
-      stub_post(url).to_return(body: fixture("generate_api_key.json"),
-                               headers: { content_type: "application/json" })
-    end
-
-    it "returns the generated api key" do
-      api_key = subject.generate_user_api_key(2)
-      expect(api_key).to be_a Hash
-      expect(api_key['api_key']).to have_key('key')
-    end
-  end
-
-  describe "#revoke_user_api_key" do
-    before do
-      url = "#{host}/admin/users/2/revoke_api_key.json"
-      stub_delete(url).to_return(body: "",
-                                 headers: { content_type: "application/json" })
-    end
-
-    it "returns 200" do
-      response = subject.revoke_user_api_key(2)
-      expect(response['status']).to eq(200)
-    end
-  end
-
   describe "#generate_master_key" do
     before do
       url = "#{host}/admin/api/key"
