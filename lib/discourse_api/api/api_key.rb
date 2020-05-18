@@ -7,14 +7,6 @@ module DiscourseApi
         response.body
       end
 
-      def generate_user_api_key(user_id)
-        response = post("/admin/users/#{user_id}/generate_api_key.json")
-      end
-
-      def revoke_user_api_key(user_id)
-        response = delete("/admin/users/#{user_id}/revoke_api_key.json")
-      end
-
       def generate_master_key
         response = post("/admin/api/key")
       end
