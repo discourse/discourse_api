@@ -25,6 +25,31 @@ module DiscourseApi
       raise RuntimeError, "sso_url not implemented on class, be sure to set it on instance"
     end
 
+    def self.unsigned_parse(payload, sso_secret = nil)
+      sso = new
+      sso.sso_secret = sso_secret if sso_secret
+
+      parsed = Rack::Utils.parse_query(payload)
+      puts "parsed: #{parsed}"
+      puts "sso.instance_variable_get(:@sso_secret): #{sso.instance_variable_get(:@sso_secret)}"
+
+      ACCESSORS.each do |k|
+        val = parsed[k.to_s]
+        val = val.to_i if FIXNUMS.include? k
+        if BOOLS.include? k
+          val = ["true", "false"].include?(val) ? val == "true" : nil
+        end
+        val = Array(val) if ARRAYS.include?(k) && !val.nil?
+        sso.send("#{k}=", val)
+      end
+
+      parsed.each do |k, v|
+        sso.custom_fields["custom.#{k}"] = v if !ACCESSORS.map(&:to_s).include?(k.to_s)
+      end
+
+      sso
+    end
+
     def self.parse(payload, sso_secret = nil)
       sso = new
       sso.sso_secret = sso_secret if sso_secret
