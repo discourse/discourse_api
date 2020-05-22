@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe DiscourseApi::API::Topics do
@@ -119,6 +120,32 @@ describe DiscourseApi::API::Topics do
       topics = subject.topics_by('test')
       expect(topics).to be_an Array
       expect(topics.first).to be_a Hash
+    end
+  end
+
+  describe "#topic_posts" do
+    before do
+      stub_get(/#{host}\/t\/57\/posts\.json/).to_return(
+        body: fixture("topic_posts.json"),
+        headers: { content_type: "application/json" }
+      )
+    end
+
+    it "requests the correct resource" do
+      subject.topic_posts(57)
+      expect(a_get("#{host}/t/57/posts.json")).to have_been_made
+    end
+
+    it 'allows scoping to specific post ids' do
+      subject.topic_posts(57, [123, 456])
+      expect(a_get("#{host}/t/57/posts.json?post_ids[]=123&post_ids[]=456")).to have_been_made
+    end
+
+    it "returns the requested topic posts" do
+      body = subject.topic_posts(57, [123])
+      expect(body).to be_a Hash
+      expect(body['post_stream']['posts']).to be_an Array
+      expect(body['post_stream']['posts'].first).to be_a Hash
     end
   end
 end

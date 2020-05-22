@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe DiscourseApi::API::Categories do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user" )}
+  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#categories" do
     before do
@@ -42,8 +43,8 @@ describe DiscourseApi::API::Categories do
   describe '#category_top_topics' do
     before do
       stub_get("#{host}/c/category-slug/l/top.json")
-      .to_return(
-        body: fixture("category_topics.json"), 
+        .to_return(
+        body: fixture("category_topics.json"),
         headers: { content_type: "application/json" }
       )
     end
@@ -57,8 +58,8 @@ describe DiscourseApi::API::Categories do
   describe '#category_new_topics' do
     before do
       stub_get("#{host}/c/category-slug/l/new.json")
-      .to_return(
-        body: fixture("category_topics.json"), 
+        .to_return(
+        body: fixture("category_topics.json"),
         headers: { content_type: "application/json" }
       )
     end
@@ -74,14 +75,14 @@ describe DiscourseApi::API::Categories do
       stub_post("#{host}/categories")
       subject.create_category(name: "test_category", color: "283890", text_color: "FFFFFF",
                               description: "This is a description",
-                              permissions: {"group_1" => 1, "admins" => 1})
+                              permissions: { "group_1" => 1, "admins" => 1 })
     end
-    
+
     it "makes a create category request" do
       expect(a_post("#{host}/categories").with(body:
           "color=283890&description=This+is+a+description&name=test_category&parent_category_id&permissions%5Badmins%5D=1&permissions%5Bgroup_1%5D=1&text_color=FFFFFF")
         ).to have_been_made
     end
-  end  
+  end
 
 end

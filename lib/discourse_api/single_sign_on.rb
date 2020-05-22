@@ -5,7 +5,7 @@ require 'openssl'
 
 module DiscourseApi
   class SingleSignOn
-    ACCESSORS = [:nonce, :name, :username, :email, :avatar_url, :avatar_force_update, :require_activation,
+    ACCESSORS = [:nonce, :name, :username, :email, :avatar_url, :profile_background_url, :card_background_url, :avatar_force_update, :require_activation,
                  :bio, :external_id, :return_sso_url, :admin, :moderator, :suppress_welcome_message, :title,
                  :add_groups, :remove_groups, :groups, :locale, :locale_force_update]
     FIXNUMS = []

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe DiscourseApi::API::Groups do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user" )}
+  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#groups" do
     before do
@@ -51,28 +52,28 @@ describe DiscourseApi::API::Groups do
       it "adds a single member by username" do
         subject.group_add(123, username: "sam")
         expect(a_request(:put, "#{host}/admin/groups/123/members.json").
-                with(body: {usernames: "sam"})
+                with(body: { usernames: "sam" })
               ).to have_been_made
       end
 
       it "adds an array of members by username" do
         subject.group_add(123, usernames: ["sam", "jeff"])
         expect(a_request(:put, "#{host}/admin/groups/123/members.json").
-                with(body: {usernames: "sam,jeff"})
+                with(body: { usernames: "sam,jeff" })
               ).to have_been_made
       end
 
       it "adds a single member by user_id" do
         subject.group_add(123, user_id: 456)
         expect(a_request(:put, "#{host}/admin/groups/123/members.json").
-                with(body: {user_ids: "456"})
+                with(body: { user_ids: "456" })
               ).to have_been_made
       end
 
       it "adds an array of members by user_id" do
         subject.group_add(123, user_id: [123, 456])
         expect(a_request(:put, "#{host}/admin/groups/123/members.json").
-                with(body: {user_ids: "123,456"})
+                with(body: { user_ids: "123,456" })
               ).to have_been_made
       end
     end
@@ -122,7 +123,7 @@ describe DiscourseApi::API::Groups do
       it "updates user's notification level for group" do
         subject.group_set_user_notification_level("mygroup", 77, 3)
         expect(a_post("#{host}/groups/mygroup/notifications?user_id=77&notification_level=3"))
-            .to have_been_made
+          .to have_been_made
       end
     end
 
