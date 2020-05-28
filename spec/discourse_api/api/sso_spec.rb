@@ -43,7 +43,7 @@ describe DiscourseApi::API::SSO do
     end
 
     it 'assigns params to sso instance' do
-      expect(DiscourseApi::SingleSignOn).to(receive(:parse_hash).with(params).and_return(sso_double))
+      allow(DiscourseApi::SingleSignOn).to(receive(:parse_hash).with(params).and_return(sso_double))
 
       subject.sync_sso(params)
 
