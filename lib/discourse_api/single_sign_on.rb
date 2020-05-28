@@ -15,6 +15,7 @@ module DiscourseApi
     #NONCE_EXPIRY_TIME = 10.minutes # minutes is a rails method and is causing an error. Is this needed in the api?
 
     attr_accessor(*ACCESSORS)
+    attr_accessor :custom_fields
     attr_writer :sso_secret, :sso_url
 
     def self.sso_secret
@@ -25,16 +26,16 @@ module DiscourseApi
       raise RuntimeError, "sso_url not implemented on class, be sure to set it on instance"
     end
 
-    def self.unsigned_parse(payload, sso_secret = nil)
+    def self.parse_hash(payload)
+      payload
       sso = new
-      sso.sso_secret = sso_secret if sso_secret
 
-      parsed = Rack::Utils.parse_query(payload)
-      puts "parsed: #{parsed}"
-      puts "sso.instance_variable_get(:@sso_secret): #{sso.instance_variable_get(:@sso_secret)}"
+      sso.sso_secret = payload.delete(:sso_secret)
+      sso.sso_url = payload.delete(:sso_url)
 
       ACCESSORS.each do |k|
-        val = parsed[k.to_s]
+        val = payload[k]
+
         val = val.to_i if FIXNUMS.include? k
         if BOOLS.include? k
           val = ["true", "false"].include?(val) ? val == "true" : nil
@@ -42,9 +43,14 @@ module DiscourseApi
         val = Array(val) if ARRAYS.include?(k) && !val.nil?
         sso.send("#{k}=", val)
       end
-
-      parsed.each do |k, v|
-        sso.custom_fields["custom.#{k}"] = v if !ACCESSORS.map(&:to_s).include?(k.to_s)
+      # Set custom_fields
+      sso.custom_fields = payload[:custom_fields]
+      # Add custom_fields (old format)
+      payload.each do |k, v|
+        if field = k[/^custom\.(.+)$/, 1]
+          # Maintain adding of .custom bug
+          sso.custom_fields["custom.#{field}"] = v
+        end
       end
 
       sso
@@ -124,11 +130,13 @@ module DiscourseApi
        payload[k] = val
       end
 
-      @custom_fields.each { |k, v| payload[k] = v.to_s } if @custom_fields
+      if @custom_fields
+        @custom_fields.each do |k, v|
+          payload["custom.#{k}"] = v.to_s
+        end
+      end
 
       Rack::Utils.build_query(payload)
     end
-
   end
-
 end

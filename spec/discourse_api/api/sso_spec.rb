@@ -17,16 +17,21 @@ describe DiscourseApi::API::SSO do
       avatar_force_update: false,
       add_groups: ['a', 'b'],
       remove_groups: ['c', 'd'],
+      # old format (which results in custom.custom.field_1 in unsigned_payload)
       'custom.field_1' => 'tomato',
-      'field_2' => 'potato'
+      # new format
+      custom_fields: {
+        field_2: 'potato'
+      }
     }
   end
-  # let(:sso_double) do
-  #   DiscourseApi::SingleSignOn.parse(
-  #     URI.encode_www_form(params),
-  #     params[:sso_secret]
-  #   )
-  # end
+  let(:expected_unsigned_payload) do
+    'name=Some+User&username=some_user&email=some%40email.com&'\
+    'avatar_url=https%3A%2F%2Fwww.website.com&external_id=abc&title=ruby'\
+    '&add_groups=a&add_groups=b&remove_groups=c&remove_groups=d&custom.field_2=potato&'\
+    'custom.custom.field_1=tomato'
+  end
+  let(:sso_double) { DiscourseApi::SingleSignOn.parse_hash(params) }
 
   describe "#sync_sso" do
     before do
@@ -34,35 +39,20 @@ describe DiscourseApi::API::SSO do
         body: fixture("user.json"),
         headers: { content_type: "application/json" }
       )
-      # expect(DiscourseApi::SingleSignOn).to(receive(:parse).and_return(sso_double))
     end
 
     it 'assigns params to sso instance' do
-      # expect(sso_double).to receive(:sso_secret=).with(params[:sso_secret]).and_call_original
-      # expect(sso_double).to receive(:name=).with(params[:name]).and_call_original
-      # expect(sso_double).to receive(:username=).with(params[:username]).and_call_original
-      # expect(sso_double).to receive(:email=).with(params[:email]).and_call_original
-      # expect(sso_double).to receive(:external_id=).with(params[:external_id]).and_call_original
-      # expect(sso_double).to receive(:suppress_welcome_message=).with(params[:suppress_welcome_message]).and_call_original
-      # expect(sso_double).to receive(:avatar_url=).with(params[:avatar_url]).and_call_original
-      # expect(sso_double).to receive(:title=).with(params[:title]).and_call_original
-      # expect(sso_double).to receive(:avatar_force_update=).with(params[:avatar_force_update]).and_call_original
-      # expect(sso_double).to receive(:add_groups=).with(params[:add_groups]).and_call_original
-      # expect(sso_double).to receive(:remove_groups=).with(params[:remove_groups]).and_call_original
-      # expect(sso_double).to receive(:custom_fields).and_call_original
-      # expect(sso_double).to receive(:payload).and_call_original
+      expect(DiscourseApi::SingleSignOn).to(receive(:parse_hash).with(params).and_return(sso_double))
 
       subject.sync_sso(params)
 
-      # expect(sso_double.instance_variable_get(:@custom_fields)).to(
-      #   eql({ 'custom.field_1' => 'tomato', 'custom.field_2' => 'potato' })
-      # )
-      # expect(sso_double.unsigned_payload).to include('custom.field_1')
+      expect(sso_double.custom_fields).to eql({ 'custom.field_1' => 'tomato', :field_2 => 'potato' })
+      expect(sso_double.unsigned_payload).to eql(expected_unsigned_payload)
     end
 
-    # it "requests the correct resource" do
-    #   subject.sync_sso({ sso_secret: "test_d7fd0429940", "custom.riffle_url" => "test" })
-    #   expect(a_post(/.*sync_sso.*/)).to have_been_made
-    # end
+    it "requests the correct resource" do
+      subject.sync_sso({ sso_secret: "test_d7fd0429940", "custom.riffle_url" => "test" })
+      expect(a_post(/.*sync_sso.*/)).to have_been_made
+    end
   end
 end
