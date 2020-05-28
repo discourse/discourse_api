@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe DiscourseApi::Client do
@@ -90,26 +91,26 @@ describe DiscourseApi::Client do
 
   describe "#post" do
     before do
-      stub_post("#{host}/test/post").with(body: { created: "object"})
+      stub_post("#{host}/test/post").with(body: { created: "object" })
       subject.api_key = 'test_d7fd0429940'
       subject.api_username = 'test_user'
     end
 
     it "allows custom post requests" do
       subject.post("/test/post", { created: "object" })
-      expect(a_post("#{host}/test/post").with(body: { created: "object"})).to have_been_made
+      expect(a_post("#{host}/test/post").with(body: { created: "object" })).to have_been_made
     end
 
     context 'when using a host with a subdirectory' do
       subject { DiscourseApi::Client.new("#{host}/forum") }
 
       before do
-        stub_post("#{host}/forum/test/post").with(body: { created: "object"})
+        stub_post("#{host}/forum/test/post").with(body: { created: "object" })
       end
 
       it "allows custom post requests" do
         subject.post("/test/post", { created: "object" })
-        expect(a_post("#{host}/forum/test/post").with(body: { created: "object"})).to have_been_made
+        expect(a_post("#{host}/forum/test/post").with(body: { created: "object" })).to have_been_made
       end
     end
   end
@@ -144,18 +145,18 @@ describe DiscourseApi::Client do
     it "catches 500 errors" do
       connection = instance_double(Faraday::Connection)
       allow(connection).to receive(:get).and_return(OpenStruct.new(env: { body: 'error page html' }, status: 500))
-      allow(subject).to receive(:connection).and_return(connection)
-      expect{subject.send(:request, :get, "/test")}.to raise_error DiscourseApi::Error
+      allow(Faraday).to receive(:new).and_return(connection)
+      expect { subject.send(:request, :get, "/test") }.to raise_error DiscourseApi::Error
     end
 
     it "catches Faraday errors" do
-      allow(subject).to receive(:connection).and_raise(Faraday::ClientError.new("BOOM!"))
-      expect{subject.send(:request, :get, "/test")}.to raise_error DiscourseApi::Error
+      allow(Faraday).to receive(:new).and_raise(Faraday::ClientError.new("BOOM!"))
+      expect { subject.send(:request, :get, "/test") }.to raise_error DiscourseApi::Error
     end
 
     it "catches JSON::ParserError errors" do
-      allow(subject).to receive(:connection).and_raise(JSON::ParserError.new("unexpected token"))
-      expect{subject.send(:request, :get, "/test")}.to raise_error DiscourseApi::Error
+      allow(Faraday).to receive(:new).and_raise(JSON::ParserError.new("unexpected token"))
+      expect { subject.send(:request, :get, "/test") }.to raise_error DiscourseApi::Error
     end
   end
 end

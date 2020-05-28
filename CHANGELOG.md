@@ -2,6 +2,36 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.40.0] - 2020-05-07
+### Fixed
+- Add missing attributes to `sync_sso`
+
+### Added
+- Add delete category method
+
+## [0.39.3] - 2020-04-30
+### Fixed
+- Add `reviewable_by_group_name` to categories
+
+## [0.39.2] - 2020-04-30
+### Fixed
+- Add `members_visibility_level` to group
+
+## [0.39.1] - 2020-03-27
+### Fixed
+- Ensure released gem version matches this commit
+
+## [0.39.0] - 2020-03-27
+### Added
+- Get latest posts across topics via posts.json
+- Allow  more options parameters when creating a category
+- Don't require topic slug when updating topic status
+- Example files now read config.yml file when present for client settings
+
+### Fixed
+- Issue with `topic_posts` and frozen strings
+- Fixed some topic and category methods
+
 ## [0.38.0] - 2019-10-18
 ### Added
 - Allow setting locale in SingleSignOn

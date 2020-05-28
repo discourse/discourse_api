@@ -9,7 +9,8 @@ module DiscourseApi
         args = API.params(args)
           .required(:name, :color, :text_color)
           .optional(:slug, :permissions, :auto_close_hours, :auto_close_based_on_last_post, :position, :email_in,
-                             :email_in_allow_strangers, :logo_url, :background_url, :allow_badges, :topic_template, :custom_fields, :description)
+                             :email_in_allow_strangers, :logo_url, :background_url, :allow_badges, :topic_template, :custom_fields, :description,
+                             :reviewable_by_group_name, :show_subcategory_list, :subcategory_list_style)
           .default(parent_category_id: nil)
         response = post("/categories", args)
         response['category']
@@ -20,10 +21,16 @@ module DiscourseApi
         args = API.params(args)
           .required(:id, :name, :color, :text_color)
           .optional(:slug, :permissions, :auto_close_hours, :auto_close_based_on_last_post, :position, :email_in,
-                             :email_in_allow_strangers, :logo_url, :background_url, :allow_badges, :topic_template, :custom_fields, :description)
+                             :email_in_allow_strangers, :logo_url, :background_url, :allow_badges, :topic_template, :custom_fields, :description,
+                             :reviewable_by_group_name, :show_subcategory_list, :subcategory_list_style)
           .default(parent_category_id: nil)
         response = put("/categories/#{category_id}", args)
         response['body']['category'] if response['body']
+      end
+
+      def delete_category(id)
+        response = delete("/categories/#{id}")
+        response[:body]['success']
       end
 
       def categories(params = {})

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe DiscourseApi::API::Badges do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user" )}
+  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#badges" do
     before do

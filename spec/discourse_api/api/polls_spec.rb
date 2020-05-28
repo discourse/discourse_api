@@ -1,14 +1,15 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe DiscourseApi::API::Polls do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user" )}
+  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#poll vote" do
     before do
       path = "#{host}/polls/vote"
       stub_put(path)
-          .to_return(body: fixture("polls_vote.json"), headers: { content_type: "application/json" })
-    
+        .to_return(body: fixture("polls_vote.json"), headers: { content_type: "application/json" })
+
     end
 
     it "requests the correct resource" do
@@ -29,7 +30,7 @@ describe DiscourseApi::API::Polls do
     before do
       path = "#{host}/polls/toggle_status"
       stub_put(path)
-          .to_return(body: fixture("polls_toggle_status.json"), headers: { content_type: "application/json" })
+        .to_return(body: fixture("polls_toggle_status.json"), headers: { content_type: "application/json" })
 
     end
 
@@ -49,7 +50,7 @@ describe DiscourseApi::API::Polls do
   describe "#poll voters" do
     before do
       stub_get("#{host}/polls/voters.json?post_id=5&poll_name=poll")
-          .to_return(body: fixture("polls_voters.json"), headers: { content_type: "application/json" })
+        .to_return(body: fixture("polls_voters.json"), headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
@@ -64,7 +65,7 @@ describe DiscourseApi::API::Polls do
       expect(voters['voters']['e539a9df8700d0d05c69356a07b768cf']).to be_an Array
       expect(voters['voters']['e539a9df8700d0d05c69356a07b768cf'][0]['id']).to eq(356)
     end
-   end
+  end
 
   end
 end
