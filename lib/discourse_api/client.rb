@@ -112,19 +112,25 @@ module DiscourseApi
 
     def connection
       @connection ||= Faraday.new connection_options do |conn|
-        # Follow redirects
-        conn.use FaradayMiddleware::FollowRedirects, limit: 5
         # Allow uploading of files
         conn.request :multipart
+
         # Convert request params to "www-form-encoded"
         conn.request :url_encoded
+
+        # Follow redirects
+        conn.response :follow_redirects, limit: 5
+
         # Parse responses as JSON
-        conn.use FaradayMiddleware::ParseJson, content_type: 'application/json'
+        conn.response :json, content_type: 'application/json'
+
         # For HTTP debugging, uncomment
         # conn.response :logger
+
         # Use Faraday's default HTTP adapter
         conn.adapter Faraday.default_adapter
-        #pass api_key and api_username on every request
+
+        # Pass api_key and api_username on every request
         unless api_username.nil?
           conn.headers['Api-Key'] = api_key
           conn.headers['Api-Username'] = api_username
