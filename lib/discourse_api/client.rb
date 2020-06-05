@@ -28,6 +28,7 @@ require 'discourse_api/api/site_settings'
 module DiscourseApi
   class Client
     attr_accessor :api_key
+    attr_accessor :basic_auth
     attr_reader :host, :api_username
 
     include DiscourseApi::API::Categories
@@ -117,6 +118,11 @@ module DiscourseApi
 
         # Convert request params to "www-form-encoded"
         conn.request :url_encoded
+
+        # Allow to interact with forums behind basic HTTP authentication
+        if basic_auth
+          conn.request :basic_auth, basic_auth[:user], basic_auth[:password]
+        end
 
         # Follow redirects
         conn.response :follow_redirects, limit: 5
