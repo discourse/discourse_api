@@ -15,6 +15,7 @@ module DiscourseApi
     #NONCE_EXPIRY_TIME = 10.minutes # minutes is a rails method and is causing an error. Is this needed in the api?
 
     attr_accessor(*ACCESSORS)
+    attr_accessor :custom_fields
     attr_writer :sso_secret, :sso_url
 
     def self.sso_secret
@@ -23,6 +24,36 @@ module DiscourseApi
 
     def self.sso_url
       raise RuntimeError, "sso_url not implemented on class, be sure to set it on instance"
+    end
+
+    def self.parse_hash(payload)
+      payload
+      sso = new
+
+      sso.sso_secret = payload.delete(:sso_secret)
+      sso.sso_url = payload.delete(:sso_url)
+
+      ACCESSORS.each do |k|
+        val = payload[k]
+
+        val = val.to_i if FIXNUMS.include? k
+        if BOOLS.include? k
+          val = ["true", "false"].include?(val) ? val == "true" : nil
+        end
+        val = Array(val) if ARRAYS.include?(k) && !val.nil?
+        sso.send("#{k}=", val)
+      end
+      # Set custom_fields
+      sso.custom_fields = payload[:custom_fields]
+      # Add custom_fields (old format)
+      payload.each do |k, v|
+        if field = k[/^custom\.(.+)$/, 1]
+          # Maintain adding of .custom bug
+          sso.custom_fields["custom.#{field}"] = v
+        end
+      end
+
+      sso
     end
 
     def self.parse(payload, sso_secret = nil)
@@ -107,7 +138,5 @@ module DiscourseApi
 
       Rack::Utils.build_query(payload)
     end
-
   end
-
 end
