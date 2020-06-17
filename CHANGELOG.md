@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.41.0] - 2020-06-17
+### Added
+- Add basic auth support
+
+### Fixed
+- Fix SSO custom field prefixes
+
+### Removed
+- Obsolete api key endpoints
+
 ## [0.40.0] - 2020-05-07
 ### Fixed
 - Add missing attributes to `sync_sso`
@@ -224,7 +234,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.8.1] - 2016-03-03
 ### Fixed
 - enable use of discourse_api to make unauthenticated requests to discourse
-  endpoints like /categories and /topics 
+  endpoints like /categories and /topics
 
 ## [0.8.0] - 2016-02-28
 ### Added
@@ -281,8 +291,3 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.1.2] - 2014-05-11
 
 - Release
-
-
-
-
-
