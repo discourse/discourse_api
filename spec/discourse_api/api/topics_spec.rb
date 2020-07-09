@@ -148,4 +148,22 @@ describe DiscourseApi::API::Topics do
       expect(body['post_stream']['posts'].first).to be_a Hash
     end
   end
+
+  describe "#create_topic_with_tags" do
+    before do
+      stub_post("#{host}/posts").to_return(body: fixture("create_topic_with_tags.json"), headers: { content_type: "application/json" })
+    end
+
+    it "makes the post request" do
+      subject.create_topic title: "Sample Topic Title", raw: "Sample topic content body", tags: ["asdf", "fdsa"]
+      expect(a_post("#{host}/posts")).to have_been_made
+    end
+
+    it "returns success" do
+      response = subject.create_topic title: "Sample Topic Title", raw: "Sample topic content body", tags: ["asdf", "fdsa"]
+      expect(response).to be_a Hash
+      expect(response['topic_id']).to eq 21
+    end
+  end
+
 end

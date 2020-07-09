@@ -24,3 +24,13 @@ client.create_topic(
   title: "Your Favorite Color?",
   raw: "[poll name=color]\n- Green\n- Blue\n- Red\n[/poll]"
 )
+
+# Create Topic with Tags
+client.create_topic(
+  category: 1,
+  skip_validations: true,
+  auto_track: false,
+  title: "Concert Master: A new way to choose",
+  raw: "This is the raw markdown for my post"
+  tags: ['asdf', 'fdsa']
+)

@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.42.0] - 2020-07-09
+### Added
+- Create topics with tags
+
 ## [0.41.0] - 2020-06-17
 ### Added
 - Add basic auth support

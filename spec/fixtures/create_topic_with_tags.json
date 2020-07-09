@@ -1,0 +1,65 @@
+{
+  "id": 29,
+  "name": null,
+  "username": "blake",
+  "avatar_template": "/user_avatar/localhost/blake/{size}/3_2.png",
+  "created_at": "2020-07-09T15:52:43.802Z",
+  "cooked": "<p>cb8ee24eb3c5a81139958cf2b6bee9bd 2a7f7ea218e24c9ee6528cd383527f99 5a3006b92918946230385393a83b6005</p>",
+  "post_number": 1,
+  "post_type": 1,
+  "updated_at": "2020-07-09T15:52:43.802Z",
+  "reply_count": 0,
+  "reply_to_post_number": null,
+  "quote_count": 0,
+  "incoming_link_count": 0,
+  "reads": 0,
+  "readers_count": 0,
+  "score": 0,
+  "yours": true,
+  "topic_id": 21,
+  "topic_slug": "1412a036bfe-6480718525e-9f71f98ef46",
+  "display_username": null,
+  "primary_group_name": null,
+  "primary_group_flair_url": null,
+  "primary_group_flair_bg_color": null,
+  "primary_group_flair_color": null,
+  "version": 1,
+  "can_edit": true,
+  "can_delete": false,
+  "can_recover": false,
+  "can_wiki": true,
+  "user_title": null,
+  "actions_summary": [
+    {
+      "id": 3,
+      "can_act": true
+    },
+    {
+      "id": 4,
+      "can_act": true
+    },
+    {
+      "id": 8,
+      "can_act": true
+    },
+    {
+      "id": 7,
+      "can_act": true
+    }
+  ],
+  "moderator": false,
+  "admin": true,
+  "staff": true,
+  "user_id": 1,
+  "draft_sequence": 0,
+  "hidden": false,
+  "trust_level": 1,
+  "deleted_at": null,
+  "user_deleted": false,
+  "edit_reason": null,
+  "can_view_edit_history": true,
+  "wiki": false,
+  "reviewable_id": null,
+  "reviewable_score_count": 0,
+  "reviewable_score_pending_count": 0
+}
