@@ -110,7 +110,7 @@ module DiscourseApi
     end
 
     def deprecated(old, new)
-      warn "[DEPRECATED]: `#{old}` is deprecated. Please use `#{new}` instead." 
+      warn "[DEPRECATED]: `#{old}` is deprecated. Please use `#{new}` instead."
     end
 
     private
