@@ -16,9 +16,8 @@ response = client.create_topic(
     raw: "This is the raw markdown for my post"
 )
 
-# get topic_id and topic_slug from response
+# get topic_id from response
 topic_id = response['topic_id']
-topic_slug = response['topic_slug']
 
 ##
 # available options (guessing from reading discourse source)
@@ -28,8 +27,8 @@ topic_slug = response['topic_slug']
 
 # lock topic (note: api_username determines user that is performing action)
 params = { status: 'closed', enabled: true, api_username: "YOUR USERNAME/USERS USERNAME" }
-client.change_topic_status(topic_slug, topic_id, params)
+client.change_topic_status(topic_id, params)
 
 # unlock topic (note: api_username determines user that is performing action)
 params = { status: 'closed', enabled: false, api_username: "YOUR USERNAME/USERS USERNAME" }
-client.change_topic_status(topic_slug, topic_id, params)
+client.change_topic_status(topic_id, params)

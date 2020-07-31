@@ -42,11 +42,17 @@ module DiscourseApi
         put("/t/#{topic_id}.json", topic_id: topic_id, category_id: category_id)
       end
 
+      # TODO: Deprecated. Remove after 20201231
       def change_topic_status(topic_slug, topic_id, params = {})
+        deprecated(__method__, 'update_topic_status')
+        update_topic_status(topic_id, params)
+      end
+
+      def update_topic_status(topic_id, params = {})
         params = API.params(params)
           .required(:status, :enabled)
           .optional(:api_username)
-        put("/t/#{topic_id}/status", params.to_h)
+        put("/t/#{topic_id}/status", params)
       end
 
       def topic(id, params = {})

@@ -109,6 +109,10 @@ module DiscourseApi
       @user_agent ||= "DiscourseAPI Ruby Gem #{DiscourseApi::VERSION}"
     end
 
+    def deprecated(old, new)
+      warn "[DEPRECATED]: `#{old}` is deprecated. Please use `#{new}` instead." 
+    end
+
     private
 
     def connection

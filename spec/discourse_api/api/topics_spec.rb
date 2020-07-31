@@ -10,7 +10,7 @@ describe DiscourseApi::API::Topics do
     end
 
     it "changes the topic status" do
-      subject.change_topic_status(nil, 57, { status: 'visible', enabled: false })
+      subject.update_topic_status(57, { status: 'visible', enabled: false })
       expect(a_put("#{host}/t/57/status")).to have_been_made
     end
   end
