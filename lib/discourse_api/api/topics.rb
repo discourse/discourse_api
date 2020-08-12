@@ -68,6 +68,10 @@ module DiscourseApi
       def delete_topic(id)
         delete("/t/#{id}.json")
       end
+      
+      def publish_topic(topic_id, slug)
+        put("/pub/by-topic/#{topic_id}", published_page: { slug: slug } )
+      end
 
       def topic_posts(topic_id, post_ids = [])
         url = ["/t/#{topic_id}/posts.json"]
