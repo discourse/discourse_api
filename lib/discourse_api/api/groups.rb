@@ -60,8 +60,16 @@ module DiscourseApi
         put("/groups/#{group_id}", group: args)
       end
 
-      def groups
-        response = get("/groups.json")
+      def groups(args = {})
+        params = API.params(args)
+          .optional(:page)
+          .to_h
+
+        url = "/groups.json"
+        if params.include?(:page)
+          url += "?page=#{params[:page]}"
+        end
+        response = get(url)
         response.body
       end
 
