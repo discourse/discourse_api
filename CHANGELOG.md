@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.43.1] - 2020-11-04
+### Fixed
+- tagged verion 0.43.0 got pushed without commmit due to new master branch
+  protections in github. No, code changes here just making sure tags align with
+  commits.
+
 ## [0.43.0] - 2020-11-04
 ### Added
 - Add pagination to list groups endpoint
