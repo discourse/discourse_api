@@ -3,7 +3,7 @@ module DiscourseApi
   module API
     module Tags
       def show_tag(tag)
-        response = get("/tags/#{tag}")
+        response = get("/tag/#{tag}")
         response[:body]
       end
     end
