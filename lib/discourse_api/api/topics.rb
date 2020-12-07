@@ -78,6 +78,13 @@ module DiscourseApi
         response = get(url.join)
         response[:body]
       end
+
+      def change_owner(topic_id, params = {})
+        params = API.params(params)
+          .required(:username, :post_ids)
+
+        post("/t/#{topic_id}/change-owner.json", params)
+      end
     end
   end
 end
