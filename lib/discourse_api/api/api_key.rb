@@ -7,6 +7,13 @@ module DiscourseApi
         response.body
       end
 
+      def generate_user_api_key(args)
+        args = API.params(args)
+          .required(:key)
+          .to_h
+        response = post("/admin/api/keys", args)
+      end
+
       def generate_master_key
         response = post("/admin/api/key")
       end

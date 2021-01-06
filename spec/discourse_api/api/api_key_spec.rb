@@ -31,6 +31,20 @@ describe DiscourseApi::API::ApiKey do
     end
   end
 
+  describe "#generate_user_api_key" do
+    before do
+      url = "#{host}/admin/api/keys"
+      stub_post(url).to_return(body: fixture("generate_user_api_key.json"),
+                               headers: { content_type: "application/json" })
+    end
+
+    it "returns the generated user api key" do
+      api_key = subject.generate_user_api_key(key: { username: 'robin' })
+      expect(api_key).to be_a Hash
+      expect(api_key['key']).to have_key('key')
+    end
+  end
+
   describe "#generate_master_key" do
     before do
       url = "#{host}/admin/api/key"
