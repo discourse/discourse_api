@@ -10,77 +10,101 @@ describe DiscourseApi::API::ApiKey do
     )
   }
 
-  describe "#api" do
+  describe "#list_api_keys" do
     before do
-      url = "#{host}/admin/api.json"
-      stub_get(url).to_return(body: fixture("api.json"),
+      url = "#{host}/admin/api/keys"
+      stub_get(url).to_return(body: fixture("list_api_keys.json"),
                               headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
-      subject.api
-      url = "#{host}/admin/api.json"
+      subject.list_api_keys
+      url = "#{host}/admin/api/keys"
       expect(a_get(url)).to have_been_made
     end
 
     it "returns the requested api keys" do
-      api = subject.api
-      expect(api).to be_an Array
-      expect(api.first).to be_a Hash
-      expect(api.first).to have_key('key')
+      keys = subject.list_api_keys
+      expect(keys["keys"]).to be_an Array
+      expect(keys["keys"].first).to be_a Hash
+      expect(keys["keys"].first).to have_key('key')
     end
   end
 
-  describe "#generate_master_key" do
+  describe "#create_api_key" do
     before do
-      url = "#{host}/admin/api/key"
-      stub_post(url).to_return(body: fixture("generate_master_key.json"),
+      url = "#{host}/admin/api/keys"
+      stub_post(url).to_return(body: fixture("api_key.json"),
                                headers: { content_type: "application/json" })
     end
 
-    it "returns the generated master key" do
-      master_key = subject.generate_master_key
-      expect(master_key).to be_a Hash
-      expect(master_key['api_key']).to have_key('key')
-      expect(master_key['api_key']['user']).to eq(nil)
+    it "requests the correct resource" do
+      subject.create_api_key(key: { username: 'robin' })
+      url = "#{host}/admin/api/keys"
+      expect(a_post(url)).to have_been_made
+    end
+
+    it "returns the generated api key" do
+      api_key = subject.create_api_key(key: { username: 'robin' })
+      expect(api_key).to be_a Hash
+      expect(api_key['key']).to have_key('key')
     end
   end
 
   describe "#revoke_api_key" do
     before do
-      url = "#{host}/admin/api/key?id=10"
-      stub_delete(url).to_return(body: "",
-                                 headers: { content_type: "application/json" })
+      url = "#{host}/admin/api/keys/10/revoke"
+      stub_post(url).to_return(body: fixture("api_key.json"),
+                               headers: { content_type: "application/json" })
     end
 
     it "requests the correct resource" do
       subject.revoke_api_key(10)
-      url = "#{host}/admin/api/key?id=10"
+      url = "#{host}/admin/api/keys/10/revoke"
+      expect(a_post(url)).to have_been_made
+    end
+
+    it "returns the api key" do
+      api_key = subject.revoke_api_key(10)
+      expect(api_key['key']).to have_key('key')
+    end
+  end
+
+  describe "#undo_revoke_api_key" do
+    before do
+      url = "#{host}/admin/api/keys/10/undo-revoke"
+      stub_post(url).to_return(body: fixture("api_key.json"),
+                               headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.undo_revoke_api_key(10)
+      url = "#{host}/admin/api/keys/10/undo-revoke"
+      expect(a_post(url)).to have_been_made
+    end
+
+    it "returns the api key" do
+      api_key = subject.undo_revoke_api_key(10)
+      expect(api_key['key']).to have_key('key')
+    end
+  end
+
+  describe "#delete_api_key" do
+    before do
+      url = "#{host}/admin/api/keys/10"
+      stub_delete(url).to_return(body: '{"success": "OK"}',
+                                 headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.delete_api_key(10)
+      url = "#{host}/admin/api/keys/10"
       expect(a_delete(url)).to have_been_made
     end
 
     it "returns 200" do
-      response = subject.revoke_api_key(10)
+      response = subject.delete_api_key(10)
       expect(response['status']).to eq(200)
-    end
-  end
-
-  describe "#regenerate_api_key" do
-    before do
-      url = "#{host}/admin/api/key"
-      stub_put(url).to_return(body: fixture("regenerate_api_key.json"),
-                              headers: { content_type: "application/json" })
-    end
-
-    it "requests the correct resource" do
-      subject.regenerate_api_key(10)
-      url = "#{host}/admin/api/key"
-      expect(a_put(url)).to have_been_made
-    end
-
-    it "returns the regenerated api key" do
-      key = subject.regenerate_api_key(10)
-      expect(key['api_key']).to have_key('key')
     end
   end
 end
