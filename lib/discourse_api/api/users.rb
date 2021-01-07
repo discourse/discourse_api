@@ -52,7 +52,7 @@ module DiscourseApi
       def create_user(args)
         args = API.params(args)
           .required(:name, :email, :password, :username)
-          .optional(:active, :staged, :user_fields)
+          .optional(:active, :approved, :staged, :user_fields)
           .to_h
         post("/users", args)
       end
