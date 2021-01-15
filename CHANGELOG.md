@@ -6,16 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.45.0] - 2021-01-15
+### Added
+- Tag configuration in create_category/update_category
+- Topic#change_owner
+- Support passing approved to #create_user
+### Changed
+- API key methods use the latest endpoints
+
 ## [0.44.0] - 2020-11-13
 ### Fixed
 - Updated `show_tag` method to use new route
-
 ### Removed
 - Support for Ruby 2.3 and 2.4
 
 ## [0.43.1] - 2020-11-04
 ### Fixed
-- tagged verion 0.43.0 got pushed without commmit due to new master branch
+- Tagged version 0.43.0 got pushed without commmit due to new master branch
   protections in github. No, code changes here just making sure tags align with
   commits.
 
@@ -32,17 +39,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.41.0] - 2020-06-17
 ### Added
 - Add basic auth support
-
 ### Fixed
 - Fix SSO custom field prefixes
-
 ### Removed
 - Obsolete api key endpoints
 
 ## [0.40.0] - 2020-05-07
 ### Fixed
 - Add missing attributes to `sync_sso`
-
 ### Added
 - Add delete category method
 
@@ -64,7 +68,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow  more options parameters when creating a category
 - Don't require topic slug when updating topic status
 - Example files now read config.yml file when present for client settings
-
 ### Fixed
 - Issue with `topic_posts` and frozen strings
 - Fixed some topic and category methods
@@ -316,5 +319,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `client.category_latest_posts("category-slug")` endpoint
 
 ## [0.1.2] - 2014-05-11
-
 - Release
