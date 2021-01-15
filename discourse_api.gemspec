@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rb-inotify', '~> 0.9'
   spec.add_development_dependency 'rspec', '~> 3.4'
   spec.add_development_dependency 'simplecov', '~> 0.11'
-  spec.add_development_dependency 'webmock', '~> 2.0'
+  spec.add_development_dependency 'webmock', '~> 3.0'
   spec.add_development_dependency 'rubocop-discourse'
 
   spec.required_ruby_version = '>= 2.5.0'
