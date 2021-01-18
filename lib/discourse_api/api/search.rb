@@ -12,7 +12,7 @@ module DiscourseApi
         raise ArgumentError.new("#{term} is required but not specified") unless term
         raise ArgumentError.new("#{term} is required but not specified") unless !term.empty?
 
-        response = get('/search/query', options.merge(term: term))
+        response = get('/search', options.merge(q: term))
         response[:body]
       end
     end
