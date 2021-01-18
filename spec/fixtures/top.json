@@ -1,0 +1,108 @@
+{
+  "topic_list": {
+    "can_create_topic": false,
+    "more_topics_url": "/latest.json?page=1",
+    "draft": null,
+    "draft_key": "new_topic",
+    "draft_sequence": null,
+    "topics": [
+      {
+        "id": 1,
+        "title": "Test topic #1",
+        "fancy_title": "Test topic #1",
+        "slug": "test-topic-1",
+        "posts_count": 1,
+        "reply_count": 0,
+        "highest_post_number": 1,
+        "image_url": null,
+        "created_at": "2013-02-04T15:26:25.977-05:00",
+        "last_posted_at": "2013-02-05T12:14:17.364-05:00",
+        "bumped": true,
+        "bumped_at": "2013-02-07T13:43:11.191-05:00",
+        "unseen": false,
+        "pinned": true,
+        "excerpt": "Welcome! \n\nTry is a sandbox, a safe place to play with Discourse and its features.\n\nThis site is reset every day (or even more often). Any accounts or posts you create here will not exist tomorrow! \n\nFeel free to experim&hellip;",
+        "visible": true,
+        "closed": false,
+        "archived": false,
+        "views": 268,
+        "like_count": 14,
+        "has_best_of": false,
+        "archetype": "regular",
+        "last_poster_username": "test_user",
+        "category_id": 1,
+        "posters": [
+          {
+            "extras": null,
+            "description": "Original Poster, Most Recent Poster",
+            "user_id": 1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "title": "Test topic #2",
+        "fancy_title": "Test topic #2",
+        "slug": "test-topic-1",
+        "posts_count": 1,
+        "reply_count": 0,
+        "highest_post_number": 2,
+        "image_url": null,
+        "created_at": "2013-11-06T13:57:47.984-05:00",
+        "last_posted_at": "2013-11-06T13:57:48.111-05:00",
+        "bumped": true,
+        "bumped_at": "2013-11-06T13:57:48.111-05:00",
+        "unseen": false,
+        "pinned": false,
+        "visible": true,
+        "closed": false,
+        "archived": false,
+        "views": 1,
+        "like_count": 0,
+        "has_best_of": false,
+        "archetype": "regular",
+        "last_poster_username": "test_user",
+        "category_id": 1,
+        "posters": [
+          {
+            "extras": null,
+            "description": "Original Poster, Most Recent Poster",
+            "user_id": 1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "title": "Test topic #3",
+        "fancy_title": "Test topic #3",
+        "slug": "test-topic-3",
+        "posts_count": 1,
+        "reply_count": 0,
+        "highest_post_number": 1,
+        "image_url": null,
+        "created_at": "2013-02-04T21:46:58.194-05:00",
+        "last_posted_at": "2013-11-06T13:56:27.753-05:00",
+        "bumped": true,
+        "bumped_at": "2013-11-06T13:56:27.753-05:00",
+        "unseen": false,
+        "pinned": false,
+        "visible": true,
+        "closed": false,
+        "archived": false,
+        "views": 82,
+        "like_count": 10,
+        "has_best_of": false,
+        "archetype": "regular",
+        "last_poster_username": "test_user",
+        "category_id": 1,
+        "posters": [
+          {
+            "extras": null,
+            "description": "Original Poster, Most Recent Poster",
+            "user_id": 1
+          }
+        ]
+      }
+    ]
+  }
+}

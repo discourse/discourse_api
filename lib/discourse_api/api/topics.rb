@@ -29,6 +29,11 @@ module DiscourseApi
         response[:body]['topic_list']['topics']
       end
 
+      def top_topics(params = {})
+        response = get("/top.json", params)
+        response[:body]['topic_list']['topics']
+      end
+
       def new_topics(params = {})
         response = get("/new.json", params)
         response[:body]['topic_list']['topics']

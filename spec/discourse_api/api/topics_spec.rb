@@ -55,6 +55,29 @@ describe DiscourseApi::API::Topics do
     end
   end
 
+  describe "#top_topics" do
+    before do
+      stub_get("#{host}/top.json").to_return(body: fixture("top.json"), headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.top_topics
+      expect(a_get("#{host}/top.json")).to have_been_made
+    end
+
+    it "returns the requested topics" do
+      topics = subject.top_topics
+      expect(topics).to be_an Array
+      expect(topics.first).to be_a Hash
+    end
+
+    it "can take a hash param" do
+      topics = subject.top_topics({})
+      expect(topics).to be_an Array
+      expect(topics.first).to be_a Hash
+    end
+  end
+
   describe "#new_topics" do
     before do
       stub_get("#{host}/new.json").to_return(body: fixture("new.json"), headers: { content_type: "application/json" })
