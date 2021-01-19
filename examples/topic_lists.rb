@@ -11,6 +11,9 @@ client.api_username = config['api_username'] || "YOUR_USERNAME"
 # get latest topics
 puts client.latest_topics({})
 
+# get top topics
+puts client.top_topics
+
 # recategorize topic
 puts client.recategorize_topic(topic_id: 108, category_id: 5)
 
