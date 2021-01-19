@@ -85,4 +85,27 @@ describe DiscourseApi::API::Categories do
     end
   end
 
+  describe "#category_set_user_notification" do
+    before do
+      stub_post("#{host}/category/1/notifications").to_return(body: fixture("notification_success.json"), headers: { content_type: "application/json" })
+    end
+
+    it "makes the post request" do
+      response = subject.category_set_user_notification(id: 1, notification_level: 3)
+      expect(a_post("#{host}/category/1/notifications")).to have_been_made
+      expect(response['success']).to eq('OK')
+    end
+  end
+
+  describe "#category_set_user_notification_level" do
+    before do
+      stub_post("#{host}/category/1/notifications").to_return(body: fixture("notification_success.json"), headers: { content_type: "application/json" })
+    end
+
+    it "makes the post request" do
+      response = subject.category_set_user_notification_level(1, notification_level: 3)
+      expect(a_post("#{host}/category/1/notifications").with(body: "notification_level=3")).to have_been_made
+      expect(response['success']).to eq('OK')
+    end
+  end
 end

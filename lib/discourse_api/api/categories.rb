@@ -75,11 +75,18 @@ module DiscourseApi
         response[:body]['category']
       end
 
+      # TODO: Deprecated. Remove after 20210727
       def category_set_user_notification(args = {})
         category_id = args[:id]
         args = API.params(args)
           .required(:notification_level)
         post("/category/#{category_id}/notifications", args)
+      end
+
+      def category_set_user_notification_level(category_id, params)
+        params = API.params(params)
+          .required(:notification_level)
+        post("/category/#{category_id}/notifications", params)
       end
     end
   end
