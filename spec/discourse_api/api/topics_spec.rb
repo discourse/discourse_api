@@ -189,4 +189,15 @@ describe DiscourseApi::API::Topics do
     end
   end
 
+  describe "#topic_set_user_notification_level" do
+    before do
+      stub_post("#{host}/t/1/notifications").to_return(body: fixture("notification_success.json"), headers: { content_type: "application/json" })
+    end
+
+    it "makes the post request" do
+      response = subject.topic_set_user_notification_level(1, notification_level: 3)
+      expect(a_post("#{host}/t/1/notifications").with(body: "notification_level=3")).to have_been_made
+      expect(response['success']).to eq('OK')
+    end
+  end
 end
