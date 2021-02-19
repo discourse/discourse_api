@@ -14,6 +14,9 @@ puts client.categories()
 # get sub categories for parent category with id 2
 puts client.categories(parent_category_id: 2)
 
+# get the full categories response
+puts client.categories_full()
+
 # List topics in a category
 category_topics = client.category_latest_topics(category_slug: "test-category")
 puts category_topics

@@ -28,6 +28,25 @@ describe DiscourseApi::API::Categories do
     end
   end
 
+  describe "#categories_full" do
+    before do
+      stub_get("#{host}/categories.json")
+        .to_return(body: fixture("categories.json"), headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.categories
+      expect(a_get("#{host}/categories.json")).to have_been_made
+    end
+
+    it "returns the entire categories response" do
+      categories = subject.categories_full
+      expect(categories).to be_a Hash
+      expect(categories).to have_key 'category_list'
+      expect(categories).to have_key 'featured_users'
+    end
+  end
+
   describe '#category_latest_topics' do
     before do
       stub_get("#{host}/c/category-slug/l/latest.json")
@@ -37,6 +56,20 @@ describe DiscourseApi::API::Categories do
     it "returns the latest topics in a category" do
       latest_topics = subject.category_latest_topics(category_slug: 'category-slug')
       expect(latest_topics).to be_an Array
+    end
+  end
+
+  describe '#category_latest_topics_full' do
+    before do
+      stub_get("#{host}/c/category-slug/l/latest.json")
+        .to_return(body: fixture("category_latest_topics.json"), headers: { content_type: "application/json" })
+    end
+
+    it "returns the entire latest topics in a category response" do
+      latest_topics = subject.category_latest_topics_full(category_slug: 'category-slug')
+      expect(latest_topics).to be_a Hash
+      expect(latest_topics).to have_key 'topic_list'
+      expect(latest_topics).to have_key 'users'
     end
   end
 
@@ -55,6 +88,23 @@ describe DiscourseApi::API::Categories do
     end
   end
 
+  describe '#category_top_topics_full' do
+    before do
+      stub_get("#{host}/c/category-slug/l/top.json")
+        .to_return(
+        body: fixture("category_topics.json"),
+        headers: { content_type: "application/json" }
+      )
+    end
+
+    it "returns the entire top topics in a category response" do
+      topics = subject.category_top_topics_full('category-slug')
+      expect(topics).to be_a Hash
+      expect(topics).to have_key 'topic_list'
+      expect(topics).to have_key 'users'
+    end
+  end
+
   describe '#category_new_topics' do
     before do
       stub_get("#{host}/c/category-slug/l/new.json")
@@ -67,6 +117,23 @@ describe DiscourseApi::API::Categories do
     it "returns the new topics in a category" do
       topics = subject.category_new_topics('category-slug')
       expect(topics).to be_an Array
+    end
+  end
+
+  describe '#category_new_topics_full' do
+    before do
+      stub_get("#{host}/c/category-slug/l/new.json")
+        .to_return(
+        body: fixture("category_topics.json"),
+        headers: { content_type: "application/json" }
+      )
+    end
+
+    it "returns the new topics in a category" do
+      topics = subject.category_new_topics_full('category-slug')
+      expect(topics).to be_a Hash
+      expect(topics).to have_key 'topic_list'
+      expect(topics).to have_key 'users'
     end
   end
 

@@ -36,11 +36,24 @@ module DiscourseApi
       end
 
       def categories(params = {})
+        categories_full(params)['category_list']['categories']
+      end
+
+      def categories_full(params = {})
         response = get('/categories.json', params)
-        response[:body]['category_list']['categories']
+        response[:body]
       end
 
       def category_latest_topics(args = {})
+        response = category_latest_topics_full(args)
+        if response['errors']
+          response['errors']
+        else
+          response['topic_list']['topics']
+        end
+      end
+
+      def category_latest_topics_full(args = {})
         params = API.params(args)
           .required(:category_slug)
           .optional(:page).to_h
@@ -49,25 +62,31 @@ module DiscourseApi
           url = "#{url}?page=#{params[:page]}"
         end
         response = get(url)
-        if response[:body]['errors']
-          response[:body]['errors']
-        else
-          response[:body]['topic_list']['topics']
-        end
+        response[:body]
       end
 
       def category_top_topics(category_slug)
-        response = get("/c/#{category_slug}/l/top.json")
-        if response[:body]['errors']
-          response[:body]['errors']
+        response = category_top_topics_full(category_slug)
+        if response['errors']
+          response['errors']
         else
-          response[:body]['topic_list']['topics']
+          response['topic_list']['topics']
         end
       end
 
+      def category_top_topics_full(category_slug)
+        response = get("/c/#{category_slug}/l/top.json")
+        response[:body]
+      end
+
       def category_new_topics(category_slug)
+        response = category_new_topics_full(category_slug)
+        response['topic_list']['topics']
+      end
+
+      def category_new_topics_full(category_slug)
         response = get("/c/#{category_slug}/l/new.json")
-        response[:body]['topic_list']['topics']
+        response[:body]
       end
 
       def category(id)
