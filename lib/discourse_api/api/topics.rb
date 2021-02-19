@@ -25,18 +25,18 @@ module DiscourseApi
       end
 
       def latest_topics(params = {})
-        response = get('/latest.json', params)
-        response[:body]['topic_list']['topics']
+        response = get("/latest.json", params)
+        response[:body]["topic_list"]["topics"]
       end
 
       def top_topics(params = {})
         response = get("/top.json", params)
-        response[:body]['topic_list']['topics']
+        response[:body]["topic_list"]["topics"]
       end
 
       def new_topics(params = {})
         response = get("/new.json", params)
-        response[:body]['topic_list']['topics']
+        response[:body]["topic_list"]["topics"]
       end
 
       def rename_topic(topic_id, title)
@@ -49,7 +49,7 @@ module DiscourseApi
 
       # TODO: Deprecated. Remove after 20201231
       def change_topic_status(topic_slug, topic_id, params = {})
-        deprecated(__method__, 'update_topic_status')
+        deprecated(__method__, "update_topic_status")
         update_topic_status(topic_id, params)
       end
 
@@ -74,13 +74,13 @@ module DiscourseApi
         delete("/t/#{id}.json")
       end
 
-      def topic_posts(topic_id, post_ids = [])
+      def topic_posts(topic_id, post_ids = [], params = {})
         url = ["/t/#{topic_id}/posts.json"]
         if post_ids.count > 0
           url.push('?')
           url.push(post_ids.map { |id| "post_ids[]=#{id}" }.join('&'))
         end
-        response = get(url.join)
+        response = get(url.join, params)
         response[:body]
       end
 
