@@ -29,7 +29,9 @@ module DiscourseApi
   class Client
     attr_accessor :api_key
     attr_accessor :basic_auth
-    attr_reader :host, :api_username
+    attr_reader :host, :api_username, :timeout
+
+    DEFAULT_TIMEOUT = 30
 
     include DiscourseApi::API::Categories
     include DiscourseApi::API::Search
@@ -60,6 +62,11 @@ module DiscourseApi
       @use_relative = check_subdirectory(host)
     end
 
+    def timeout=(timeout)
+      @timeout = timeout
+      @connection.options.timeout = timeout if @connection
+    end
+
     def api_username=(api_username)
       @api_username = api_username
       @connection.headers['Api-Username'] = api_username unless @connection.nil?
@@ -68,6 +75,9 @@ module DiscourseApi
     def connection_options
       @connection_options ||= {
         url: @host,
+        request: {
+          timeout: @timeout || DEFAULT_TIMEOUT
+        },
         headers: {
           accept: 'application/json',
           user_agent: user_agent,
@@ -158,6 +168,8 @@ module DiscourseApi
       response.env
     rescue Faraday::ClientError, JSON::ParserError
       raise DiscourseApi::Error
+    rescue Faraday::ConnectionFailed
+      raise DiscourseApi::Timeout
     end
 
     def handle_error(response)
