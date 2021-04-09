@@ -200,4 +200,28 @@ describe DiscourseApi::API::Topics do
       expect(response['success']).to eq('OK')
     end
   end
+
+  describe "#bookmark_topic" do
+    before do
+      stub_put("#{host}/t/1/bookmark.json").to_return(body: "", headers: { content_type: "application/json" })
+    end
+
+    it "makes the put request" do
+      response = subject.bookmark_topic(1)
+      expect(a_put("#{host}/t/1/bookmark.json")).to have_been_made
+      expect(response.body).to eq(nil)
+    end
+  end
+
+  describe "#remove_topic_bookmark" do
+    before do
+      stub_put("#{host}/t/1/remove_bookmarks.json").to_return(body: "", headers: { content_type: "application/json" })
+    end
+
+    it "makes the put request" do
+      response = subject.remove_topic_bookmark(1)
+      expect(a_put("#{host}/t/1/remove_bookmarks.json")).to have_been_made
+      expect(response.body).to eq(nil)
+    end
+  end
 end

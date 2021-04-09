@@ -96,6 +96,14 @@ module DiscourseApi
           .required(:notification_level)
         post("/t/#{topic_id}/notifications", params)
       end
+
+      def bookmark_topic(topic_id)
+        put("/t/#{topic_id}/bookmark.json")
+      end
+
+      def remove_topic_bookmark(topic_id)
+        put("/t/#{topic_id}/remove_bookmarks.json")
+      end
     end
   end
 end
