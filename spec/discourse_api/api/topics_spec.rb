@@ -170,6 +170,14 @@ describe DiscourseApi::API::Topics do
       expect(body['post_stream']['posts']).to be_an Array
       expect(body['post_stream']['posts'].first).to be_a Hash
     end
+
+    it "can retrieve a topic posts' raw attribute" do
+      body = subject.topic_posts(57, [123], { include_raw: true })
+      expect(body).to be_a Hash
+      expect(body['post_stream']['posts']).to be_an Array
+      expect(body['post_stream']['posts'].first).to be_a Hash
+      expect(body['post_stream']['posts'].first['raw']).to be_an Array
+    end
   end
 
   describe "#create_topic_with_tags" do
