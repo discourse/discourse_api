@@ -34,6 +34,7 @@
         "read":true,
         "user_title":null,
         "actions_summary":[{"id":2,"count":3,"can_act":true}],
+        "raw": [{"type":"paragraph","children":[{"text":"This is a raw post  I've got white   space!... and emojis 😈😈😈😈😈😈"}]}],
         "moderator":false,
         "admin":false,
         "staff":false,
