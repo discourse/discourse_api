@@ -6,6 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.46.0] - 2021-04-12
+### Added
+- Allow bookmarking topics
+- Add timeout to requests
+- Add params to get_topic_posts
+
+## [0.45.1] - 2021-03-11
+### Added
+- Fetch global top topics
+- Allow setting topic notifications
+- Return full category response
+
+### Changed
+- Use new search endpoint
+
 ## [0.45.0] - 2021-01-15
 ### Added
 - Tag configuration in create_category/update_category
