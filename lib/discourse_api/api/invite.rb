@@ -14,7 +14,7 @@ module DiscourseApi
             :expires_at
           ).to_h
 
-        post("/invites", params)
+        post("/invites", args)
       end
 
       def invite_user_to_topic(params = {})
@@ -27,7 +27,7 @@ module DiscourseApi
             :custom_message
           ).to_h
 
-        post("/t/#{params[:topic_id]}/invite", params)
+        post("/t/#{params[:topic_id]}/invite", args)
       end
 
       # requires this plugin => https://github.com/discourse/discourse-invite-tokens
