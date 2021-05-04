@@ -17,9 +17,8 @@ module DiscourseApi
         post("/invites", args)
       end
 
-      def invite_user_to_topic(params = {})
+      def invite_user_to_topic(topic_id, params = {})
         args = API.params(params)
-          .required(:topic_id)
           .optional(
             :email,
             :user,
@@ -27,7 +26,7 @@ module DiscourseApi
             :custom_message
           ).to_h
 
-        post("/t/#{params[:topic_id]}/invite", args)
+        post("/t/#{topic_id}/invite", args)
       end
 
       # requires this plugin => https://github.com/discourse/discourse-invite-tokens
