@@ -17,16 +17,22 @@ module DiscourseApi
         post("/invites", args)
       end
 
-      def invite_user_to_topic(topic_id, params = {})
-        args = API.params(params)
-          .optional(
-            :email,
-            :user,
-            :group_ids,
-            :custom_message
-          ).to_h
+      # TODO: Deprecated. Remove after 20210506
+      def invite_user_to_topic(params = {})
+        deprecated(__method__, 'invite_to_topic')
+        invite_to_topic(params[:topic_id], params)
+      end
 
-        post("/t/#{topic_id}/invite", args)
+      def invite_to_topic(topic_id, params = {})
+        args = API.params(params)
+        .optional(
+          :email,
+          :user,
+          :group_ids,
+          :custom_message
+        ).to_h
+
+      post("/t/#{topic_id}/invite", args)
       end
 
       # requires this plugin => https://github.com/discourse/discourse-invite-tokens
