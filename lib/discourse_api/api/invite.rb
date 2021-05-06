@@ -17,7 +17,7 @@ module DiscourseApi
         post("/invites", args)
       end
 
-      # TODO: Deprecated. Remove after 20210506
+      # TODO: Deprecated. Remove after 20220506
       def invite_user_to_topic(params = {})
         deprecated(__method__, 'invite_to_topic')
         invite_to_topic(params[:topic_id], params)
