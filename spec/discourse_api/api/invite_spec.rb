@@ -31,4 +31,20 @@ describe DiscourseApi::API::Invite do
       expect(a_put("#{host}/invites/27")).to have_been_made
     end
   end
+
+  describe "#retrieve_invite" do
+    before do
+      stub_get("#{host}/invites/retrieve.json?email=foo@bar.com").to_return(body: fixture("retrieve_invite.json"), headers: { content_type: "application/json" })
+    end
+
+    it "requests the correct resource" do
+      subject.retrieve_invite(email: "foo@bar.com")
+      expect(a_get("#{host}/invites/retrieve.json?email=foo@bar.com")).to have_been_made
+    end
+
+    it "returns the requested topics" do
+      invites = subject.retrieve_invite(email: "foo@bar.com")
+      expect(invites).to be_an Hash
+    end
+  end
 end
