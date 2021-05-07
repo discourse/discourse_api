@@ -25,6 +25,11 @@ describe DiscourseApi::API::Topics do
       expect(a_post("#{host}/t/12/invite")).to have_been_made
     end
 
+    it "requests the correct resource with new method 'invite_to_topic'" do
+      subject.invite_to_topic(12, email: "fake_user@example.com")
+      expect(a_post("#{host}/t/12/invite")).to have_been_made
+    end
+
     it "returns success" do
       response = subject.invite_user_to_topic(email: "fake_user@example.com", topic_id: 12)
       expect(response).to be_a Hash
