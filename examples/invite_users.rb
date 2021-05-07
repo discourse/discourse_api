@@ -9,7 +9,10 @@ client.api_key = config['api_key'] || "YOUR_API_KEY"
 client.api_username = config['api_username'] || "YOUR_USERNAME"
 
 # invite user
-client.invite_user(email: "name@example.com", group_ids: "41,42")
+invite = client.invite_user(email: "name@example.com", group_ids: "41,42")
+
+#update invite
+client.update_invite(invite["id"], email: "namee@example.com")
 
 # invite to a topic
 client.invite_user_to_topic(email: "foo@bar.com", topic_id: 1)
