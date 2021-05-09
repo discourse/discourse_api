@@ -56,7 +56,7 @@ module DiscourseApi
         put("invites/#{invite_id}", args)
       end
 
-      def destroy_invite(params)
+      def destroy_invite(params = {})
         args = API.params(params).required(:id).to_h
 
         delete("/invites", args)
