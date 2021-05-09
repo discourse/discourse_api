@@ -35,7 +35,7 @@ module DiscourseApi
         post("/t/#{topic_id}/invite", args)
       end
 
-      def retrieve_invite(params)
+      def retrieve_invite(params = {})
         args = API.params(params).required(:email).to_h
 
         response = get("invites/retrieve.json", args)
