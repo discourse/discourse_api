@@ -31,4 +31,20 @@ describe DiscourseApi::API::Invite do
       expect(a_put("#{host}/invites/27")).to have_been_made
     end
   end
+
+  describe "#destroy_invite" do
+    let(:url) { "#{host}/invites?id=27" }
+
+    before do
+      stub_delete(url).to_return(
+        body: '{"success": "OK"}',
+        headers: { content_type: "application/json" }
+      )
+    end
+
+    it "destroy invite" do
+      subject.destroy_invite(id: 27)
+      expect(a_delete(url)).to have_been_made
+    end
+  end
 end
