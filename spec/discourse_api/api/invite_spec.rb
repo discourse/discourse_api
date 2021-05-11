@@ -46,5 +46,11 @@ describe DiscourseApi::API::Invite do
       invites = subject.retrieve_invite(email: "foo@bar.com")
       expect(invites).to be_an Hash
     end
+
+    it "returns the requested invite" do
+      invites = subject.retrieve_invite(email: "foo@bar.com")
+      expect(invites["email"]).to eq("foo@bar.com")
+      expect(invites).to have_key("invite_key")
+    end
   end
 end
