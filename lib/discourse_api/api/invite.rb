@@ -35,6 +35,14 @@ module DiscourseApi
         post("/t/#{topic_id}/invite", args)
       end
 
+      def retrieve_invite(params = {})
+        args = API.params(params).required(:email).to_h
+
+        response = get("invites/retrieve.json", args)
+
+        response.body
+      end
+
       # requires this plugin => https://github.com/discourse/discourse-invite-tokens
       def disposable_tokens(params = {})
         post("/invite-token/generate", params)
