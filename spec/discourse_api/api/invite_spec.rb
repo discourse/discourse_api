@@ -53,4 +53,21 @@ describe DiscourseApi::API::Invite do
       expect(invites).to have_key("invite_key")
     end
   end
+
+  describe "#resend_invite" do
+    let(:url) { "#{host}/invites/reinvite" }
+
+    before do
+      stub_post(url)
+        .to_return(
+          body: '{"success": "OK"}',
+          headers: { content_type: "application/json" }
+        )
+    end
+
+    it "resends invite" do
+      subject.resend_invite("foo@bar.com")
+      expect(a_post(url)).to have_been_made
+    end
+  end
 end

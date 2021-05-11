@@ -63,6 +63,10 @@ module DiscourseApi
 
         put("invites/#{invite_id}", args)
       end
+
+      def resend_invite(email)
+        post("invites/reinvite", { :email => email })
+      end
     end
   end
 end
