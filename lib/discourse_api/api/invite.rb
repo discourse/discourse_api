@@ -57,7 +57,7 @@ module DiscourseApi
       end
 
       def destroy_invite(invite_id)
-        delete("/invites", { :id => invite_id })
+        delete("/invites", { id: invite_id })
       end
     end
   end
