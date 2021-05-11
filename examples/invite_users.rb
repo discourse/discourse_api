@@ -22,3 +22,6 @@ client.invite_user_to_topic(email: "foo@bar.com", group_ids: "1,2,3", topic_id: 
 
 # retrieve invite
 puts client.retrieve_invite(email: "foo@bar.com")
+
+# resend all invites
+client.resend_all_invites

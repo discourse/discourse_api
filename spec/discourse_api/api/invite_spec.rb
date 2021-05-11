@@ -53,4 +53,21 @@ describe DiscourseApi::API::Invite do
       expect(invites).to have_key("invite_key")
     end
   end
+
+  describe "#resend_all_invites" do
+    let(:url) { "#{host}/invites/reinvite-all" }
+
+    before do
+      stub_post(url)
+        .to_return(
+          body: '{"success": "OK"}',
+          headers: { content_type: "application/json" }
+        )
+    end
+
+    it "resends all invites" do
+      subject.resend_all_invites
+      expect(a_post(url)).to have_been_made
+    end
+  end
 end

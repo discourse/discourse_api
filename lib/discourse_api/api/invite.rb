@@ -63,6 +63,10 @@ module DiscourseApi
 
         put("invites/#{invite_id}", args)
       end
+
+      def resend_all_invites
+        post("invites/reinvite-all")
+      end
     end
   end
 end
