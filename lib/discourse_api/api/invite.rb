@@ -65,7 +65,7 @@ module DiscourseApi
       end
 
       def resend_invite(email)
-        post("invites/reinvite", { :email => email })
+        post("invites/reinvite", { "email": email })
       end
     end
   end
