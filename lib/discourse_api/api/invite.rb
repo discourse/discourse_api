@@ -63,6 +63,10 @@ module DiscourseApi
 
         put("invites/#{invite_id}", args)
       end
+
+      def destroy_all_expired_invites
+        post("invites/destroy-all-expired")
+      end
     end
   end
 end
