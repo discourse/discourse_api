@@ -11,7 +11,7 @@ client.api_username = config['api_username'] || "YOUR_USERNAME"
 # invite user
 invite = client.invite_user(email: "name@example.com", group_ids: "41,42")
 
-#update invite
+# update invite
 client.update_invite(invite["id"], email: "namee@example.com")
 
 # invite to a topic
@@ -20,5 +20,5 @@ client.invite_user_to_topic(email: "foo@bar.com", topic_id: 1)
 # if the user is an admin you may invite to a group as well
 client.invite_user_to_topic(email: "foo@bar.com", group_ids: "1,2,3", topic_id: 1)
 
-#destroy invite
-client.destroy_invite(id: invite["id"])
+# destroy invite
+client.destroy_invite(invite["id"])

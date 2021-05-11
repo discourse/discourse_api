@@ -43,7 +43,7 @@ describe DiscourseApi::API::Invite do
     end
 
     it "destroy invite" do
-      subject.destroy_invite(id: 27)
+      subject.destroy_invite(27)
       expect(a_delete(url)).to have_been_made
     end
   end
