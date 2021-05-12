@@ -67,6 +67,18 @@ module DiscourseApi
       def destroy_all_expired_invites
         post("invites/destroy-all-expired")
       end
+
+      def resend_all_invites
+        post("invites/reinvite-all")
+      end
+
+      def resend_invite(email)
+        post("invites/reinvite", { "email": email })
+      end
+
+      def destroy_invite(invite_id)
+        delete("/invites", { id: invite_id })
+      end
     end
   end
 end

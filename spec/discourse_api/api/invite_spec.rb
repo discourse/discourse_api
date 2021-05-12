@@ -70,4 +70,54 @@ describe DiscourseApi::API::Invite do
       expect(a_post(url)).to have_been_made
     end
   end
+
+  describe "#resend_all_invites" do
+    let(:url) { "#{host}/invites/reinvite-all" }
+
+    before do
+      stub_post(url)
+        .to_return(
+          body: '{"success": "OK"}',
+          headers: { content_type: "application/json" }
+        )
+    end
+
+    it "resends all invites" do
+      subject.resend_all_invites
+      expect(a_post(url)).to have_been_made
+    end
+  end
+
+  describe "#resend_invite" do
+    let(:url) { "#{host}/invites/reinvite" }
+
+    before do
+      stub_post(url)
+        .to_return(
+          body: '{"success": "OK"}',
+          headers: { content_type: "application/json" }
+        )
+    end
+
+    it "resends invite" do
+      subject.resend_invite("foo@bar.com")
+      expect(a_post(url)).to have_been_made
+    end
+  end
+
+  describe "#destroy_invite" do
+    let(:url) { "#{host}/invites?id=27" }
+
+    before do
+      stub_delete(url).to_return(
+        body: '{"success": "OK"}',
+        headers: { content_type: "application/json" }
+      )
+    end
+
+    it "destroys the invite" do
+      subject.destroy_invite(27)
+      expect(a_delete(url)).to have_been_made
+    end
+  end
 end
