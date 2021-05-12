@@ -53,4 +53,21 @@ describe DiscourseApi::API::Invite do
       expect(invites).to have_key("invite_key")
     end
   end
+
+  describe "#destroy_all_expired_invites" do
+    let(:url) { "#{host}/invites/destroy-all-expired" }
+
+    before do
+      stub_post(url)
+        .to_return(
+          body: '{"success": "OK"}',
+          headers: { content_type: "application/json" }
+        )
+    end
+
+    it "destroys all expired invites" do
+      subject.destroy_all_expired_invites
+      expect(a_post(url)).to have_been_made
+    end
+  end
 end
