@@ -3,13 +3,20 @@ module DiscourseApi
   module API
     module PrivateMessages
 
-      # :target_usernames REQUIRED comma separated list of usernames
+      # TODO: Deprecated. Remove after 20220628
+      def create_private_message(args = {})
+        deprecated(__method__, 'create_pm')
+        args[:target_recipients] = args.delete :target_usernames
+        create_pm(args.to_h)
+      end
+
+      # :target_recipients REQUIRED comma separated list of usernames
       # :category OPTIONAL name of category, not ID
       # :created_at OPTIONAL seconds since epoch.
-      def create_private_message(args = {})
+      def create_pm(args = {})
         args[:archetype] = 'private_message'
         args = API.params(args)
-          .required(:title, :raw, :target_usernames, :archetype)
+          .required(:title, :raw, :target_recipients, :archetype)
           .optional(:category, :created_at, :api_username)
         post("/posts", args.to_h)
       end
