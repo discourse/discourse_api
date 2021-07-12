@@ -13,3 +13,6 @@ client.category_set_user_notification_level(1, notification_level: 3)
 
 # mute a topic
 client.topic_set_user_notification_level(1, notification_level: 0)
+
+# get user notifications
+client.notifications(username: 'discourse')

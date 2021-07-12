@@ -2,8 +2,11 @@
 module DiscourseApi
   module API
     module Notifications
-      def notifications
-        response = get('/notifications.json')
+      def notifications(params = {})
+        params = API.params(params)
+          .optional(:username, :recent, :limit, :offset, :filter)
+
+        response = get('/notifications.json', params)
         response[:body]
       end
     end
