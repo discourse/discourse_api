@@ -38,7 +38,6 @@ module DiscourseApi
                             :messageable_level,
                             :name,
                             :automatic_membership_email_domains,
-                            :automatic_membership_retroactive,
                             :title,
                             :primary_group,
                             :grant_trust_level,
@@ -47,17 +46,29 @@ module DiscourseApi
                             :flair_bg_color,
                             :flair_color,
                             :bio_raw,
-                            :members_visibility_level,
+                            :visibility_level,
                             :public_admission,
                             :public_exit,
                             :allow_membership_requests,
                             :full_name,
                             :default_notification_level,
-                            :usernames,
-                            :owner_usernames,
                             :membership_request_template)
           .to_h
         put("/groups/#{group_id}", group: args)
+      end
+
+      def group_add_owners(group_id, args)
+        args = API.params(args)
+          .required(:usernames)
+          .to_h
+        put("/admin/groups/#{group_id}/owners.json", group: args)
+      end
+
+      def group_remove_owners(group_id, args)
+        args = API.params(args)
+          .required(:usernames)
+          .to_h
+        delete("/admin/groups/#{group_id}/owners.json", group: args)
       end
 
       def groups(args = {})
