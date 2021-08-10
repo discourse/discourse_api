@@ -91,6 +91,35 @@ describe DiscourseApi::API::Groups do
       end
     end
 
+    describe "add owners" do
+      let(:url) { "#{host}/admin/groups/123/owners.json" }
+
+      before do
+        stub_put(url)
+      end
+
+      it "makes the member an owner" do
+        subject.group_add_owners(123, usernames: "sam")
+        params = escape_params("group[usernames]" => "sam")
+        expect(a_request(:put, "#{host}/admin/groups/123/owners.json").
+                with(body: params)
+              ).to have_been_made
+      end
+    end
+
+    describe "remove owners" do
+      let(:url) { "#{host}/admin/groups/123/owners.json?group%5Busernames%5D=sam" }
+
+      before do
+        stub_delete(url)
+      end
+
+      it "removes the owner role from the group member" do
+        subject.group_remove_owners(123, usernames: "sam")
+        expect(a_delete(url)).to have_been_made
+      end
+    end
+
     describe "group members" do
       it "list members" do
         stub_get("#{host}/groups/mygroup/members.json?limit=100&offset=0").to_return(body: fixture("members_0.json"), headers: { content_type: "application/json" })
