@@ -41,6 +41,12 @@ describe DiscourseApi::Client do
         expect(subject.send(:connection).options.timeout).to eq(25)
       end
     end
+
+    it "raises DiscourseApi::Timeout" do
+      stub_get("#{host}/t/1.json").to_timeout
+
+      expect { subject.topic(1) }.to raise_error(DiscourseApi::Timeout)
+    end
   end
 
   describe "#api_key" do
