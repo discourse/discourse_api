@@ -102,6 +102,10 @@ module DiscourseApi
         put("/admin/users/#{user_id}/unsuspend")
       end
 
+      def anonymize(user_id)
+        put("/admin/users/#{user_id}/anonymize")
+      end
+
       def delete_user(user_id, delete_posts = false)
         delete("/admin/users/#{user_id}.json?delete_posts=#{delete_posts}")
       end

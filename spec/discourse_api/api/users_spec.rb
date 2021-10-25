@@ -306,6 +306,20 @@ describe DiscourseApi::API::Users do
     end
   end
 
+  describe "#anonymize" do
+    before do
+      url = "#{host}/admin/users/11/anonymize"
+      stub_put(url).to_return(body: '', status: 200)
+    end
+
+    it "makes the correct put request" do
+      result = subject.anonymize(11)
+      url = "#{host}/admin/users/11/anonymize"
+      expect(a_put(url)).to have_been_made
+      expect(result.status).to eq(200)
+    end
+  end
+
   describe "#delete_user" do
     before do
       url = "#{host}/admin/users/11.json?delete_posts=true"
