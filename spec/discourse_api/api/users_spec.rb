@@ -316,7 +316,6 @@ describe DiscourseApi::API::Users do
       result = subject.anonymize(11)
       url = "#{host}/admin/users/11/anonymize"
       expect(a_put(url)).to have_been_made
-      expect(result.body).to eq('{"success": true}')
       expect(result.status).to eq(200)
     end
   end
