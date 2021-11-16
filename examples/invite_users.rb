@@ -18,10 +18,10 @@ client.update_invite(invite["id"], email: "namee@example.com")
 client.resend_invite("namee@example.com")
 
 # invite to a topic
-client.invite_user_to_topic(email: "foo@bar.com", topic_id: 1)
+client.invite_to_topic(1, email: "foo@bar.com")
 
 # if the user is an admin you may invite to a group as well
-client.invite_user_to_topic(email: "foo@bar.com", group_ids: "1,2,3", topic_id: 1)
+client.invite_to_topic(1, email: "foo@bar.com", group_ids: "1,2,3")
 
 # retrieve invite
 puts client.retrieve_invite(email: "foo@bar.com")

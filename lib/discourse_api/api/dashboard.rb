@@ -14,10 +14,10 @@ module DiscourseApi
         topics = global_reports[3]
         posts = global_reports[4]
 
-        totals = {
+        {
           'users' => users['total'],
           'topics' => topics['total'],
-          'posts' => posts['total']
+          'posts' => posts['total'],
         }
       end
     end
