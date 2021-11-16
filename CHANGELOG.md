@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pass params to get notifications API
 
 ### Deprecated
-- `invite_user_to_topic` has been deprecated, use `invite_user` instead.
+- `invite_user_to_topic` has been deprecated, use `invite_to_topic` instead.
 - `create_private_message` has been deprecated, use `create_pm` instead.
 
 ## [0.46.0] - 2021-04-12
