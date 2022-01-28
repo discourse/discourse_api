@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.48.0] - 2022-01-28
+### Added
+- `group_add_owners` method (#239)
+- `group_remove_owners` method (#239)
+- `anonymize` method (#241)
+
+### Changed
+- `DiscourseApi::Timeout` error now inherits from `DiscourseApi::Error` (#240)
+- `DiscourseApi::SingleSignOn#groups` now returns an array of strings where each string is a group name, rather than an array with a single string that contains all the groups comma-concatenated (#243)
+
 ## [0.47.0] - 2021-07-19
 ### Added
 - Update invite method
