@@ -27,10 +27,10 @@ describe DiscourseApi::API::SSO do
     }
   end
   let(:expected_unsigned_payload) do
-    'name=Some+User&username=some_user&email=some%40email.com&'\
-    'avatar_url=https%3A%2F%2Fwww.website.com&external_id=abc&title=ruby'\
-    '&add_groups=a&add_groups=b&remove_groups=c&remove_groups=d&custom.field_2=potato&'\
-    'custom.custom.field_1=tomato'
+    'add_groups=a&add_groups=b&avatar_url=https%3A%2F%2Fwww.website.com'\
+    '&email=some%40email.com&external_id=abc&name=Some+User&remove_groups=c'\
+    '&remove_groups=d&title=ruby&username=some_user&custom.field_2=potato'\
+    '&custom.custom.field_1=tomato'
   end
   let(:sso_double) { DiscourseApi::SingleSignOn.parse_hash(params) }
 
