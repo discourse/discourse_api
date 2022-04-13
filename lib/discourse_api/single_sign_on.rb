@@ -5,12 +5,46 @@ require 'openssl'
 
 module DiscourseApi
   class SingleSignOn
-    ACCESSORS = [:nonce, :name, :username, :email, :avatar_url, :profile_background_url, :card_background_url, :avatar_force_update, :require_activation,
-                 :bio, :external_id, :return_sso_url, :admin, :moderator, :suppress_welcome_message, :title,
-                 :add_groups, :remove_groups, :groups, :locale, :locale_force_update]
+    ACCESSORS = [
+      :add_groups,
+      :admin,
+      :avatar_force_update,
+      :avatar_url,
+      :bio,
+      :card_background_url,
+      :confirmed_2fa,
+      :email,
+      :external_id,
+      :groups,
+      :locale,
+      :locale_force_update,
+      :moderator,
+      :name,
+      :no_2fa_methods,
+      :nonce,
+      :profile_background_url,
+      :remove_groups,
+      :require_2fa,
+      :require_activation,
+      :return_sso_url,
+      :suppress_welcome_message,
+      :title,
+      :username,
+    ]
+
     FIXNUMS = []
-    BOOLS = [:avatar_force_update, :admin, :moderator, :require_activation, :suppress_welcome_message,
-      :locale_force_update]
+
+    BOOLS = [
+      :admin,
+      :avatar_force_update,
+      :confirmed_2fa,
+      :locale_force_update,
+      :moderator,
+      :no_2fa_methods,
+      :require_2fa,
+      :require_activation,
+      :suppress_welcome_message,
+    ]
     ARRAYS = [:groups]
     #NONCE_EXPIRY_TIME = 10.minutes # minutes is a rails method and is causing an error. Is this needed in the api?
 
