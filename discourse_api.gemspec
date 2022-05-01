@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'faraday', '~> 1.0'
   spec.add_runtime_dependency 'faraday_middleware', '~> 1.0'
   spec.add_runtime_dependency 'rack', '>= 1.6'
+  spec.add_runtime_dependency 'uri'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'guard', '~> 2.14'
@@ -30,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.4'
   spec.add_development_dependency 'simplecov', '~> 0.11'
   spec.add_development_dependency 'webmock', '~> 3.0'
-  spec.add_development_dependency 'rubocop-discourse', '~> 2.4.1'
+  spec.add_development_dependency 'rubocop-discourse', '~> 2.5.0'
 
-  spec.required_ruby_version = '>= 2.5.0'
+  spec.required_ruby_version = '>= 2.6.0'
 end

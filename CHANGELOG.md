@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2022-05-01
+### Changed
+- The package now requires ruby 2.6+
+
 ## [0.48.1] - 2022-04-13
 ### Added
 - New attributes for Discourse Connect (aka SSO)
@@ -65,7 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.43.1] - 2020-11-04
 ### Fixed
-- Tagged version 0.43.0 got pushed without commmit due to new master branch
+- Tagged version 0.43.0 got pushed without commit due to new master branch
   protections in github. No, code changes here just making sure tags align with
   commits.
 
@@ -118,7 +122,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.38.0] - 2019-10-18
 ### Added
 - Allow setting locale in SingleSignOn
-- Optional param to group memebrs to include owners as well as members
+- Optional param to group members to include owners as well as members
 
 ## [0.37.0] - 2019-09-23
 ### Added
@@ -131,7 +135,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added poll methods
 ### Fixed
 - Updated create topic example
-- Fixed capialization for header auth keys
+- Fixed capitalization for header auth keys
 
 ## [0.35.0] - 2019-05-15
 ### Added
@@ -293,7 +297,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - group_members: Allows you to retrieve more than 100 users with pagination (offset &
   limit)
 ### Fixed
-- Deprication warning with SimpleCov
+- Deprecation warning with SimpleCov
 - updated rack dependency and added ruby 2.3 to travis config
 
 ## [0.9.1] - 2016-03-23
