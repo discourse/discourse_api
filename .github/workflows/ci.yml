@@ -4,7 +4,6 @@ on:
   pull_request:
   push:
     branches:
-      - master
       - main
 
 jobs:
@@ -14,13 +13,13 @@ jobs:
     strategy:
       matrix:
         ruby:
-          - 2.5
-          - 2.6
-          - 2.7
-          - 3.0
+          - '2.6'
+          - '2.7'
+          - '3.0'
+          - '3.1'
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup ruby
         uses: ruby/setup-ruby@v1
@@ -35,15 +34,15 @@ jobs:
         run: bundle exec rake test
 
   publish:
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Release Gem
-        uses: discourse/publish-rubygems-action@v2-beta
+        uses: discourse/publish-rubygems-action@v2
         env:
           RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
           GIT_EMAIL: team@discourse.org
