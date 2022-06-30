@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2022-07-01
+### Changed
+- `DiscourseApi::SingleSignOn.parse` now raises `DiscourseApi::SingleSignOn::ParseError` instead of `RuntimeError` when there's a signature mismatch or `sso_secret` or `sso_url` are missing. `DiscourseApi::SingleSignOn::ParseError` inherits from `RuntimeError` so existing `rescue` blocks will continue to work.
+
 ## [1.0.0] - 2022-05-01
 ### Changed
 - The package now requires ruby 2.6+

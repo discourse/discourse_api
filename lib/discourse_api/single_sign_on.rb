@@ -5,6 +5,13 @@ require 'openssl'
 
 module DiscourseApi
   class SingleSignOn
+    # We inherit from RuntimeError instead of StandardError for backward
+    # compatibility reasons. We used to raise RuntimeError but that was too
+    # generic and could be raised by libraries/code from other sources so we
+    # changed it to a custom error (ParseError) to make it possible to rescue
+    # exceptions that only relate to parsing errors
+    class ParseError < RuntimeError; end
+
     ACCESSORS = [
       :add_groups,
       :admin,
@@ -52,11 +59,11 @@ module DiscourseApi
     attr_writer :custom_fields, :sso_secret, :sso_url
 
     def self.sso_secret
-      raise RuntimeError, "sso_secret not implemented on class, be sure to set it on instance"
+      raise ParseError, "sso_secret not implemented on class, be sure to set it on instance"
     end
 
     def self.sso_url
-      raise RuntimeError, "sso_url not implemented on class, be sure to set it on instance"
+      raise ParseError, "sso_url not implemented on class, be sure to set it on instance"
     end
 
     def self.parse_hash(payload)
@@ -98,9 +105,9 @@ module DiscourseApi
       if sso.sign(parsed["sso"]) != parsed["sig"]
         diags = "\n\nsso: #{parsed["sso"]}\n\nsig: #{parsed["sig"]}\n\nexpected sig: #{sso.sign(parsed["sso"])}"
         if parsed["sso"] =~ /[^a-zA-Z0-9=\r\n\/+]/m
-          raise RuntimeError, "The SSO field should be Base64 encoded, using only A-Z, a-z, 0-9, +, /, and = characters. Your input contains characters we don't understand as Base64, see http://en.wikipedia.org/wiki/Base64 #{diags}"
+          raise ParseError, "The SSO field should be Base64 encoded, using only A-Z, a-z, 0-9, +, /, and = characters. Your input contains characters we don't understand as Base64, see http://en.wikipedia.org/wiki/Base64 #{diags}"
         else
-          raise RuntimeError, "Bad signature for payload #{diags}"
+          raise ParseError, "Bad signature for payload #{diags}"
         end
       end
 
