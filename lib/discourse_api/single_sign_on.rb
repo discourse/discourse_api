@@ -11,6 +11,7 @@ module DiscourseApi
     # changed it to a custom error (ParseError) to make it possible to rescue
     # exceptions that only relate to parsing errors
     class ParseError < RuntimeError; end
+    class MissingConfigError < RuntimeError; end
 
     ACCESSORS = [
       :add_groups,
@@ -59,11 +60,11 @@ module DiscourseApi
     attr_writer :custom_fields, :sso_secret, :sso_url
 
     def self.sso_secret
-      raise ParseError, "sso_secret not implemented on class, be sure to set it on instance"
+      raise MissingConfigError, "sso_secret not implemented on class, be sure to set it on instance"
     end
 
     def self.sso_url
-      raise ParseError, "sso_url not implemented on class, be sure to set it on instance"
+      raise MissingConfigError, "sso_url not implemented on class, be sure to set it on instance"
     end
 
     def self.parse_hash(payload)
