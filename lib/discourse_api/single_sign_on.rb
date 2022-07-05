@@ -5,11 +5,6 @@ require 'openssl'
 
 module DiscourseApi
   class SingleSignOn
-    # We inherit from RuntimeError instead of StandardError for backward
-    # compatibility reasons. We used to raise RuntimeError but that was too
-    # generic and could be raised by libraries/code from other sources so we
-    # changed it to a custom error (ParseError) to make it possible to rescue
-    # exceptions that only relate to parsing errors
     class ParseError < RuntimeError; end
     class MissingConfigError < RuntimeError; end
 
