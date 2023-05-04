@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'faraday'
-require 'faraday_middleware'
+require 'faraday/follow_redirects'
+require 'faraday/multipart'
 require 'json'
 require 'uri'
 require 'discourse_api/version'
@@ -135,7 +136,7 @@ module DiscourseApi
 
         # Allow to interact with forums behind basic HTTP authentication
         if basic_auth
-          conn.request :basic_auth, basic_auth[:user], basic_auth[:password]
+          conn.request :authorization, :basic, basic_auth[:user], basic_auth[:password]
         end
 
         # Follow redirects

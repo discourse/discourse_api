@@ -18,8 +18,9 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'faraday', '~> 1.0'
-  spec.add_runtime_dependency 'faraday_middleware', '~> 1.0'
+  spec.add_runtime_dependency 'faraday', '~> 2.7.4'
+  spec.add_runtime_dependency 'faraday-follow_redirects'
+  spec.add_runtime_dependency 'faraday-multipart'
   spec.add_runtime_dependency 'rack', '>= 1.6'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
