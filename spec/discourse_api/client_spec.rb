@@ -29,13 +29,13 @@ describe DiscourseApi::Client do
   end
 
   describe "#timeout" do
-    context "custom timeout" do
+    context "with a custom timeout" do
       it "is set to Faraday connection" do
         expect(subject.send(:connection).options.timeout).to eq(30)
       end
     end
 
-    context "default timeout" do
+    context "with the default timeout" do
       it "is set to Faraday connection" do
         subject.timeout = 25
         expect(subject.send(:connection).options.timeout).to eq(25)

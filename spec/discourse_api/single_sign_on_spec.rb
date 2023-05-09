@@ -3,13 +3,13 @@
 require "spec_helper"
 
 describe DiscourseApi::SingleSignOn do
-  context "::MissingConfigError" do
+  describe DiscourseApi::SingleSignOn::MissingConfigError do
     it "inherits from RuntimeError for backward compatibility" do
       expect(DiscourseApi::SingleSignOn::MissingConfigError).to be < RuntimeError
     end
   end
 
-  context "::ParseError" do
+  describe DiscourseApi::SingleSignOn::ParseError do
     it "inherits from RuntimeError for backward compatibility" do
       expect(DiscourseApi::SingleSignOn::ParseError).to be < RuntimeError
     end
