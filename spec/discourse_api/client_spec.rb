@@ -50,25 +50,25 @@ describe DiscourseApi::Client do
   end
 
   describe "#api_key" do
-    it "is publically accessible" do
+    it "is publicly accessible" do
       subject.api_key = "test_d7fd0429940"
       expect(subject.api_key).to eq("test_d7fd0429940")
     end
   end
 
   describe "#api_username" do
-    it "is publically accessible" do
+    it "is publicly accessible" do
       subject.api_username = "test_user"
       expect(subject.api_username).to eq("test_user")
     end
   end
 
   describe "#host" do
-    it "is publically readable" do
+    it "is publicly readable" do
       expect(subject.host).to eq("#{host}")
     end
 
-    it "is not publically writeable" do
+    it "is not publicly writeable" do
       expect(subject).not_to respond_to(:host=)
     end
   end
