@@ -31,6 +31,6 @@ client.create_topic(
   skip_validations: true,
   auto_track: false,
   title: "Concert Master: A new way to choose",
-  raw: "This is the raw markdown for my post"
+  raw: "This is the raw markdown for my post",
   tags: ['asdf', 'fdsa']
 )
