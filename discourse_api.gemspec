@@ -31,6 +31,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov', '~> 0.11'
   spec.add_development_dependency 'webmock', '~> 3.0'
   spec.add_development_dependency 'rubocop-discourse', '~> 3.2.0'
+  spec.add_development_dependency 'syntax_tree', '~> 6.1.1'
+  spec.add_development_dependency 'syntax_tree-disable_ternary', '~> 1.0.0'
 
   spec.required_ruby_version = '>= 2.7.0'
 end
