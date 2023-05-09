@@ -1,17 +1,14 @@
 # frozen_string_literal: true
-require 'simplecov'
+require "simplecov"
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-  SimpleCov::Formatter::HTMLFormatter
-])
+SimpleCov.formatter =
+  SimpleCov::Formatter::MultiFormatter.new([SimpleCov::Formatter::HTMLFormatter])
 
-SimpleCov.start do
-  add_filter "/spec/"
-end
+SimpleCov.start { add_filter "/spec/" }
 
-require 'discourse_api'
-require 'rspec'
-require 'webmock/rspec'
+require "discourse_api"
+require "rspec"
+require "webmock/rspec"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
@@ -22,7 +19,7 @@ end
 WebMock.disable_net_connect!(allow_localhost: true)
 
 def host
-  'http://localhost:3000'
+  "http://localhost:3000"
 end
 
 def a_delete(path)
@@ -62,11 +59,9 @@ def fixture_path
 end
 
 def fixture(file)
-  File.new(fixture_path + '/' + file)
+  File.new(fixture_path + "/" + file)
 end
 
 def escape_params(params)
-  params.map do |key, value|
-    [CGI.escape(key), value].join('=')
-  end.join('&')
+  params.map { |key, value| [CGI.escape(key), value].join("=") }.join("&")
 end

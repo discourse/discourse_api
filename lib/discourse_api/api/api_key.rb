@@ -8,9 +8,7 @@ module DiscourseApi
       end
 
       def create_api_key(args)
-        args = API.params(args)
-          .required(:key)
-          .to_h
+        args = API.params(args).required(:key).to_h
         post("/admin/api/keys", args)
       end
 

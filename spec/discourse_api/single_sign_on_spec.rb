@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 describe DiscourseApi::SingleSignOn do
   context "::MissingConfigError" do
@@ -17,17 +17,17 @@ describe DiscourseApi::SingleSignOn do
 
   describe ".sso_secret" do
     it "raises MissingConfigError when sso_secret is not present" do
-      expect {
-        described_class.sso_secret
-      }.to raise_error(DiscourseApi::SingleSignOn::MissingConfigError)
+      expect { described_class.sso_secret }.to raise_error(
+        DiscourseApi::SingleSignOn::MissingConfigError,
+      )
     end
   end
 
   describe ".sso_url" do
     it "raises MissingConfigError when sso_url is not present" do
-      expect {
-        described_class.sso_url
-      }.to raise_error(DiscourseApi::SingleSignOn::MissingConfigError)
+      expect { described_class.sso_url }.to raise_error(
+        DiscourseApi::SingleSignOn::MissingConfigError,
+      )
     end
   end
 
@@ -35,9 +35,9 @@ describe DiscourseApi::SingleSignOn do
     it "raises ParseError when there's a signature mismatch" do
       sso = described_class.new
       sso.sso_secret = "abcd"
-      expect {
-        described_class.parse(sso.payload, "dcba")
-      }.to raise_error(DiscourseApi::SingleSignOn::ParseError)
+      expect { described_class.parse(sso.payload, "dcba") }.to raise_error(
+        DiscourseApi::SingleSignOn::ParseError,
+      )
     end
   end
 end
