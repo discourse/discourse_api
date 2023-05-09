@@ -15,7 +15,7 @@ describe DiscourseApi::SingleSignOn do
     end
   end
 
-  context ".sso_secret" do
+  describe ".sso_secret" do
     it "raises MissingConfigError when sso_secret is not present" do
       expect {
         described_class.sso_secret
@@ -23,7 +23,7 @@ describe DiscourseApi::SingleSignOn do
     end
   end
 
-  context ".sso_url" do
+  describe ".sso_url" do
     it "raises MissingConfigError when sso_url is not present" do
       expect {
         described_class.sso_url
@@ -31,7 +31,7 @@ describe DiscourseApi::SingleSignOn do
     end
   end
 
-  context ".parse" do
+  describe ".parse" do
     it "raises ParseError when there's a signature mismatch" do
       sso = described_class.new
       sso.sso_secret = "abcd"
