@@ -1,29 +1,29 @@
 # frozen_string_literal: true
-require 'faraday'
-require 'faraday_middleware'
-require 'json'
-require 'uri'
-require 'discourse_api/version'
-require 'discourse_api/api/categories'
-require 'discourse_api/api/search'
-require 'discourse_api/api/sso'
-require 'discourse_api/api/tags'
-require 'discourse_api/api/topics'
-require 'discourse_api/api/polls'
-require 'discourse_api/api/posts'
-require 'discourse_api/api/users'
-require 'discourse_api/api/groups'
-require 'discourse_api/api/invite'
-require 'discourse_api/api/private_messages'
-require 'discourse_api/api/notifications'
-require 'discourse_api/api/badges'
-require 'discourse_api/api/email'
-require 'discourse_api/api/api_key'
-require 'discourse_api/api/backups'
-require 'discourse_api/api/dashboard'
-require 'discourse_api/api/uploads'
-require 'discourse_api/api/user_actions'
-require 'discourse_api/api/site_settings'
+require "faraday"
+require "faraday_middleware"
+require "json"
+require "uri"
+require "discourse_api/version"
+require "discourse_api/api/categories"
+require "discourse_api/api/search"
+require "discourse_api/api/sso"
+require "discourse_api/api/tags"
+require "discourse_api/api/topics"
+require "discourse_api/api/polls"
+require "discourse_api/api/posts"
+require "discourse_api/api/users"
+require "discourse_api/api/groups"
+require "discourse_api/api/invite"
+require "discourse_api/api/private_messages"
+require "discourse_api/api/notifications"
+require "discourse_api/api/badges"
+require "discourse_api/api/email"
+require "discourse_api/api/api_key"
+require "discourse_api/api/backups"
+require "discourse_api/api/dashboard"
+require "discourse_api/api/uploads"
+require "discourse_api/api/user_actions"
+require "discourse_api/api/site_settings"
 
 module DiscourseApi
   class Client
@@ -55,9 +55,9 @@ module DiscourseApi
     include DiscourseApi::API::SiteSettings
 
     def initialize(host, api_key = nil, api_username = nil)
-      raise ArgumentError, 'host needs to be defined' if host.nil? || host.empty?
-      @host         = host
-      @api_key      = api_key
+      raise ArgumentError, "host needs to be defined" if host.nil? || host.empty?
+      @host = host
+      @api_key = api_key
       @api_username = api_username
       @use_relative = check_subdirectory(host)
     end
@@ -69,19 +69,19 @@ module DiscourseApi
 
     def api_username=(api_username)
       @api_username = api_username
-      @connection.headers['Api-Username'] = api_username unless @connection.nil?
+      @connection.headers["Api-Username"] = api_username unless @connection.nil?
     end
 
     def connection_options
       @connection_options ||= {
         url: @host,
         request: {
-          timeout: @timeout || DEFAULT_TIMEOUT
+          timeout: @timeout || DEFAULT_TIMEOUT,
         },
         headers: {
-          accept: 'application/json',
+          accept: "application/json",
           user_agent: user_agent,
-        }
+        },
       }
     end
 
@@ -126,43 +126,42 @@ module DiscourseApi
     private
 
     def connection
-      @connection ||= Faraday.new connection_options do |conn|
-        # Allow uploading of files
-        conn.request :multipart
+      @connection ||=
+        Faraday.new connection_options do |conn|
+          # Allow uploading of files
+          conn.request :multipart
 
-        # Convert request params to "www-form-encoded"
-        conn.request :url_encoded
+          # Convert request params to "www-form-encoded"
+          conn.request :url_encoded
 
-        # Allow to interact with forums behind basic HTTP authentication
-        if basic_auth
-          conn.request :basic_auth, basic_auth[:user], basic_auth[:password]
+          # Allow to interact with forums behind basic HTTP authentication
+          conn.request :basic_auth, basic_auth[:user], basic_auth[:password] if basic_auth
+
+          # Follow redirects
+          conn.response :follow_redirects, limit: 5
+
+          # Parse responses as JSON
+          conn.response :json, content_type: "application/json"
+
+          # For HTTP debugging, uncomment
+          # conn.response :logger
+
+          # Use Faraday's default HTTP adapter
+          conn.adapter Faraday.default_adapter
+
+          # Pass api_key and api_username on every request
+          unless api_username.nil?
+            conn.headers["Api-Key"] = api_key
+            conn.headers["Api-Username"] = api_username
+          end
         end
-
-        # Follow redirects
-        conn.response :follow_redirects, limit: 5
-
-        # Parse responses as JSON
-        conn.response :json, content_type: 'application/json'
-
-        # For HTTP debugging, uncomment
-        # conn.response :logger
-
-        # Use Faraday's default HTTP adapter
-        conn.adapter Faraday.default_adapter
-
-        # Pass api_key and api_username on every request
-        unless api_username.nil?
-          conn.headers['Api-Key'] = api_key
-          conn.headers['Api-Username'] = api_username
-        end
-      end
     end
 
     def request(method, path, params = {})
       unless Hash === params
         params = params.to_h if params.respond_to? :to_h
       end
-      path = @use_relative ? path.sub(/^\//, '') : path
+      path = @use_relative ? path.sub(%r{^/}, "") : path
       response = connection.send(method.to_sym, path, params)
       handle_error(response)
       response.env
@@ -188,7 +187,7 @@ module DiscourseApi
     end
 
     def check_subdirectory(host)
-      URI(host).request_uri != '/'
+      URI(host).request_uri != "/"
     end
   end
 end

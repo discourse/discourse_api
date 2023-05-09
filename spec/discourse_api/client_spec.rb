@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'spec_helper'
+require "spec_helper"
 
 describe DiscourseApi::Client do
   subject { DiscourseApi::Client.new(host) }
@@ -18,24 +18,24 @@ describe DiscourseApi::Client do
     end
 
     it "accepts an api key argument" do
-      client = DiscourseApi::Client.new(host, 'test')
-      expect(client.api_key).to eq('test')
+      client = DiscourseApi::Client.new(host, "test")
+      expect(client.api_key).to eq("test")
     end
 
     it "accepts an api username argument" do
-      client = DiscourseApi::Client.new(host, 'test', 'test_user')
-      expect(client.api_username).to eq('test_user')
+      client = DiscourseApi::Client.new(host, "test", "test_user")
+      expect(client.api_username).to eq("test_user")
     end
   end
 
   describe "#timeout" do
-    context 'custom timeout' do
+    context "with a custom timeout" do
       it "is set to Faraday connection" do
         expect(subject.send(:connection).options.timeout).to eq(30)
       end
     end
 
-    context 'default timeout' do
+    context "with the default timeout" do
       it "is set to Faraday connection" do
         subject.timeout = 25
         expect(subject.send(:connection).options.timeout).to eq(25)
@@ -50,25 +50,25 @@ describe DiscourseApi::Client do
   end
 
   describe "#api_key" do
-    it "is publically accessible" do
+    it "is publicly accessible" do
       subject.api_key = "test_d7fd0429940"
       expect(subject.api_key).to eq("test_d7fd0429940")
     end
   end
 
   describe "#api_username" do
-    it "is publically accessible" do
+    it "is publicly accessible" do
       subject.api_username = "test_user"
       expect(subject.api_username).to eq("test_user")
     end
   end
 
   describe "#host" do
-    it "is publically readable" do
+    it "is publicly readable" do
       expect(subject.host).to eq("#{host}")
     end
 
-    it "is not publically writeable" do
+    it "is not publicly writeable" do
       expect(subject).not_to respond_to(:host=)
     end
   end
@@ -87,8 +87,8 @@ describe DiscourseApi::Client do
   describe "#delete" do
     before do
       stub_delete("#{host}/test/delete").with(query: { deleted: "object" })
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
+      subject.api_key = "test_d7fd0429940"
+      subject.api_username = "test_user"
     end
 
     it "allows custom delete requests" do
@@ -96,16 +96,16 @@ describe DiscourseApi::Client do
       expect(a_delete("#{host}/test/delete").with(query: { deleted: "object" })).to have_been_made
     end
 
-    context 'when using a host with a subdirectory' do
+    context "when using a host with a subdirectory" do
       subject { DiscourseApi::Client.new("#{host}/forum") }
 
-      before do
-        stub_delete("#{host}/forum/test/delete").with(query: { deleted: "object" })
-      end
+      before { stub_delete("#{host}/forum/test/delete").with(query: { deleted: "object" }) }
 
       it "allows custom delete requests" do
         subject.delete("/test/delete", { deleted: "object" })
-        expect(a_delete("#{host}/forum/test/delete").with(query: { deleted: "object" })).to have_been_made
+        expect(
+          a_delete("#{host}/forum/test/delete").with(query: { deleted: "object" }),
+        ).to have_been_made
       end
     end
   end
@@ -113,8 +113,8 @@ describe DiscourseApi::Client do
   describe "#post" do
     before do
       stub_post("#{host}/test/post").with(body: { created: "object" })
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
+      subject.api_key = "test_d7fd0429940"
+      subject.api_username = "test_user"
     end
 
     it "allows custom post requests" do
@@ -122,16 +122,16 @@ describe DiscourseApi::Client do
       expect(a_post("#{host}/test/post").with(body: { created: "object" })).to have_been_made
     end
 
-    context 'when using a host with a subdirectory' do
+    context "when using a host with a subdirectory" do
       subject { DiscourseApi::Client.new("#{host}/forum") }
 
-      before do
-        stub_post("#{host}/forum/test/post").with(body: { created: "object" })
-      end
+      before { stub_post("#{host}/forum/test/post").with(body: { created: "object" }) }
 
       it "allows custom post requests" do
         subject.post("/test/post", { created: "object" })
-        expect(a_post("#{host}/forum/test/post").with(body: { created: "object" })).to have_been_made
+        expect(
+          a_post("#{host}/forum/test/post").with(body: { created: "object" }),
+        ).to have_been_made
       end
     end
   end
@@ -139,8 +139,8 @@ describe DiscourseApi::Client do
   describe "#put" do
     before do
       stub_put("#{host}/test/put").with(body: { updated: "object" })
-      subject.api_key = 'test_d7fd0429940'
-      subject.api_username = 'test_user'
+      subject.api_key = "test_d7fd0429940"
+      subject.api_username = "test_user"
     end
 
     it "allows custom put requests" do
@@ -148,12 +148,10 @@ describe DiscourseApi::Client do
       expect(a_put("#{host}/test/put").with(body: { updated: "object" })).to have_been_made
     end
 
-    context 'when using a host with a subdirectory' do
+    context "when using a host with a subdirectory" do
       subject { DiscourseApi::Client.new("#{host}/forum") }
 
-      before do
-        stub_put("#{host}/forum/test/put").with(body: { updated: "object" })
-      end
+      before { stub_put("#{host}/forum/test/put").with(body: { updated: "object" }) }
 
       it "allows custom post requests" do
         subject.put("/test/put", { updated: "object" })
@@ -165,7 +163,9 @@ describe DiscourseApi::Client do
   describe "#request" do
     it "catches 500 errors" do
       connection = instance_double(Faraday::Connection)
-      allow(connection).to receive(:get).and_return(OpenStruct.new(env: { body: 'error page html' }, status: 500))
+      allow(connection).to receive(:get).and_return(
+        OpenStruct.new(env: { body: "error page html" }, status: 500),
+      )
       allow(Faraday).to receive(:new).and_return(connection)
       expect { subject.send(:request, :get, "/test") }.to raise_error DiscourseApi::Error
     end

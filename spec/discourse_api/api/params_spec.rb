@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'spec_helper'
+require "spec_helper"
 
 describe DiscourseApi::API::Params do
   def params_for(h)
@@ -31,7 +31,9 @@ describe DiscourseApi::API::Params do
   end
 
   it "should include optional and default params when defined and provided" do
-    expect(params_for({ r1: "test", o1: "optional", d1: "override" }).to_h).to include(o1: "optional", d1: "override")
+    expect(params_for({ r1: "test", o1: "optional", d1: "override" }).to_h).to include(
+      o1: "optional",
+      d1: "override",
+    )
   end
-
 end

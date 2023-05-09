@@ -8,21 +8,19 @@ module DiscourseApi
 
       def user(username, params = {})
         response = get("/users/#{username}.json", params)
-        response[:body]['user']
+        response[:body]["user"]
       end
 
       def user_sso(user_id)
         response = get("/admin/users/#{user_id}.json")
-        response[:body]['single_sign_on_record']
+        response[:body]["single_sign_on_record"]
       end
 
       def update_avatar(username, args)
-        args = API.params(args)
-          .optional(:file, :url)
-          .default(type: 'avatar', synchronous: true)
-          .to_h
+        args =
+          API.params(args).optional(:file, :url).default(type: "avatar", synchronous: true).to_h
         upload_response = post("/uploads", args)
-        put("/u/#{username}/preferences/avatar/pick", upload_id: upload_response['id'])
+        put("/u/#{username}/preferences/avatar/pick", upload_id: upload_response["id"])
       end
 
       def update_email(username, email)
@@ -30,10 +28,24 @@ module DiscourseApi
       end
 
       def update_user(username, args)
-        args = API.params(args)
-          .optional(:name, :title, :bio_raw, :location, :website, :profile_background, :card_background,
-                    :email_messages_level, :mailing_list_mode, :homepage_id, :theme_ids, :user_fields)
-          .to_h
+        args =
+          API
+            .params(args)
+            .optional(
+              :name,
+              :title,
+              :bio_raw,
+              :location,
+              :website,
+              :profile_background,
+              :card_background,
+              :email_messages_level,
+              :mailing_list_mode,
+              :homepage_id,
+              :theme_ids,
+              :user_fields,
+            )
+            .to_h
         put("/u/#{username}", args)
       end
 
@@ -42,18 +54,18 @@ module DiscourseApi
       end
 
       def update_trust_level(user_id, args)
-        args = API.params(args)
-          .required(:level)
-          .to_h
+        args = API.params(args).required(:level).to_h
         response = put("/admin/users/#{user_id}/trust_level", args)
         response[:body]
       end
 
       def create_user(args)
-        args = API.params(args)
-          .required(:name, :email, :password, :username)
-          .optional(:active, :approved, :staged, :user_fields)
-          .to_h
+        args =
+          API
+            .params(args)
+            .required(:name, :email, :password, :username)
+            .optional(:active, :approved, :staged, :user_fields)
+            .to_h
         post("/users", args)
       end
 
@@ -91,7 +103,7 @@ module DiscourseApi
 
       def by_external_id(external_id)
         response = get("/users/by-external/#{external_id}")
-        response[:body]['user']
+        response[:body]["user"]
       end
 
       def suspend(user_id, suspend_until, reason)
