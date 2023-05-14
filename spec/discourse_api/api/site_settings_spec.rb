@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'spec_helper'
+require "spec_helper"
 
 describe DiscourseApi::API::SiteSettings do
   subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
@@ -11,8 +11,7 @@ describe DiscourseApi::API::SiteSettings do
     end
 
     it "makes a site_settings_update request" do
-      expect(a_put("#{host}/admin/site_settings/foo")
-             .with(body: "foo=bar")).to have_been_made
+      expect(a_put("#{host}/admin/site_settings/foo").with(body: "foo=bar")).to have_been_made
     end
   end
 end

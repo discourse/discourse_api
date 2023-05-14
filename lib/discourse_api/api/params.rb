@@ -28,31 +28,21 @@ module DiscourseApi
       end
 
       def default(args)
-        args.each do |k, v|
-          @defaults[k] = v
-        end
+        args.each { |k, v| @defaults[k] = v }
         self
       end
 
       def to_h
         h = {}
 
-        @required.each do |k|
-          h[k] = @args[k]
-        end
+        @required.each { |k| h[k] = @args[k] }
 
-        @optional.each do |k|
-          h[k] = @args[k] if @args.include?(k)
-        end
+        @optional.each { |k| h[k] = @args[k] if @args.include?(k) }
 
-        @defaults.each do |k, v|
-          @args.key?(k) ? h[k] = @args[k] : h[k] = v
-        end
+        @defaults.each { |k, v| @args.key?(k) ? h[k] = @args[k] : h[k] = v }
 
         h
-
       end
     end
-
   end
 end

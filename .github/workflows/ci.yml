@@ -7,16 +7,32 @@ on:
       - main
 
 jobs:
-  build:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Rubocop
+        run: bundle exec rubocop
+
+      - name: syntax_tree
+        if: ${{ !cancelled() }}
+        run: |
+          set -E
+          bundle exec stree check Gemfile $(git ls-files '*.rb') $(git ls-files '*.rake')
+
+  test:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        ruby:
-          - '2.6'
-          - '2.7'
-          - '3.0'
-          - '3.1'
+        ruby: ['2.7', '3.0', '3.1', '3.2']
 
     steps:
       - uses: actions/checkout@v3
@@ -27,15 +43,12 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - name: Lint
-        run: bundle exec rubocop
-
       - name: Tests
         run: bundle exec rake test
 
   publish:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: build
+    needs: [lint, test]
     runs-on: ubuntu-latest
 
     steps:

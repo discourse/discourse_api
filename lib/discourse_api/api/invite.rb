@@ -3,34 +3,31 @@ module DiscourseApi
   module API
     module Invite
       def invite_user(params = {})
-        args = API.params(params)
-          .optional(
-            :email,
-            :skip_email,
-            :custom_message,
-            :max_redemptions_allowed,
-            :topic_id,
-            :group_ids,
-            :expires_at
-          ).to_h
+        args =
+          API
+            .params(params)
+            .optional(
+              :email,
+              :skip_email,
+              :custom_message,
+              :max_redemptions_allowed,
+              :topic_id,
+              :group_ids,
+              :expires_at,
+            )
+            .to_h
 
         post("/invites", args)
       end
 
       # TODO: Deprecated. Remove after 20220506
       def invite_user_to_topic(params = {})
-        deprecated(__method__, 'invite_to_topic')
+        deprecated(__method__, "invite_to_topic")
         invite_to_topic(params[:topic_id], params)
       end
 
       def invite_to_topic(topic_id, params = {})
-        args = API.params(params)
-          .optional(
-            :email,
-            :user,
-            :group_ids,
-            :custom_message
-          ).to_h
+        args = API.params(params).optional(:email, :user, :group_ids, :custom_message).to_h
 
         post("/t/#{topic_id}/invite", args)
       end
@@ -49,17 +46,20 @@ module DiscourseApi
       end
 
       def update_invite(invite_id, params = {})
-        args = API.params(params)
-          .optional(
-            :topic_id,
-            :group_ids,
-            :group_names,
-            :email,
-            :send_email,
-            :custom_message,
-            :max_redemptions_allowed,
-            :expires_at
-          ).to_h
+        args =
+          API
+            .params(params)
+            .optional(
+              :topic_id,
+              :group_ids,
+              :group_names,
+              :email,
+              :send_email,
+              :custom_message,
+              :max_redemptions_allowed,
+              :expires_at,
+            )
+            .to_h
 
         put("invites/#{invite_id}", args)
       end
@@ -73,7 +73,7 @@ module DiscourseApi
       end
 
       def resend_invite(email)
-        post("invites/reinvite", { "email": email })
+        post("invites/reinvite", { email: email })
       end
 
       def destroy_invite(invite_id)

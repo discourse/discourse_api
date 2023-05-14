@@ -18,7 +18,7 @@ module DiscourseApi
       def download_backup(file_name, destination)
         response = get("/admin/backups/#{file_name}")
         # write file
-        File.open("#{destination}/#{file_name}", 'wb') { |fp| fp.write(response.body) }
+        File.open("#{destination}/#{file_name}", "wb") { |fp| fp.write(response.body) }
       end
     end
   end

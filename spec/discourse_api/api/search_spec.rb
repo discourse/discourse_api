@@ -1,12 +1,17 @@
 # frozen_string_literal: true
-require 'spec_helper'
+require "spec_helper"
 
 describe DiscourseApi::API::Search do
   subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#search" do
     before do
-      stub_get("#{host}/search").with(query: { q: "test" }).to_return(body: fixture("search.json"), headers: { content_type: "application/json" })
+      stub_get("#{host}/search").with(query: { q: "test" }).to_return(
+        body: fixture("search.json"),
+        headers: {
+          content_type: "application/json",
+        },
+      )
     end
 
     it "requests the correct resource" do
@@ -25,7 +30,7 @@ describe DiscourseApi::API::Search do
     end
 
     it "raises an ArgumentError for empty string" do
-      expect { subject.search('') }.to raise_error(ArgumentError)
+      expect { subject.search("") }.to raise_error(ArgumentError)
     end
   end
 end
