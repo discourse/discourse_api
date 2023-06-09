@@ -73,10 +73,6 @@ module DiscourseApi
         post("/admin/users/#{id}/log_out")
       end
 
-      def invite_admin(args = {})
-        post("/admin/users/invite_admin", args)
-      end
-
       def list_users(type, params = {})
         response = get("admin/users/list/#{type}.json", params)
         response[:body]
