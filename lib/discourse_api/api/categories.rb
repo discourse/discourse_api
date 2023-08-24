@@ -68,6 +68,10 @@ module DiscourseApi
         response["body"]["category"] if response["body"]
       end
 
+      def reorder_categories(args = {})
+        post("/categories/reorder", orgs)
+      end
+
       def delete_category(id)
         response = delete("/categories/#{id}")
         response[:body]["success"]
