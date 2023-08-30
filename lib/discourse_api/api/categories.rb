@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'pry'
 module DiscourseApi
   module API
     module Categories
@@ -69,7 +70,8 @@ module DiscourseApi
       end
 
       def reorder_categories(args = {})
-        post("/categories/reorder", orgs)
+        params = API.params(args).required(:mapping)
+        post("/categories/reorder", params)
       end
 
       def delete_category(id)
