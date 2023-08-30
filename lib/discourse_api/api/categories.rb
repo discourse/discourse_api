@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 module DiscourseApi
   module API
     module Categories
