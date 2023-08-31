@@ -182,6 +182,28 @@ describe DiscourseApi::API::Categories do
     end
   end
 
+  describe "#reorder_categories" do
+    before do
+      stub_post("#{host}/categories/reorder").to_return(
+        body: fixture("notification_success.json"),
+        headers: {
+          content_type: "application/json",
+        },
+      )
+    end
+
+    it "makes a categories reordering request" do
+      payload = { "1": 2, "2": 3, "3": 4, "4": 1 }
+      response = subject.reorder_categories(mapping: payload.to_json)
+      expect(
+        a_post("#{host}/categories/reorder").with(
+          body: "mapping=#{CGI.escape(payload.to_json.to_s)}",
+        ),
+      ).to have_been_made
+      expect(response["success"]).to eq("OK")
+    end
+  end
+
   describe "#category_set_user_notification" do
     before do
       stub_post("#{host}/category/1/notifications").to_return(
