@@ -75,7 +75,7 @@ module DiscourseApi
 
         val = val.to_i if FIXNUMS.include? k
         val = %w[true false].include?(val) ? val == "true" : nil if BOOLS.include? k
-        val = val.split(",") if ARRAYS.include?(k) && !val.nil?
+        val = Array(val) if ARRAYS.include?(k) && !val.nil?
         sso.send("#{k}=", val)
       end
 

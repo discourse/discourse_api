@@ -18,6 +18,7 @@ describe DiscourseApi::API::SSO do
       :avatar_force_update => false,
       :add_groups => %w[a b],
       :remove_groups => %w[c d],
+      :groups => 'a,b',
       # old format (which results in custom.custom.field_1 in unsigned_payload)
       "custom.field_1" => "tomato",
       # new format
@@ -28,7 +29,7 @@ describe DiscourseApi::API::SSO do
   end
   let(:expected_unsigned_payload) do
     "add_groups=a&add_groups=b&avatar_url=https%3A%2F%2Fwww.website.com" \
-      "&email=some%40email.com&external_id=abc&name=Some+User&remove_groups=c" \
+      "&email=some%40email.com&external_id=abc&groups=a%2Cb&name=Some+User&remove_groups=c" \
       "&remove_groups=d&title=ruby&username=some_user&custom.field_2=potato" \
       "&custom.custom.field_1=tomato"
   end
@@ -45,6 +46,7 @@ describe DiscourseApi::API::SSO do
     end
 
     it "assigns params to sso instance" do
+      RSpec::Support::ObjectFormatter.default_instance.max_formatted_output_length = nil
       allow(DiscourseApi::SingleSignOn).to(receive(:parse_hash).with(params).and_return(sso_double))
 
       subject.sync_sso(params)
