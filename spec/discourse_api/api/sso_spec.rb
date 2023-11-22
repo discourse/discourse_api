@@ -18,7 +18,7 @@ describe DiscourseApi::API::SSO do
       :avatar_force_update => false,
       :add_groups => %w[a b],
       :remove_groups => %w[c d],
-      :groups => 'a,b',
+      :groups => "a,b",
       # old format (which results in custom.custom.field_1 in unsigned_payload)
       "custom.field_1" => "tomato",
       # new format
@@ -46,7 +46,6 @@ describe DiscourseApi::API::SSO do
     end
 
     it "assigns params to sso instance" do
-      RSpec::Support::ObjectFormatter.default_instance.max_formatted_output_length = nil
       allow(DiscourseApi::SingleSignOn).to(receive(:parse_hash).with(params).and_return(sso_double))
 
       subject.sync_sso(params)
