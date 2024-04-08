@@ -9,8 +9,10 @@ module DiscourseApi
         args =
           API
             .params(args)
-            .required(:name, :color, :text_color)
+            .required(:name)
             .optional(
+              :color,
+              :text_color,
               :slug,
               :permissions,
               :auto_close_hours,
