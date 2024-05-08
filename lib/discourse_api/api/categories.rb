@@ -100,34 +100,35 @@ module DiscourseApi
       def common_category_params(args, include_id: false)
         params = API.params(args)
         params = params.required(:id) if include_id
-        params.required(:name)
-              .optional(
-                :color,
-                :text_color,
-                :slug,
-                :permissions,
-                :auto_close_hours,
-                :auto_close_based_on_last_post,
-                :position,
-                :email_in,
-                :email_in_allow_strangers,
-                :logo_url,
-                :background_url,
-                :allow_badges,
-                :topic_template,
-                :custom_fields,
-                :description,
-                :reviewable_by_group_name,
-                :show_subcategory_list,
-                :subcategory_list_style,
-                :allowed_tags,
-                :allowed_tag_groups,
-                :required_tag_group_name,
-                :topic_featured_links_allowed,
-                :search_priority,
-                :form_template_ids
-              )
-              .default(parent_category_id: nil)
+        params
+          .required(:name)
+          .optional(
+            :color,
+            :text_color,
+            :slug,
+            :permissions,
+            :auto_close_hours,
+            :auto_close_based_on_last_post,
+            :position,
+            :email_in,
+            :email_in_allow_strangers,
+            :logo_url,
+            :background_url,
+            :allow_badges,
+            :topic_template,
+            :custom_fields,
+            :description,
+            :reviewable_by_group_name,
+            :show_subcategory_list,
+            :subcategory_list_style,
+            :allowed_tags,
+            :allowed_tag_groups,
+            :required_tag_group_name,
+            :topic_featured_links_allowed,
+            :search_priority,
+            :form_template_ids,
+          )
+          .default(parent_category_id: nil)
       end
     end
   end
