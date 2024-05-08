@@ -9,6 +9,7 @@ SimpleCov.start { add_filter "/spec/" }
 require "discourse_api"
 require "rspec"
 require "webmock/rspec"
+require "ostruct"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
