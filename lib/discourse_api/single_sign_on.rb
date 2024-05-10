@@ -100,8 +100,8 @@ module DiscourseApi
       parsed = Rack::Utils.parse_query(payload)
       if parsed["sso"].nil? || sso.sign(parsed["sso"]) != parsed["sig"]
         diags =
-          "\n\nsso: #{parsed["sso"]}\n\nsig: #{parsed["sig"]}\n\nexpected sig: #{sso.sign(parsed["sso"])}"
-        if parsed["sso"] && parsed["sso"] =~ %r{[^a-zA-Z0-9=\r\n/+]}m
+          "\n\nsso: #{parsed["sso"].inspect}\n\nsig: #{parsed["sig"].inspect}\n\nexpected sig: #{sso.sign(parsed.fetch("sso", ''))}"
+        if parsed["sso"].nil? || parsed["sso"] =~ %r{[^a-zA-Z0-9=\r\n/+]}m
           raise ParseError,
                 "The SSO field should be Base64 encoded, using only A-Z, a-z, 0-9, +, /, and = characters. Your input contains characters we don't understand as Base64, see http://en.wikipedia.org/wiki/Base64 #{diags}"
         else

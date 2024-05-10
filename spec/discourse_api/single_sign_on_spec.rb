@@ -32,12 +32,27 @@ describe DiscourseApi::SingleSignOn do
   end
 
   describe ".parse" do
-    it "raises ParseError when there's a signature mismatch" do
-      sso = described_class.new
-      sso.sso_secret = "abcd"
-      expect { described_class.parse(sso.payload, "dcba") }.to raise_error(
-        DiscourseApi::SingleSignOn::ParseError,
-      )
+    context "when sso is present" do
+      it "raises ParseError when there's a signature mismatch" do
+        sso = described_class.new
+        sso.sso_secret = "abcd"
+        expect { described_class.parse(sso.payload, "dcba") }.to raise_error(
+          DiscourseApi::SingleSignOn::ParseError,
+        )
+      end
+    end
+
+    context "when sso is missing" do
+      it "raises ParseError when there's a signature mismatch" do
+        sso = described_class.new
+        sso.sso_secret = "abcd"
+        missing_sso = Rack::Utils.parse_query(sso.payload).except("sso")
+        malformed_query = Rack::Utils.build_query(missing_sso)
+
+        expect { described_class.parse(malformed_query, "dcba") }.to raise_error(
+          DiscourseApi::SingleSignOn::ParseError, /The SSO field should/i
+        )
+      end
     end
   end
 end
