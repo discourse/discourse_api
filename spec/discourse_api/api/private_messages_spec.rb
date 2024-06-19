@@ -2,7 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::API::PrivateMessages do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
+  subject(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#private_messages" do
     before do
@@ -15,12 +15,12 @@ describe DiscourseApi::API::PrivateMessages do
     end
 
     it "requests the correct resource" do
-      subject.private_messages("test_user")
+      client.private_messages("test_user")
       expect(a_get("#{host}/topics/private-messages/test_user.json")).to have_been_made
     end
 
     it "returns the requested private messages" do
-      private_messages = subject.private_messages("test_user")
+      private_messages = client.private_messages("test_user")
       expect(private_messages).to be_an Array
     end
   end
@@ -36,12 +36,12 @@ describe DiscourseApi::API::PrivateMessages do
     end
 
     it "requests the correct resource" do
-      subject.sent_private_messages("test_user")
+      client.sent_private_messages("test_user")
       expect(a_get("#{host}/topics/private-messages-sent/test_user.json")).to have_been_made
     end
 
     it "returns the requested sent private messages" do
-      private_messages = subject.sent_private_messages("test_user")
+      private_messages = client.sent_private_messages("test_user")
       expect(private_messages).to be_an Array
     end
   end
@@ -49,7 +49,7 @@ describe DiscourseApi::API::PrivateMessages do
   describe "#create_pm" do
     before do
       stub_post("#{host}/posts")
-      subject.create_pm(
+      client.create_pm(
         title: "Confidential: Hello World!",
         raw: "This is the raw markdown for my private message",
         target_recipients: "user1,user2",

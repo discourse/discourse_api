@@ -2,7 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::API::Categories do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
+  subject(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#categories" do
     before do
@@ -15,18 +15,18 @@ describe DiscourseApi::API::Categories do
     end
 
     it "requests the correct resource" do
-      subject.categories
+      client.categories
       expect(a_get("#{host}/categories.json")).to have_been_made
     end
 
     it "returns the requested categories" do
-      categories = subject.categories
+      categories = client.categories
       expect(categories).to be_an Array
       expect(categories.first).to be_a Hash
     end
 
     it "returns the requested categories with hash arg" do
-      categories = subject.categories({})
+      categories = client.categories({})
       expect(categories).to be_an Array
       expect(categories.first).to be_a Hash
     end
@@ -43,12 +43,12 @@ describe DiscourseApi::API::Categories do
     end
 
     it "requests the correct resource" do
-      subject.categories
+      client.categories
       expect(a_get("#{host}/categories.json")).to have_been_made
     end
 
     it "returns the entire categories response" do
-      categories = subject.categories_full
+      categories = client.categories_full
       expect(categories).to be_a Hash
       expect(categories).to have_key "category_list"
       expect(categories).to have_key "featured_users"
@@ -66,7 +66,7 @@ describe DiscourseApi::API::Categories do
     end
 
     it "returns the latest topics in a category" do
-      latest_topics = subject.category_latest_topics(category_slug: "category-slug")
+      latest_topics = client.category_latest_topics(category_slug: "category-slug")
       expect(latest_topics).to be_an Array
     end
   end
@@ -82,7 +82,7 @@ describe DiscourseApi::API::Categories do
     end
 
     it "returns the entire latest topics in a category response" do
-      latest_topics = subject.category_latest_topics_full(category_slug: "category-slug")
+      latest_topics = client.category_latest_topics_full(category_slug: "category-slug")
       expect(latest_topics).to be_a Hash
       expect(latest_topics).to have_key "topic_list"
       expect(latest_topics).to have_key "users"
@@ -100,7 +100,7 @@ describe DiscourseApi::API::Categories do
     end
 
     it "returns the top topics in a category" do
-      topics = subject.category_top_topics("category-slug")
+      topics = client.category_top_topics("category-slug")
       expect(topics).to be_an Array
     end
   end
@@ -116,7 +116,7 @@ describe DiscourseApi::API::Categories do
     end
 
     it "returns the entire top topics in a category response" do
-      topics = subject.category_top_topics_full("category-slug")
+      topics = client.category_top_topics_full("category-slug")
       expect(topics).to be_a Hash
       expect(topics).to have_key "topic_list"
       expect(topics).to have_key "users"
@@ -134,7 +134,7 @@ describe DiscourseApi::API::Categories do
     end
 
     it "returns the new topics in a category" do
-      topics = subject.category_new_topics("category-slug")
+      topics = client.category_new_topics("category-slug")
       expect(topics).to be_an Array
     end
   end
@@ -150,7 +150,7 @@ describe DiscourseApi::API::Categories do
     end
 
     it "returns the new topics in a category" do
-      topics = subject.category_new_topics_full("category-slug")
+      topics = client.category_new_topics_full("category-slug")
       expect(topics).to be_a Hash
       expect(topics).to have_key "topic_list"
       expect(topics).to have_key "users"
@@ -160,7 +160,7 @@ describe DiscourseApi::API::Categories do
   describe "#category_new_category" do
     before do
       stub_post("#{host}/categories")
-      subject.create_category(
+      client.create_category(
         name: "test_category",
         color: "283890",
         text_color: "FFFFFF",
@@ -194,7 +194,7 @@ describe DiscourseApi::API::Categories do
 
     it "makes a categories reordering request" do
       payload = { "1": 2, "2": 3, "3": 4, "4": 1 }
-      response = subject.reorder_categories(mapping: payload.to_json)
+      response = client.reorder_categories(mapping: payload.to_json)
       expect(
         a_post("#{host}/categories/reorder").with(
           body: "mapping=#{CGI.escape(payload.to_json.to_s)}",
@@ -215,7 +215,7 @@ describe DiscourseApi::API::Categories do
     end
 
     it "makes the post request" do
-      response = subject.category_set_user_notification(id: 1, notification_level: 3)
+      response = client.category_set_user_notification(id: 1, notification_level: 3)
       expect(a_post("#{host}/category/1/notifications")).to have_been_made
       expect(response["success"]).to eq("OK")
     end
@@ -232,7 +232,7 @@ describe DiscourseApi::API::Categories do
     end
 
     it "makes the post request" do
-      response = subject.category_set_user_notification_level(1, notification_level: 3)
+      response = client.category_set_user_notification_level(1, notification_level: 3)
       expect(
         a_post("#{host}/category/1/notifications").with(body: "notification_level=3"),
       ).to have_been_made

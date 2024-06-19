@@ -2,7 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::API::Email do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
+  subject(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#email_settings" do
     before do
@@ -15,12 +15,12 @@ describe DiscourseApi::API::Email do
     end
 
     it "requests the correct resource" do
-      subject.email_settings
+      client.email_settings
       expect(a_get("#{host}/admin/email.json")).to have_been_made
     end
 
     it "returns the requested settings" do
-      settings = subject.email_settings
+      settings = client.email_settings
       expect(settings).to be_a Hash
       expect(settings).to have_key("delivery_method")
       expect(settings).to have_key("settings")
@@ -38,12 +38,12 @@ describe DiscourseApi::API::Email do
     end
 
     it "requests the correct resource" do
-      subject.list_email("all")
+      client.list_email("all")
       expect(a_get("#{host}/admin/email/all.json")).to have_been_made
     end
 
     it "returns all email" do
-      all_email = subject.list_email("all")
+      all_email = client.list_email("all")
       expect(all_email).to be_an Array
     end
   end

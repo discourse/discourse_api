@@ -2,7 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::API::UserActions do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
+  subject(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#user_replies" do
     before do
@@ -15,12 +15,12 @@ describe DiscourseApi::API::UserActions do
     end
 
     it "requests the correct resource" do
-      subject.user_replies("testuser")
+      client.user_replies("testuser")
       expect(a_get("#{host}/user_actions.json?username=testuser&filter=5")).to have_been_made
     end
 
     it "returns the requested user" do
-      replies = subject.user_replies("testuser")
+      replies = client.user_replies("testuser")
       expect(replies).to be_an Array
     end
   end
@@ -36,12 +36,12 @@ describe DiscourseApi::API::UserActions do
     end
 
     it "requests the correct resource" do
-      subject.user_topics_and_replies("testuser")
+      client.user_topics_and_replies("testuser")
       expect(a_get("#{host}/user_actions.json?username=testuser&filter=4,5")).to have_been_made
     end
 
     it "returns the requested user" do
-      replies = subject.user_topics_and_replies("testuser")
+      replies = client.user_topics_and_replies("testuser")
       expect(replies).to be_an Array
     end
   end
