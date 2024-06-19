@@ -2,9 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::API::Posts do
-  let(:client) {
-    DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user")
-  }
+  let(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#get_post" do
     before do
