@@ -2,7 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::API::Groups do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
+  subject(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#groups" do
     before do
@@ -15,12 +15,12 @@ describe DiscourseApi::API::Groups do
     end
 
     it "requests the correct resource" do
-      subject.groups
+      client.groups
       expect(a_get("#{host}/groups.json")).to have_been_made
     end
 
     it "returns the requested groups" do
-      groups = subject.groups
+      groups = client.groups
       expect(groups).to be_an Array
       groups.each { |g| expect(g).to be_a Hash }
     end
@@ -32,20 +32,20 @@ describe DiscourseApi::API::Groups do
           content_type: "application/json",
         },
       )
-      group = subject.group("some-group")
+      group = client.group("some-group")
       expect(group["basic_group"]).to be_a Hash
     end
 
     it "create new groups" do
       stub_post("#{host}/admin/groups")
-      subject.create_group(name: "test_group")
+      client.create_group(name: "test_group")
       params = escape_params("group[name]" => "test_group", "group[visibility_level]" => 0)
       expect(a_post("#{host}/admin/groups").with(body: params)).to have_been_made
     end
 
     it "update an existing group" do
       stub_put("#{host}/groups/42")
-      subject.update_group(42, name: "test_group")
+      client.update_group(42, name: "test_group")
       params = escape_params("group[name]" => "test_group", "group[visibility_level]" => 0)
       expect(a_put("#{host}/groups/42").with(body: params)).to have_been_made
     end
@@ -54,14 +54,14 @@ describe DiscourseApi::API::Groups do
       before { stub_request(:put, "#{host}/admin/groups/123/members.json") }
 
       it "adds a single member by username" do
-        subject.group_add(123, username: "sam")
+        client.group_add(123, username: "sam")
         expect(
           a_request(:put, "#{host}/admin/groups/123/members.json").with(body: { usernames: "sam" }),
         ).to have_been_made
       end
 
       it "adds an array of members by username" do
-        subject.group_add(123, usernames: %w[sam jeff])
+        client.group_add(123, usernames: %w[sam jeff])
         expect(
           a_request(:put, "#{host}/admin/groups/123/members.json").with(
             body: {
@@ -72,14 +72,14 @@ describe DiscourseApi::API::Groups do
       end
 
       it "adds a single member by user_id" do
-        subject.group_add(123, user_id: 456)
+        client.group_add(123, user_id: 456)
         expect(
           a_request(:put, "#{host}/admin/groups/123/members.json").with(body: { user_ids: "456" }),
         ).to have_been_made
       end
 
       it "adds an array of members by user_id" do
-        subject.group_add(123, user_id: [123, 456])
+        client.group_add(123, user_id: [123, 456])
         expect(
           a_request(:put, "#{host}/admin/groups/123/members.json").with(
             body: {
@@ -96,7 +96,7 @@ describe DiscourseApi::API::Groups do
       before { stub_delete(url) }
 
       it "removes member" do
-        subject.group_remove(123, username: "sam")
+        client.group_remove(123, username: "sam")
         expect(a_delete(url)).to have_been_made
       end
     end
@@ -107,7 +107,7 @@ describe DiscourseApi::API::Groups do
       before { stub_put(url) }
 
       it "makes the member an owner" do
-        subject.group_add_owners(123, usernames: "sam")
+        client.group_add_owners(123, usernames: "sam")
         params = escape_params("group[usernames]" => "sam")
         expect(
           a_request(:put, "#{host}/admin/groups/123/owners.json").with(body: params),
@@ -121,7 +121,7 @@ describe DiscourseApi::API::Groups do
       before { stub_delete(url) }
 
       it "removes the owner role from the group member" do
-        subject.group_remove_owners(123, usernames: "sam")
+        client.group_remove_owners(123, usernames: "sam")
         expect(a_delete(url)).to have_been_made
       end
     end
@@ -140,10 +140,10 @@ describe DiscourseApi::API::Groups do
             content_type: "application/json",
           },
         )
-        members = subject.group_members("mygroup")
+        members = client.group_members("mygroup")
         expect(a_get("#{host}/groups/mygroup/members.json?limit=100&offset=0")).to have_been_made
         expect(members.length).to eq(100)
-        members = subject.group_members("mygroup", offset: 100)
+        members = client.group_members("mygroup", offset: 100)
         expect(a_get("#{host}/groups/mygroup/members.json?limit=100&offset=100")).to have_been_made
         expect(members.length).to eq(90)
       end
@@ -156,7 +156,7 @@ describe DiscourseApi::API::Groups do
               content_type: "application/json",
             },
           )
-          member_data = subject.group_members("mygroup", all: true)
+          member_data = client.group_members("mygroup", all: true)
           expect(a_get("#{host}/groups/mygroup/members.json?limit=100&offset=0")).to have_been_made
           expect(member_data["members"].length).to eq(100)
           expect(member_data["owners"].length).to eq(7)
@@ -169,7 +169,7 @@ describe DiscourseApi::API::Groups do
       before { stub_post("#{host}/groups/mygroup/notifications?user_id=77&notification_level=3") }
 
       it "updates user's notification level for group" do
-        subject.group_set_user_notification_level("mygroup", 77, 3)
+        client.group_set_user_notification_level("mygroup", 77, 3)
         expect(
           a_post("#{host}/groups/mygroup/notifications?user_id=77&notification_level=3"),
         ).to have_been_made

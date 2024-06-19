@@ -2,7 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::API::Users do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
+  subject(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#user" do
     before do
@@ -15,17 +15,17 @@ describe DiscourseApi::API::Users do
     end
 
     it "requests the correct resource" do
-      subject.user("test")
+      client.user("test")
       expect(a_get("#{host}/users/test.json")).to have_been_made
     end
 
     it "returns the requested user" do
-      user = subject.user("test")
+      user = client.user("test")
       expect(user).to be_a Hash
     end
 
     it "works with optional params" do
-      user = subject.user("test", {})
+      user = client.user("test", {})
       expect(user).to be_a Hash
     end
   end
@@ -41,12 +41,12 @@ describe DiscourseApi::API::Users do
     end
 
     it "requests the correct resource" do
-      subject.user_sso(15)
+      client.user_sso(15)
       expect(a_get("#{host}/admin/users/15.json")).to have_been_made
     end
 
     it "has single_sign_on_record" do
-      user_sso = subject.user_sso(15)
+      user_sso = client.user_sso(15)
       expect(user_sso).to be_a Hash
       expect(user_sso).to have_key("external_id")
     end
@@ -72,7 +72,7 @@ describe DiscourseApi::API::Users do
       sam =
         "https://meta-discourse.global.ssl.fastly.net/user_avatar/meta.discourse.org/sam/120/5243.png"
       args = { url: sam }
-      response = subject.update_avatar("test_user", args)
+      response = client.update_avatar("test_user", args)
       expect(response[:body]["success"]).to eq("OK")
     end
   end
@@ -88,12 +88,12 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the put request" do
-      subject.update_email("fake_user", "fake_user_2@example.com")
+      client.update_email("fake_user", "fake_user_2@example.com")
       expect(a_put("#{host}/u/fake_user/preferences/email")).to have_been_made
     end
 
     it "returns success" do
-      response = subject.update_email("fake_user", "fake_user_2@example.com")
+      response = client.update_email("fake_user", "fake_user_2@example.com")
       expect(response[:body]["success"]).to be_truthy
     end
   end
@@ -109,16 +109,16 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the put request" do
-      subject.api_key = "test_d7fd0429940"
-      subject.api_username = "test_user"
-      subject.update_user("fake_user", name: "Fake User 2")
+      client.api_key = "test_d7fd0429940"
+      client.api_username = "test_user"
+      client.update_user("fake_user", name: "Fake User 2")
       expect(a_put("#{host}/u/fake_user")).to have_been_made
     end
 
     it "returns success" do
-      subject.api_key = "test_d7fd0429940"
-      subject.api_username = "test_user"
-      response = subject.update_user("fake_user", name: "Fake User 2")
+      client.api_key = "test_d7fd0429940"
+      client.api_username = "test_user"
+      response = client.update_user("fake_user", name: "Fake User 2")
       expect(response[:body]["success"]).to be_truthy
     end
   end
@@ -134,12 +134,12 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the put request" do
-      subject.update_username("fake_user", "fake_user_2")
+      client.update_username("fake_user", "fake_user_2")
       expect(a_put("#{host}/u/fake_user/preferences/username")).to have_been_made
     end
 
     it "returns the updated username" do
-      response = subject.update_username("fake_user", "fake_user_2")
+      response = client.update_username("fake_user", "fake_user_2")
       expect(response[:body]["username"]).to eq("fake_user_2")
     end
   end
@@ -155,19 +155,19 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the post request" do
-      subject.create_user name: "Test User",
-                          email: "test2@example.com",
-                          password: "P@ssword",
-                          username: "test2"
+      client.create_user name: "Test User",
+                         email: "test2@example.com",
+                         password: "P@ssword",
+                         username: "test2"
       expect(a_post("#{host}/users")).to have_been_made
     end
 
     it "returns success" do
       response =
-        subject.create_user name: "Test User",
-                            email: "test2@example.com",
-                            password: "P@ssword",
-                            username: "test2"
+        client.create_user name: "Test User",
+                           email: "test2@example.com",
+                           password: "P@ssword",
+                           username: "test2"
       expect(response).to be_a Hash
       expect(response["success"]).to be_truthy
     end
@@ -184,12 +184,12 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the put request" do
-      subject.activate(15)
+      client.activate(15)
       expect(a_put("#{host}/admin/users/15/activate")).to have_been_made
     end
 
     it "returns success" do
-      response = subject.activate(15)
+      response = client.activate(15)
       expect(response[:body]["success"]).to eq("OK")
     end
   end
@@ -205,12 +205,12 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes a post request" do
-      subject.log_out(4)
+      client.log_out(4)
       expect(a_post("#{host}/admin/users/4/log_out")).to have_been_made
     end
 
     it "returns success" do
-      response = subject.log_out(4)
+      response = client.log_out(4)
       expect(response).to be_a Hash
       expect(response["success"]).to eq("OK")
     end
@@ -227,7 +227,7 @@ describe DiscourseApi::API::Users do
     end
 
     it "Raises API Error" do
-      expect { subject.log_out(90) }.to raise_error DiscourseApi::NotFoundError
+      expect { client.log_out(90) }.to raise_error DiscourseApi::NotFoundError
     end
   end
 
@@ -242,12 +242,12 @@ describe DiscourseApi::API::Users do
     end
 
     it "requests the correct resource" do
-      subject.list_users("active")
+      client.list_users("active")
       expect(a_get("#{host}/admin/users/list/active.json")).to have_been_made
     end
 
     it "returns the requested users" do
-      users = subject.list_users("active")
+      users = client.list_users("active")
       expect(users).to be_an Array
       expect(users.first).to be_a Hash
     end
@@ -266,14 +266,14 @@ describe DiscourseApi::API::Users do
 
     it "makes the correct put request" do
       params = { level: 2 }
-      subject.update_trust_level(2, params)
+      client.update_trust_level(2, params)
       url = "#{host}/admin/users/2/trust_level"
       expect(a_put(url)).to have_been_made
     end
 
     it "updates the trust_level" do
       params = { level: 2 }
-      admin_user = subject.update_trust_level(2, params)
+      admin_user = client.update_trust_level(2, params)
       expect(admin_user).to be_a Hash
       expect(admin_user["admin_user"]).to have_key("trust_level")
     end
@@ -291,13 +291,13 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the correct put request" do
-      subject.grant_admin(11)
+      client.grant_admin(11)
       url = "#{host}/admin/users/11/grant_admin"
       expect(a_put(url)).to have_been_made
     end
 
     it "makes the user an admin" do
-      result = subject.grant_admin(11)
+      result = client.grant_admin(11)
       expect(result).to be_a Hash
       expect(result["admin_user"]["admin"]).to eq(true)
     end
@@ -315,13 +315,13 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the correct put request" do
-      subject.grant_moderation(11)
+      client.grant_moderation(11)
       url = "#{host}/admin/users/11/grant_moderation"
       expect(a_put(url)).to have_been_made
     end
 
     it "makes the user a moderator" do
-      result = subject.grant_moderation(11)
+      result = client.grant_moderation(11)
       expect(result).to be_a Hash
       expect(result["admin_user"]["moderator"]).to eq(true)
     end
@@ -334,7 +334,7 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the correct put request" do
-      result = subject.revoke_moderation(11)
+      result = client.revoke_moderation(11)
       url = "#{host}/admin/users/11/revoke_moderation"
       expect(a_put(url)).to have_been_made
       expect(result.status).to eq(200)
@@ -352,12 +352,12 @@ describe DiscourseApi::API::Users do
     end
 
     it "requests the correct resource" do
-      subject.by_external_id(1)
+      client.by_external_id(1)
       expect(a_get("#{host}/users/by-external/1")).to have_been_made
     end
 
     it "returns the requested user" do
-      user = subject.by_external_id(1)
+      user = client.by_external_id(1)
       expect(user["id"]).to eq 1
     end
   end
@@ -369,7 +369,7 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the correct put request" do
-      result = subject.suspend(11, "2030-01-01", "no reason")
+      result = client.suspend(11, "2030-01-01", "no reason")
       url = "#{host}/admin/users/11/suspend"
       expect(a_put(url)).to have_been_made
       expect(result.status).to eq(200)
@@ -383,7 +383,7 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the correct put request" do
-      result = subject.unsuspend(11)
+      result = client.unsuspend(11)
       url = "#{host}/admin/users/11/unsuspend"
       expect(a_put(url)).to have_been_made
       expect(result.status).to eq(200)
@@ -397,7 +397,7 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the correct put request" do
-      result = subject.anonymize(11)
+      result = client.anonymize(11)
       url = "#{host}/admin/users/11/anonymize"
       expect(a_put(url)).to have_been_made
       expect(result.status).to eq(200)
@@ -411,7 +411,7 @@ describe DiscourseApi::API::Users do
     end
 
     it "makes the correct delete request" do
-      result = subject.delete_user(11, true)
+      result = client.delete_user(11, true)
       url = "#{host}/admin/users/11.json?delete_posts=true"
       expect(a_delete(url)).to have_been_made
       expect(result.body).to eq('{"deleted": true}')
@@ -426,12 +426,12 @@ describe DiscourseApi::API::Users do
     before { stub_get(url).to_return(body: body, headers: { content_type: "application/json" }) }
 
     it "requests the correct resource" do
-      subject.check_username("sparrow")
+      client.check_username("sparrow")
       expect(a_get(url)).to have_been_made
     end
 
     it "returns the result" do
-      result = subject.check_username("sparrow")
+      result = client.check_username("sparrow")
       expect(result["available"]).to eq false
     end
 
@@ -440,12 +440,12 @@ describe DiscourseApi::API::Users do
       let(:body) { '{"errors":["must only include numbers, letters, dashes, and underscores"]}' }
 
       it "escapes them" do
-        subject.check_username("1_[4]! @the$#?")
+        client.check_username("1_[4]! @the$#?")
         expect(a_get(url)).to have_been_made
       end
 
       it "returns the result" do
-        result = subject.check_username("1_[4]! @the$#?")
+        result = client.check_username("1_[4]! @the$#?")
         expect(
           result["errors"].first,
         ).to eq "must only include numbers, letters, dashes, and underscores"
@@ -457,12 +457,12 @@ describe DiscourseApi::API::Users do
     before { stub_put("#{host}/admin/users/15/deactivate").to_return(body: nil) }
 
     it "makes the put request" do
-      subject.deactivate(15)
+      client.deactivate(15)
       expect(a_put("#{host}/admin/users/15/deactivate")).to have_been_made
     end
 
     it "returns success" do
-      response = subject.deactivate(15)
+      response = client.deactivate(15)
       expect(response.status).to eq(200)
     end
   end

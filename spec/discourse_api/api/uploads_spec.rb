@@ -2,7 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::API::Uploads do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
+  subject(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#upload_file" do
     before do
@@ -18,7 +18,7 @@ describe DiscourseApi::API::Uploads do
       image =
         "https://meta-discourse.global.ssl.fastly.net/user_avatar/meta.discourse.org/sam/120/5243.png"
       args = { url: image }
-      response = subject.upload_file(args)
+      response = client.upload_file(args)
       expect(response["url"]).to eq(
         "/uploads/default/original/1X/417e624d2453925e6c68748b9aa67637c284b5aa.jpg",
       )
@@ -27,7 +27,7 @@ describe DiscourseApi::API::Uploads do
     it "uploads a file" do
       file = Faraday::UploadIO.new("spec/fixtures/upload_file.json", "application/json")
       args = { file: file }
-      response = subject.upload_file(args)
+      response = client.upload_file(args)
       expect(response["url"]).to eq(
         "/uploads/default/original/1X/417e624d2453925e6c68748b9aa67637c284b5aa.jpg",
       )

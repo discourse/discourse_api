@@ -1,2 +1,5 @@
 inherit_gem:
   rubocop-discourse: stree-compat.yml
+
+Discourse/Plugins:
+  Enabled: false

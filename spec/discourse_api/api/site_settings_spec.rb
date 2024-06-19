@@ -2,12 +2,12 @@
 require "spec_helper"
 
 describe DiscourseApi::API::SiteSettings do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
+  subject(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#site_setting_update" do
     before do
       stub_put("#{host}/admin/site_settings/foo")
-      subject.site_setting_update(name: "foo", value: "bar")
+      client.site_setting_update(name: "foo", value: "bar")
     end
 
     it "makes a site_settings_update request" do

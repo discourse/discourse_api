@@ -2,7 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::API::SSO do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
+  subject(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   let(:params) do
     {
@@ -47,7 +47,7 @@ describe DiscourseApi::API::SSO do
     it "assigns params to sso instance" do
       allow(DiscourseApi::SingleSignOn).to(receive(:parse_hash).with(params).and_return(sso_double))
 
-      subject.sync_sso(params)
+      client.sync_sso(params)
 
       expect(sso_double.custom_fields).to eql(
         { "custom.field_1" => "tomato", :field_2 => "potato" },
@@ -56,7 +56,7 @@ describe DiscourseApi::API::SSO do
     end
 
     it "requests the correct resource" do
-      subject.sync_sso({ :sso_secret => "test_d7fd0429940", "custom.riffle_url" => "test" })
+      client.sync_sso({ :sso_secret => "test_d7fd0429940", "custom.riffle_url" => "test" })
       expect(a_post(/.*sync_sso.*/)).to have_been_made
     end
   end

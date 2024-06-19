@@ -2,7 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::API::Badges do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
+  subject(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#badges" do
     before do
@@ -15,12 +15,12 @@ describe DiscourseApi::API::Badges do
     end
 
     it "requests the correct resource" do
-      subject.badges
+      client.badges
       expect(a_get("#{host}/admin/badges.json")).to have_been_made
     end
 
     it "returns the requested badges" do
-      badges = subject.badges
+      badges = client.badges
       expect(badges).to be_a Hash
       expect(badges["badges"]).to be_an Array
     end
@@ -37,12 +37,12 @@ describe DiscourseApi::API::Badges do
     end
 
     it "requests the correct resource" do
-      subject.user_badges("test_user")
+      client.user_badges("test_user")
       expect(a_get("#{host}/user-badges/test_user.json")).to have_been_made
     end
 
     it "returns the requested user badges" do
-      badges = subject.user_badges("test_user")
+      badges = client.user_badges("test_user")
       expect(badges).to be_an Array
       expect(badges.first).to be_a Hash
       expect(badges.first).to have_key("badge_type_id")

@@ -2,7 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::API::ApiKey do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
+  subject(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#list_api_keys" do
     before do
@@ -16,13 +16,13 @@ describe DiscourseApi::API::ApiKey do
     end
 
     it "requests the correct resource" do
-      subject.list_api_keys
+      client.list_api_keys
       url = "#{host}/admin/api/keys"
       expect(a_get(url)).to have_been_made
     end
 
     it "returns the requested api keys" do
-      keys = subject.list_api_keys
+      keys = client.list_api_keys
       expect(keys["keys"]).to be_an Array
       expect(keys["keys"].first).to be_a Hash
       expect(keys["keys"].first).to have_key("key")
@@ -41,13 +41,13 @@ describe DiscourseApi::API::ApiKey do
     end
 
     it "requests the correct resource" do
-      subject.create_api_key(key: { username: "robin" })
+      client.create_api_key(key: { username: "robin" })
       url = "#{host}/admin/api/keys"
       expect(a_post(url)).to have_been_made
     end
 
     it "returns the generated api key" do
-      api_key = subject.create_api_key(key: { username: "robin" })
+      api_key = client.create_api_key(key: { username: "robin" })
       expect(api_key).to be_a Hash
       expect(api_key["key"]).to have_key("key")
     end
@@ -65,13 +65,13 @@ describe DiscourseApi::API::ApiKey do
     end
 
     it "requests the correct resource" do
-      subject.revoke_api_key(10)
+      client.revoke_api_key(10)
       url = "#{host}/admin/api/keys/10/revoke"
       expect(a_post(url)).to have_been_made
     end
 
     it "returns the api key" do
-      api_key = subject.revoke_api_key(10)
+      api_key = client.revoke_api_key(10)
       expect(api_key["key"]).to have_key("key")
     end
   end
@@ -88,13 +88,13 @@ describe DiscourseApi::API::ApiKey do
     end
 
     it "requests the correct resource" do
-      subject.undo_revoke_api_key(10)
+      client.undo_revoke_api_key(10)
       url = "#{host}/admin/api/keys/10/undo-revoke"
       expect(a_post(url)).to have_been_made
     end
 
     it "returns the api key" do
-      api_key = subject.undo_revoke_api_key(10)
+      api_key = client.undo_revoke_api_key(10)
       expect(api_key["key"]).to have_key("key")
     end
   end
@@ -111,13 +111,13 @@ describe DiscourseApi::API::ApiKey do
     end
 
     it "requests the correct resource" do
-      subject.delete_api_key(10)
+      client.delete_api_key(10)
       url = "#{host}/admin/api/keys/10"
       expect(a_delete(url)).to have_been_made
     end
 
     it "returns 200" do
-      response = subject.delete_api_key(10)
+      response = client.delete_api_key(10)
       expect(response["status"]).to eq(200)
     end
   end

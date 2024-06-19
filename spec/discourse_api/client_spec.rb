@@ -2,7 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::Client do
-  subject { DiscourseApi::Client.new(host) }
+  subject(:client) { DiscourseApi::Client.new(host) }
 
   describe ".new" do
     it "requires a host argument" do
@@ -10,11 +10,11 @@ describe DiscourseApi::Client do
     end
 
     it "defaults api key to nil" do
-      expect(subject.api_key).to be_nil
+      expect(client.api_key).to be_nil
     end
 
     it "defaults api username to nil" do
-      expect(subject.api_username).to be_nil
+      expect(client.api_username).to be_nil
     end
 
     it "accepts an api key argument" do
@@ -31,55 +31,55 @@ describe DiscourseApi::Client do
   describe "#timeout" do
     context "with a custom timeout" do
       it "is set to Faraday connection" do
-        expect(subject.send(:connection).options.timeout).to eq(30)
+        expect(client.send(:connection).options.timeout).to eq(30)
       end
     end
 
     context "with the default timeout" do
       it "is set to Faraday connection" do
-        subject.timeout = 25
-        expect(subject.send(:connection).options.timeout).to eq(25)
+        client.timeout = 25
+        expect(client.send(:connection).options.timeout).to eq(25)
       end
     end
 
     it "raises DiscourseApi::Timeout" do
       stub_get("#{host}/t/1.json").to_timeout
 
-      expect { subject.topic(1) }.to raise_error(DiscourseApi::Timeout)
+      expect { client.topic(1) }.to raise_error(DiscourseApi::Timeout)
     end
   end
 
   describe "#api_key" do
     it "is publicly accessible" do
-      subject.api_key = "test_d7fd0429940"
-      expect(subject.api_key).to eq("test_d7fd0429940")
+      client.api_key = "test_d7fd0429940"
+      expect(client.api_key).to eq("test_d7fd0429940")
     end
   end
 
   describe "#api_username" do
     it "is publicly accessible" do
-      subject.api_username = "test_user"
-      expect(subject.api_username).to eq("test_user")
+      client.api_username = "test_user"
+      expect(client.api_username).to eq("test_user")
     end
   end
 
   describe "#host" do
     it "is publicly readable" do
-      expect(subject.host).to eq("#{host}")
+      expect(client.host).to eq("#{host}")
     end
 
     it "is not publicly writeable" do
-      expect(subject).not_to respond_to(:host=)
+      expect(client).not_to respond_to(:host=)
     end
   end
 
   describe "#connection" do
     it "looks like a Faraday connection" do
-      expect(subject.send(:connection)).to respond_to :run_request
+      expect(client.send(:connection)).to respond_to :run_request
     end
 
     it "memorizes the connection" do
-      c1, c2 = subject.send(:connection), subject.send(:connection)
+      c1, c2 = client.send(:connection), client.send(:connection)
       expect(c1.object_id).to eq(c2.object_id)
     end
   end
@@ -87,22 +87,22 @@ describe DiscourseApi::Client do
   describe "#delete" do
     before do
       stub_delete("#{host}/test/delete").with(query: { deleted: "object" })
-      subject.api_key = "test_d7fd0429940"
-      subject.api_username = "test_user"
+      client.api_key = "test_d7fd0429940"
+      client.api_username = "test_user"
     end
 
     it "allows custom delete requests" do
-      subject.delete("/test/delete", { deleted: "object" })
+      client.delete("/test/delete", { deleted: "object" })
       expect(a_delete("#{host}/test/delete").with(query: { deleted: "object" })).to have_been_made
     end
 
     context "when using a host with a subdirectory" do
-      subject { DiscourseApi::Client.new("#{host}/forum") }
+      subject(:client) { DiscourseApi::Client.new("#{host}/forum") }
 
       before { stub_delete("#{host}/forum/test/delete").with(query: { deleted: "object" }) }
 
       it "allows custom delete requests" do
-        subject.delete("/test/delete", { deleted: "object" })
+        client.delete("/test/delete", { deleted: "object" })
         expect(
           a_delete("#{host}/forum/test/delete").with(query: { deleted: "object" }),
         ).to have_been_made
@@ -113,22 +113,22 @@ describe DiscourseApi::Client do
   describe "#post" do
     before do
       stub_post("#{host}/test/post").with(body: { created: "object" })
-      subject.api_key = "test_d7fd0429940"
-      subject.api_username = "test_user"
+      client.api_key = "test_d7fd0429940"
+      client.api_username = "test_user"
     end
 
     it "allows custom post requests" do
-      subject.post("/test/post", { created: "object" })
+      client.post("/test/post", { created: "object" })
       expect(a_post("#{host}/test/post").with(body: { created: "object" })).to have_been_made
     end
 
     context "when using a host with a subdirectory" do
-      subject { DiscourseApi::Client.new("#{host}/forum") }
+      subject(:client) { DiscourseApi::Client.new("#{host}/forum") }
 
       before { stub_post("#{host}/forum/test/post").with(body: { created: "object" }) }
 
       it "allows custom post requests" do
-        subject.post("/test/post", { created: "object" })
+        client.post("/test/post", { created: "object" })
         expect(
           a_post("#{host}/forum/test/post").with(body: { created: "object" }),
         ).to have_been_made
@@ -139,22 +139,22 @@ describe DiscourseApi::Client do
   describe "#put" do
     before do
       stub_put("#{host}/test/put").with(body: { updated: "object" })
-      subject.api_key = "test_d7fd0429940"
-      subject.api_username = "test_user"
+      client.api_key = "test_d7fd0429940"
+      client.api_username = "test_user"
     end
 
     it "allows custom put requests" do
-      subject.put("/test/put", { updated: "object" })
+      client.put("/test/put", { updated: "object" })
       expect(a_put("#{host}/test/put").with(body: { updated: "object" })).to have_been_made
     end
 
     context "when using a host with a subdirectory" do
-      subject { DiscourseApi::Client.new("#{host}/forum") }
+      subject(:client) { DiscourseApi::Client.new("#{host}/forum") }
 
       before { stub_put("#{host}/forum/test/put").with(body: { updated: "object" }) }
 
       it "allows custom post requests" do
-        subject.put("/test/put", { updated: "object" })
+        client.put("/test/put", { updated: "object" })
         expect(a_put("#{host}/forum/test/put").with(body: { updated: "object" })).to have_been_made
       end
     end
@@ -167,17 +167,17 @@ describe DiscourseApi::Client do
         OpenStruct.new(env: { body: "error page html" }, status: 500),
       )
       allow(Faraday).to receive(:new).and_return(connection)
-      expect { subject.send(:request, :get, "/test") }.to raise_error DiscourseApi::Error
+      expect { client.send(:request, :get, "/test") }.to raise_error DiscourseApi::Error
     end
 
     it "catches Faraday errors" do
       allow(Faraday).to receive(:new).and_raise(Faraday::ClientError.new("BOOM!"))
-      expect { subject.send(:request, :get, "/test") }.to raise_error DiscourseApi::Error
+      expect { client.send(:request, :get, "/test") }.to raise_error DiscourseApi::Error
     end
 
     it "catches JSON::ParserError errors" do
       allow(Faraday).to receive(:new).and_raise(JSON::ParserError.new("unexpected token"))
-      expect { subject.send(:request, :get, "/test") }.to raise_error DiscourseApi::Error
+      expect { client.send(:request, :get, "/test") }.to raise_error DiscourseApi::Error
     end
   end
 end

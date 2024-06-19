@@ -2,7 +2,7 @@
 require "spec_helper"
 
 describe DiscourseApi::API::Topics do
-  subject { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
+  subject(:client) { DiscourseApi::Client.new("#{host}", "test_d7fd0429940", "test_user") }
 
   describe "#change_topic_status" do
     before do
@@ -15,7 +15,7 @@ describe DiscourseApi::API::Topics do
     end
 
     it "changes the topic status" do
-      subject.update_topic_status(57, { status: "visible", enabled: false })
+      client.update_topic_status(57, { status: "visible", enabled: false })
       expect(a_put("#{host}/t/57/status")).to have_been_made
     end
   end
@@ -31,12 +31,12 @@ describe DiscourseApi::API::Topics do
     end
 
     it "requests the correct resource" do
-      subject.invite_to_topic(12, email: "fake_user@example.com")
+      client.invite_to_topic(12, email: "fake_user@example.com")
       expect(a_post("#{host}/t/12/invite")).to have_been_made
     end
 
     it "returns success" do
-      response = subject.invite_to_topic(12, email: "fake_user@example.com")
+      response = client.invite_to_topic(12, email: "fake_user@example.com")
       expect(response).to be_a Hash
       expect(response["success"]).to be_truthy
     end
@@ -53,18 +53,18 @@ describe DiscourseApi::API::Topics do
     end
 
     it "requests the correct resource" do
-      subject.latest_topics
+      client.latest_topics
       expect(a_get("#{host}/latest.json")).to have_been_made
     end
 
     it "returns the requested topics" do
-      topics = subject.latest_topics
+      topics = client.latest_topics
       expect(topics).to be_an Array
       expect(topics.first).to be_a Hash
     end
 
     it "can take a hash param" do
-      topics = subject.latest_topics({})
+      topics = client.latest_topics({})
       expect(topics).to be_an Array
       expect(topics.first).to be_a Hash
     end
@@ -81,18 +81,18 @@ describe DiscourseApi::API::Topics do
     end
 
     it "requests the correct resource" do
-      subject.top_topics
+      client.top_topics
       expect(a_get("#{host}/top.json")).to have_been_made
     end
 
     it "returns the requested topics" do
-      topics = subject.top_topics
+      topics = client.top_topics
       expect(topics).to be_an Array
       expect(topics.first).to be_a Hash
     end
 
     it "can take a hash param" do
-      topics = subject.top_topics({})
+      topics = client.top_topics({})
       expect(topics).to be_an Array
       expect(topics.first).to be_a Hash
     end
@@ -109,13 +109,13 @@ describe DiscourseApi::API::Topics do
     end
 
     it "requests the correct resource" do
-      subject.new_topics
+      client.new_topics
       expect(a_get("#{host}/new.json")).to have_been_made
     end
 
     it "returns the requested topics" do
-      subject.api_username = "test_user"
-      topics = subject.new_topics
+      client.api_username = "test_user"
+      topics = client.new_topics
       expect(topics).to be_an Array
       expect(topics.first).to be_a Hash
     end
@@ -132,12 +132,12 @@ describe DiscourseApi::API::Topics do
     end
 
     it "requests the correct resource" do
-      subject.topic(57)
+      client.topic(57)
       expect(a_get("#{host}/t/57.json")).to have_been_made
     end
 
     it "returns the requested topic" do
-      topic = subject.topic(57)
+      topic = client.topic(57)
       expect(topic).to be_a Hash
       expect(topic["id"]).to eq(57)
     end
@@ -154,12 +154,12 @@ describe DiscourseApi::API::Topics do
     end
 
     it "renames the topic" do
-      subject.rename_topic(57, "A new title!")
+      client.rename_topic(57, "A new title!")
       expect(a_put("#{host}/t/57.json")).to have_been_made
     end
 
     it "assigns the topic a new category" do
-      subject.recategorize_topic(57, 3)
+      client.recategorize_topic(57, 3)
       expect(a_put("#{host}/t/57.json")).to have_been_made
     end
   end
@@ -175,12 +175,12 @@ describe DiscourseApi::API::Topics do
     end
 
     it "requests the correct resource" do
-      subject.topics_by("test")
+      client.topics_by("test")
       expect(a_get("#{host}/topics/created-by/test.json")).to have_been_made
     end
 
     it "returns the requested topics" do
-      topics = subject.topics_by("test")
+      topics = client.topics_by("test")
       expect(topics).to be_an Array
       expect(topics.first).to be_a Hash
     end
@@ -197,24 +197,24 @@ describe DiscourseApi::API::Topics do
     end
 
     it "requests the correct resource" do
-      subject.topic_posts(57)
+      client.topic_posts(57)
       expect(a_get("#{host}/t/57/posts.json")).to have_been_made
     end
 
     it "allows scoping to specific post ids" do
-      subject.topic_posts(57, [123, 456])
+      client.topic_posts(57, [123, 456])
       expect(a_get("#{host}/t/57/posts.json?post_ids[]=123&post_ids[]=456")).to have_been_made
     end
 
     it "returns the requested topic posts" do
-      body = subject.topic_posts(57, [123])
+      body = client.topic_posts(57, [123])
       expect(body).to be_a Hash
       expect(body["post_stream"]["posts"]).to be_an Array
       expect(body["post_stream"]["posts"].first).to be_a Hash
     end
 
     it "can retrieve a topic posts' raw attribute" do
-      body = subject.topic_posts(57, [123], { include_raw: true })
+      body = client.topic_posts(57, [123], { include_raw: true })
       expect(body).to be_a Hash
       expect(body["post_stream"]["posts"]).to be_an Array
       expect(body["post_stream"]["posts"].first).to be_a Hash
@@ -233,17 +233,17 @@ describe DiscourseApi::API::Topics do
     end
 
     it "makes the post request" do
-      subject.create_topic title: "Sample Topic Title",
-                           raw: "Sample topic content body",
-                           tags: %w[asdf fdsa]
+      client.create_topic title: "Sample Topic Title",
+                          raw: "Sample topic content body",
+                          tags: %w[asdf fdsa]
       expect(a_post("#{host}/posts")).to have_been_made
     end
 
     it "returns success" do
       response =
-        subject.create_topic title: "Sample Topic Title",
-                             raw: "Sample topic content body",
-                             tags: %w[asdf fdsa]
+        client.create_topic title: "Sample Topic Title",
+                            raw: "Sample topic content body",
+                            tags: %w[asdf fdsa]
       expect(response).to be_a Hash
       expect(response["topic_id"]).to eq 21
     end
@@ -260,7 +260,7 @@ describe DiscourseApi::API::Topics do
     end
 
     it "makes the post request" do
-      response = subject.topic_set_user_notification_level(1, notification_level: 3)
+      response = client.topic_set_user_notification_level(1, notification_level: 3)
       expect(
         a_post("#{host}/t/1/notifications").with(body: "notification_level=3"),
       ).to have_been_made
@@ -279,7 +279,7 @@ describe DiscourseApi::API::Topics do
     end
 
     it "makes the put request" do
-      response = subject.bookmark_topic(1)
+      response = client.bookmark_topic(1)
       expect(a_put("#{host}/t/1/bookmark.json")).to have_been_made
       expect(response.body).to eq(nil)
     end
@@ -296,7 +296,7 @@ describe DiscourseApi::API::Topics do
     end
 
     it "makes the put request" do
-      response = subject.remove_topic_bookmark(1)
+      response = client.remove_topic_bookmark(1)
       expect(a_put("#{host}/t/1/remove_bookmarks.json")).to have_been_made
       expect(response.body).to eq(nil)
     end
