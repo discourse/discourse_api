@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2025-12-02
+### Changed
+- Add support for `external_id` in topic creation
+### Added
+- Add get topic url by `external_id`
+
+## [2.0.1] - 2023-06-09
+### Removed
+- Invite admin method removed
+
 ## [2.0.0] - 2023-05-26
 ### Changed
 - The package now requires ruby 2.7+
