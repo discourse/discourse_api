@@ -11,7 +11,15 @@ module DiscourseApi
           API
             .params(args)
             .required(:title, :raw)
-            .optional(:skip_validations, :category, :auto_track, :created_at, :api_username, :tags, :external_id)
+            .optional(
+              :skip_validations,
+              :category,
+              :auto_track,
+              :created_at,
+              :api_username,
+              :tags,
+              :external_id,
+            )
         post("/posts", args.to_h)
       end
 
