@@ -11,7 +11,15 @@ module DiscourseApi
           API
             .params(args)
             .required(:title, :raw)
-            .optional(:skip_validations, :category, :auto_track, :created_at, :api_username, :tags)
+            .optional(
+              :skip_validations,
+              :category,
+              :auto_track,
+              :created_at,
+              :api_username,
+              :tags,
+              :external_id,
+            )
         post("/posts", args.to_h)
       end
 
@@ -110,6 +118,10 @@ module DiscourseApi
 
       def remove_topic_bookmark(topic_id)
         put("/t/#{topic_id}/remove_bookmarks.json")
+      end
+
+      def get_topic_url_by_external_id(external_id)
+        get("/t/external_id/#{external_id}")
       end
     end
   end
