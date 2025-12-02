@@ -1,6 +1,6 @@
 # Specify your environment by making a copy of this file to create a file in your root directory called config.yml with your environment settings.
 
-# host e.g. localhost:3000 or discourse.my_domain.com
+# host e.g. http://localhost:3000 or https://discourse.my_domain.com
 host: YOUR_HOST_NAME
 
 # api user (can effect results returned, e.g. .categories method returns only the categories your api_username can see)
