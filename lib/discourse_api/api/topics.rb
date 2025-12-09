@@ -19,6 +19,7 @@ module DiscourseApi
               :api_username,
               :tags,
               :external_id,
+              :visible,
             )
         post("/posts", args.to_h)
       end
